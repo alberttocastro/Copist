@@ -13,7 +13,7 @@
 
 @section('main')
 
-    <!-- ABA de territórios designados para mim -->
+{{-- ABA de territórios designados para mim  --}}
     <div id="assigned-territories" class="col s12">
         <div class="container">
             
@@ -113,8 +113,9 @@
         </div>
         
     </div>
+{{-- Fim da ABA de territórios designados --}}
 
-    <!-- ABA de informações -->
+{{-- ABA de informações --}}
     <div id="info" class="col s12 m12 l12" >
         <div class="container">
             
@@ -176,5 +177,5 @@
         </div>
         {{-- <% end %> --}}
     </div>
-
+{{-- Fim da ABA de informações --}}
 @endsection
