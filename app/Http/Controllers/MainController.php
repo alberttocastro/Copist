@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
-    public function clara(){
+    /**
+     * @return view
+     */
+    public function main()
+    {
         return view("main/index");
     }
 }
