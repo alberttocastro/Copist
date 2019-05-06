@@ -31,6 +31,7 @@ class CreateAddressesTable extends Migration
                 $table->integer('second_language_id');
                 $table->integer('card_id');
                 $table->bigInteger('frequence');
+                $table->timestamps();
             }
         );
     }
