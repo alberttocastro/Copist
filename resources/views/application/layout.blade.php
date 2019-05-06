@@ -32,8 +32,8 @@
         <footer>
             @yield('bar', View::make('application.footer'))
         </footer>
-
-        <script src="{{ asset('js/materialize.js') }}" type="text/javascript" async="true" defer></script>
-        <script src="{{ asset('js/application.js') }}" type="text/javascript" async="true" defer></script>
     </body>
+    <script src="{{ asset('js/jquery-3.4.1.js') }}" type="text/javascript" ></script>
+    <script src="{{ asset('js/materialize.js') }}" type="text/javascript" ></script>
+    <script src="{{ asset('js/application.js') }}" type="text/javascript" ></script>
 </html>
