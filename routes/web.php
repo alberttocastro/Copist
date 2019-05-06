@@ -11,8 +11,4 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/clara','MainController@clara');
+Route::get('/', 'MainController@main')->name('home');
