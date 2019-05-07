@@ -21,33 +21,33 @@
                 {{-- <% User.first.assignments_to_do.each do |assignment| %> --}}
                 {{-- <% puts assignment%> --}}
                 {{-- <%# Cartão %> --}}
-            <?php $addresses = App\Address::all(); ?>
-            @foreach($addresses as $address)
+            <?php $assignments = App\Assignment::all(); ?>
+            @foreach($assignments as $assignment)
+            <?php $card = $assignment->$card ?>
+            {{-- Cartão --}}
             <div class="row">
                 <div class="col s12 m10 l8 xl8 offset-xl2 offset-l2 offset-m1">
                     <div class="card grey lighten-5 z-depth-2">
                         <?php // Conteúdo do cartão  ?>
                         <div class="card-content indigo-text text-darken-4">
                             
-                            {{-- <%# Header %> --}}
-                            {{-- <% @card = Card.find(assignment.card_id) %> --}}
+                            {{-- Header --}}
                             <span class="card-title">
                                 <div class="row">
                                     <div class="col s2" style="padding-left: 0%"><i class="material-icons medium">location_on</i></div>
                                     <div class="col s10" style="vertical-align:middle;">
                                         <h4 style="margin-top: 0px">
-                                            {{$address->name}}
-                                            {{-- <b><%= @card.name %></b> --}}
+                                            {{$card->name}}
                                         </h4>
                                     </div>
                                 </div>
                             </span>
                             
-                            {{-- <%# Endereços %> --}}
-                            {{-- <% @addresses = @card.addresses%> --}}
-                            {{-- <% if !@addresses.empty? %> --}}
+                            <?php $addresses = $card->addresses() ?>
+                            @if($addresses != null)
                             <ul class="collapsible z-depth-0">
                                 {{-- <% @addresses.each do |address| %> --}}
+                                @foreach($addresses as $address)
                                 <li>
                                     <div class="collapsible-header <?php //= address.done?(assignment.id) ? "blue lighten-4" : nil ?>">
                                         {{-- <i class="material-icons">contacts</i><%= address.street %> --}}
@@ -69,10 +69,10 @@
                                         </div>
                                     </div>
                                 </li>
-                                {{-- <% end %> --}}
+                                @endforeach
                                 
                             </ul>
-                            {{-- <% end %> --}}
+                            @endif
                             
                         </div>
                         
