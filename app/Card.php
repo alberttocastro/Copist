@@ -11,4 +11,9 @@ class Card extends Model
     {
         return $this->belongsTo('App\Macro_region');
     }
+
+    public function addresses()
+    {
+        return $this->hasMany('App\Address');
+    }
 }
