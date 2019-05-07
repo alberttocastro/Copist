@@ -21,7 +21,8 @@
                 {{-- <% User.first.assignments_to_do.each do |assignment| %> --}}
                 {{-- <% puts assignment%> --}}
                 {{-- <%# Cartão %> --}}
-            
+            <?php $addresses = App\Address::all(); ?>
+            @foreach($addresses as $address)
             <div class="row">
                 <div class="col s12 m10 l8 xl8 offset-xl2 offset-l2 offset-m1">
                     <div class="card grey lighten-5 z-depth-2">
@@ -35,6 +36,7 @@
                                     <div class="col s2" style="padding-left: 0%"><i class="material-icons medium">location_on</i></div>
                                     <div class="col s10" style="vertical-align:middle;">
                                         <h4 style="margin-top: 0px">
+                                            {{$address->name}}
                                             {{-- <b><%= @card.name %></b> --}}
                                         </h4>
                                     </div>
@@ -47,7 +49,7 @@
                             <ul class="collapsible z-depth-0">
                                 {{-- <% @addresses.each do |address| %> --}}
                                 <li>
-                                    <div class="collapsible-header <%= address.done?(assignment.id) ? "blue lighten-4" : nil %>">
+                                    <div class="collapsible-header <?php //= address.done?(assignment.id) ? "blue lighten-4" : nil ?>">
                                         {{-- <i class="material-icons">contacts</i><%= address.street %> --}}
                                     </div>
                                     <div class="collapsible-body">
@@ -83,7 +85,8 @@
                     
                 </div>
                 
-            </div>        
+            </div>
+            @endforeach        
             {{-- <% end %> --}}
 
             {{-- <%# Modal de relatar visita %> --}}
