@@ -64,7 +64,7 @@
                                                 </div>
                                             </div>
                                             <div>
-                                                <a id="<%= address.id %>" class="waves-effect waves-light btn modal-trigger blue darken-3 report-visit" href="#report-visit">Report</a>
+                                            <a id="{{ $address->id }}" class="waves-effect waves-light btn modal-trigger blue darken-3 report-visit" href="#report-visit">Report</a>
                                             </div>
                                         </div>
                                     </li>
@@ -92,12 +92,12 @@
             {{-- TODO: Criar o formulário e colocar a rota correta --}}
             <div id="report-visit" class="modal" style="min-height: 100%">
                     {{-- <%# TODO: Trocar as partes do código comentadas %> --}}
-                    <input id="publisher_id" name="publisher_id" type="hidden" />
+                <input id="publisher_id" name="publisher_id" type="hidden" />
                 <input id="address_id" name="address_id" type="hidden" />
                 <div class="modal-content">
                     <h4>Add a report</h4> <br>
                     <div class="input-field col s12">
-                        <input type="text" name="date" class="datepicker"/>
+                        <input type="text" name="date" placeholder="Date" class="datepicker"/>
                     </div>
                     <div class="input-field col s12">
                         <input type="text" name="comment"/>
@@ -149,7 +149,6 @@
     </div>
     
     {{--  Modal de adicionar endereço --}}
-    {{-- TODO: Criar o formulário e colocar a rota correta --}}
     <div id="add-territory-modal" class="modal">
         <form action="{{route('create_suggested_address')}}" method="POST">
             {{ csrf_field() }}
