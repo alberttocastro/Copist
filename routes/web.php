@@ -28,6 +28,7 @@ Route::prefix('assignment')->group(function(){
 
 Route::get('help','MainController@help')->name('help');
 
-Route::prefix('permission')->group(function(){
-    Route::get('/','PermissionsController@index');
+Route::prefix('permissions')->group(function(){
+    Route::get('/','PermissionsController@index')->name('permissions');
+    Route::put('update', 'PermissionsController@update')->name('update_permission');
 });
