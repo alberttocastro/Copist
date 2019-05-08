@@ -31,7 +31,7 @@
         
         <div class="divider"></div>
         <li>
-            <a href="/"><i class="material-icons left">help</i> Help </a>
+            <a href="{{route('help')}}"><i class="material-icons left">help</i> Help </a>
         </li>
         
         <div class="divider"></div>

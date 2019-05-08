@@ -18,7 +18,7 @@
         <a href="/">Database</a>
     </li>
     <li>
-        <a href="/">Help</a>
+        <a href="{{route('help')}}">Help</a>
     </li>
     <li>
         <a href="/">Logout</a>
