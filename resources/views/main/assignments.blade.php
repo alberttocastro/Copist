@@ -12,33 +12,39 @@
 @endsection
 
 @section('main')
-<!-- ABA 1 -->
+{{-- ABA Dos territórios não designados --}}
 <div id="all" class="col s12">
         <div class="container">
-            <% Macroregion.all.each do |macroregion| %>
-            <blockquote>
-                <h4><%= macroregion.macroreg.nil? ? "Unnamed Region" : macroregion.macroreg %></h4>
-            </blockquote>
-            <% macroregion.unassigned_cards.each do |card|%>
-            <ul class="collection with-header z-depth-3">
-                <li class="collection-header">
-                    <div class="row valign-wrapper" style="margin-bottom: 0;">
-                        <div class="col s8">
-                            <h4><%= card.name %></h4>
-                        </div>
-                        <div class="col s4">
-                            <a id="<%= card.id %>" class="waves-effect waves-teal btn-flat modal-trigger add-publisher-button" href="#modal-assign-territory">Assign</a>
-                        </div>
-                    </div>
-                </li>
-                <% card.addresses.each do |address| %>
-                <li class="collection-item"><%= address.street %></li>
-                <% end %>
-            </ul>
-            <% end %>
-            <% end %>
+            <?php $macroregions = App\Macro_region::all(); ?>
+            @foreach($macroregions as $macroregion)
+                <blockquote>
+                    @if($macroregion->name == "")
+                        <h4>Unnamed Region</h4>
+                    @else
+                        <h4>{{$macroregion->name}}</h4>
+                    @endif
+                </blockquote>
+                @foreach($macroregion->unassigned_cards() as $card)
+                    <ul class="collection with-header z-depth-3">
+                        <li class="collection-header">
+                            <div class="row valign-wrapper" style="margin-bottom: 0;">
+                                <div class="col s8">
+                                    <h4> {{$card->name}}</h4>
+                                </div>
+                                <div class="col s4">
+                                    <a id="<%= card.id %>" class="waves-effect waves-teal btn-flat modal-trigger add-publisher-button" href="#modal-assign-territory">Assign</a>
+                                </div>
+                            </div>
+                        </li>
+                        @foreach($card->addresses as $address)
+                            <li class="collection-item"> {{$address->street}}</li>
+                        @endforeach
+                    </ul>
+                @endforeach
+            @endforeach
         </div>
     </div>
+    {{-- Fim da aba dos territórios designados --}}
     
     
     
