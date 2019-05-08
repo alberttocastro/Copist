@@ -23,5 +23,5 @@ Route::prefix('territory')->group(function(){
 
 Route::prefix('assignment')->group(function(){
 
-    Route::get('/','AssignmentController@index');
+    Route::get('/','AssignmentController@index')->name('assignments');
 });
