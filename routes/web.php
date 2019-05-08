@@ -27,3 +27,7 @@ Route::prefix('assignment')->group(function(){
 });
 
 Route::get('help','MainController@help')->name('help');
+
+Route::prefix('permission')->group(function(){
+    Route::get('/','PermissionsController@index');
+});
