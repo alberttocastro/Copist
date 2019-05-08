@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'MainController@main')->name('home');
+Route::get('overview', 'MainController@overview')->name('overview');
 
 Route::prefix('territory')->group(function(){
 
