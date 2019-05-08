@@ -12,6 +12,11 @@ class TerritoryController extends Controller
 {
     //
 
+    public function management()
+    {
+        return view('territory.management');
+    }
+
     public function view($id)
     {
         $address = Address::find((int)$id);
