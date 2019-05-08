@@ -12,5 +12,11 @@
 */
 
 Route::get('/', 'MainController@main')->name('home');
-Route::post('territory/suggest', 'TerritoryController@create_suggested_address')->name('create_suggested_address');
-Route::post('territory/report', 'TerritoryController@create_address_report')->name('create_address_report');
+
+Route::prefix('territory')->group(function(){
+
+    Route::post('suggest', 'TerritoryController@create_suggested_address')->name('create_suggested_address');
+    Route::post('report', 'TerritoryController@create_address_report')->name('create_address_report');
+
+    Route::get('{id}', 'TerritoryController@view')->name('view_territory');
+});
