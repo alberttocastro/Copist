@@ -13,7 +13,7 @@
             <div class="navbar-fixed">
                 <nav class="nav-extended navbar-dark indigo darken-2 z-depth-2">
                     <div class="nav-wrapper">
-                        <a href="home.html" class="brand-logo">Coins</a>
+                        <a href="{{route('home')}}" class="brand-logo">Coins</a>
                         <a href="#" data-target="slide-out" class="sidenav-trigger">
                             <i class="material-icons">menu</i>
                         </a>
