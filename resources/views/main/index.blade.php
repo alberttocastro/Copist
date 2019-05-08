@@ -91,24 +91,27 @@
             {{--  Modal de relatar visita  --}}
             {{-- TODO: Criar o formulário e colocar a rota correta --}}
             <div id="report-visit" class="modal" style="min-height: 100%">
-                    {{-- <%# TODO: Trocar as partes do código comentadas %> --}}
-                <input id="publisher_id" name="publisher_id" type="hidden" />
-                <input id="address_id" name="address_id" type="hidden" />
-                <div class="modal-content">
-                    <h4>Add a report</h4> <br>
-                    <div class="input-field col s12">
-                        <input type="text" name="date" placeholder="Date" class="datepicker"/>
+                <form action="{{route('create_address_report')}}" method="POST">
+                    {{ csrf_field() }}
+                    {{-- < TODO: Id do publicador para ser pego dinamicamente  --}}
+                    <input id="publisher_id" name="publisher_id" type="hidden" value="{{App\Publisher::find(1)->id}}" />
+                    <input id="address_id" name="address_id" type="hidden" />
+                    <div class="modal-content">
+                        <h4>ADD A REPORT</h4> <br>
+                        <div class="input-field col s12">
+                            <input type="text" name="date" placeholder="Date" class="datepicker"/>
+                        </div>
+                        <div class="input-field col s12">
+                            <input type="text" name="comment"/>
+                            <label for="textarea1">Your report</label>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+                            <input type="submit" value="Send" class="modal-close waves-effect waves-green btn-flat">
+                        </div>
                     </div>
-                    <div class="input-field col s12">
-                        <input type="text" name="comment"/>
-                        <label for="textarea1">Your report</label>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
-                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Send</a>
-                    </div>
-                </div>
-                {{-- <% end %> --}}
+                    {{-- <% end %> --}}
+                </form>
             </div>
             
         </div>
