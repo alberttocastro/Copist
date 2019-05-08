@@ -18,13 +18,17 @@ class Publisher extends Model
         return $this->belongsTo('App\Group');
     }
 
-    public function without_user()
+    public static function without_user($selected_publisher = 0)
     {
         $publishers = array();
-        foreach(Publisher::all()->cursor() as $publisher){
+        foreach(Publisher::where('','')->cursor() as $publisher){
             if(User::where('publisher_id', $publisher->id)->count() == 0){
-                $publishers->push($publisher->id);
+                array_push($publishers, $publisher->id);
             }
+        }
+
+        if($selected_publisher != 0){
+            array_push($publishers, $selected_publisher);
         }
 
         return Publisher::find($publishers);
