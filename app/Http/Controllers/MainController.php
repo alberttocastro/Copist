@@ -18,4 +18,9 @@ class MainController extends Controller
     {
         return view('main.help');
     }
+
+    public function overview()
+    {
+        return view('main.overview');
+    }
 }
