@@ -9,7 +9,7 @@
 
         <form action="/" method="put">
 
-            <%# Iteração sobre todos os usuários. Relaciona-os com os seus devidos publicadores %>
+            {{-- <%# Iteração sobre todos os usuários. Relaciona-os com os seus devidos publicadores %> --}}
             <div class="row">
             @foreach(App\User::all() as $user)
                 <div class="col s12 m12">
@@ -17,21 +17,24 @@
                         <div class="card-content black-text">
                             <span class="card-title">{{$user->email}}</span>
                             <div>
-                                @if($user->publisher_id == null && $user->publisher_id != "" )
+                                @if($user->publisher_id == 0 )
                                     <select name="publisher_{{$user->id}}" id="publisher_{{$user->id}}">
+                                        <option value="">Select a user</option>
                                         @foreach(App\Publisher::without_user() as $publisher)
                                             <option value="{{$publisher->id}}">{{$publisher->name}}</option>
                                         @endforeach
                                     </select>
                                 @else
                                     <select name="publisher_{{$user->id}}" id="publisher_{{$user->id}}">
-                                        @foreach(App\Publisher::without_user() as $publisher)
+                                        @forelse(App\Publisher::without_user($user->publisher_id) as $publisher)
                                             @if ($user->publisher_id == $publisher->id)
                                                 <option value="{{$publisher->id}}" selected>{{$publisher->name}}</option>
                                             @else
                                                 <option value="{{$publisher->id}}">{{$publisher->name}}</option>
                                             @endif
-                                        @endforeach
+                                        @empty
+                                            <option value="">Select a publisher</option>
+                                        @endforelse
                                     </select>
                                 @endif
                                 </br>
