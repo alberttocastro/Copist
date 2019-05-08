@@ -14,8 +14,8 @@ class AddColumnsToUser extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('user_type');
-            $table->integer('publisher_id');
+            $table->integer('user_type')->default(0);
+            $table->integer('publisher_id')->default(0);
         });
     }
 
