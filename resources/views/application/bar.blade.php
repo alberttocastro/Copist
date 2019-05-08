@@ -12,7 +12,7 @@
         <a href="/">Management</a>
     </li>
     <li>
-        <a href="/">Permissions</a>
+        <a href="{{route('permissions')}}">Permissions</a>
     </li>
     <li>
         <a href="/">Database</a>

@@ -20,7 +20,7 @@
             <a href="/"><i class="material-icons left">person_add</i> Management </a>
         </li>
         <li>
-            <a href="/"><i class="material-icons left">lock_open</i> Permissions </a>
+            <a href="{{route('permissions')}}"><i class="material-icons left">lock_open</i> Permissions </a>
         </li>
     
         <div class="divider"></div>
