@@ -8,6 +8,10 @@ class Address extends Model
 {
     //
 
+    public function is_visited(){
+        return $this->publisher_id != "0";
+    }
+
     public function card()
     {
         return $this->belongsTo('App\Card');
