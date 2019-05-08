@@ -12,3 +12,4 @@
 */
 
 Route::get('/', 'MainController@main')->name('home');
+Route::post('territory/suggest', 'TerritoryController@add_suggested_address')->name('add_suggested_address');
