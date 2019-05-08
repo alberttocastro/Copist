@@ -1,14 +1,13 @@
 @extends('application.layout')
 
-@section('header')
-    
-@endsection
-
 @section('main')
     <div class="container">
 
-        <form action="/" method="put">
+        {{-- TODO: Fazer com que ao escolher um usuário, ele não possa ser escolhido novamente --}}
 
+        <form action="{{route('update_permission')}}" method="post">
+            <input type="hidden" name="_method" value="put" />
+            {{ csrf_field()}}
             {{-- <%# Iteração sobre todos os usuários. Relaciona-os com os seus devidos publicadores %> --}}
             <div class="row">
             @foreach(App\User::all() as $user)
@@ -18,29 +17,25 @@
                             <span class="card-title">{{$user->email}}</span>
                             <div>
                                 @if($user->publisher_id == 0 )
-                                    <select name="publisher_{{$user->id}}" id="publisher_{{$user->id}}">
-                                        <option value="">Select a user</option>
+                                    <select name="{{$user->id}}" id="{{$user->id}}">
+                                        <option value="0" selected>Access denied</option>
                                         @foreach(App\Publisher::without_user() as $publisher)
                                             <option value="{{$publisher->id}}">{{$publisher->name}}</option>
                                         @endforeach
                                     </select>
                                 @else
-                                    <select name="publisher_{{$user->id}}" id="publisher_{{$user->id}}">
-                                        @forelse(App\Publisher::without_user($user->publisher_id) as $publisher)
+                                    <select name="{{$user->id}}" id="{{$user->id}}">
+                                        <option value="0">Access denied</option>
+                                        @foreach(App\Publisher::without_user($user->publisher_id) as $publisher)
                                             @if ($user->publisher_id == $publisher->id)
                                                 <option value="{{$publisher->id}}" selected>{{$publisher->name}}</option>
                                             @else
                                                 <option value="{{$publisher->id}}">{{$publisher->name}}</option>
                                             @endif
-                                        @empty
-                                            <option value="">Select a publisher</option>
-                                        @endforelse
+                                        @endforeach
                                     </select>
                                 @endif
                                 </br>
-                            </div>
-                            <div class="right-align">
-                                <a href="/{id}" method="delete">REMOVE</a>
                             </div>
                         </div>
                     </div>
