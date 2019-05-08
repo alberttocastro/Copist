@@ -43,4 +43,9 @@ class Address extends Model
     public function macro_region(){
         return $this->belongsTo('App\Macro_region');
     }
+
+    public function visits()
+    {
+        return $this->hasMany('App\Visit');
+    }
 }
