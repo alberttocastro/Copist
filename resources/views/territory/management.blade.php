@@ -23,20 +23,20 @@
                         <div class="card grey lighten-5 z-depth-2">
                             <div class="card-content indigo-text text-darken-4">
                                 <p>
-                                    <b>Street:</b> <span class="street" id="<%= suggested_address.id %>">{{$suggested_address->street}}</span>
+                                    <b>Street:</b> <span class="street" id="{{$suggested_address->id}}">{{$suggested_address->street}}</span>
                                 </p>
                                 <p>
-                                    <b>Neighborhood:</b> <span class="neighborhood" id="<%= suggested_address.id %>">{{$suggested_address->neighborhood}}</span>
+                                    <b>Neighborhood:</b> <span class="neighborhood" id="{{$suggested_address->id}}">{{$suggested_address->neighborhood}}</span>
                                 </p>
                                 <p>
-                                    <b>Name:</b> <span class="name" id="<%= suggested_address.id %>">{{ $suggested_address->name }}</span>
+                                    <b>Name:</b> <span class="name" id="{{$suggested_address->id}}">{{ $suggested_address->name }}</span>
                                 </p>
                                 <p>
-                                    <b>Comments:</b> <span class="comments" id="<%= suggested_address.id %>">{{$suggested_address->comments}}</span>
+                                    <b>Comments:</b> <span class="comments" id="{{$suggested_address->id}}">{{$suggested_address->comments}}</span>
                                 </p>
                             </div>
                             <div class="card-action">
-                                <a id="<%= suggested_address.id %>" href="#accept-address" class="modal-trigger suggested-address">Accept</a>
+                                <a id="{{$suggested_address->id}}" href="#accept-address" class="modal-trigger suggested-address">Accept</a>
                                 <a href="#">Reject</a>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
 
         </div>
 
-        <%= render "accept_address" %>
+        @yield('accept_addres', view('territory.modal.accept_address'))
     </div> <!-- <div id="new"> -->
 
     <!-- Aba para escolher o mapa dos endereços -->
@@ -59,7 +59,7 @@
             </blockquote>
 
             <!-- Cartão de novo território -->
-            @foreach (App\Address::where('card_id', '') as $address)
+            @foreach(App\Address::all()->where('card_id', 0) as $address)
                 <div class="row">
                     <div class="col s12 m6">
                         <div class="card grey lighten-5 z-depth-2">
@@ -90,6 +90,7 @@
             @endforeach
 
             <form action="" method="post">
+                @csrf
                 <!-- Modal - Escolher mapa -->
                 <div id="choose-map" class="modal">
                     <!-- Conteúdo -->
