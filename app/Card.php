@@ -16,4 +16,9 @@ class Card extends Model
     {
         return $this->hasMany('App\Address');
     }
+
+    public function is_at_work()
+    {
+        return Assignment::where('card_id',$this->id).count() > 0;
+    }
 }
