@@ -6,7 +6,7 @@
         <a href="{{route('assignments')}}">Assignments</a>
     </li>
     <li>
-        <a href="/">Overview</a>
+        <a href="{{route('overview')}}">Overview</a>
     </li>
     <li>
         <a href="/">Management</a>

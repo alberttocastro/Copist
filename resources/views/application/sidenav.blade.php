@@ -14,7 +14,7 @@
             <a href="{{route('assignments')}}"><i class="material-icons left">assignment</i>Assign </a>
         </li>
         <li>
-            <a href="/"><i class="material-icons left">show_chart</i> Overview </a>
+            <a href="{{route('overview')}}"><i class="material-icons left">show_chart</i> Overview </a>
         </li>
         <li>
             <a href="/"><i class="material-icons left">person_add</i> Management </a>
