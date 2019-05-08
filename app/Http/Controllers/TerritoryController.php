@@ -6,10 +6,17 @@ use Illuminate\Http\Request;
 use App\Suggested_address;
 use App\Date_parser;
 use App\Visit;
+use App\Address;
 
 class TerritoryController extends Controller
 {
     //
+
+    public function view($id)
+    {
+        $address = Address::find((int)$id);
+        return view('territory.view', ['address'=>$address]);
+    }
 
     public function create_suggested_address(Request $request)
     {
