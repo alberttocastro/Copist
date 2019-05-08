@@ -57,7 +57,7 @@ function notHidden(){
     
     
     $('.datepicker').datepicker({
-      format: 'dd/mm/yyyy',
+      format: 'mm/dd/yyyy',
       selectMonths: true, // Creates a dropdown to control month
       selectYears: 15, // Creates a dropdown of 15 years to control year,
       today: 'Today',
@@ -91,11 +91,11 @@ function notHidden(){
     $('.sidenav').sidenav();
     
     // Sets the active item in the navbar extended
-    var pathname = window.location.pathname;
-    var pathparts = pathname.split("/");
-    if (pathparts[1] != null) {
-      $("#".concat(pathparts[1])).addClass("active");
-    }
+    // var pathname = window.location.pathname;
+    // var pathparts = pathname.split("/");
+    // if (pathparts[1] != null) {
+    //   $("#".concat(pathparts[1])).addClass("active");
+    // }
   
     // Na lista de endereços sugeridos,
     // Coloca os dados que aparecem na lista dentro do formulário do
@@ -113,7 +113,9 @@ function notHidden(){
     // Colocando o id do endereço no modal quando o botão de adicionar um relatório de visita for clicado
     $("a.report-visit").click(function(event){
       var id = event.target.id;
-  
+      
+      console.log("Adicionar relatório clicado");
+
       $("input#address_id").val(id);
     });
   
