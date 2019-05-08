@@ -13,3 +13,4 @@
 
 Route::get('/', 'MainController@main')->name('home');
 Route::post('territory/suggest', 'TerritoryController@create_suggested_address')->name('create_suggested_address');
+Route::post('territory/report', 'TerritoryController@create_address_report')->name('create_address_report');
