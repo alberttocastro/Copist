@@ -85,7 +85,7 @@
                             </li>
                         @endforeach
                         <li class="collection-item center" style="padding: 0% 0% 0% 0%">
-                            <a href="#modal-assign-territory" class="btn-flat waves-effect waves-light modal-trigger" style="height: 100%; width: 100%;">
+                            <a href="#modal-assign-territory" class="btn-flat waves-effect waves-light modal-trigger">
                                 <span> + Add publisher</span>
                             </a>
                         </li>
@@ -97,5 +97,5 @@
     
     </div>
     
-    @yield('main.modal.choose_publisher')
+    @yield('modal',view('main.modal.choose_publisher'))
 @endsection
