@@ -21,4 +21,13 @@ class Card extends Model
     {
         return Assignment::where('card_id',$this->id).count() > 0;
     }
+
+    public function get_people_assigned_to_the_card()
+    {
+        $people = array();
+        foreach(Assignment::where('card_id',$this->id).where('completion_date', '') as $assignment){
+            $people[$assignment->id] = $assignment->user;
+        }
+        return $people;
+    }
 }
