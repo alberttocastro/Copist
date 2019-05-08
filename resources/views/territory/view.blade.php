@@ -101,7 +101,7 @@
             
         </div>
         
-        @if($address->visits == [])
+        @if($address->visits->count() > 0)
         <div class="carousel carousel-slider">
 
             <div class="row hide-on-small-only">
