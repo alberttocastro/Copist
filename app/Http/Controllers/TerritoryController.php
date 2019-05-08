@@ -9,7 +9,7 @@ class TerritoryController extends Controller
 {
     //
 
-    public function add_suggested_address(Request $request)
+    public function create_suggested_address(Request $request)
     {
         $suggested_address = new Suggested_address;
         $suggested_address->neighborhood = $request->input('neighborhood');

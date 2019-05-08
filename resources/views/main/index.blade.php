@@ -151,7 +151,7 @@
     {{--  Modal de adicionar endereço --}}
     {{-- TODO: Criar o formulário e colocar a rota correta --}}
     <div id="add-territory-modal" class="modal">
-        <form action="{{route('add_suggested_address')}}" method="POST">
+        <form action="{{route('create_suggested_address')}}" method="POST">
             {{ csrf_field() }}
             <div class="modal-content">
                 <h4>Add a new territory</h4> <br>
