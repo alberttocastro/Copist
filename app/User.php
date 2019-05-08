@@ -36,4 +36,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Retrieve information about people not to call
+     * 
+     * @return model
+     */
+    public function do_not_call_info(){
+        // TODO: Pegar de maneira dinâmica
+        return Address::where('is_valid', 1)
+                            ->where('is_visitable', 0)
+                            ->get();
+    }
 }
