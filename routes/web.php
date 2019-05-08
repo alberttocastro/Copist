@@ -20,3 +20,8 @@ Route::prefix('territory')->group(function(){
 
     Route::get('{id}', 'TerritoryController@view')->name('view_territory');
 });
+
+Route::prefix('assignment')->group(function(){
+
+    Route::get('/','AssignmentController@index');
+});
