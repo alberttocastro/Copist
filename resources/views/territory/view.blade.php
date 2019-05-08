@@ -3,6 +3,12 @@
 @section('main')
     <div class="container">
         
+        <div class="row">
+            <div class="col s12 offset-s1">
+                <h2>{{$address->street}}</h2>
+            </div>
+        </div>
+
         {{-- Caso a pessoa tenha um instrutor, mostra --}}
         @if ($address->is_visited())
         <div class="row">
