@@ -52,65 +52,50 @@
     <div id="dashboard" class="col s12">
     
         <div class="container">
-            <% @working_cards.keys.each do |macroregion| %>
-            <blockquote>
-                <h4>
-                    <%= macroregion %>
-                </h4>
-            </blockquote>
-    
-            <% @working_cards[macroregion].each do |card| %>
-            <ul class="collection with-header z-depth-3">
-                <li class="collection-header">
-                    <div class="row mb-0 valign-wrapper">
-                        <div class="col s9">
-                            <h4>
-                                <%= card.name %>
-                            </h4>
-                        </div>
-                        <div class="col s3">
-                            <%= link_to  "Received", finish_all_card_assignments_path(card_id: card.id), method: :post, class:'waves-effect waves-teal btn-flat' %>
-                        </div>
-                    </div>
-                </li>
-                <% @assignments = card.people_assigned_to_the_card %>
-                <% @assignments.keys.each do |date| %>
-                <li class="collection-item">
-                    <%= @assignments[date].join(", ") %>
-                    <div class="right">
-                        <div class="center">
-                            <b><%= date %></b>
-                        </div>
-                    </div>
-                </li>
-                <% end %>
-                <%# Verificar a possibilidade de adição de ver comentários posteriormente  %>
-                <%#<li class="collection-item">
-                    <div class="row valign-wrapper mb-0">
-                        <div class="col s10">
-                            João @ Rua Marquês de Caravelas, 55, Ed Montreal, Ap 3
-                        </div>
-                        <div class="col s2">
-                            <div class="center">
-                                <a href="#" class=" btn-flat waves-teal btn-flat">
-                                    see
-                                </a>
+            @foreach ($working_cards as $macro_region_id => $cards)
+                <blockquote>
+                    <h4>
+                        {{App\Macro_region::find(1)->name}}
+                    </h4>
+                </blockquote>
+        
+                @foreach ($cards as $card)
+                    <ul class="collection with-header z-depth-3">
+                        <li class="collection-header">
+                            <div class="row mb-0 valign-wrapper">
+                                <div class="col s9">
+                                    <h4>
+                                    {{$card->name}}
+                                    </h4>
+                                </div>
+                                <div class="col s3">
+                                    <a href="/" method="GET">Received</a>
+                                    {{-- <%= link_to  "Received", finish_all_card_assignments_path(card_id: card.id), method: :post, class:'waves-effect waves-teal btn-flat' %> --}}
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </li> %>
-                <li class="collection-item center" style="padding: 0% 0% 0% 0%">
-                    <a href="#modal-assign-territory" class="btn-flat waves-effect waves-light modal-trigger" style="height: 100%; width: 100%;">
-                        <span> + Add publisher</span>
-                    </a>
-                </li>
-            </ul>
-            <% end %>
-            <% end %>
+                        </li>
+                        @foreach ($card->get_people_assigned_to_the_card() as $user)
+                            <li class="collection-item">
+                                {{$user->email}}
+                                <div class="right">
+                                    <div class="center">
+                                        <b>{{App\Assignment::where('user_id', $user->id).where('card_id', $card->id).where('completion_date', '')->first()->created_at}}</b>
+                                    </div>
+                                </div>
+                            </li>
+                        @endforeach
+                        <li class="collection-item center" style="padding: 0% 0% 0% 0%">
+                            <a href="#modal-assign-territory" class="btn-flat waves-effect waves-light modal-trigger" style="height: 100%; width: 100%;">
+                                <span> + Add publisher</span>
+                            </a>
+                        </li>
+                    </ul>
+                @endforeach
+            @endforeach
     
         </div>
     
     </div>
     
-    <%= render  "publisher_choice_assign.html.erb" %>
+    @yield('main.modal.choose_publisher')
 @endsection
