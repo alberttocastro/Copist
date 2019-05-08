@@ -25,3 +25,5 @@ Route::prefix('assignment')->group(function(){
 
     Route::get('/','AssignmentController@index')->name('assignments');
 });
+
+Route::get('help','MainController@help')->name('help');

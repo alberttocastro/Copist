@@ -13,4 +13,9 @@ class MainController extends Controller
     {
         return view("main/index");
     }
+
+    public function help()
+    {
+        return view('main.help');
+    }
 }
