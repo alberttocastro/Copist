@@ -3,7 +3,7 @@
         <a href="/">My Assignments</a> 
     </li>
     <li>
-        <a href="/">Assignments</a>
+        <a href="{{route('assignments')}}">Assignments</a>
     </li>
     <li>
         <a href="/">Overview</a>

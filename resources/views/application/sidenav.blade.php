@@ -11,7 +11,7 @@
             <a href="/"> <i class="material-icons left">home</i> Home </a>
         </li>
         <li>
-            <a href="/"><i class="material-icons left">assignment</i>Assign </a>
+            <a href="{{route('assignments')}}"><i class="material-icons left">assignment</i>Assign </a>
         </li>
         <li>
             <a href="/"><i class="material-icons left">show_chart</i> Overview </a>
