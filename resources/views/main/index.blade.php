@@ -59,7 +59,7 @@
                                                     <p>Obs: {{ $address->comments }} </p> <br>
                                                 </div>
                                                 <div class="col s3">
-                                                    <a href="/">View</a>
+                                                    <a href="{{route('view_territory', ['id'=>$address->id])}}">View</a>
                                                     {{-- TODO: View address --}}
                                                 </div>
                                             </div>
