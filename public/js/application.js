@@ -126,7 +126,7 @@ function notHidden(){
     $(".add-publisher-button").click(function(event){
       var id = event.target.id;
   
-      $("input#card").val(id);
+      $("input#card_id").val(id);
     });
   
     // Setar id do endereço ao clicar no botão para adicionar cartão ao território
