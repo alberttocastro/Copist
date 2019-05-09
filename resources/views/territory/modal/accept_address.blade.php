@@ -1,7 +1,8 @@
 <div id="accept-address" class="modal">
     <form action="" method="post">
         @csrf
-        <input type="hidden" name="id" class="hidden-id">
+        @method('post')
+        <input type="hidden" name="suggeste_address_id" class="hidden-id">
         <!-- Conteúdo -->
         <div class="modal-content">
             <h4>Add a new territory</h4> <br>
@@ -48,6 +49,7 @@
             <div class="input-field col s12">
                 Card<br>
                 <select name="card_id" id="card_id">
+                    <option value="0" selected>No card</option>
                     @foreach (App\Card::all() as $card)
                         <option value="{{$card->id}}">{{$card->name}} - {{$card->number}}</option>
                     @endforeach
