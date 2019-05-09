@@ -69,17 +69,25 @@ class TerritoryController extends Controller
             $address->name = $request->name;
             $address->comments = $request->comments;
             $address->address_type_id = $request->address_type_id;
-            $address->macroregion_id = $request->macroregion_id;
-            $address->group_id = $request->group_id;
+            $address->macro_region_id = $request->macroregion_id;
             $address->card_id = $request->card_id;
+            $address->nationality_id = 0;
+            $address->idiom_id = 0;
+            $address->second_language_id = 0;
+            $address->address_type_id = 0;
+            $address->publisher_id=0;
+            $address->frequence=0;
+            $address->references = "";
+            $address->is_valid = true;
+            $address->is_visitable = true;
     
             $address->save();
 
             $suggested_address = Suggested_address::find($request->suggeste_address_id)->delete();
 
-            return redirect()->action('PermissionsController@index')->with('message', 'Address saved successfully');
+            return redirect()->action('TerritoryController@management')->with('message', 'Address saved successfully');
         } catch (\Exception $th) {
-            return redirect()->action('PermissionsController@index')->with('message', 'Adress was not saved. Try again.');
+            return redirect()->action('TerritoryController@management')->with('message', 'Address was not saved. Try again.'.$th);
         }
 
     }
@@ -87,14 +95,14 @@ class TerritoryController extends Controller
     public function set_map_to_address(Request $request)
     {
         try {
-            $address = Adress::find($request->address_id);
+            $address = Address::find($request->address_id);
             $address->card_id = $request->address_id;
 
             $address->save();
 
-            return redirect()->action('PermissionsController@index')->with('message', 'Card set successfully');
+            return redirect()->action('TerritoryController@management')->with('message', 'Card set successfully');
         } catch (\Exception $th) {
-            return redirect()->action('PermissionsController@index')->with('message', 'Card could not be set. Try again.');
+            return redirect()->action('TerritoryController@management')->with('message', 'Card could not be set. Try again.');
         }
     }
 }
