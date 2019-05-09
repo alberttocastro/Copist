@@ -108,7 +108,7 @@ function notHidden(){
       $(".textarea-neighborhood").val($("#" + id + ".neighborhood")[0].innerText);
       $(".textarea-name").val($("#" + id + ".name")[0].innerText);
       $(".textarea-comments").val($("#" + id + ".comments")[0].innerText);
-    })
+    });
   
     // Colocando o id do endereço no modal quando o botão de adicionar um relatório de visita for clicado
     $("a.report-visit").click(function(event){
@@ -129,6 +129,7 @@ function notHidden(){
       $("input#card").val(id);
     });
   
+    // Setar id do endereço ao clicar no botão para adicionar cartão ao território
     $(".add-card-to-address-button").click(function(event){
       var id = event.target.id;
   
@@ -136,12 +137,5 @@ function notHidden(){
     })
   
   });
-  
-  //$(document).ready(runfunction);
-  //$(document).on('page:load', runfunction);
-  //$(document).on('page:change', runfunction);
-  //$(window).bind('page:change', runfunction);
-  //$(document).onload = runfunction;
-  //window.onload = runfunction;
   
   
