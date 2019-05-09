@@ -19,13 +19,13 @@ class Card extends Model
 
     public function is_at_work()
     {
-        return Assignment::where('card_id',$this->id)->where('completion_date', '')->count() > 0;
+        return Assignment::where('card_id',$this->id)->where('completion_date', null)->count() > 0;
     }
 
     public function get_people_assigned_to_the_card()
     {
         $people = array();
-        foreach(Assignment::where('card_id',$this->id)->where('completion_date', '') as $assignment){
+        foreach(Assignment::where('card_id',$this->id)->where('completion_date', null)->get() as $assignment){
             $people[$assignment->id] = $assignment->user;
         }
         return $people;
