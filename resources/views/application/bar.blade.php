@@ -9,17 +9,19 @@
         <a href="{{route('overview')}}">Overview</a>
     </li>
     <li>
-        <a href="/">Management</a>
+        <a href="{{route('territory_management')}}">Management</a>
     </li>
     <li>
         <a href="{{route('permissions')}}">Permissions</a>
     </li>
+    {{-- TODO: link para database --}}
     <li>
         <a href="/">Database</a>
     </li>
     <li>
         <a href="{{route('help')}}">Help</a>
     </li>
+    {{-- TODO: link para logout --}}
     <li>
         <a href="/">Logout</a>
     </li>

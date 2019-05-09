@@ -17,13 +17,14 @@
             <a href="{{route('overview')}}"><i class="material-icons left">show_chart</i> Overview </a>
         </li>
         <li>
-            <a href="/"><i class="material-icons left">person_add</i> Management </a>
+            <a href="{{route('territory_management')}}"><i class="material-icons left">person_add</i> Management </a>
         </li>
         <li>
             <a href="{{route('permissions')}}"><i class="material-icons left">lock_open</i> Permissions </a>
         </li>
     
         <div class="divider"></div>
+        {{-- TODO: link para banco de dados --}}
         <li>
             <a href="/"><i class="material-icons left">dvr</i> Database </a>
         </li>
@@ -35,6 +36,7 @@
         </li>
         
         <div class="divider"></div>
+        {{-- TODO: link para logout --}}
         <li>
             <a href="/"><i class="material-icons left">exit_to_app</i> Logout </a>
         </li>
