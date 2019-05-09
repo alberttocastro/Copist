@@ -59,4 +59,42 @@ class TerritoryController extends Controller
         }
 
     }
+
+    public function accept_new_address(Request $request)
+    {
+        try {
+            $address = new Address;
+            $address->street = $request->street;
+            $address->neighborhood = $request->neighborhood;
+            $address->name = $request->name;
+            $address->comments = $request->comments;
+            $address->address_type_id = $request->address_type_id;
+            $address->macroregion_id = $request->macroregion_id;
+            $address->group_id = $request->group_id;
+            $address->card_id = $request->card_id;
+    
+            $address->save();
+
+            $suggested_address = Suggested_address::find($request->suggeste_address_id)->delete();
+
+            return redirect()->action('PermissionsController@index')->with('message', 'Address saved successfully');
+        } catch (\Exception $th) {
+            return redirect()->action('PermissionsController@index')->with('message', 'Adress was not saved. Try again.');
+        }
+
+    }
+
+    public function set_map_to_address(Request $request)
+    {
+        try {
+            $address = Adress::find($request->address_id);
+            $address->card_id = $request->address_id;
+
+            $address->save();
+
+            return redirect()->action('PermissionsController@index')->with('message', 'Card set successfully');
+        } catch (\Exception $th) {
+            return redirect()->action('PermissionsController@index')->with('message', 'Card could not be set. Try again.');
+        }
+    }
 }

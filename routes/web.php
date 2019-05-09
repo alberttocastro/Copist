@@ -17,6 +17,8 @@ Route::get('overview', 'MainController@overview')->name('overview');
 Route::prefix('territory')->group(function(){
     
     Route::get('management', 'TerritoryController@management')->name('territory_management');
+    Route::post('management/accept','TerritoryController@accept_new_address')->name('accept_address');
+    Route::post('management/map', 'TerritoryController@set_map_to_address')->name('set_map_to_address');
 
     Route::post('suggest', 'TerritoryController@create_suggested_address')->name('create_suggested_address');
     Route::post('report', 'TerritoryController@create_address_report')->name('create_address_report');
