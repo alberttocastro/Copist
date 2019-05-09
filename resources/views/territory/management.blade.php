@@ -12,6 +12,9 @@
 @endsection
 
 @section('main')
+@if (\Session::has('message'))
+    <p>{{\Session::get('message')}}</p>
+@endif
     <!-- Aba de aceitar endereços novos -->
     <div id="new">
         <div class="container">
@@ -82,20 +85,21 @@
                                 @endif
                             </div>
                             <div class="card-action">
-                                <a id="<%= address.id %>" href="#choose-map" class="modal-trigger add-card-to-address-button">Choose card</a>
+                                <a id="{{$address->id}}" href="#choose-map" class="modal-trigger add-card-to-address-button">Choose card</a>
                             </div>
                         </div>
                     </div>
                 </div>
             @endforeach
 
-            <form action="" method="post">
+            <form action="{{route('set_map_to_address')}}" method="post">
+                @method('put')
                 @csrf
                 <!-- Modal - Escolher mapa -->
                 <div id="choose-map" class="modal">
                     <!-- Conteúdo -->
                     <div class="modal-content">
-                        <input type="hidden" name="address_id">
+                        <input type="hidden" id="address_id" name="address_id">
                         <h4>Choose map</h4> <br>
                         <div class="input-field col s12">
                             <select name="card_id" id="card_id">

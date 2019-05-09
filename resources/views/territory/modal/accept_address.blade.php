@@ -1,5 +1,5 @@
 <div id="accept-address" class="modal">
-    <form action="" method="post">
+    <form action="{{route('accept_address')}}" method="post">
         @csrf
         @method('post')
         <input type="hidden" name="suggeste_address_id" class="hidden-id">
@@ -35,14 +35,6 @@
                 <select name="macroregion_id" id="macroregion_id">
                     @foreach (App\Macro_region::all() as $macro_region)
                         <option value="{{$macro_region->id}}">{{$macro_region->name}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="input-field col s12">
-                Group<br>
-                <select name="group_id" id="group_id">
-                    @foreach (App\Group::all() as $group)
-                        <option value="{{$group->id}}">{{$group->name}}</option>
                     @endforeach
                 </select>
             </div>
