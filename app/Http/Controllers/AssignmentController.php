@@ -32,13 +32,21 @@ class AssignmentController extends Controller
         try {
             $assignment = new Assignment;
             $assignment->card_id = $request->card_id;
-            $assignment->user_id = $request->user_id;
+            $assignment->user_id = $request->publisher_1;
 
+            $assignment_2 = new Assignment;
+            $assignment_2->card_id = $request->card_id;
+            $assignment_2->user_id = $request->publisher_2;
+            
             $assignment->save();
+
+            if($request->publisher_2 != 0){
+                $assignment_2->save();
+            }
 
             return redirect()->action('AssignmentController@index')->with('message', 'Territory assignmed successfully');
         } catch (\Exception $th) {
-            return redirect()->action('AssignmentController@index')->with('message', 'Could not assign territory. Try again.');
+            return redirect()->action('AssignmentController@index')->with('message', '<br><br><br>Could not assign territory. Try again. <br>'.$th);
         }
     }
 
