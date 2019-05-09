@@ -1,12 +1,12 @@
 <!-- Modal: Escolher irmãos para designar para endereço -->
 <div id="modal-assign-territory" class="modal">
-    <form action="/" method="post">
-        {{ csrf_field() }}
-        <input type="hidden" name="card">
+    <form action="{{route('assign_to_territory')}}" method="post">
+        @csrf
+        <input type="hidden" id="card_id" name="card_id">
         <div class="modal-content">
             <h4>Assign Territory</h4> <br>
             <div class="input-field col s12">
-                <select name="publisher_2" id="publisher_1">
+                <select name="publisher_1" id="publisher_1">
                     <option value="">Choose publisher</option>
                     @foreach (App\User::all() as $user)
                         <option value="{{$user->id}}">{{$user->email}}</option>
@@ -17,7 +17,7 @@
             
             <div class="input-field col s12">
                 <select name="publisher_2" id="publisher_2">
-                    <option value="">Choose publisher</option>
+                    <option value="0">Choose publisher</option>
                     @foreach (App\User::all() as $user)
                         <option value="{{$user->id}}">{{$user->email}}</option>
                     @endforeach
