@@ -12,8 +12,13 @@
 @endsection
 
 @section('main')
-{{-- ABA Dos territórios não designados --}}
-<div id="all" class="col s12">
+    @if(\Session::has('message'))
+        <p>
+            {{\Session::get('message')}}
+        </p>
+    @endif
+    {{-- ABA Dos territórios não designados --}}
+    <div id="all" class="col s12">
         <div class="container">
             <?php $macroregions = App\Macro_region::all(); ?>
             @foreach($macroregions as $macroregion)
@@ -32,7 +37,7 @@
                                     <h4> {{$card->name}}</h4>
                                 </div>
                                 <div class="col s4">
-                                    <a id="<%= card.id %>" class="waves-effect waves-teal btn-flat modal-trigger add-publisher-button" href="#modal-assign-territory">Assign</a>
+                                    <a id="{{$card->id}}" class="waves-effect waves-teal btn-flat modal-trigger add-publisher-button" href="#modal-assign-territory">Assign</a>
                                 </div>
                             </div>
                         </li>
@@ -69,8 +74,7 @@
                                     </h4>
                                 </div>
                                 <div class="col s3">
-                                    <a href="/" method="GET">Received</a>
-                                    {{-- <%= link_to  "Received", finish_all_card_assignments_path(card_id: card.id), method: :post, class:'waves-effect waves-teal btn-flat' %> --}}
+                                    <a href="{{route('remove_assignment_to_territory')}}" >Received</a>
                                 </div>
                             </div>
                         </li>
@@ -79,14 +83,14 @@
                                 {{$user->email}}
                                 <div class="right">
                                     <div class="center">
-                                        <b>{{App\Assignment::where('user_id', $user->id).where('card_id', $card->id).where('completion_date', '')->first()->created_at}}</b>
+                                        <b>{{strftime('%m/%d/%Y', App\Assignment::where('user_id', $user->id)->where('card_id', $card->id)->where('completion_date', null)->first()->created_at->timestamp)}}</b>
                                     </div>
                                 </div>
                             </li>
                         @endforeach
                         <li class="collection-item center" style="padding: 0% 0% 0% 0%">
-                            <a href="#modal-assign-territory" class="btn-flat waves-effect waves-light modal-trigger">
-                                <span> + Add publisher</span>
+                            <a href="#modal-assign-territory" class="btn-flat waves-effect waves-light modal-trigger add-publisher-button" >
+                                <span id="{{$card->id}}"> + Add publisher</span>
                             </a>
                         </li>
                     </ul>
