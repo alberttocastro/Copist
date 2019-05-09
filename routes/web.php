@@ -29,6 +29,9 @@ Route::prefix('territory')->group(function(){
 Route::prefix('assignment')->group(function(){
 
     Route::get('/','AssignmentController@index')->name('assignments');
+
+    Route::post('set', 'AssignmentController@assign_to_territory')->name('assign_to_territory');
+    Route::delete('remove', 'AssignmentController@remove_assignment')->name('remove_assignment_to_territory');
 });
 
 Route::get('help','MainController@help')->name('help');
