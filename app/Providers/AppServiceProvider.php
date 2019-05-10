@@ -25,6 +25,10 @@ class AppServiceProvider extends ServiceProvider
     {
         //
 
+        // It is supossed to solve the problem:
+        // Specified key was too long; max key length is 1000 bytes
+        Schema::defaultStringLength(191);
+
         /*$this->publishes(
             [
             __DIR__.'/path/to/assets' => public_path('vendor/courier'),
