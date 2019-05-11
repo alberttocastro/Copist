@@ -18,79 +18,75 @@
         <div class="container">
             
             {{-- Caso haja designação --}}
-            @if (App\Assignment::all()->count() == 0)
-                
-                @foreach(App\Assignment::all() as $assignment)
-                    <?php 
-                        $card = $assignment->card;
-                    ?>
-                    {{-- Cartão --}}
-                    <div class="row">
-                        <div class="col s12 m10 l8 xl8 offset-xl2 offset-l2 offset-m1">
-                            <div class="card grey lighten-5 z-depth-2">
-                                <?php // Conteúdo do cartão  ?>
-                                <div class="card-content indigo-text text-darken-4">
-                                    
-                                    {{-- Header --}}
-                                    <span class="card-title">
-                                        <div class="row">
-                                            <div class="col s2" style="padding-left: 0%"><i class="material-icons medium">location_on</i></div>
-                                            <div class="col s10" style="vertical-align:middle;">
-                                                <h4 style="margin-top: 0px">
-                                                    {{ $card->name }}
-                                                </h4>
+            {{-- TODO: Pegar designações dinâmicas --}}
+            @forelse(App\Assignment::whereNull('completion_date')->get() as $assignment)
+                <?php $card = $assignment->card; ?>
+                {{-- Cartão --}}
+                <div class="row">
+                    <div class="col s12 m10 l8 xl8 offset-xl2 offset-l2 offset-m1">
+                        <div class="card grey lighten-5 z-depth-2">
+                            <?php // Conteúdo do cartão  ?>
+                            <div class="card-content indigo-text text-darken-4">
+                                
+                                {{-- Header --}}
+                                <span class="card-title">
+                                    <div class="row">
+                                        <div class="col s2" style="padding-left: 0%"><i class="material-icons medium">location_on</i></div>
+                                        <div class="col s10" style="vertical-align:middle;">
+                                            <h4 style="margin-top: 0px">
+                                                {{ $card->name }}
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </span>
+                                
+                                <?php  $addresses = $card->addresses ?>
+                                @if($addresses != null)
+                                <ul class="collapsible z-depth-0">
+                                    @foreach($addresses as $address)
+                                    <li>
+                                        {{-- TODO: Address done? --}}
+                                        <div class="collapsible-header <?php //= address.done?(assignment.id) ? "blue lighten-4" : nil ?>">
+                                            <i class="material-icons">contacts</i>{{ $address->street }}
+                                        </div>
+                                        <div class="collapsible-body">
+                                            <div class="row valign-wrapper">
+                                                <div class="col s9">
+                                                    <p>Name: {{ $address->name }}</p> 
+                                                    <p>Country: {{ $address->nationality->name }} </p>
+                                                    <p>Ref:  {{ $address->references }} </p>
+                                                    <p>Obs: {{ $address->comments }} </p> <br>
+                                                </div>
+                                                <div class="col s3">
+                                                    <a href="{{route('view_territory', ['id'=>$address->id])}}">View</a>
+                                                    {{-- TODO: View address --}}
+                                                </div>
+                                            </div>
+                                            <div>
+                                            <a id="{{ $address->id }}" class="waves-effect waves-light btn modal-trigger blue darken-3 report-visit" href="#report-visit">Report</a>
                                             </div>
                                         </div>
-                                    </span>
+                                    </li>
+                                    @endforeach
                                     
-                                    <?php  $addresses = $card->addresses ?>
-                                    @if($addresses != null)
-                                    <ul class="collapsible z-depth-0">
-                                        @foreach($addresses as $address)
-                                        <li>
-                                            {{-- TODO: Address done? --}}
-                                            <div class="collapsible-header <?php //= address.done?(assignment.id) ? "blue lighten-4" : nil ?>">
-                                                <i class="material-icons">contacts</i>{{ $address->street }}
-                                            </div>
-                                            <div class="collapsible-body">
-                                                <div class="row valign-wrapper">
-                                                    <div class="col s9">
-                                                        <p>Name: {{ $address->name }}</p> 
-                                                        <p>Country: {{ $address->nationality->name }} </p>
-                                                        <p>Ref:  {{ $address->references }} </p>
-                                                        <p>Obs: {{ $address->comments }} </p> <br>
-                                                    </div>
-                                                    <div class="col s3">
-                                                        <a href="{{route('view_territory', ['id'=>$address->id])}}">View</a>
-                                                        {{-- TODO: View address --}}
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                <a id="{{ $address->id }}" class="waves-effect waves-light btn modal-trigger blue darken-3 report-visit" href="#report-visit">Report</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        @endforeach
-                                        
-                                    </ul>
-                                    @endif
-                                    
-                                </div>
+                                </ul>
+                                @endif
                                 
-                                {{-- Ações do cartão --}}
-                                <div class="card-action">
-                                    <a href="/" class="black-text waves-effect waves-teal btn-flat" method="post"><b>Done</b></a>
-                                </div>
-                                
+                            </div>
+                            
+                            {{-- Ações do cartão --}}
+                            <div class="card-action">
+                                <a href="/" class="black-text waves-effect waves-teal btn-flat" method="post"><b>Done</b></a>
                             </div>
                             
                         </div>
                         
                     </div>
-                @endforeach
+                    
+                </div>
+            @empty
             
             {{-- Caso não haja nenhuma designação --}}
-            @else
 
                 <div class="valign-wrapper">
                     <div>
@@ -99,8 +95,9 @@
                         <h5 class="center-align">"Here I am. Send me!"</h5>
                     </div>
                 </div>
+
+            @endforelse
                 
-            @endif        
             {{-- <% end %> --}}
             
             {{--  Modal de relatar visita  --}}
