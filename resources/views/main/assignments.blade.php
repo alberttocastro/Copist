@@ -20,8 +20,7 @@
     {{-- ABA Dos territórios não designados --}}
     <div id="all" class="col s12">
         <div class="container">
-            <?php $macroregions = App\Macro_region::all(); ?>
-            @foreach($macroregions as $macroregion)
+            @forelse(App\Macro_region::all() as $macroregion)
                 <blockquote>
                     @if($macroregion->name == "")
                         <h4>Unnamed Region</h4>
@@ -46,7 +45,18 @@
                         @endforeach
                     </ul>
                 @endforeach
-            @endforeach
+
+            @empty
+                {{-- Caso não tenha uma macro-região cadastrada --}}
+
+                <div class="valign-wrapper">
+                    <div>
+                        <h2 class="center-align">There aren't macro-regions yet.</h2>
+                        <h5 class="center-align">Please, go to the database to create one.</h5>
+                    </div>
+                </div>
+            
+            @endforelse
         </div>
     </div>
     {{-- Fim da aba dos territórios designados --}}
@@ -57,7 +67,7 @@
     <div id="dashboard" class="col s12">
     
         <div class="container">
-            @foreach ($working_cards as $macro_region_id => $cards)
+            @forelse ($working_cards as $macro_region_id => $cards)
                 <blockquote>
                     <h4>
                         {{App\Macro_region::find(1)->name}}
@@ -95,7 +105,16 @@
                         </li>
                     </ul>
                 @endforeach
-            @endforeach
+            @empty
+            
+                <div class="valign-wrapper">
+                    <div style="width: 100%">
+                        <h2 class="center-align">Oh no!</h2>
+                        <h5 class="center-align">No cards at work.</h5>
+                    </div>
+                </div>
+
+            @endforelse
     
         </div>
     
