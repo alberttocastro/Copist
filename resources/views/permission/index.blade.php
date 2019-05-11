@@ -10,7 +10,7 @@
             {{ csrf_field()}}
             {{-- <%# Iteração sobre todos os usuários. Relaciona-os com os seus devidos publicadores %> --}}
             <div class="row">
-            @foreach(App\User::all() as $user)
+            @forelse(App\User::all() as $user)
                 <div class="col s12 m12">
                     <div class="card white z-depth-3">
                         <div class="card-content black-text">
@@ -40,7 +40,17 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+
+                <div class="valign-wrapper">
+                    <div style="width: 100%">
+                        <h2 class="center-align">Ooops</h2>
+                        <h5 class="center-align">No users to manage permission</h5>
+                        <p class="center-align">Encourage the brothers from your congregation to use it!</p>
+                    </div>
+                </div>
+            
+            @endforelse
             </div>
 
             {{-- <%# Botão para enviar as modificações %> --}}
