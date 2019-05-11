@@ -54,11 +54,13 @@
             </div>
 
             {{-- <%# Botão para enviar as modificações %> --}}
-            <div class="fixed-action-btn">
-                <button type="submit" method="put" class="btn-floating btn-large purple darken-2">
-                    <i class="material-icons Large">send</i>
-                </button>
-            </div>
+            @if (App\User::all()->count() > 0)
+                <div class="fixed-action-btn">
+                    <button type="submit" method="put" class="btn-floating btn-large purple darken-2">
+                        <i class="material-icons Large">send</i>
+                    </button>
+                </div>
+            @endif
 
         </form>
     </div>
