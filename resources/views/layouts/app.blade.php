@@ -1,8 +1,12 @@
-<html>
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <title>Copist</title>
-
+        <meta charset="utf-8">
+        <title>{{ config('app.name', 'App') }}</title>
+        
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/materialize.css') }}" />
