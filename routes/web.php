@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'MainController@main')->name('home');
 Route::get('overview', 'MainController@overview')->name('overview');
@@ -41,6 +44,3 @@ Route::prefix('permissions')->group(function(){
     Route::put('update', 'PermissionsController@update')->name('update_permission');
 });
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
