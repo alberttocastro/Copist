@@ -1,4 +1,4 @@
-@extends('application.layout')
+@extends('layouts.app')
 
 @section('header')
 <ul class="tabs tabs-transparent">
