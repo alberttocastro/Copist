@@ -14,7 +14,8 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/materialize.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/application.css') }}" >
 </head>
 <body>
     <div id="app">
