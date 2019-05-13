@@ -1,1 +1,5 @@
-    You are not permitted to access this view
+@extends('layouts.app')
+
+@section('main')
+    You are not permitted to access this function
+@endsection
