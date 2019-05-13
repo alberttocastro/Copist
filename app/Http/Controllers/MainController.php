@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class MainController extends Controller
 {
@@ -11,7 +12,10 @@ class MainController extends Controller
      */
     public function main()
     {
-        return view("main/index");
+        if (Gate::allows('is_user_approved'))
+            return view("main.index");
+        
+        return view('denied.not_approved');
     }
 
     public function help()
