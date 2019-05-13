@@ -30,5 +30,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('is_user_admin', function ($user) {
             return $user->is_admin;
         });
+
+        Gate::define('is_user_approved', function($user) {
+            return $user->publisher_id > 0;
+        });
     }
 }
