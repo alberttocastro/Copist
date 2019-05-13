@@ -45,6 +45,16 @@
                 </nav>
             </div>
             <ul id="slide-out" class="sidenav">
+                <li>
+                    <div class="user-view">
+                        <div class="background">
+                            <img src="http://via.placeholder.com/300x100">
+                        </div>
+                        <?php // TODO: Colocar dados do usuário dinamicamente ?>
+                        <a href="#name"><span class="white-text name">Log in</span></a>
+                        <a href="#email"><span class="white-text email">your@email.com</span></a>
+                    </div>
+                </li>
                 @guest
                     <li>
                         <a href="{{ route('login') }}">{{ __('Login') }}</a>
