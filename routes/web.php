@@ -14,9 +14,13 @@
 // Rotas de autenticação
 Auth::routes();
 
+// Rotas não aprovadas
+Route::get('/unapproved','MainController@not_approved')->middleware('auth');
+
 // Rotas protegidas pelo sistema
-Route::middleware('auth')->group(function(){
+Route::middleware(['auth', 'approved'])->group(function(){
     Route::get('/', 'MainController@main')->name('home');
+    
     Route::get('overview', 'MainController@overview')->name('overview');
     
     Route::prefix('territory')->group(function(){
