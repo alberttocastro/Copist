@@ -20,6 +20,6 @@ class CheckIfApproved
         if(Auth::check() && Auth::user()->publisher_id > 0 )
             return $next($request);
             
-        return redirect()->action('MainController@not_approved');
+        return redirect()->action('MainController@main');
     }
 }
