@@ -38,6 +38,12 @@
         <div class="divider"></div>
         {{-- TODO: link para logout --}}
         <li>
-            <a href="/"><i class="material-icons left">exit_to_app</i> Logout </a>
+            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="material-icons left">exit_to_app</i>{{ __('Logout') }}
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
         </li>
     </ul>
