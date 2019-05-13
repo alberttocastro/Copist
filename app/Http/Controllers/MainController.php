@@ -23,4 +23,9 @@ class MainController extends Controller
     {
         return view('main.overview');
     }
+
+    public function not_approved()
+    {
+        return view('denied.not_approved');
+    }
 }
