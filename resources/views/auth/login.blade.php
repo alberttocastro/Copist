@@ -6,6 +6,7 @@
         <div class="container">
             <h3>Log in</h3>
             <form method="POST" action="{{ route('login') }}">
+                @csrf
                 <div class="row">
                     <div class="col s12">
                         <div class="field">
