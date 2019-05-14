@@ -32,4 +32,9 @@ class MainController extends Controller
     {
         return view('denied.not_approved');
     }
+
+    public function database()
+    {
+        return view('main.database');
+    }
 }

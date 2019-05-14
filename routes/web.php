@@ -48,5 +48,7 @@ Route::middleware(['auth', 'approved'])->group(function(){
         Route::get('/','PermissionsController@index')->name('permissions');
         Route::put('update', 'PermissionsController@update')->name('update_permission');
     });
+
+    Route::get('/database', 'MainController@database')->name('database');
 });
 
