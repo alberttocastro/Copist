@@ -11,10 +11,15 @@
             <a href="/"> <i class="material-icons left">home</i> Home </a>
         </li>
         <li>
-            <a href="{{route('assignments')}}"><i class="material-icons left">assignment</i>Assign </a>
+            <a href="{{route('overview')}}"><i class="material-icons left">show_chart</i> Overview </a>
         </li>
         <li>
-            <a href="{{route('overview')}}"><i class="material-icons left">show_chart</i> Overview </a>
+            <a href="{{route('help')}}"><i class="material-icons left">help</i> Help </a>
+        </li>
+        @can('is_user_admin')
+        <div class="divider"></div>
+        <li>
+            <a href="{{route('assignments')}}"><i class="material-icons left">assignment</i>Assign </a>
         </li>
         <li>
             <a href="{{route('territory_management')}}"><i class="material-icons left">person_add</i> Management </a>
@@ -22,28 +27,21 @@
         <li>
             <a href="{{route('permissions')}}"><i class="material-icons left">lock_open</i> Permissions </a>
         </li>
-    
+        
         <div class="divider"></div>
         {{-- TODO: link para banco de dados --}}
         <li>
             <a href="/"><i class="material-icons left">dvr</i> Database </a>
         </li>
-    
-        
+        @endcan
         <div class="divider"></div>
-        <li>
-            <a href="{{route('help')}}"><i class="material-icons left">help</i> Help </a>
-        </li>
-        
-        <div class="divider"></div>
-        {{-- TODO: link para logout --}}
         <li>
             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <i class="material-icons left">exit_to_app</i>{{ __('Logout') }}
-            </a>
-
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
+                    <i class="material-icons left">exit_to_app</i>{{ __('Logout') }}
+                </a>
+                
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
             </form>
         </li>
     </ul>
