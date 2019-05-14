@@ -49,6 +49,9 @@ Route::middleware(['auth', 'approved'])->group(function(){
         Route::put('update', 'PermissionsController@update')->name('update_permission');
     });
 
-    Route::get('/database', 'MainController@database')->name('database');
+    Route::prefix('/database')->group(function(){
+        Route::get('/service', 'MainController@db_service')->name('db_service');
+        Route::get('/public', 'MainController@db_public')->name('db_public');
+    });
 });
 

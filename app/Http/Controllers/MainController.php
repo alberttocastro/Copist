@@ -33,8 +33,19 @@ class MainController extends Controller
         return view('denied.not_approved');
     }
 
-    public function database()
+    public function db_service()
     {
-        return view('main.database');
+        if (Gate::allows('is_user_admin'))
+            return view("main.index");
+
+        return view('main.db_service');
+    }
+
+    public function db_public()
+    {
+        if (Gate::allows('is_user_admin'))
+            return view("main.index");
+            
+        return view('main.db_public');
     }
 }
