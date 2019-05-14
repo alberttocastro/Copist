@@ -19,7 +19,28 @@
 
 @section('main')
 <div id="publishers" class="col s12">
-    1
+    <div class="row">
+        <div class="col s6 offset-s3">
+            <h4>Publishers</h4>
+        </div>
+        <div class="row">
+            <div class="col s12 m10 offset-m1">
+                <div class="row">
+                    @foreach (App\Publisher::all() as $publisher)
+                    <div class="col s12 m6">
+                        <div class="card-panel">
+                            <h5 style="margin-top: 0;">{{ucwords($publisher->name)}}</h5>
+                            <span><b>Email</b> {{$publisher->email}}</span><br>
+                            <span><b>Phone</b> {{$publisher->phone}}</span><br>
+                            <span><b>Neighborhood</b> {{$publisher->neighborhood}}</span><br>
+                            <span><b>Macro Region</b> {{$publisher->macro_region->name}}</span><br>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div id="macroregions" class="col s12">
     4
