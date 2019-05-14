@@ -20,24 +20,32 @@
     <div id="all" class="col s12">
         <div class="container">
             
-            @foreach (App\Macro_region::all() as $macro_region)
-            <blockquote>
-                <h5>{{$macro_region->name}}</h5>
-            </blockquote>
-            
-            <ul class="collapsible popout">
-                @foreach ($macro_region->cards as $card)
-                <li>
-                    <div class="collapsible-header"><i class="material-icons">place</i><%= card.name %></div>
-                    <div class="collapsible-body">
-                        @foreach ($card->addresses as $address)
-                            <span>{{$address->street}}</span><br>
-                        @endforeach
+            @forelse (App\Macro_region::all() as $macro_region)
+                <blockquote>
+                    <h5>{{$macro_region->name}}</h5>
+                </blockquote>
+                
+                <ul class="collapsible popout">
+                    @foreach ($macro_region->cards as $card)
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">place</i><%= card.name %></div>
+                        <div class="collapsible-body">
+                            @foreach ($card->addresses as $address)
+                                <span>{{$address->street}}</span><br>
+                            @endforeach
+                        </div>
+                    </li>
+                    @endforeach
+                </ul>
+            @empty
+                <div class="valign-wrapper">
+                    <div style="width: 100%">
+                        <h2 class="center-align">No addresses yet</h2>
+                        <h5 class="center-align">To register a new one, go to the <b>database</b>.</h5>
+                        <p class="center-align"><i>Don't forget to create a Macro-region</i></p>
                     </div>
-                </li>
-                @endforeach
-            </ul>
-            @endforeach
+                </div>
+            @endforelse
         </div>
     </div>
 

@@ -17,11 +17,10 @@
     <div id="assigned-territories" class="col s12">
         <div class="container">
             
-            <?php $assignments = App\Assignment::all(); ?>
-            @foreach($assignments as $assignment)
-                <?php 
-                    $card = $assignment->card;
-                ?>
+            {{-- Caso haja designação --}}
+            {{-- TODO: Pegar designações dinâmicas --}}
+            @forelse(App\Assignment::whereNull('completion_date')->get() as $assignment)
+                <?php $card = $assignment->card; ?>
                 {{-- Cartão --}}
                 <div class="row">
                     <div class="col s12 m10 l8 xl8 offset-xl2 offset-l2 offset-m1">
@@ -85,7 +84,20 @@
                     </div>
                     
                 </div>
-            @endforeach        
+            @empty
+            
+            {{-- Caso não haja nenhuma designação --}}
+
+                <div class="valign-wrapper">
+                    <div>
+                        <h2 class="center-align">You don't have any new assignment.</h2>
+                        <h5 class="center-align">Contact a responsible brother for a new one.</h5>
+                        <h5 class="center-align">"Here I am. Send me!"</h5>
+                    </div>
+                </div>
+
+            @endforelse
+                
             {{-- <% end %> --}}
             
             {{--  Modal de relatar visita  --}}

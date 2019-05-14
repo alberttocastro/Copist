@@ -22,7 +22,7 @@
             <!-- Cartão de novo território -->
             <div class="row">
                 <div class="col s12 m6">
-                    @foreach (App\Suggested_address::all() as $suggested_address)
+                    @forelse (App\Suggested_address::all() as $suggested_address)
                         <div class="card grey lighten-5 z-depth-2">
                             <div class="card-content indigo-text text-darken-4">
                                 <p>
@@ -43,7 +43,16 @@
                                 <a href="#">Reject</a>
                             </div>
                         </div>
-                    @endforeach
+                    @empty
+
+                        <div class="valign-wrapper">
+                            <div style="width: 100%">
+                                <h2 class="center-align">Well done!</h2>
+                                <h5 class="center-align">All new addresses are managed</h5>
+                            </div>
+                        </div>
+                    
+                    @endforelse
                 </div>
             </div>
 
@@ -56,13 +65,14 @@
     <div id="manage">
         <div class="container">
 
-
-            <blockquote>
-                <h4>Address without a map</h4>
-            </blockquote>
+            @if (App\Address::all()->where('card_id', 0)->count() > 0)
+                <blockquote>
+                    <h4>Address without a map</h4>
+                </blockquote>
+            @endif
 
             <!-- Cartão de novo território -->
-            @foreach(App\Address::all()->where('card_id', 0) as $address)
+            @forelse(App\Address::where('card_id', 0)->get() as $address)
                 <div class="row">
                     <div class="col s12 m6">
                         <div class="card grey lighten-5 z-depth-2">
@@ -90,7 +100,17 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+
+                <div class="valign-wrapper">
+                    <div style="width: 100%">
+                        <h2 class="center-align">Nice!</h2>
+                        <h5 class="center-align">All addresses have their own map.</h5>
+                        <p class="center-align">That's beautiful!</p>
+                    </div>
+                </div>
+
+            @endforelse
 
             <form action="{{route('set_map_to_address')}}" method="post">
                 @method('put')
