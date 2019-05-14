@@ -19,7 +19,10 @@
             </div>
         </header>
         <main>
-            You are not allowed yet
+            <div class="row">
+                <h2 class="center-align" style="width:100%">Sorry</h2>
+                <h5 class="center-align" style="width:100%">You were not yet granted access. Please, contact one of the administrators.</h5>
+            </div>
         </main>
     </body>
     <script src="{{ asset('js/jquery-3.4.1.js') }}" type="text/javascript" defer></script>
