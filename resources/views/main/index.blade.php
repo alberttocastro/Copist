@@ -89,12 +89,10 @@
             {{-- <% end %> --}}
             
             {{--  Modal de relatar visita  --}}
-            {{-- TODO: Criar o formulário e colocar a rota correta --}}
             <div id="report-visit" class="modal" style="min-height: 100%">
                 <form action="{{route('create_address_report')}}" method="POST">
                     {{ csrf_field() }}
-                    {{-- < TODO: Id do publicador para ser pego dinamicamente  --}}
-                    <input id="publisher_id" name="publisher_id" type="hidden" value="{{App\Publisher::find(1)->id}}" />
+                    <input id="publisher_id" name="publisher_id" type="hidden" value="{{Auth::user()->publisher_id}}" />
                     <input id="address_id" name="address_id" type="hidden" />
                     <div class="modal-content">
                         <h4>ADD A REPORT</h4> <br>

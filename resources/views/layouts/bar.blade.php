@@ -14,7 +14,6 @@
                 class="material-icons right">arrow_drop_down</i></a>
     </li>
     @endcan
-    {{-- TODO: link para logout --}}
     <li>
         <a href="{{ route('logout') }}"
             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
