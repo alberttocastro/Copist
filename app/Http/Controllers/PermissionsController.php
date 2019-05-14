@@ -10,10 +10,10 @@ class PermissionsController extends Controller
 {
     //
     public function index(){
-        if (Gate::allows('is_user_admin')) 
-            return view('permission.index');
-        
-        return view('denied.permission_not_granted');
+        if (Gate::denies('is_user_admin')) 
+            return view('denied.permission_not_granted');
+            
+        return view('permission.index');
     }
 
     public function update(Request $request){

@@ -12,24 +12,23 @@ class AssignmentController extends Controller
     //
     public function index()
     {
-        if (Gate::allows('is_user_admin')){
-            $working_cards = array();
-            $cards = Card::all();
-            foreach($cards as $id => $card){
-                if($card->is_at_work()){
-                    if(\array_key_exists($card->macro_region_id, $working_cards)){
-                        $macro_region_array = $working_cards[$card->macro_region_id];
-                    } else {
-                        $macro_region_array = array();
-                    }
-                    $macro_region_array[$card->id] = $card;
-                    $working_cards[$card->macro_region_id] = $macro_region_array;
+        if (Gate::denies('is_user_admin'))
+            return view('denied.permission_not_granted');
+        
+        $working_cards = array();
+        $cards = Card::all();
+        foreach($cards as $id => $card){
+            if($card->is_at_work()){
+                if(\array_key_exists($card->macro_region_id, $working_cards)){
+                    $macro_region_array = $working_cards[$card->macro_region_id];
+                } else {
+                    $macro_region_array = array();
                 }
+                $macro_region_array[$card->id] = $card;
+                $working_cards[$card->macro_region_id] = $macro_region_array;
             }
-            return view('main.assignments',['working_cards'=>$working_cards]);
         }
-
-        return view('denied.permission_not_granted');
+        return view('main.assignments',['working_cards'=>$working_cards]);
     }
 
     public function assign_to_territory(Request $request)

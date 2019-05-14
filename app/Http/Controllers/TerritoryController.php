@@ -7,6 +7,7 @@ use App\Suggested_address;
 use App\Date_parser;
 use App\Visit;
 use App\Address;
+use Illuminate\Support\Facades\Gate;
 
 class TerritoryController extends Controller
 {
@@ -14,6 +15,9 @@ class TerritoryController extends Controller
 
     public function management()
     {
+        if (Gate::denies('is_user_admin'))
+            return view('denied.permission_not_granted');
+
         return view('territory.management');
     }
 
