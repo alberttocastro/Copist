@@ -40,7 +40,7 @@
     <li class="divider"></li>
     {{-- TODO: link para database --}}
     <li>
-        <a href="/">Database</a>
+        <a href="{{route('database')}}">Database</a>
     </li>
 </ul>
 @endcan

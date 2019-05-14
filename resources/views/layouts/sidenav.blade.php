@@ -31,7 +31,7 @@
         <div class="divider"></div>
         {{-- TODO: link para banco de dados --}}
         <li>
-            <a href="/"><i class="material-icons left">dvr</i> Database </a>
+            <a href="{{route('database')}}"><i class="material-icons left">dvr</i> Database </a>
         </li>
         @endcan
         <div class="divider"></div>
