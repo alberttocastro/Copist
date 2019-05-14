@@ -6,12 +6,6 @@
         <a href="#publishers" class="active">Publishers</a>
     </li>
     <li class="tab">
-        <a href="#idioms">Idioms</a>
-    </li>
-    <li class="tab">
-        <a href="#nationalities">Nationalities</a>
-    </li>
-    <li class="tab">
         <a href="#macroregions">Macro Region</a>
     </li>
     <li class="tab">
@@ -26,12 +20,6 @@
 @section('main')
 <div id="publishers" class="col s12">
     1
-</div>
-<div id="idioms" class="col s12">
-    2
-</div>
-<div id="nationalities" class="col s12">
-    3
 </div>
 <div id="macroregions" class="col s12">
     4
