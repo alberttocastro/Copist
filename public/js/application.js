@@ -54,7 +54,10 @@ function notHidden(){
     $('.collapsible').collapsible();
     
     $('.tabs').tabs();
-    
+
+    $(".dropdown-trigger").dropdown({
+      coverTrigger: false
+    });
     
     $('.datepicker').datepicker({
       format: 'mm/dd/yyyy',
