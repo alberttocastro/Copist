@@ -37,10 +37,12 @@
     <li>
         <a href="{{route('permissions')}}">Permissions</a>
     </li>
-    <li class="divider"></li>
-    {{-- TODO: link para database --}}
+    <li class="divider">DB</li>
     <li>
-        <a href="{{route('database')}}">Database</a>
+        <a href="{{route('db_service')}}">Database - Service</a>
+    </li>
+    <li>
+        <a href="{{route('db_public')}}">Database - Public</a>
     </li>
 </ul>
 @endcan

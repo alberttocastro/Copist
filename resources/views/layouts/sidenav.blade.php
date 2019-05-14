@@ -29,9 +29,11 @@
         </li>
         
         <div class="divider"></div>
-        {{-- TODO: link para banco de dados --}}
         <li>
-            <a href="{{route('database')}}"><i class="material-icons left">dvr</i> Database </a>
+            <a href="{{route('db_service')}}"><i class="material-icons left">dvr</i> Database - Service </a>
+        </li>
+        <li>
+            <a href="{{route('db_public')}}"><i class="material-icons left">dvr</i> Database - Public </a>
         </li>
         @endcan
         <div class="divider"></div>
