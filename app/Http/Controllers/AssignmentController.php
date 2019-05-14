@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Card;
 use App\Assignment;
+use Illuminate\Support\Facades\Gate;
 
 class AssignmentController extends Controller
 {
     //
     public function index()
     {
+        if (Gate::denies('is_user_admin'))
+            return view('denied.permission_not_granted');
+        
         $working_cards = array();
         $cards = Card::all();
         foreach($cards as $id => $card){

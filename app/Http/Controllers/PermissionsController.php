@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use App\User;
 
 class PermissionsController extends Controller
 {
     //
     public function index(){
+        if (Gate::denies('is_user_admin')) 
+            return view('denied.permission_not_granted');
+            
         return view('permission.index');
     }
 
