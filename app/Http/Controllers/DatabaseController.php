@@ -57,7 +57,7 @@ class DatabaseController extends Controller
         } catch (\Throwable $th) {
             return redirect()->action('DatabaseController@db_service')->with('message','Not possible');
         }
-        
+
         return redirect()->action('DatabaseController@db_service')->with('message','Saved successfully');
     }
 
@@ -97,10 +97,10 @@ class DatabaseController extends Controller
         try{
             $idiom->save();
         } catch (\Throwable $th) {
-            return redirect()->action('DatabaseController@db_service')->with('message','Not possible');
+            return redirect()->action('DatabaseController@db_public')->with('message','Not possible');
         }
 
-        return redirect()->action('DatabaseController@db_service')->with('message','Saved successfully');
+        return redirect()->action('DatabaseController@db_public')->with('message','Saved successfully');
     }
 
     public function create_nationality(Request $request)
@@ -111,9 +111,9 @@ class DatabaseController extends Controller
         try{
             $nationality->save();
         } catch (\Throwable $th) {
-            return redirect()->action('DatabaseController@db_service')->with('message','Not possible');
+            return redirect()->action('DatabaseController@db_public')->with('message','Not possible');
         }
 
-        return redirect()->action('DatabaseController@db_service')->with('message','Saved successfully');
+        return redirect()->action('DatabaseController@db_public')->with('message','Saved successfully');
     }
 }
