@@ -38,8 +38,16 @@
                                     <h5 style="margin-top: 0;">{{ucwords($publisher->name)}}</h5>
                                     <span><b>Email</b> {{$publisher->email}}</span><br>
                                     <span><b>Phone</b> {{$publisher->phone}}</span><br>
+                                    @if ($publisher->neighborhood != null)
                                     <span><b>Neighborhood</b> {{$publisher->neighborhood}}</span><br>
+                                    @else
+                                    <span><b>Neighborhood</b> <i class="red-text">Unknown</i></span><br>
+                                    @endif
+                                    @if ($publisher->macro_region != null)
                                     <span><b>Macro Region</b> {{$publisher->macro_region->name}}</span><br>
+                                    @else
+                                    <span><b>Macro Region</b> <i class="red-text">Unknown</i></span><br>
+                                    @endif
                                 </div>
                                 <div class="card-action">
                                     <a class="blue-text text-darken-4" href="#">Edit</a>
@@ -70,7 +78,7 @@
                 <label for="phone">Phone</label>
                 <input type="tel" name="phone" id="phone">
                 <label for="neighborhood">Neighborhood</label>
-                <input type="text" name="neighborhood" id="neighborhood" value="">
+                <input type="text" name="neighborhood" id="neighborhood">
                 <label for="macro-region">Macro Region</label>
                 <select name="macro_region" id="macro_region">
                     <option value="0">Select a Macro-Region</option>
