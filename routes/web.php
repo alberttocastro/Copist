@@ -50,7 +50,17 @@ Route::middleware(['auth', 'approved'])->group(function(){
     });
 
     Route::prefix('/database')->group(function(){
-        Route::get('/service', 'DatabaseController@db_service')->name('db_service');
+        Route::prefix('service')->group(function(){
+            Route::get('/', 'DatabaseController@db_service')->name('db_service');
+            
+            Route::post('publisher')->name('create_publisher');
+            Route::post('card')->name('create_card');
+            Route::post('address_type')->name('create_address_type');
+            Route::post('macro_region')->name('create_macro_region');
+            
+            Route::post('idiom')->name('create_idiom');
+            Route::post('nationality')->name('create_nationality');
+        });
         Route::get('/public', 'DatabaseController@db_public')->name('db_public');
     });
 });
