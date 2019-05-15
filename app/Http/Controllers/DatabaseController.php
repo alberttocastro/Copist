@@ -26,20 +26,21 @@ class DatabaseController extends Controller
     {
         if (Gate::allows('is_user_admin'))
             return view('main.db_public');
-        
+
         return view('denied.not_approved');
     }
-    
+
     public function create_card(Request $request)
     {
         $card = new Card;
         $card->name = $request->name;
         $card->macro_region_id = $request->macro_region;
+        $card->number = $request->number;
         try {
             //code...
             $card->save();
         } catch (\Throwable $th) {
-            return redirect()->action('DatabaseController@db_service')->with('message','Not possible');
+            return redirect()->action('DatabaseController@db_service')->with('message','Not possible '.$th);
         }
 
         return redirect()->action('DatabaseController@db_service')->with('message','Saved successfully');
