@@ -53,17 +53,17 @@ Route::middleware(['auth', 'approved'])->group(function(){
         Route::prefix('service')->group(function(){
             Route::get('/', 'DatabaseController@db_service')->name('db_service');
             
-            Route::post('publisher')->name('create_publisher');
-            Route::post('card')->name('create_card');
-            Route::post('address_type')->name('create_address_type');
-            Route::post('macro_region')->name('create_macro_region');
+            Route::post('publisher', 'DatabaseController@create_publisher')->name('create_publisher');
+            Route::post('card', 'DatabaseController@create_card')->name('create_card');
+            Route::post('address_type', 'DatabaseController@create_address_type')->name('create_address_type');
+            Route::post('macro_region', 'DatabaseController@create_macro_region')->name('create_macro_region');
         });
         
         Route::prefix('public')->group(function(){
             Route::get('/', 'DatabaseController@db_public')->name('db_public');
             
-            Route::post('idiom')->name('create_idiom');
-            Route::post('nationality')->name('create_nationality');
+            Route::post('idiom', 'DatabaseController@create_idiom')->name('create_idiom');
+            Route::post('nationality', 'DatabaseController@create_nationality')->name('create_nationality');
         });
     });
 });
