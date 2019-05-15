@@ -9,6 +9,7 @@ use App\Macro_region;
 use App\Address_type;
 use App\Idiom;
 use App\Nationality;
+use Illuminate\Support\Facades\Gate;
 
 class DatabaseController extends Controller
 {
@@ -48,6 +49,7 @@ class DatabaseController extends Controller
     {
         $publisher = new Publisher;
         $publisher->name = $request->name;
+        $publisher->email = $request->email;
         $publisher->phone = $request->phone;
         $publisher->neighborhood = $request->neighborhood;
         $publisher->macro_region_id = $request->macro_region;
@@ -55,7 +57,7 @@ class DatabaseController extends Controller
         try{
             $publisher->save();
         } catch (\Throwable $th) {
-            return redirect()->action('DatabaseController@db_service')->with('message','Not possible');
+            return redirect()->action('DatabaseController@db_service')->with('message','Not possible '.$th);
         }
 
         return redirect()->action('DatabaseController@db_service')->with('message','Saved successfully');
