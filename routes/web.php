@@ -50,8 +50,8 @@ Route::middleware(['auth', 'approved'])->group(function(){
     });
 
     Route::prefix('/database')->group(function(){
-        Route::get('/service', 'MainController@db_service')->name('db_service');
-        Route::get('/public', 'MainController@db_public')->name('db_public');
+        Route::get('/service', 'DatabaseController@db_service')->name('db_service');
+        Route::get('/public', 'DatabaseController@db_public')->name('db_public');
     });
 });
 
