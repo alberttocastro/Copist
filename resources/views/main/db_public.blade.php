@@ -35,7 +35,8 @@
                         </div>
                         @endforeach
                     </div>
-                    <a href="/" class="btn blue accent-4 waves-effect waves-light col s12 center-align">
+                    <a href="#create-idiom"
+                        class="btn blue accent-4 waves-effect waves-light col s12 center-align modal-trigger">
                         <span class="valign-wrapper " style="max-width:fit-content; margin: auto;">
                             <i class="material-icons">add_circle_outline</i> Add Idiom
                         </span>
@@ -44,7 +45,19 @@
             </div>
         </div>
     </div>
-</div>
+    <div id="create-idiom" class="modal">
+        {{-- TODO: add route --}}
+        <form action="/" method="post">
+            <div class="modal-content">
+                <label for="idiom">Idiom name</label>
+                <input type="text" name="idiom" id="idiom">
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn-flat modal-close green-text">Create idiom</button>
+            </div>
+        </form>
+    </div>
+</div> {{-- End div#idioms --}}
 <div id="nationalities" class="col s12">
     <div class="container">
         <div class="row">
@@ -54,7 +67,7 @@
             <div class="row">
                 <div class="col s12 m10 offset-m1">
                     <div class="row">
-                        @foreach (App\Nationlity::all() as $nationlity)
+                        @foreach (App\Nationality::all() as $nationlity)
                         <div class="col s12 m6">
                             <div class="card">
                                 <div class="card-content">
@@ -68,7 +81,8 @@
                         </div>
                         @endforeach
                     </div>
-                    <a href="/" class="btn blue accent-4 waves-effect waves-light col s12 center-align">
+                    <a href="#create-nationality"
+                        class="btn blue accent-4 waves-effect waves-light col s12 center-align modal-trigger">
                         <span class="valign-wrapper " style="max-width:fit-content; margin: auto;">
                             <i class="material-icons">add_circle_outline</i> Add Nationality
                         </span>
@@ -77,5 +91,17 @@
             </div>
         </div>
     </div>
-</div>
+    <div id="create-nationality" class="modal bottom-sheet">
+        {{-- TODO: colocar rota --}}
+        <form action="/" method="post">
+            <div class="modal-content">
+                <label for="nationality">Nationality name</label>
+                <input type="text" name="nationality" id="nationlity">
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn-flat green-text">Create Nationality</button>
+            </div>
+        </form>
+    </div>
+</div> {{-- End - div#nationalities --}}
 @endsection
