@@ -46,8 +46,8 @@
         </div>
     </div>
     <div id="create-idiom" class="modal">
-        {{-- TODO: add route --}}
-        <form action="/" method="post">
+        <form action="{{route('create_idiom')}}" method="post">
+            @csrf
             <div class="modal-content">
                 <label for="idiom">Idiom name</label>
                 <input type="text" name="idiom" id="idiom">
@@ -92,8 +92,8 @@
         </div>
     </div>
     <div id="create-nationality" class="modal bottom-sheet">
-        {{-- TODO: colocar rota --}}
-        <form action="/" method="post">
+        <form action="{{route('create_nationality')}}" method="post">
+            @csrf
             <div class="modal-content">
                 <label for="nationality">Nationality name</label>
                 <input type="text" name="nationality" id="nationlity">

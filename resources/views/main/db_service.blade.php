@@ -18,6 +18,10 @@
 @endsection
 
 @section('main')
+@if (\Session::has('message'))
+    {{\Session::get('message')}}
+@endif
+
 <div id="publishers" class="col s12">
     <div class="container">
         <div class="row">
@@ -56,18 +60,20 @@
         </div>
     </div>
     <div id="create-publisher" class="modal">
-        {{-- TODO: colocar rota --}}
-        <form action="/" method="post">
+        <form action="{{route('create_publisher')}}" method="post">
+            @csrf
             <div class="modal-content">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name">
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email">
                 <label for="phone">Phone</label>
                 <input type="tel" name="phone" id="phone">
                 <label for="neighborhood">Neighborhood</label>
-                <input type="text" name="neighborhood" id="neighborhood">
+                <input type="text" name="neighborhood" id="neighborhood" value="">
                 <label for="macro-region">Macro Region</label>
-                <select name="macro-region" id="macro-region">
-                    <option value="">Select a Macro-Region</option>
+                <select name="macro_region" id="macro_region">
+                    <option value="0">Select a Macro-Region</option>
                     @foreach (App\Macro_region::all() as $macro_region)
                     <option value="{{$macro_region->id}}">{{$macro_region->name}}</option>
                     @endforeach
@@ -114,8 +120,8 @@
         </div>
     </div>
     <div id="create-macro-region" class="modal">
-        {{-- TODO: Colocar rota --}}
-        <form action="/" method="post">
+        <form action="{{route('create_macro_region')}}" method="post">
+            @csrf
             <div class="modal-content">
                 <label for="name">Macro Region name</label>
                 <input type="text" name="name" id="name">
@@ -160,8 +166,8 @@
         </div>
     </div>
     <div id="create-card" class="modal">
-        {{-- TODO: colocar rota --}}
-        <form action="/" method="post">
+        <form action="{{route('create_card')}}" method="post">
+            @csrf
             <div class="modal-content">
                 <label for="name">name</label>
                 <input type="text" name="name" id="name">
@@ -206,7 +212,8 @@
         </div>
     </div>
     <div class="modal" id="create-address-type">
-        <form action="/" method="post">
+        <form action="{{route('create_address_type')}}" method="post">
+            @csrf
             <div class="modal-content">
                 <label for="name">Type</label>
                 <input type="text" name="name" id="name">
