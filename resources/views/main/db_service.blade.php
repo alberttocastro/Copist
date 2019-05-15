@@ -45,7 +45,8 @@
                         </div>
                         @endforeach
                     </div>
-                    <a href="/" class="btn blue accent-4 waves-effect waves-light col s12 center-align">
+                    <a href="#create-publisher"
+                        class="btn blue accent-4 waves-effect waves-light col s12 center-align modal-trigger">
                         <span class="valign-wrapper " style="max-width:fit-content; margin: auto;">
                             <i class="material-icons">add_circle_outline</i> Add Publisher
                         </span>
@@ -54,7 +55,31 @@
             </div>
         </div>
     </div>
-</div>
+    <div id="create-publisher" class="modal">
+        {{-- TODO: colocar rota --}}
+        <form action="/" method="post">
+            <div class="modal-content">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email">
+                <label for="phone">Phone</label>
+                <input type="tel" name="phone" id="phone">
+                <label for="neighborhood">Neighborhood</label>
+                <input type="text" name="neighborhood" id="neighborhood">
+                <label for="macro-region">Macro Region</label>
+                <select name="macro-region" id="macro-region">
+                    <option value="">Select a Macro-Region</option>
+                    @foreach (App\Macro_region::all() as $macro_region)
+                    <option value="{{$macro_region->id}}">{{$macro_region->name}}</option>
+                    @endforeach
+                </select>
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn-flat green-text">Create Publisher</button>
+            </div>
+        </form>
+    </div>
+</div>{{-- END div#publishers --}}
 <div id="macroregions" class="col s12">
     <div class="container">
         <div class="row">
@@ -78,7 +103,8 @@
                         </div>
                         @endforeach
                     </div>
-                    <a href="/" class="btn blue accent-4 waves-effect waves-light col s12 center-align">
+                    <a href="#create-macro-region"
+                        class="btn blue accent-4 waves-effect waves-light col s12 center-align modal-trigger">
                         <span class="valign-wrapper " style="max-width:fit-content; margin: auto;">
                             <i class="material-icons">add_circle_outline</i> Add Macro Region
                         </span>
@@ -87,7 +113,19 @@
             </div>
         </div>
     </div>
-</div>
+    <div id="create-macro-region" class="modal">
+        {{-- TODO: Colocar rota --}}
+        <form action="/" method="post">
+            <div class="modal-content">
+                <label for="name">Macro Region name</label>
+                <input type="text" name="name" id="name">
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn-flat green-text">Create Macro-Region</button>
+            </div>
+        </form>
+    </div>
+</div> {{-- END div#macro-region--}}
 <div id="cards" class="col s12">
     <div class="container">
         <div class="row">
@@ -111,7 +149,8 @@
                         </div>
                         @endforeach
                     </div>
-                    <a href="/" class="btn blue accent-4 waves-effect waves-light col s12 center-align">
+                    <a href="#create-card"
+                        class="btn blue accent-4 waves-effect waves-light col s12 center-align modal-trigger">
                         <span class="valign-wrapper " style="max-width:fit-content; margin: auto;">
                             <i class="material-icons">add_circle_outline</i> Add Card
                         </span>
@@ -120,7 +159,19 @@
             </div>
         </div>
     </div>
-</div>
+    <div id="create-card" class="modal">
+        {{-- TODO: colocar rota --}}
+        <form action="/" method="post">
+            <div class="modal-content">
+                <label for="name">name</label>
+                <input type="text" name="name" id="name">
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn-flat green-text">Create card</button>
+            </div>
+        </form>
+    </div>
+</div> {{-- END  div#cards--}}
 <div id="addresstype" class="col s12">
     <div class="container">
         <div class="row">
@@ -144,7 +195,8 @@
                         </div>
                         @endforeach
                     </div>
-                    <a href="/" class="btn blue accent-4 waves-effect waves-light col s12 center-align">
+                    <a href="#create-address-type"
+                        class="btn blue accent-4 waves-effect waves-light col s12 center-align modal-trigger">
                         <span class="valign-wrapper " style="max-width:fit-content; margin: auto;">
                             <i class="material-icons">add_circle_outline</i> Add Address Type
                         </span>
@@ -153,5 +205,16 @@
             </div>
         </div>
     </div>
-</div>
+    <div class="modal" id="create-address-type">
+        <form action="/" method="post">
+            <div class="modal-content">
+                <label for="name">Type</label>
+                <input type="text" name="name" id="name">
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn-flat green-text">Create Address Type</button>
+            </div>
+        </form>
+    </div>
+</div> {{-- END div#address-types--}}
 @endsection
