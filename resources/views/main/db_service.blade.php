@@ -19,7 +19,7 @@
 
 @section('main')
 @if (\Session::has('message'))
-    {{\Session::get('message')}}
+{{\Session::get('message')}}
 @endif
 
 <div id="publishers" class="col s12">
@@ -179,6 +179,15 @@
             <div class="modal-content">
                 <label for="name">name</label>
                 <input type="text" name="name" id="name">
+                <label for="macro_region">Macro Region</label>
+                <select name="macro_region" id="macro_region">
+                    <option value="0">Select Macro Region</option>
+                    @foreach (App\Macro_region::all() as $macro_region)
+                    <option value="{{$macro_region->id}}">{{$macro_region->name}}</option>
+                    @endforeach
+                </select>
+                <label for="number"></label>
+                <input type="number" name="number" id="number">
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn-flat green-text">Create card</button>
