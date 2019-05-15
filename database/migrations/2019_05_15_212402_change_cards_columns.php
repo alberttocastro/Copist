@@ -16,6 +16,7 @@ class ChangeCardsColumns extends Migration
         Schema::table('cards', function (Blueprint $table) {
             $table->integer('macro_region_id')->default(0)->change();
             $table->string('name')->nullable(true)->change();
+            $table->integer('number')->standard(0)->change();
         });
     }
 
@@ -29,6 +30,7 @@ class ChangeCardsColumns extends Migration
         Schema::table('cards', function (Blueprint $table) {
             $table->integer('macro_region_id')->default(null)->change();
             $table->string('name')->nullable(false)->change();
+            $table->integer('number')->standard(null)->change();
         });
     }
 }
