@@ -57,11 +57,14 @@ Route::middleware(['auth', 'approved'])->group(function(){
             Route::post('card')->name('create_card');
             Route::post('address_type')->name('create_address_type');
             Route::post('macro_region')->name('create_macro_region');
+        });
+        
+        Route::prefix('public')->group(function(){
+            Route::get('/', 'DatabaseController@db_public')->name('db_public');
             
             Route::post('idiom')->name('create_idiom');
             Route::post('nationality')->name('create_nationality');
         });
-        Route::get('/public', 'DatabaseController@db_public')->name('db_public');
     });
 });
 
