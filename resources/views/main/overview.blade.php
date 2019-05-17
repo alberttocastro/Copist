@@ -43,7 +43,7 @@
                                     <p>{{$address->street}}</p>
                                 </div>
                                 <div class="s4">
-                                    <a href="#" class="waves-effect waves-light btn right">Edit</a>
+                                    <a href="{{route('edit_territory',['id'=>$address->id])}}" class="waves-effect waves-light btn right">Edit</a>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                                     <p>{{$address->street}}</p>
                                 </div>
                                 <div class="s4">
-                                    <a href="#" class="waves-effect waves-light btn right">Edit</a>
+                                    <a href="{{route('edit_territory',['id'=>$address->id])}}" class="waves-effect waves-light btn right">Edit</a>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +97,7 @@
                                     <p>{{$address->street}}</p>
                                 </div>
                                 <div class="s4">
-                                    <a href="#" class="waves-effect waves-light btn right">Edit</a>
+                                    <a href="{{route('edit_territory',['id'=>$address->id])}}" class="waves-effect waves-light btn right">Edit</a>
                                 </div>
                             </div>
                         </div>
