@@ -138,6 +138,11 @@
                                         </div>
                                         <div class="row">
                                             <h6 class="mt-0" style="font-weight: 300">
+                                                @if ($visit->date != null)
+                                                {{$visit->date}}
+                                                @else
+                                                No date
+                                                @endif
                                                 {{--<%= visit.date.nil? ? "No date" : visit.date.strftime("%d/%m/%Y") %>--}}
                                             </h6>
                                         </div>
