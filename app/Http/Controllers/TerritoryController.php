@@ -56,7 +56,7 @@ class TerritoryController extends Controller
             $visit->save();
 
             return redirect()->route('home')->with('message', 'Report successfully saved');
-                        
+
         } else
         {
             return redirect()->route('home')->with('message', 'Couldn\'t parse date');
@@ -84,7 +84,7 @@ class TerritoryController extends Controller
             $address->references = "";
             $address->is_valid = true;
             $address->is_visitable = true;
-    
+
             $address->save();
 
             $suggested_address = Suggested_address::find($request->suggeste_address_id)->delete();
@@ -108,5 +108,39 @@ class TerritoryController extends Controller
         } catch (\Exception $th) {
             return redirect()->action('TerritoryController@management')->with('message', 'Card could not be set. Try again.');
         }
+    }
+
+    public function edit()
+    {
+        return view('territory.edit');
+    }
+
+    public function update(Request $request)
+    {
+        $address = App\Address::find($request->id);
+
+        $address->street = $request->street;
+        $address->neighborhood = $request->neighborhood;
+        $address->name = $request->name;
+        $address->comments = $request->comments;
+        $address->address_type_id = $request->address_type_id;
+        $address->macro_region_id = $request->macroregion_id;
+        $address->card_id = $request->card_id;
+        $address->nationality_id = 0;
+        $address->idiom_id = 0;
+        $address->second_language_id = 0;
+        $address->address_type_id = 0;
+        $address->publisher_id=0;
+        $address->frequence=0;
+        $address->references = "";
+        $address->is_valid = true;
+        $address->is_visitable = true;
+
+        if (Gate::denies('is_user_admin'))
+            return view('denied.permission_not_granted');
+
+        $address->save();
+
+        return redirect()->route('view_territory', ['id'=>$request->id]);
     }
 }
