@@ -16,7 +16,7 @@
 {{-- ABA de territórios designados para mim  --}}
     <div id="assigned-territories" class="col s12">
         <div class="container">
-            
+
             {{-- Caso haja designação --}}
             {{-- TODO: Pegar designações dinâmicas --}}
             @forelse(App\Assignment::whereNull('completion_date')->get() as $assignment)
@@ -27,7 +27,7 @@
                         <div class="card grey lighten-5 z-depth-2">
                             <?php // Conteúdo do cartão  ?>
                             <div class="card-content indigo-text text-darken-4">
-                                
+
                                 {{-- Header --}}
                                 <span class="card-title">
                                     <div class="row">
@@ -39,7 +39,7 @@
                                         </div>
                                     </div>
                                 </span>
-                                
+
                                 <?php  $addresses = $card->addresses ?>
                                 @if($addresses != null)
                                 <ul class="collapsible z-depth-0">
@@ -52,14 +52,13 @@
                                         <div class="collapsible-body">
                                             <div class="row valign-wrapper">
                                                 <div class="col s9">
-                                                    <p>Name: {{ $address->name }}</p> 
-                                                    <p>Country: {{ $address->nationality->name }} </p>
+                                                    <p>Name: {{ $address->name }}</p>
+                                                    <p>Country:@if($address->nationality !=null) {{ $address->nationality->name }}@endif </p>
                                                     <p>Ref:  {{ $address->references }} </p>
                                                     <p>Obs: {{ $address->comments }} </p> <br>
                                                 </div>
                                                 <div class="col s3">
                                                     <a href="{{route('view_territory', ['id'=>$address->id])}}">View</a>
-                                                    {{-- TODO: View address --}}
                                                 </div>
                                             </div>
                                             <div>
@@ -68,24 +67,24 @@
                                         </div>
                                     </li>
                                     @endforeach
-                                    
+
                                 </ul>
                                 @endif
-                                
+
                             </div>
-                            
+
                             {{-- Ações do cartão --}}
                             <div class="card-action">
                                 <a href="/" class="black-text waves-effect waves-teal btn-flat" method="post"><b>Done</b></a>
                             </div>
-                            
+
                         </div>
-                        
+
                     </div>
-                    
+
                 </div>
             @empty
-            
+
             {{-- Caso não haja nenhuma designação --}}
 
                 <div class="valign-wrapper">
@@ -97,9 +96,9 @@
                 </div>
 
             @endforelse
-                
+
             {{-- <% end %> --}}
-            
+
             {{--  Modal de relatar visita  --}}
             <div id="report-visit" class="modal" style="min-height: 100%">
                 <form action="{{route('create_address_report')}}" method="POST">
@@ -123,23 +122,23 @@
                     {{-- <% end %> --}}
                 </form>
             </div>
-            
+
         </div>
-        
+
     </div>
     {{-- Fim da ABA de territórios designados --}}
-    
+
     {{-- ABA de informações --}}
     <div id="info" class="col s12 m12 l12" >
         <div class="container">
-            
+
             {{-- cartão --}}
             <div class="row">
                 <div class="col s12 m10 l8 xl8 offset-xl2 offset-l2 offset-m1">
                     <div class="card white">
                         <div class="card-content">
                             <span class="card-title red-text"><b>DO NOT CALL</b></span>
-                            
+
                             <?php $do_not_calls = App\User::find(1)->do_not_call_info();?>
                             @foreach($do_not_calls as $do_not_call)
                             {{-- TODO: Pegar os não visitar de maneira dinâmica --}}
@@ -151,16 +150,16 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
-    
+
     <div class="fixed-action-btn">
         <a class="btn-floating btn-large blue lighten-2">
             <i class="material-icons Large modal-trigger" href="#add-territory-modal">add</i>
         </a>
     </div>
-    
+
     {{--  Modal de adicionar endereço --}}
     <div id="add-territory-modal" class="modal">
         <form action="{{route('create_suggested_address')}}" method="POST">
