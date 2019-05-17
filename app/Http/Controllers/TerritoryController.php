@@ -132,8 +132,8 @@ class TerritoryController extends Controller
         $address->address_type_id = $request->second_language_id;
         $address->publisher_id= $request->publisher_id;
         $address->references = $request->references;
-        $address->is_valid = $request->is_valid;
-        $address->is_visitable = $request->is_visitable;
+        $address->is_valid = $request->is_valid != null;
+        $address->is_visitable = $request->is_visitable != null;
 
         if (Gate::denies('is_user_admin'))
             return view('denied.permission_not_granted');
