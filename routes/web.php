@@ -31,7 +31,7 @@ Route::middleware(['auth', 'approved'])->group(function(){
         Route::post('suggest', 'TerritoryController@create_suggested_address')->name('create_suggested_address');
         Route::post('report', 'TerritoryController@create_address_report')->name('create_address_report');
 
-        Route::get('{id}', 'TerritoryController@view')->name('view_territory');
+        Route::get('/{id}', 'TerritoryController@view')->name('view_territory');
 
         Route::get('/edit/{id}', 'TerritoryController@edit')->name('edit_territory');
         Route::put('/edit/{id}', 'TerritoryController@update')->name('update_territory');
