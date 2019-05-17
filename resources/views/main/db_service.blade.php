@@ -49,10 +49,10 @@
                                     <span><b>Macro Region</b> <i class="red-text">Unknown</i></span><br>
                                     @endif
                                 </div>
-                                <div class="card-action">
+                                {{-- <div class="card-action">
                                     <a class="blue-text text-darken-4" href="#">Edit</a>
                                     <a class="red-text text-darken-4" href="#">Delete</a>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         @endforeach
@@ -109,10 +109,10 @@
                                 <div class="card-content">
                                     <h5 style="margin-top: 0;">{{ucwords($macro_region->name)}}</h5>
                                 </div>
-                                <div class="card-action">
+                                {{-- <div class="card-action">
                                     <a class="blue-text text-darken-4" href="#">Edit</a>
                                     <a class="red-text text-darken-4" href="#">Delete</a>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         @endforeach
@@ -154,11 +154,16 @@
                             <div class="card">
                                 <div class="card-content">
                                     <h5 style="margin-top: 0;">{{$card->name}}</h5>
+                                    @forelse ($card->addresses as $address)
+                                    <p>{{$address->street}} | <b>{{$address->neighborhood}}</b></p>
+                                    @empty
+                                    <i>No addresses in this card yet.</i>
+                                    @endforelse
                                 </div>
-                                <div class="card-action">
+                                {{-- <div class="card-action">
                                     <a class="blue-text text-darken-4" href="#">Edit</a>
                                     <a class="red-text text-darken-4" href="#">Delete</a>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         @endforeach
@@ -210,10 +215,10 @@
                                 <div class="card-content">
                                     <h5 style="margin-top: 0;">{{$address_type->name}}</h5>
                                 </div>
-                                <div class="card-action">
+                                {{-- <div class="card-action">
                                     <a class="blue-text text-darken-4" href="#">Edit</a>
                                     <a class="red-text text-darken-4" href="#">Delete</a>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         @endforeach
