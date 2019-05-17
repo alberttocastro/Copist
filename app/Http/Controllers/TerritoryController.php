@@ -73,7 +73,6 @@ class TerritoryController extends Controller
             $address->name = $request->name;
             $address->comments = $request->comments;
             $address->address_type_id = $request->address_type_id;
-            $address->macro_region_id = $request->macroregion_id;
             $address->card_id = $request->card_id;
             $address->nationality_id = 0;
             $address->idiom_id = 0;
@@ -110,37 +109,37 @@ class TerritoryController extends Controller
         }
     }
 
-    public function edit()
+    public function edit($id)
     {
-        return view('territory.edit');
+        $address = Address::find((int)$id);
+
+        return view('territory.edit', ['address'=>$address]);
     }
 
-    public function update(Request $request)
+    public function update($id, Request $request)
     {
-        $address = App\Address::find($request->id);
+        $address = Address::find($id);
 
         $address->street = $request->street;
         $address->neighborhood = $request->neighborhood;
         $address->name = $request->name;
         $address->comments = $request->comments;
         $address->address_type_id = $request->address_type_id;
-        $address->macro_region_id = $request->macroregion_id;
         $address->card_id = $request->card_id;
-        $address->nationality_id = 0;
-        $address->idiom_id = 0;
-        $address->second_language_id = 0;
-        $address->address_type_id = 0;
-        $address->publisher_id=0;
-        $address->frequence=0;
-        $address->references = "";
-        $address->is_valid = true;
-        $address->is_visitable = true;
+        $address->nationality_id = $request->nationality_id;
+        $address->idiom_id = $request->idiom_id;
+        $address->second_language_id = $request->second_language_id;
+        $address->address_type_id = $request->second_language_id;
+        $address->publisher_id= $request->publisher_id;
+        $address->references = $request->references;
+        $address->is_valid = $request->is_valid;
+        $address->is_visitable = $request->is_visitable;
 
         if (Gate::denies('is_user_admin'))
             return view('denied.permission_not_granted');
 
         $address->save();
 
-        return redirect()->route('view_territory', ['id'=>$request->id]);
+        return redirect()->route('view_territory', ['id'=>$id]);
     }
 }
