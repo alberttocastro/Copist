@@ -6,7 +6,6 @@
         <form action="{{route('update_territory', ['id'=> $address->id])}}" method="post" class="col s12">
             @csrf
             @method('put')
-            <input type="hidden" name="id">
             <div class="row">
                 <div class="input-field s12">
                     <label for="neighborhood">Neighborhood</label>
