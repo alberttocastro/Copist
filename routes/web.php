@@ -34,7 +34,7 @@ Route::middleware(['auth', 'approved'])->group(function(){
         Route::get('{id}', 'TerritoryController@view')->name('view_territory');
 
         Route::get('/edit/{id}', 'TerritoryController@edit')->name('edit_territory');
-        Route::put('/edit/{id}', 'TerritoryController@upadate')->name('update_territory');
+        Route::put('/edit/{id}', 'TerritoryController@update')->name('update_territory');
     });
 
     Route::prefix('assignment')->group(function(){
