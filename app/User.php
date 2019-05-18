@@ -39,7 +39,7 @@ class User extends Authenticatable
 
     /**
      * Retrieve information about people not to call
-     * 
+     *
      * @return model
      */
     public function do_not_call_info(){
@@ -47,5 +47,15 @@ class User extends Authenticatable
         return Address::where('is_valid', 1)
                             ->where('is_visitable', 0)
                             ->get();
+    }
+
+    public function publisher()
+    {
+        return $this->belongsTo('App\Publisher');
+    }
+
+    public static function approved_users()
+    {
+        return User::where('publisher_id', '>', 0)->get();
     }
 }
