@@ -123,7 +123,11 @@
             </li>
             @foreach ($card->get_people_assigned_to_the_card() as $user)
             <li class="collection-item">
-                {{$user->email}}
+                @if ($user->publisher != null)
+                {{$user->publisher->name}}
+                @else
+                Unknown
+                @endif
                 <div class="right">
                     <div class="center">
                         <b>{{strftime('%m/%d/%Y', App\Assignment::where('user_id', $user->id)->where('card_id', $card->id)->where('completion_date', null)->first()->created_at->timestamp)}}</b>
