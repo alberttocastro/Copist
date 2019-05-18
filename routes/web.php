@@ -41,10 +41,11 @@ Route::middleware(['auth', 'approved'])->group(function(){
 
         Route::get('/','AssignmentController@index')->name('assignments');
 
-        Route::post('/{assignment_id}','AssignmentController@set_assignment_as_done')->name('set_assignment_done');
-
         Route::post('set', 'AssignmentController@assign_to_territory')->name('assign_to_territory');
         Route::delete('remove', 'AssignmentController@remove_assignment')->name('remove_assignment_to_territory');
+
+        Route::post('done/{assignment_id}','AssignmentController@set_assignment_as_done')->name('set_assignment_done');
+
     });
 
     Route::get('help','MainController@help')->name('help');

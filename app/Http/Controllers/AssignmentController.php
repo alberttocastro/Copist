@@ -57,11 +57,10 @@ class AssignmentController extends Controller
     public function remove_assignment(Request $request)
     {
         try {
-            $assignment = Assignment::find($request->assignment_id);
-            $assignment->completion_date = new DateTime();
-
-            $assignment->save();
-
+            foreach(Assignment::where('card_id', $request->card_id)->get() as $assignment){
+                $assignment->completion_date = date('m/d/Y', time());
+                $assignment->save();
+            }
             return redirect()->action('AssignmentController@index')->with('message', 'Assignment removed successfully');
         } catch (\Exception $th) {
             return redirect()->action('AssignmentController@index')->with('message', 'Could not remove assignment. Try again.');
