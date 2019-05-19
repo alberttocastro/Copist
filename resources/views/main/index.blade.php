@@ -150,9 +150,8 @@
                     <div class="card-content">
                         <span class="card-title red-text"><b>DO NOT CALL</b></span>
 
-                        <?php $do_not_calls = App\User::find(1)->do_not_call_info();?>
+                        <?php $do_not_calls = Auth::user()->do_not_call_info();?>
                         @foreach($do_not_calls as $do_not_call)
-                        {{-- TODO: Pegar os não visitar de maneira dinâmica --}}
                         <h5>{{"MACRO REGION"}}</h5>
                         <p>{{$do_not_call->street}} </p>
                         <div class="divider"></div>
