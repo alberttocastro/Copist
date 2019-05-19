@@ -55,7 +55,11 @@
         <div class="row">
             <div class="col s10  offset-s2">
                 <div class="left-align description-font">
+                    @if ($address->nationality != null)
                     {{ $address->nationality->name }}
+                    @else
+                    Unknown
+                    @endif
                     <div class="divider"></div>
                 </div>
             </div>
