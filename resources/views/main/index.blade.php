@@ -41,7 +41,7 @@
                         </span>
 
                         <?php  $addresses = $card->addresses ?>
-                        @if($addresses != null)
+                        @if($addresses->count() > 0)
                         <ul class="collapsible z-depth-0">
                             @foreach($addresses as $address)
                             <li>
@@ -73,6 +73,10 @@
                             @endforeach
 
                         </ul>
+                        @else
+
+                        <h5 class="green-text text-darken-1">This card has no address!</h5>
+
                         @endif
 
                     </div>
