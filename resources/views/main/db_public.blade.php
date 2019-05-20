@@ -16,7 +16,7 @@
     <div class="container">
         <div class="row">
             <div class="col s12 m10 offset-m1">
-                <h4><b>Publishers</b></h4>
+                <h4><b>Idioms</b></h4>
             </div>
             <div class="row">
                 <div class="col s12 m10 offset-m1">
@@ -62,7 +62,7 @@
     <div class="container">
         <div class="row">
             <div class="col s12 m10 offset-m1">
-                <h4><b>Publishers</b></h4>
+                <h4><b>Nationalities</b></h4>
             </div>
             <div class="row">
                 <div class="col s12 m10 offset-m1">
