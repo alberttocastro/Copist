@@ -28,4 +28,16 @@ class Macro_region extends Model
 
         return $cards;
     }
+
+    public function addresses_quantity()
+    {
+        $amount = 0;
+
+        foreach($this->cards as $card){
+            $amount += $card->addresses->count();
+        }
+
+        return $amount;
+    }
+
 }
