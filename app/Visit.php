@@ -17,4 +17,10 @@ class Visit extends Model
     {
         return $this->belongsTo('App\Publisher');
     }
+
+    public function date()
+    {
+        $date = \DateTime::createFromFormat("Y-m-d", $this->visit_date);
+        return $date;
+    }
 }
