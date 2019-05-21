@@ -58,7 +58,8 @@ class AssignmentController extends Controller
     {
         try {
             foreach(Assignment::where('card_id', $request->card_id)->get() as $assignment){
-                $assignment->completion_date = date('m/d/Y', time());
+                $date = new \DateTime;
+                $assignment->completion_date = $date->format('Y-m-d H:i:s');
                 $assignment->save();
             }
             return redirect()->action('AssignmentController@index')->with('message', 'Assignment removed successfully');
@@ -71,8 +72,8 @@ class AssignmentController extends Controller
     public function set_assignment_as_done($assignment_id)
     {
         $assignment = Assignment::find($assignment_id);
-
-        $assignment->completion_date = date('m/d/Y', time());
+        $date = new \DateTime;
+        $assignment->completion_date = $date->format('Y-m-d H:i:s');
         $assignment->save();
 
         return redirect()->route('home');
