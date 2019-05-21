@@ -26,7 +26,15 @@ class Card extends Model
     {
         $people = array();
         foreach(Assignment::where('card_id',$this->id)->where('completion_date', null)->get() as $assignment){
-            $people[$assignment->id] = $assignment->user;
+            if($assignment->user != null )
+            {
+                $people[$assignment->id] = $assignment->user;
+            } else {
+                // Caso o usuário não esteja mais no banco de dados, previne que dê erro
+                $user = new App\User;
+                $user->name = "Unknown";
+                $people[$assignment->id] = $user;
+            }
         }
         return $people;
     }

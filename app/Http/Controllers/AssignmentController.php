@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Card;
 use App\Assignment;
+use Illuminate\Support\Facades\Gate;
 
 class AssignmentController extends Controller
 {
     //
     public function index()
     {
+        if (Gate::denies('is_user_admin'))
+            return view('denied.permission_not_granted');
+
         $working_cards = array();
         $cards = Card::all();
         foreach($cards as $id => $card){
@@ -37,7 +41,7 @@ class AssignmentController extends Controller
             $assignment_2 = new Assignment;
             $assignment_2->card_id = $request->card_id;
             $assignment_2->user_id = $request->publisher_2;
-            
+
             $assignment->save();
 
             if($request->publisher_2 != 0){
@@ -53,15 +57,25 @@ class AssignmentController extends Controller
     public function remove_assignment(Request $request)
     {
         try {
-            $assignment = Assignment::find($request->assignment_id);
-            $assignment->completion_date = new DateTime();
-    
-            $assignment->save();
-
+            foreach(Assignment::where('card_id', $request->card_id)->get() as $assignment){
+                $date = new \DateTime;
+                $assignment->completion_date = $date->format('Y-m-d H:i:s');
+                $assignment->save();
+            }
             return redirect()->action('AssignmentController@index')->with('message', 'Assignment removed successfully');
         } catch (\Exception $th) {
             return redirect()->action('AssignmentController@index')->with('message', 'Could not remove assignment. Try again.');
         }
 
+    }
+
+    public function set_assignment_as_done($assignment_id)
+    {
+        $assignment = Assignment::find($assignment_id);
+        $date = new \DateTime;
+        $assignment->completion_date = $date->format('Y-m-d H:i:s');
+        $assignment->save();
+
+        return redirect()->route('home');
     }
 }

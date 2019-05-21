@@ -17,15 +17,27 @@ class Macro_region extends Model
      *  isto é, tem data de término
      */
     public function unassigned_cards(){
-        
+
         $cards = array();
 
-        foreach($this->cards as $id => $card){
-            if(Assignment::where('card_id', $id)->where('completion_date','')->count() == 0){
-                $cards[$id] = $card;
+        foreach($this->cards as $card){
+            if(Assignment::whereNull('completion_date')->where('card_id', $card->id)->get()->count() == 0){
+                array_push($cards,$card);
             }
         }
 
         return $cards;
     }
+
+    public function addresses_quantity()
+    {
+        $amount = 0;
+
+        foreach($this->cards as $card){
+            $amount += $card->addresses->count();
+        }
+
+        return $amount;
+    }
+
 }

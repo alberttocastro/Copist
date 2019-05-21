@@ -21,7 +21,7 @@ class Publisher extends Model
     public static function without_user($selected_publisher = 0)
     {
         $publishers = array();
-        foreach(Publisher::where('','')->cursor() as $publisher){
+        foreach(Publisher::all() as $publisher){
             if(User::where('publisher_id', $publisher->id)->count() == 0){
                 array_push($publishers, $publisher->id);
             }
