@@ -142,8 +142,8 @@
                                         </div>
                                         <div class="row">
                                             <h6 class="mt-0" style="font-weight: 300">
-                                                @if ($visit->date != null)
-                                                {{$visit->date}}
+                                                @if ($visit->date() != null)
+                                                {{$visit->date()->format('m/d/Y')}}
                                                 @else
                                                 No date
                                                 @endif
