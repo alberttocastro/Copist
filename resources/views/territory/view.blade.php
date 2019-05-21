@@ -147,7 +147,6 @@
                                                 @else
                                                 No date
                                                 @endif
-                                                {{--<%= visit.date.nil? ? "No date" : visit.date.strftime("%d/%m/%Y") %>--}}
                                             </h6>
                                         </div>
                                     </div>
