@@ -42,15 +42,12 @@ class TerritoryController extends Controller
 
     public function create_address_report(Request $request)
     {
-        $parser = new Date_parser;
-        $date = $parser->from_string_to_datetime($request->date);
-
-        if($date != false)
+        if($request->date != null)
         {
             $visit = new Visit;
             $visit->publisher_id = (int)$request->publisher_id;
             $visit->address_id = (int)$request->address_id;
-            $visit->visit_date = $date;
+            $visit->visit_date = \DateTime::createFromFormat("m/d/Y",$request->date);
             $visit->comment = $request->comment;
 
             $visit->save();
