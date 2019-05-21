@@ -108,7 +108,7 @@
                     <select name="publisher_id" id="publisher_id">
                         <option value="0">Is not being visited</option>
                         @foreach (App\Publisher::all() as $publisher)
-                        <option value="{{$publisher->id}}">{{$publisher->name}}</option>
+                        <option value="{{$publisher->id}}" @if($publisher->id == $address->publisher_id) selected @endif>{{$publisher->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -119,7 +119,7 @@
                     <select name="card_id" id="card_id">
                         <option value="0">No card</option>
                         @foreach (App\Card::all() as $card)
-                        <option value="{{$card->id}}">{{$card->name}}</option>
+                        <option value="{{$card->id}}" @if ($card->id == $address->card_id) selected @endif>{{$card->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -130,7 +130,7 @@
                     <select name="address_type_id" id="address_type_id">
                         <option value="0">Undefined</option>
                         @foreach (App\Address_type::all() as $address_type)
-                        <option value="{{$address_type->id}}">{{$address_type->name}}</option>
+                        <option value="{{$address_type->id}}" @if($address->address_type_id == $address_type->id) selected @endif>{{$address_type->name}}</option>
                         @endforeach
                     </select>
                 </div>
