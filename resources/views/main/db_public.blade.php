@@ -50,7 +50,7 @@
             @csrf
             <div class="modal-content">
                 <label for="idiom">Idiom name</label>
-                <input type="text" name="idiom" id="idiom">
+                <input type="text" name="name" id="name">
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn-flat modal-close green-text">Create idiom</button>
@@ -96,7 +96,7 @@
             @csrf
             <div class="modal-content">
                 <label for="nationality">Nationality name</label>
-                <input type="text" name="nationality" id="nationlity">
+                <input type="text" name="name" id="name">
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn-flat green-text">Create Nationality</button>
