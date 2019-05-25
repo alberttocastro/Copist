@@ -103,11 +103,13 @@
                 </div>
             </div>
         </div>
+        @can('is_user_admin')
         <div class="row">
             <div class="col s6 offset-s3">
             <a href="{{route('edit_territory',['id'=>$address->id])}}" class="btn">Edit</a>
             </div>
         </div>
+        @endcan
     </div>
 
     @if($address->visits->count() > 0)
