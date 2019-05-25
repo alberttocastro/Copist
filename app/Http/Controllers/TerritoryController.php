@@ -139,4 +139,17 @@ class TerritoryController extends Controller
 
         return redirect()->route('view_territory', ['id'=>$id]);
     }
+
+    public function delete_suggested_address($id)
+    {
+        $suggested_address = Suggested_address::find($id);
+
+        try {
+            $suggested_address->delete();
+
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            //do nothing
+        }
+    }
 }

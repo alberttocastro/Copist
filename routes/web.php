@@ -29,6 +29,7 @@ Route::middleware(['auth', 'approved'])->group(function(){
         Route::put('management/map', 'TerritoryController@set_map_to_address')->name('set_map_to_address');
 
         Route::post('suggest', 'TerritoryController@create_suggested_address')->name('create_suggested_address');
+        Route::delete('suggest/{id}', 'TerritoryController@delete_suggested_address')->name('delete_suggested_address');
         Route::post('report', 'TerritoryController@create_address_report')->name('create_address_report');
 
         Route::get('/{id}', 'TerritoryController@view')->name('view_territory');
