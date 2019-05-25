@@ -46,9 +46,9 @@
                         <a id="{{$suggested_address->id}}" href="#accept-address"
                             class="modal-trigger suggested-address">Accept</a>
                         <a href="#"
-                            onclick="event.preventDefault(); document.getElementById('delete_suggested_address').submit();">Reject</a>
+                            onclick="event.preventDefault(); document.getElementById('delete-{{$suggested_address->id}}').submit();">Reject</a>
 
-                        <form id="delete_suggested_address" action="{{route('delete_suggested_address', ['id'=>$suggested_address->id])}}"
+                        <form id="delete-{{$suggested_address->id}}" action="{{route('delete_suggested_address', ['id'=>$suggested_address->id])}}"
                             method="post">
                             @csrf
                             @method('delete')
