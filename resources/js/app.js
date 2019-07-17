@@ -1,5 +1,5 @@
-require('./jquery-3.4.1');
-require('./materialize');
+require('./initialization');
+
 
 function notHidden() {
     if ($("nav").parent().prop("tagName") == "DIV") {
