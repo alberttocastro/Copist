@@ -14,6 +14,14 @@
                 class="material-icons right">arrow_drop_down</i></a>
     </li>
     @endcan
+    <li class="valign-wrapper">
+        <a href="#!" class="dropdown-trigger" data-target="user"><span class="material-icons">account_circle</span><span
+            class="material-icons">arrow_drop_down</span>
+        </a>
+    </li>
+</ul>
+
+<ul id="user" class="dropdown-content">
     <li>
         <a href="{{ route('logout') }}"
             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
