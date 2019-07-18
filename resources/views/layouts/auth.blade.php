@@ -9,16 +9,11 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Fonts -->
-        <link rel="dns-prefetch" href="//fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-
         <!-- Icons -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('css/materialize.css') }}" />
-        <link rel="stylesheet" href="{{ asset('css/application.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
     </head>
     <body>
         <header>
@@ -68,7 +63,5 @@
             @yield('content')
         </main>
     </body>
-    <script src="{{ asset('js/jquery-3.4.1.js') }}" type="text/javascript" defer></script>
-    <script src="{{ asset('js/materialize.js') }}" type="text/javascript" defer></script>
-    <script src="{{ asset('js/application.js') }}" type="text/javascript" defer></script>
+    <script src="{{ asset('js/app.js') }}" type="text/javascript" defer></script>
 </html>
