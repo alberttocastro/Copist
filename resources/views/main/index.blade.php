@@ -83,8 +83,11 @@
 
                     {{-- Ações do cartão --}}
                     <div class="card-action">
-                        <a href="#" class="black-text waves-effect waves-teal btn-flat" onclick="event.preventDefault(); document.getElementById('set-assignment-done').submit();"><b>Done</b></a>
-                        <form id="set-assignment-done" action="{{ route('set_assignment_done',['assignment_id'=>$assignment->id]) }}" method="POST" style="display: none;">
+                        <a href="#" class="black-text waves-effect waves-teal btn-flat"
+                            onclick="event.preventDefault(); document.getElementById('set-assignment-done').submit();"><b>Done</b></a>
+                        <form id="set-assignment-done"
+                            action="{{ route('set_assignment_done',['assignment_id'=>$assignment->id]) }}" method="POST"
+                            style="display: none;">
                             @csrf
                         </form>
                     </div>
@@ -172,25 +175,33 @@
 
 {{--  Modal de adicionar endereço --}}
 <div id="add-territory-modal" class="modal">
-    <form action="{{route('create_suggested_address')}}" method="POST">
+    <form id="add-territory-form" action="{{route('create_suggested_address')}}" method="POST">
         {{ csrf_field() }}
         <div class="modal-content">
             <h4>Add a new territory</h4> <br>
-            <div class="input-field col s12">
-                <input type="text" name="street">
-                <label for="textarea-address">Address</label>
-            </div>
-            <div class="input-field col s12">
-                <input type="text" name="neighborhood">
-                <label for="textarea-reference">Reference</label>
-            </div>
-            <div class="input-field col s12">
-                <input type="text" name="name">
-                <label for="textarea-notes">Name <i>(Optional)</i></label>
-            </div>
-            <div class="input-field col s12">
-                <input type="text" name="comments">
-                <label for="textarea-notes">Notes</label>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="text" name="street" id="street">
+                    <label for="street">Address</label>
+                    <span class="helper-text" data-error="wrong" data-success="right">Example: Rua do Meio, 90, Rio
+                        Vermelho - Salvador</span>
+                </div>
+                <div class="input-field col s12">
+                    <input type="text" name="neighborhood">
+                    <label for="textarea-reference">Reference</label>
+                    <span class="helper-text" data-error="wrong" data-success="right">Example: Close to Hostel Rio
+                        Vermelho</span>
+                </div>
+                <div class="input-field col s12">
+                    <input type="text" name="name">
+                    <label for="textarea-notes">Name <i>(Optional)</i></label>
+                </div>
+                <div class="input-field col s12">
+                    <textarea type="text" name="comments" class="materialize-textarea" form="add-territory-form"></textarea>
+                    <label for="textarea-notes">Notes</label>
+                    <span class="helper-text" data-error="wrong" data-success="right">Example: Possibly a foreigner that
+                        somebody told us while...</span>
+                </div>
             </div>
         </div>
         <div class="modal-footer">
