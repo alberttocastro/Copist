@@ -21,7 +21,7 @@
 
         <!-- Cartão de novo território -->
         <div class="row">
-            <div class="col s12 m6">
+            <div class="col s12">
                 @forelse (App\Suggested_address::all() as $suggested_address)
                 <div class="card grey lighten-5 z-depth-2">
                     <div class="card-content indigo-text text-darken-4">
