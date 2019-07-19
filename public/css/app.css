@@ -9167,8 +9167,27 @@ input[type=range]::-ms-thumb {
   }
 }
 
+.form-input-error,
+.form-input-error:not([value]) {
+  border-bottom-color: red !important;
+  box-shadow: 0 1px 0 0 red !important;
+}
+
+.form-label-error {
+  color: red !important;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+}
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.display-none {
+  display: none;
 }
 

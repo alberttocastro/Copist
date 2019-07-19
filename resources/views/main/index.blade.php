@@ -178,28 +178,30 @@
     <form id="add-territory-form" action="{{route('create_suggested_address')}}" method="POST">
         {{ csrf_field() }}
         <div class="modal-content">
-            <h4>Add a new territory</h4> <br>
+            <h4>Add a new territory</h4>
+            <span class="error-message display-none">Correct the fields in red</span>
             <div class="row">
                 <div class="input-field col s12">
                     <input type="text" name="street" id="street">
                     <label for="street">Address</label>
-                    <span class="helper-text" data-error="wrong" data-success="right">Example: Rua do Meio, 90, Rio
+                    <span class="helper-text">Example: Rua do Meio, 90, Rio
                         Vermelho - Salvador</span>
                 </div>
                 <div class="input-field col s12">
                     <input type="text" name="neighborhood">
-                    <label for="textarea-reference">Reference</label>
-                    <span class="helper-text" data-error="wrong" data-success="right">Example: Close to Hostel Rio
+                    <label for="neighborhood">Reference</label>
+                    <span class="helper-text">Example: Close to Hostel Rio
                         Vermelho</span>
                 </div>
                 <div class="input-field col s12">
                     <input type="text" name="name">
-                    <label for="textarea-notes">Name <i>(Optional)</i></label>
+                    <label for="name">Name <i>(Optional)</i></label>
                 </div>
                 <div class="input-field col s12">
-                    <textarea type="text" name="comments" class="materialize-textarea" form="add-territory-form"></textarea>
-                    <label for="textarea-notes">Notes</label>
-                    <span class="helper-text" data-error="wrong" data-success="right">Example: Possibly a foreigner that
+                    <textarea type="text" name="comments" class="materialize-textarea"
+                        form="add-territory-form"></textarea>
+                    <label for="comments">Notes</label>
+                    <span class="helper-text">Example: Possibly a foreigner that
                         somebody told us while...</span>
                 </div>
             </div>

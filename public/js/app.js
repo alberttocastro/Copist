@@ -29702,20 +29702,8 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./initialization */ "./resources/js/initialization.js");
+__webpack_require__(/*! ./initialization */ "./resources/js/initialization.js"); // Document Ready Início
 
-function notHidden() {
-  if ($("nav").parent().prop("tagName") == "DIV") {
-    $("main").css({
-      "padding-top": $('nav').height() - 40
-    });
-  }
-}
-
-function searchHelp() {
-  $("ul.collapsible.popout").children("li").show();
-  $("ul.collapsible.popout").children("li:not(:contains(" + $("#autocomplete-input").val() + "))").hide();
-}
 
 $(document).ready(function () {
   // Formulário para pesquisar as perguntas do HELPDESK
@@ -29799,13 +29787,7 @@ $(document).ready(function () {
     coverTrigger: false,
     beloworigin: true
   });
-  $('.sidenav').sidenav(); // Sets the active item in the navbar extended
-  // var pathname = window.location.pathname;
-  // var pathparts = pathname.split("/");
-  // if (pathparts[1] != null) {
-  //   $("#".concat(pathparts[1])).addClass("active");
-  // }
-  // Na lista de endereços sugeridos,
+  $('.sidenav').sidenav(); // Na lista de endereços sugeridos,
   // Coloca os dados que aparecem na lista dentro do formulário do
   // modal de adicionar novo endereço
 
@@ -29837,7 +29819,64 @@ $(document).ready(function () {
     var id = event.target.id;
     $("input#address_id").val(id);
   });
-});
+  suggestTerritoryValidation();
+}); // Document Ready Fim
+
+function notHidden() {
+  if ($("nav").parent().prop("tagName") == "DIV") {
+    $("main").css({
+      "padding-top": $('nav').height() - 40
+    });
+  }
+}
+
+function searchHelp() {
+  $("ul.collapsible.popout").children("li").show();
+  $("ul.collapsible.popout").children("li:not(:contains(" + $("#autocomplete-input").val() + "))").hide();
+} //Validação de dados de enviar novo território
+
+
+function suggestTerritoryValidation() {
+  form_query = "form#add-territory-form";
+  $(form_query).submit(function () {
+    var send_form = false;
+
+    if ($('form#add-territory-form input[name="street"]').val() == "") {
+      $(form_query + ' [name="street"]').addClass('form-input-error');
+      $(form_query + ' label[for="street"]').addClass('form-label-error');
+      send_form = false;
+    } else {
+      $(form_query + ' [name="street"]').removeClass('form-input-error');
+      $(form_query + ' label[for="street"]').removeClass('form-label-error');
+    }
+
+    if ($('form#add-territory-form input[name="neighborhood"]').val() == "") {
+      $(form_query + ' [name="neighborhood"]').addClass('form-input-error');
+      $(form_query + ' label[for="neighborhood"]').addClass('form-label-error');
+      send_form = false;
+    } else {
+      $(form_query + ' [name="neighborhood"]').removeClass('form-input-error');
+      $(form_query + ' label[for="neighborhood"]').removeClass('form-label-error');
+    }
+
+    if ($('form#add-territory-form textarea[name="comments"]').val() == "") {
+      $(form_query + ' [name="comments"]').addClass('form-input-error');
+      $(form_query + ' label[for="comments"]').addClass('form-label-error');
+      send_form = false;
+    } else {
+      $(form_query + ' [name="comments"]').removeClass('form-input-error');
+      $(form_query + ' label[for="comments"]').removeClass('form-label-error');
+    }
+
+    if (send_form) {
+      $('span.error-message').addClass('display-none');
+    } else {
+      $('span.error-message').removeClass('display-none');
+    }
+
+    return send_form;
+  });
+}
 
 /***/ }),
 
