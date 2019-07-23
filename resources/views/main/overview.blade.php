@@ -22,7 +22,7 @@
 <div id="all" class="col s12">
     <div class="container">
         <div id="vue">
-            <all-adresses></all-adresses>
+            <all-addresses></all-addresses>
         </div>
     </div>
 </div>

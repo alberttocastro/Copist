@@ -63,7 +63,7 @@ import VueAxios from 'vue-axios'
 
 Vue.use(VueAxios, axios);
 
-Vue.component('AllAdresses', require('./components/AllAdresses.vue').default);
+Vue.component('AllAddresses', require('./components/AllAddresses.vue').default);
 
 var vm = new Vue({
     el: "#vue"
