@@ -1,7 +1,7 @@
 require('./initialization');
 
 // Document Ready Início
-$(document).ready(function () {
+$(function () {
 
     // Formulário para pesquisar as perguntas do HELPDESK
     var questions = {};
@@ -65,9 +65,11 @@ $(document).ready(function () {
         closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
         draggable: true, // Choose whether you can drag to open on touch screens,
         onOpen: function (el) {
-            /* Do Stuff */ }, // A function to be called when sideNav is opened
+            /* Do Stuff */
+        }, // A function to be called when sideNav is opened
         onClose: function (el) {
-            /* Do Stuff */ }, // A function to be called when sideNav is closed
+            /* Do Stuff */
+        }, // A function to be called when sideNav is closed
     });
 
     $('.fixed-action-btn').floatingActionButton({
@@ -142,13 +144,13 @@ function searchHelp() {
 }
 
 //Validação de dados de enviar novo território
-function suggestTerritoryValidation(){
+function suggestTerritoryValidation() {
     form_query = "form#add-territory-form";
-    $(form_query).submit(function(){
+    $(form_query).submit(function () {
 
         var send_form = false;
 
-        if($('form#add-territory-form input[name="street"]').val() == ""){
+        if ($('form#add-territory-form input[name="street"]').val() == "") {
             $(form_query + ' [name="street"]').addClass('form-input-error');
             $(form_query + ' label[for="street"]').addClass('form-label-error');
             send_form = false;
@@ -156,7 +158,7 @@ function suggestTerritoryValidation(){
             $(form_query + ' [name="street"]').removeClass('form-input-error');
             $(form_query + ' label[for="street"]').removeClass('form-label-error');
         }
-        if($('form#add-territory-form input[name="neighborhood"]').val() == ""){
+        if ($('form#add-territory-form input[name="neighborhood"]').val() == "") {
             $(form_query + ' [name="neighborhood"]').addClass('form-input-error');
             $(form_query + ' label[for="neighborhood"]').addClass('form-label-error');
             send_form = false;
@@ -164,16 +166,16 @@ function suggestTerritoryValidation(){
             $(form_query + ' [name="neighborhood"]').removeClass('form-input-error');
             $(form_query + ' label[for="neighborhood"]').removeClass('form-label-error');
         }
-        if($('form#add-territory-form textarea[name="comments"]').val() == ""){
+        if ($('form#add-territory-form textarea[name="comments"]').val() == "") {
             $(form_query + ' [name="comments"]').addClass('form-input-error');
             $(form_query + ' label[for="comments"]').addClass('form-label-error');
             send_form = false;
-        }else {
+        } else {
             $(form_query + ' [name="comments"]').removeClass('form-input-error');
             $(form_query + ' label[for="comments"]').removeClass('form-label-error');
         }
 
-        if(send_form){
+        if (send_form) {
             $('span.error-message').addClass('display-none');
         } else {
             $('span.error-message').removeClass('display-none');

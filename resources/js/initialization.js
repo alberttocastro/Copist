@@ -1,4 +1,5 @@
 window._ = require('lodash');
+
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
@@ -50,3 +51,20 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/**
+ * Vue será usado para fazer componentes reativos consumindo banco de dados
+ */
+window.Vue = require('vue');
+
+import Vue from 'vue'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+Vue.use(VueAxios, axios);
+
+Vue.component('AllAdresses', require('./components/AllAdresses.vue').default);
+
+var vm = new Vue({
+    el: "#vue"
+});
