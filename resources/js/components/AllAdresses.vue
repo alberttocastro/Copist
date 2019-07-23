@@ -50,7 +50,7 @@ export default {
     };
   },
   created() {
-    let uri = "/api/api";
+    let uri = "/api/v1/territorries";
     this.axios.get(uri).then(response => {
       console.log(response);
       this.macro_regions = response.data.data;
@@ -58,7 +58,6 @@ export default {
     });
   },
   updated(){
-    
     $('.collapsible').collapsible();
   }
 };
