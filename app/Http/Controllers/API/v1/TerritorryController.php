@@ -8,6 +8,7 @@ use App\Macro_region;
 
 class TerritorryController extends Controller
 {
+    public $BLANK_ID = '';
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +26,14 @@ class TerritorryController extends Controller
             ];
         };
         return [
-            'data' => $data
+            'data' => $data,
+            'meta' => [
+                'links' => [
+                    'address' => [
+                        'edit' => route('edit_territory', ['id' => $this->BLANK_ID])
+                    ]
+                ]
+            ]
         ];
     }
 }
