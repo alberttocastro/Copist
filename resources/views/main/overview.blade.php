@@ -3,10 +3,10 @@
 @section('header')
 <ul class="tabs tabs-transparent">
     <li class="tab">
-        <a href="#dashboard" class="active">Insights</a>
+        <a href="#dashboard">Insights</a>
     </li>
     <li class="tab">
-        <a href="#all">Addresses</a>
+        <a href="#all" class="active">Addresses</a>
     </li>
 
 </ul>
@@ -21,108 +21,9 @@
 <!-- ABA 1 -->
 <div id="all" class="col s12">
     <div class="container">
-
-        @if (App\Address::all()->count() != 0)
-        @if (App\Macro_region::all()->count() > 0)
-        <h4>Macro Region and Addresses</h4>
-        @foreach (App\Macro_region::all() as $macro_region)
-        <blockquote>
-            <h5>{{$macro_region->name}}</h5> <span>({{$macro_region->addresses_quantity()}})</span>
-        </blockquote>
-
-        <ul class="collapsible popout">
-            @foreach ($macro_region->cards as $card)
-            <li>
-                <div class="collapsible-header"><i class="material-icons">place</i>{{$card->name}}</div>
-                <div class="collapsible-body">
-                    @foreach ($card->addresses as $address)
-                    <div class="card blue-grey darken-1">
-                        <div class="card-content white-text">
-                            <span class="card-title">{{$address->neighborhood}}</span>
-                            <div class="row">
-                                <div class="col s8">
-                                    <p><b>{{$address->name}}</b></p>
-                                    <p>{{$address->street}}</p>
-                                </div>
-                                <div class="s4">
-                                    <a href="{{route('edit_territory',['id'=>$address->id])}}"
-                                        class="waves-effect waves-light btn right">Edit</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-            </li>
-            @endforeach
-        </ul>
-        @endforeach
-        @endif
-        <div class="divider"></div>
-        {{-- Cards without macro-region --}}
-        @if (App\Card::where('macro_region_id', 0)->get()->count() > 0)
-        <h4>Addresses without Macro Region</h4>
-        <ul class="collapsible popout">
-            @foreach (App\Card::where('macro_region_id', 0)->get() as $card)
-            <li>
-                <div class="collapsible-header"><i class="material-icons">place</i>{{$card->name}}</div>
-                <div class="collapsible-body">
-                    @foreach ($card->addresses as $address)
-                    <div class="card blue-grey darken-1">
-                        <div class="card-content white-text">
-                            <span class="card-title">{{$address->neighborhood}}</span>
-                            <div class="row">
-                                <div class="col s8">
-                                    <p><b>{{$address->name}}</b></p>
-                                    <p>{{$address->street}}</p>
-                                </div>
-                                <div class="s4">
-                                    <a href="{{route('edit_territory',['id'=>$address->id])}}"
-                                        class="waves-effect waves-light btn right">Edit</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-            </li>
-            @endforeach
-            {{-- Addresses sem card --}}
-            <li>
-                <div class="collapsible-header"><i class="material-icons red-text">place</i><span
-                        class="red-text"><b>Addresses without cards</b></span></div>
-                <div class="collapsible-body">
-                    @foreach (App\Address::where('card_id', 0)->get() as $address)
-                    <div class="card blue-grey darken-1">
-                        <div class="card-content white-text">
-                            <span class="card-title">{{$address->neighborhood}}</span>
-                            <div class="row">
-                                <div class="col s8">
-                                    <p><b>{{$address->name}}</b></p>
-                                    <p>{{$address->street}}</p>
-                                </div>
-                                <div class="s4">
-                                    <a href="{{route('edit_territory',['id'=>$address->id])}}"
-                                        class="waves-effect waves-light btn right">Edit</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-            </li>
-        </ul>
-        @endif
-        @else
-        {{-- Quando não tem endereços --}}
-        <div class="valign-wrapper">
-            <div style="width: 100%">
-                <h2 class="center-align">No addresses yet</h2>
-                <h5 class="center-align">To register a new one, go to the <b>database</b>.</h5>
-                <p class="center-align"><i>Don't forget to create a Macro-region</i></p>
-            </div>
+        <div id="vue">
+            <all-adresses></all-adresses>
         </div>
-        @endif
     </div>
 </div>
 
