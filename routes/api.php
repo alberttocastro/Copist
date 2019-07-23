@@ -19,17 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('api', function (){
-    $data = [];
-    foreach(Macro_region::all() as $macro_region){        
-        $data[] = [
-            'id' => $macro_region->id,
-            'name' => $macro_region->name,
-            'amount' => $macro_region->addresses_quantity(),
-            'cards' => $macro_region->cards
-        ];
-    };
-    return [
-        'data' => $data
-    ];
+
+Route::prefix('v1')->group(function(){
+    Route::get('territorries', 'API\v1\TerritorryController@territories');
 });
