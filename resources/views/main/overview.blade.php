@@ -23,6 +23,7 @@
     <div class="container">
         <div id="vue">
             <all-addresses></all-addresses>
+            <all-addresses-without-map></all-addresses-without-map>
         </div>
     </div>
 </div>
