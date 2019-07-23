@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h4>Macro Region and Addresses: {{test_data}}</h4>
+    <h4>Macro Region and Addresses</h4>
     <div v-bind:key="macro_region.id" v-for="macro_region in macro_regions">
       <blockquote>
         <h5>{{macro_region.name}}</h5>
@@ -29,7 +29,7 @@
                     <p>{{address.street}}</p>
                   </div>
                   <div class="s4">
-                    <a href="#" class="waves-effect waves-light btn right">Edit</a>
+                    <a :href="links.address.edit + '/'+ address.id" class="waves-effect waves-light btn right">Edit</a>
                   </div>
                 </div>
               </div>
@@ -45,8 +45,8 @@
 export default {
   data() {
     return {
-      test_data: "",
-      macro_regions: []
+      macro_regions: [],
+      links: []
     };
   },
   created() {
@@ -54,7 +54,7 @@ export default {
     this.axios.get(uri).then(response => {
       console.log(response);
       this.macro_regions = response.data.data;
-
+      this.links = response.data.meta.links;
     });
   },
   updated(){

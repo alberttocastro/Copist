@@ -1743,17 +1743,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      test_data: "",
-      macro_regions: []
+      macro_regions: [],
+      links: []
     };
   },
   created: function created() {
     var _this = this;
 
-    var uri = "/api/api";
+    var uri = "/api/v1/territorries";
     this.axios.get(uri).then(function (response) {
       console.log(response);
       _this.macro_regions = response.data.data;
+      _this.links = response.data.meta.links;
     });
   },
   updated: function updated() {
@@ -30011,9 +30012,7 @@ var render = function() {
     "div",
     { staticClass: "container" },
     [
-      _c("h4", [
-        _vm._v("Macro Region and Addresses: " + _vm._s(_vm.test_data))
-      ]),
+      _c("h4", [_vm._v("Macro Region and Addresses")]),
       _vm._v(" "),
       _vm._l(_vm.macro_regions, function(macro_region) {
         return _c("div", { key: macro_region.id }, [
@@ -30058,7 +30057,20 @@ var render = function() {
                               _c("p", [_vm._v(_vm._s(address.street))])
                             ]),
                             _vm._v(" "),
-                            _vm._m(0, true)
+                            _c("div", { staticClass: "s4" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass:
+                                    "waves-effect waves-light btn right",
+                                  attrs: {
+                                    href:
+                                      _vm.links.address.edit + "/" + address.id
+                                  }
+                                },
+                                [_vm._v("Edit")]
+                              )
+                            ])
                           ])
                         ])
                       ]
@@ -30076,23 +30088,7 @@ var render = function() {
     2
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "s4" }, [
-      _c(
-        "a",
-        {
-          staticClass: "waves-effect waves-light btn right",
-          attrs: { href: "#" }
-        },
-        [_vm._v("Edit")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
