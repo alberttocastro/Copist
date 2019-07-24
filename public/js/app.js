@@ -42707,7 +42707,7 @@ function searchHelp() {
 function suggestTerritoryValidation() {
   form_query = "form#add-territory-form";
   $(form_query).submit(function () {
-    var send_form = false;
+    var send_form = true;
 
     if ($('form#add-territory-form input[name="street"]').val() == "") {
       $(form_query + ' [name="street"]').addClass('form-input-error');
@@ -42890,15 +42890,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*****************************************************!*\
   !*** ./resources/js/components/UnassignedCards.vue ***!
   \*****************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _UnassignedCards_vue_vue_type_template_id_356fcabe___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UnassignedCards.vue?vue&type=template&id=356fcabe& */ "./resources/js/components/UnassignedCards.vue?vue&type=template&id=356fcabe&");
 /* harmony import */ var _UnassignedCards_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UnassignedCards.vue?vue&type=script&lang=js& */ "./resources/js/components/UnassignedCards.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _UnassignedCards_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _UnassignedCards_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -42928,7 +42927,7 @@ component.options.__file = "resources/js/components/UnassignedCards.vue"
 /*!******************************************************************************!*\
   !*** ./resources/js/components/UnassignedCards.vue?vue&type=script&lang=js& ***!
   \******************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

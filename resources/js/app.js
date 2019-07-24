@@ -148,7 +148,7 @@ function suggestTerritoryValidation() {
     form_query = "form#add-territory-form";
     $(form_query).submit(function () {
 
-        var send_form = false;
+        var send_form = true;
 
         if ($('form#add-territory-form input[name="street"]').val() == "") {
             $(form_query + ' [name="street"]').addClass('form-input-error');
