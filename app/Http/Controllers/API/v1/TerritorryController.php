@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Macro_region;
 use App\Address;
 
+//TODO: Mudar de territorry pra territory
 class TerritorryController extends Controller
 {
     public $BLANK_ID = '';
@@ -38,6 +39,9 @@ class TerritorryController extends Controller
         ];
     }
 
+    /**
+     * Retorna todos os endereços que não pertencem a nenhum cartão
+     */
     public function addresses_without_map()
     { 
         $data = [];
@@ -53,6 +57,13 @@ class TerritorryController extends Controller
                     ]
                 ]
             ]
+        ];
+    }
+
+    public function suggested_addresses()
+    {
+        return [
+            'data' => \App\Suggested_address::All()->toArray()
         ];
     }
 }
