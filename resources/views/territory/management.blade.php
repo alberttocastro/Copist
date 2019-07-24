@@ -17,57 +17,8 @@
 @endif
 <!-- Aba de aceitar endereços novos -->
 <div id="new">
-    <div class="container">
-
-        <!-- Cartão de novo território -->
-        <div class="row">
-            <div class="col s12">
-                @forelse (App\Suggested_address::all() as $suggested_address)
-                <div class="card grey lighten-5 z-depth-2">
-                    <div class="card-content indigo-text text-darken-4">
-                        <p>
-                            <b>Street:</b> <span class="street"
-                                id="{{$suggested_address->id}}">{{$suggested_address->street}}</span>
-                        </p>
-                        <p>
-                            <b>Neighborhood:</b> <span class="neighborhood"
-                                id="{{$suggested_address->id}}">{{$suggested_address->neighborhood}}</span>
-                        </p>
-                        <p>
-                            <b>Name:</b> <span class="name"
-                                id="{{$suggested_address->id}}">{{ $suggested_address->name }}</span>
-                        </p>
-                        <p>
-                            <b>Comments:</b> <span class="comments"
-                                id="{{$suggested_address->id}}">{{$suggested_address->comments}}</span>
-                        </p>
-                    </div>
-                    <div class="card-action">
-                        <a id="{{$suggested_address->id}}" href="#accept-address"
-                            class="modal-trigger suggested-address">Accept</a>
-                        <a href="#"
-                            onclick="event.preventDefault(); document.getElementById('delete-{{$suggested_address->id}}').submit();">Reject</a>
-
-                        <form id="delete-{{$suggested_address->id}}" action="{{route('delete_suggested_address', ['id'=>$suggested_address->id])}}"
-                            method="post">
-                            @csrf
-                            @method('delete')
-                        </form>
-                    </div>
-                </div>
-                @empty
-
-                <div class="valign-wrapper">
-                    <div style="width: 100%">
-                        <h2 class="center-align">Well done!</h2>
-                        <h5 class="center-align">All new addresses are managed</h5>
-                    </div>
-                </div>
-
-                @endforelse
-            </div>
-        </div>
-
+    <div id="vue3">
+        <territory-suggestion></territory-suggestion>
     </div>
 
     @yield('accept_addres', view('territory.modal.accept_address'))
