@@ -18,18 +18,26 @@ class AssignmentController extends Controller
         $unassigned_cards = array();
 
         foreach (Macro_region::all() as $macro_region) {
-            $macro_region_assigned_cards = $macro_region->cards_report(true);
-            $macro_region_unassigned_cards = $macro_region->cards_report(false);
+            $macro_region_assigned_territories = array();
+            $macro_region_assigned_territories = $macro_region->cards_report(true);
 
-            if (\count($macro_region_assigned_cards) > 0) {
-                $macro_region->cards = $macro_region_assigned_cards;
-                $assigned_cards[] = $macro_region;
+            if (\count($macro_region_assigned_territories) > 0) {
+                $mr = clone $macro_region; 
+                $mr->assignment_cards = $macro_region_assigned_territories;
+                $assigned_cards[] = clone $mr;
             }
-            if (\count($macro_region_unassigned_cards) > 0) {
-                $macro_region->cards = $macro_region_unassigned_cards;
-                $unassigned_cards[] = $macro_region;
+
+            $macro_region_unassigned_territories = array();
+            $macro_region_unassigned_territories = $macro_region->cards_report(false);
+
+            if(\count($macro_region_unassigned_territories) > 0){
+                $mr = clone $macro_region;
+                $mr->assignment_cards = $macro_region_unassigned_territories;
+                $unassigned_cards[] = clone $mr;
             }
         }
+
+        
 
 
         return [
