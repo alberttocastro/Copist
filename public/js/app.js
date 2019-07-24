@@ -42777,7 +42777,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_axios__WEBPACK_IMPORTED_MODULE_2___default.a, axios__WEBPACK_IMPORTED_MODULE_1___default.a);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('AllAddresses', __webpack_require__(/*! ./components/AllAddresses.vue */ "./resources/js/components/AllAddresses.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('AllAddressesWithoutMap', __webpack_require__(/*! ./components/AllAddressesWithoutMap.vue */ "./resources/js/components/AllAddressesWithoutMap.vue")["default"]);
-var vm = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
+window.vm = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: "#vue"
 });
 
