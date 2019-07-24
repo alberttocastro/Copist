@@ -25,4 +25,6 @@ Route::prefix('v1')->group(function(){
     Route::get('withoutmap', 'API\v1\TerritorryController@addresses_without_map');
 
     Route::get('assignments', 'API\v1\AssignmentController@cards_assignment');
+
+    Route::get('suggestedaddresses', 'API\v1\TerritorryController@suggested_addresses');
 });
