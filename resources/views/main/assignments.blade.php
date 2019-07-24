@@ -56,68 +56,8 @@
 <!-- ABA 2 -->
 <div id="dashboard" class="col s12">
 
-    <div class="container">
-        @forelse ($working_cards as $macro_region_id => $cards)
-        <blockquote>
-            <h4>
-                {{App\Macro_region::find(1)->name}}
-            </h4>
-        </blockquote>
-
-        @foreach ($cards as $card)
-        <ul class="collection with-header z-depth-3">
-            <li class="collection-header">
-                <div class="row mb-0 valign-wrapper">
-                    <div class="col s9">
-                        <h4>
-                            {{$card->name}}
-                        </h4>
-                    </div>
-                    <div class="col s3">
-                        <a href="#"
-                            onclick="event.preventDefault(); document.getElementById('remove_assignment_to_territory').submit();">Received</a>
-                        <form id="remove_assignment_to_territory" action="{{route('remove_assignment_to_territory')}}"
-                            method="POST" style="display: none;">
-                            @method('delete')
-                            @csrf
-                            <input type="hidden" name="card_id" value="{{$card->id}}">
-                        </form>
-                    </div>
-                </div>
-            </li>
-            @foreach ($card->get_people_assigned_to_the_card() as $user)
-            <li class="collection-item">
-                @if ($user->publisher != null)
-                {{$user->publisher->name}}
-                @else
-                Unknown
-                @endif
-                <div class="right">
-                    <div class="center">
-                        <b>{{strftime('%m/%d/%Y', App\Assignment::where('user_id', $user->id)->where('card_id', $card->id)->where('completion_date', null)->first()->created_at->timestamp)}}</b>
-                    </div>
-                </div>
-            </li>
-            @endforeach
-            <li class="collection-item center" style="padding: 0% 0% 0% 0%">
-                <a href="#modal-assign-territory"
-                    class="btn-flat waves-effect waves-light modal-trigger add-publisher-button">
-                    <span id="{{$card->id}}"> + Add publisher</span>
-                </a>
-            </li>
-        </ul>
-        @endforeach
-        @empty
-
-        <div class="valign-wrapper">
-            <div style="width: 100%">
-                <h2 class="center-align">Oh no!</h2>
-                <h5 class="center-align">No cards at work.</h5>
-            </div>
-        </div>
-
-        @endforelse
-
+    <div id="vue">
+        <assigned-cards></assigned-cards>
     </div>
 
 </div>
