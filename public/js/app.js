@@ -1830,6 +1830,111 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ChooseAddressCard.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ChooseAddressCard.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      addresses: []
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    var uri = "/api/v1/withoutmap";
+    this.axios.get(uri).then(function (response) {
+      _this.addresses = response.data.data;
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TerritorySuggestion.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TerritorySuggestion.vue?vue&type=script&lang=js& ***!
@@ -30385,6 +30490,150 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ChooseAddressCard.vue?vue&type=template&id=3c5d7d32&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ChooseAddressCard.vue?vue&type=template&id=3c5d7d32& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm.addresses
+      ? _c(
+          "div",
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _vm._l(_vm.addresses, function(address) {
+              return _c("div", { key: address.id, staticClass: "row" }, [
+                _c("div", { staticClass: "col s12 m6" }, [
+                  _c("div", { staticClass: "card grey lighten-5 z-depth-2" }, [
+                    _c(
+                      "div",
+                      { staticClass: "card-content indigo-text text-darken-4" },
+                      [
+                        _c("p", [
+                          _c("b", [_vm._v("Street:")]),
+                          _vm._v(" "),
+                          _c("span", [_vm._v(_vm._s(address.street))])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _c("b", [_vm._v("Neighborhood:")]),
+                          _vm._v(" "),
+                          _c("span", [_vm._v(_vm._s(address.neighborhood))])
+                        ]),
+                        _vm._v(" "),
+                        address.reference != ""
+                          ? _c("p", [
+                              _c("b", [_vm._v("Reference:")]),
+                              _vm._v(" "),
+                              _c("span", [_vm._v(_vm._s(address.reference))])
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        address.comments != ""
+                          ? _c("p", [
+                              _c("b", [_vm._v("Comments:")]),
+                              _vm._v(" "),
+                              _c("span", [_vm._v(_vm._s(address.comments))])
+                            ])
+                          : _vm._e()
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "card-action" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass:
+                            "modal-trigger add-card-to-address-button",
+                          attrs: { id: address.id, href: "#choose-map" }
+                        },
+                        [_vm._v("Choose card")]
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            })
+          ],
+          2
+        )
+      : _c("div", [_vm._m(1)]),
+    _vm._v(" "),
+    _vm._m(2)
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("blockquote", [_c("h4", [_vm._v("Address without a map")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "valign-wrapper" }, [
+      _c("div", { staticStyle: { width: "100%" } }, [
+        _c("h2", { staticClass: "center-align" }, [_vm._v("Nice!")]),
+        _vm._v(" "),
+        _c("h5", { staticClass: "center-align" }, [
+          _vm._v("All addresses have their own map.")
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "center-align" }, [_vm._v("That's beautiful!")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("form", { attrs: { action: "#", method: "post" } }, [
+      _c("div", { staticClass: "modal", attrs: { id: "choose-map" } }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _c("input", {
+            attrs: { type: "hidden", id: "address_id", name: "address_id" }
+          }),
+          _vm._v(" "),
+          _c("h4", [_vm._v("Choose map")]),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-field col s12" }, [
+            _c("select", { attrs: { name: "card_id", id: "card_id" } }, [
+              _c("option", { attrs: { value: "0" } }, [_vm._v("Cartão 1 - 1")])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "modal-footer" }, [
+          _c("input", {
+            staticClass: "modal-close waves-effect waves-green btn-flat",
+            attrs: { type: "submit", value: "Confirm" }
+          })
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TerritorySuggestion.vue?vue&type=template&id=4591f6ba&":
 /*!**********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TerritorySuggestion.vue?vue&type=template&id=4591f6ba& ***!
@@ -43082,6 +43331,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/ChooseAddressCard.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/ChooseAddressCard.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ChooseAddressCard_vue_vue_type_template_id_3c5d7d32___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ChooseAddressCard.vue?vue&type=template&id=3c5d7d32& */ "./resources/js/components/ChooseAddressCard.vue?vue&type=template&id=3c5d7d32&");
+/* harmony import */ var _ChooseAddressCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChooseAddressCard.vue?vue&type=script&lang=js& */ "./resources/js/components/ChooseAddressCard.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ChooseAddressCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ChooseAddressCard_vue_vue_type_template_id_3c5d7d32___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ChooseAddressCard_vue_vue_type_template_id_3c5d7d32___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ChooseAddressCard.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ChooseAddressCard.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/ChooseAddressCard.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChooseAddressCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ChooseAddressCard.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ChooseAddressCard.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChooseAddressCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ChooseAddressCard.vue?vue&type=template&id=3c5d7d32&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/ChooseAddressCard.vue?vue&type=template&id=3c5d7d32& ***!
+  \**************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChooseAddressCard_vue_vue_type_template_id_3c5d7d32___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ChooseAddressCard.vue?vue&type=template&id=3c5d7d32& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ChooseAddressCard.vue?vue&type=template&id=3c5d7d32&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChooseAddressCard_vue_vue_type_template_id_3c5d7d32___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChooseAddressCard_vue_vue_type_template_id_3c5d7d32___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/TerritorySuggestion.vue":
 /*!*********************************************************!*\
   !*** ./resources/js/components/TerritorySuggestion.vue ***!
@@ -43296,6 +43614,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('AllAddresses', __webpack_r
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('AllAddressesWithoutMap', __webpack_require__(/*! ./components/AllAddressesWithoutMap.vue */ "./resources/js/components/AllAddressesWithoutMap.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('UnassignedCards', __webpack_require__(/*! ./components/UnassignedCards */ "./resources/js/components/UnassignedCards.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('TerritorySuggestion', __webpack_require__(/*! ./components/TerritorySuggestion.vue */ "./resources/js/components/TerritorySuggestion.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('ChooseAddressCard', __webpack_require__(/*! ./components/ChooseAddressCard */ "./resources/js/components/ChooseAddressCard.vue")["default"]);
 window.vm = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: "#vue"
 });
@@ -43304,6 +43623,9 @@ window.vm2 = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
 });
 window.vm3 = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: "#vue3"
+});
+window.vm4 = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
+  el: "#vue4"
 });
 
 /***/ }),

@@ -67,6 +67,7 @@ Vue.component('AllAddresses', require('./components/AllAddresses.vue').default);
 Vue.component('AllAddressesWithoutMap', require('./components/AllAddressesWithoutMap.vue').default);
 Vue.component('UnassignedCards', require('./components/UnassignedCards').default);
 Vue.component('TerritorySuggestion', require('./components/TerritorySuggestion.vue').default);
+Vue.component('ChooseAddressCard', require('./components/ChooseAddressCard').default)
 
 window.vm = new Vue({
     el: "#vue"
@@ -78,4 +79,8 @@ window.vm2 = new Vue({
 
 window.vm3 = new Vue({
     el: "#vue3"
+})
+
+window.vm4 = new Vue({
+    el: "#vue4"
 })
