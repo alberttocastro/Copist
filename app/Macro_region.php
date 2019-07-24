@@ -40,4 +40,20 @@ class Macro_region extends Model
         return $amount;
     }
 
+    /**
+     * Retorna lista de cartões designados ou não designados de acordo com o parâmetro $assigned
+     */
+    public function cards_report($assigned){
+        $return = array();
+
+        foreach($this->cards as $card){
+            $card->addresses = $card->addresses;
+            if($card->is_at_work() == $assigned){
+                $return[] = $card;
+            }
+        }
+
+        return $return;
+    }
+
 }
