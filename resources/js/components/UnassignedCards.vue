@@ -8,7 +8,7 @@
         <ul
           class="collection with-header z-depth-3"
           v-bind:key="card.id"
-          v-for="card in macro_region.cards"
+          v-for="card in macro_region.assignment_cards"
         >
           <li class="collection-header">
             <div class="row valign-wrapper" style="margin-bottom: 0;">
