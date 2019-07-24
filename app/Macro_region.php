@@ -48,6 +48,7 @@ class Macro_region extends Model
 
         foreach($this->cards as $card){
             $card->addresses = $card->addresses;
+            $card->assignments = $card->get_assignments_to_card();
             if($card->is_at_work() == $assigned){
                 $return[] = $card;
             }
