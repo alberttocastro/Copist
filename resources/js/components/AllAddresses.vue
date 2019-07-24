@@ -52,7 +52,6 @@ export default {
   created() {
     let uri = "/api/v1/territorries";
     this.axios.get(uri).then(response => {
-      console.log(response);
       this.macro_regions = response.data.data;
       this.links = response.data.meta.links;
     });
