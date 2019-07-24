@@ -60,6 +60,9 @@ class TerritorryController extends Controller
         ];
     }
 
+    /**
+     * Retorna todos os endereços sugeridos pelos publicadores
+     */
     public function suggested_addresses()
     {
         return [
