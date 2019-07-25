@@ -1800,15 +1800,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1826,7 +1817,7 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   updated: function updated() {
-    $('.collapsible').collapsible();
+    $(".collapsible").collapsible();
   }
 });
 
@@ -31031,9 +31022,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "container" },
     [
-      _c("h4", [_vm._v("Macro Region and Addresses")]),
+      _c("h4", { staticClass: "session-title" }, [
+        _vm._v("Macro Region and Addresses")
+      ]),
       _vm._v(" "),
       _vm._l(_vm.macro_regions, function(macro_region) {
         return _c("div", { key: macro_region.id }, [
@@ -31057,45 +31049,29 @@ var render = function() {
                   "div",
                   { staticClass: "collapsible-body" },
                   _vm._l(card.addresses, function(address) {
-                    return _c(
-                      "div",
-                      {
-                        key: address.id,
-                        staticClass: "card blue-grey darken-1"
-                      },
-                      [
-                        _c("div", { staticClass: "card-content white-text" }, [
-                          _c("span", { staticClass: "card-title" }, [
-                            _vm._v(_vm._s(address.neighborhood))
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "row" }, [
-                            _c("div", { staticClass: "col s8" }, [
-                              _c("p", [
-                                _c("b", [_vm._v(_vm._s(address.name))])
-                              ]),
-                              _vm._v(" "),
-                              _c("p", [_vm._v(_vm._s(address.street))])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "s4" }, [
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "waves-effect waves-light btn right",
-                                  attrs: {
-                                    href:
-                                      _vm.links.address.edit + "/" + address.id
-                                  }
-                                },
-                                [_vm._v("Edit")]
-                              )
-                            ])
-                          ])
-                        ])
-                      ]
-                    )
+                    return _c("div", { key: address.id }, [
+                      _vm._v(
+                        "\n            " +
+                          _vm._s(address.neighborhood) +
+                          "\n            " +
+                          _vm._s(address.name) +
+                          "\n            " +
+                          _vm._s(address.street) +
+                          "\n            "
+                      ),
+                      _c("div", [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "waves-effect waves-light btn right",
+                            attrs: {
+                              href: _vm.links.address.edit + "/" + address.id
+                            }
+                          },
+                          [_vm._v("Edit")]
+                        )
+                      ])
+                    ])
                   }),
                   0
                 )

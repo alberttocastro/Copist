@@ -20,11 +20,9 @@
 
 <!-- ABA 1 -->
 <div id="all" class="col s12">
-    <div class="container">
-        <div id="vue">
-            <all-addresses></all-addresses>
-            <all-addresses-without-map></all-addresses-without-map>
-        </div>
+    <div id="vue">
+        <all-addresses></all-addresses>
+        <all-addresses-without-map></all-addresses-without-map>
     </div>
 </div>
 
