@@ -67,8 +67,15 @@ Vue.component('AllAddresses', require('./components/AllAddresses.vue').default);
 Vue.component('AllAddressesWithoutMap', require('./components/AllAddressesWithoutMap.vue').default);
 Vue.component('UnassignedCards', require('./components/UnassignedCards').default);
 Vue.component('TerritorySuggestion', require('./components/TerritorySuggestion.vue').default);
-Vue.component('ChooseAddressCard', require('./components/ChooseAddressCard').default);
-Vue.component('AssignedCards', require('./components/AssignedCards').default);
+Vue.component('ChooseAddressCard', require('./components/ChooseAddressCard.vue').default);
+Vue.component('AssignedCards', require('./components/AssignedCards.vue').default);
+
+Vue.component('AllAddressTypes',require('./components/AllAddressTypes').default);
+Vue.component('AllCards',require('./components/AllCards').default);
+Vue.component('AllIdioms',require('./components/AllIdioms').default);
+Vue.component('AllMacroRegions',require('./components/AllMacroRegions.vue').default);
+Vue.component('AllNationalities',require('./components/AllNationalities').default);
+Vue.component('AllPublishers',require('./components/AllPublishers').default);
 
 window.vm = new Vue({
     el: "#vue"

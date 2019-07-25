@@ -27,4 +27,12 @@ Route::prefix('v1')->group(function(){
     Route::get('assignments', 'API\v1\AssignmentController@cards_assignment');
 
     Route::get('suggestedaddresses', 'API\v1\TerritorryController@suggested_addresses');
+
+    Route::get('publishers', 'API\v1\InformationController@publishers');
+    Route::get('macroregions', 'API\v1\InformationController@macro_regions');
+    Route::get('cards', 'API\v1\InformationController@cards');
+    Route::get('addresstypes', 'API\v1\InformationController@address_types');
+
+    Route::get('idioms', 'API\v1\InformationController@idioms');
+    Route::get('nationalities', 'API\v1\InformationController@nationalities');
 });
