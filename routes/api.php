@@ -23,6 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::prefix('v1')->group(function(){
     Route::get('territorries', 'API\v1\TerritorryController@territories');
     Route::get('withoutmap', 'API\v1\TerritorryController@addresses_without_map');
+    Route::get('withoutmacroregion', 'API\v1\TerritorryController@cards_without_macro_region');
 
     Route::get('assignments', 'API\v1\AssignmentController@cards_assignment');
 
