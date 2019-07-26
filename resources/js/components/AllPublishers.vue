@@ -7,38 +7,35 @@
     </div>
     <div class="row">
       <div v-bind:key="publisher.id" v-for="publisher in publishers" class="col s12 m6">
-        <div class="card">
+        <div class="card publisher-card">
           <div class="card-content">
-            <h5 style="margin-top: 0;">{{publisher.name}}</h5>
-            <span>
-              <b>Email</b>
-              {{publisher.email}}
-            </span>
-            <br />
-            <span>
-              <b>Phone</b>
-              {{publisher.phone}}
-            </span>
-            <br />
-            <span v-if="publisher.neighborhood">
-              <b>Neighborhood</b>
-              {{publisher.neighborhood}}
-            </span>
-            <br />
-            <span>
-              <b>Neighborhood</b>
-              <i class="red-text">Unknown</i>
-            </span>
-            <br />
-            <span v-if="publisher.macro_region">
-              <b>Macro Region</b>
-              {{publisher.macro_region.name}}
-            </span>
-            <span v-else>
-              <b>Macro Region</b>
-              <i class="red-text">Unknown</i>
-            </span>
-            <br />
+              <span class="publisher-name">{{publisher.name}}</span>
+            <div class="publisher-card-item">
+              <span class="publisher-card-item-title">
+                Email
+              </span>
+              <span class="publisher-card-item-info">{{publisher.email}}</span>
+            </div>
+            <div class="publisher-card-item">
+              <span class="publisher-card-item-title">
+                Phone
+              </span>
+              <span class="publisher-card-item-info">{{publisher.phone}}</span>
+            </div>
+            <div class="publisher-card-item">
+              <span class="publisher-card-item-title">
+                Neighborhood
+              </span>
+              <span v-if="publisher.neighborhood" class="publisher-card-item-info">{{publisher.neighborhood}}</span>
+              <span v-else class="publisher-card-item-info red-text">Unknown</span>
+            </div>
+            <div class="publisher-card-item">
+              <span class="publisher-card-item-title">
+                Macro Region
+              </span>
+              <span v-if="publisher.macro_region" class="publisher-card-item-info">{{publisher.macro_region.name}}</span>
+              <span v-else class="publisher-card-item-info red-text">Unknown</span>
+            </div>
           </div>
           <!-- TODO: Botão de editar -->
         </div>
@@ -58,29 +55,32 @@
     </div>
 
     <div id="create-publisher" class="modal">
-        <!-- Colocar ação do formulário -->
-        <form action="#" method="post">
-            @csrf
-            <div class="modal-content">
-                <label for="name">Name</label>
-                <input type="text" name="name" id="name">
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email">
-                <label for="phone">Phone</label>
-                <input type="tel" name="phone" id="phone">
-                <label for="neighborhood">Neighborhood</label>
-                <input type="text" name="neighborhood" id="neighborhood">
-                <label for="macro-region">Macro Region</label>
-                <select name="macro_region" id="macro_region">
-                    <option value="0">Select a Macro-Region</option>
-                    <option v-for="macro_region in macro_regions" v-bind:key="macro_region.id" :value="macro_region.id">{{macro_region.name}}</option>
-                </select>
-
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn-flat green-text">Create Publisher</button>
-            </div>
-        </form>
+      <!-- Colocar ação do formulário -->
+      <form action="#" method="post">
+        @csrf
+        <div class="modal-content">
+          <label for="name">Name</label>
+          <input type="text" name="name" id="name" />
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" />
+          <label for="phone">Phone</label>
+          <input type="tel" name="phone" id="phone" />
+          <label for="neighborhood">Neighborhood</label>
+          <input type="text" name="neighborhood" id="neighborhood" />
+          <label for="macro-region">Macro Region</label>
+          <select name="macro_region" id="macro_region">
+            <option value="0">Select a Macro-Region</option>
+            <option
+              v-for="macro_region in macro_regions"
+              v-bind:key="macro_region.id"
+              :value="macro_region.id"
+            >{{macro_region.name}}</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn-flat green-text">Create Publisher</button>
+        </div>
+      </form>
     </div>
   </div>
 </template>
@@ -98,7 +98,7 @@ export default {
       this.publishers = response.data.data;
     });
 
-    let macro_regions_uri = "/api/v1/macroregions"
+    let macro_regions_uri = "/api/v1/macroregions";
     this.axios.get(uri).then(response => {
       this.macro_regions = response.data.data;
     });

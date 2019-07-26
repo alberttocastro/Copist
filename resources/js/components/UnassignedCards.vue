@@ -1,38 +1,34 @@
 <template>
   <div>
-    <div class="container" v-if="unassigned">
+    <div id="macro-region" v-if="unassigned">
       <div v-bind:key="macro_region.id" v-for="macro_region in unassigned">
         <blockquote>
           <h4>{{macro_region.name}}</h4>
         </blockquote>
         <ul
-          class="collection with-header z-depth-3"
+          class="collection with-header z-depth-3 card"
           v-bind:key="card.id"
           v-for="card in macro_region.assignment_cards"
         >
-          <li class="collection-header">
-            <div class="row valign-wrapper" style="margin-bottom: 0;">
-              <div class="col s8">
-                <h4>{{card.name}}</h4>
+          <li class="collection-header card-header">
+            <div class="card-header-flex">
+              <div class="card-header-name">
+                {{card.name}}
               </div>
-              <div class="col s4">
-                <a
-                  :id="card.id"
-                  class="waves-effect waves-teal btn-flat modal-trigger add-publisher-button"
-                  href="#modal-assign-territory"
-                >Assign</a>
+              <div class="card-header-btn">
+                <a href="#">Editar</a>
               </div>
             </div>
           </li>
           <li
-            class="collection-item"
+            class="collection-item" v-bind:class="address.is_visitable == 1 ? '' : 'address-not-visitable'"
             v-bind:key="address.id"
             v-for="address in card.addresses"
-          >{{address.street}}</li>
+          >({{address.neighborhood}}) {{address.street}}</li>
         </ul>
       </div>
     </div>
-    <div v-else>
+    <div id="macro-region" v-else>
       <!--  Caso não tenha uma macro-região cadastrada -->
       <div class="valign-wrapper">
         <div>

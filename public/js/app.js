@@ -2390,6 +2390,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2655,10 +2661,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
 //
 //
 //
@@ -31341,7 +31343,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
+  return _c("div", [
     _c("div", { staticClass: "row" }, [
       _vm._m(0),
       _vm._v(" "),
@@ -31914,63 +31916,63 @@ var render = function() {
       { staticClass: "row" },
       _vm._l(_vm.publishers, function(publisher) {
         return _c("div", { key: publisher.id, staticClass: "col s12 m6" }, [
-          _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card publisher-card" }, [
             _c("div", { staticClass: "card-content" }, [
-              _c("h5", { staticStyle: { "margin-top": "0" } }, [
+              _c("span", { staticClass: "publisher-name" }, [
                 _vm._v(_vm._s(publisher.name))
               ]),
               _vm._v(" "),
-              _c("span", [
-                _c("b", [_vm._v("Email")]),
-                _vm._v(
-                  "\n            " + _vm._s(publisher.email) + "\n          "
-                )
+              _c("div", { staticClass: "publisher-card-item" }, [
+                _c("span", { staticClass: "publisher-card-item-title" }, [
+                  _vm._v("\n              Email\n            ")
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "publisher-card-item-info" }, [
+                  _vm._v(_vm._s(publisher.email))
+                ])
               ]),
               _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _c("span", [
-                _c("b", [_vm._v("Phone")]),
-                _vm._v(
-                  "\n            " + _vm._s(publisher.phone) + "\n          "
-                )
+              _c("div", { staticClass: "publisher-card-item" }, [
+                _c("span", { staticClass: "publisher-card-item-title" }, [
+                  _vm._v("\n              Phone\n            ")
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "publisher-card-item-info" }, [
+                  _vm._v(_vm._s(publisher.phone))
+                ])
               ]),
               _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              publisher.neighborhood
-                ? _c("span", [
-                    _c("b", [_vm._v("Neighborhood")]),
-                    _vm._v(
-                      "\n            " +
-                        _vm._s(publisher.neighborhood) +
-                        "\n          "
+              _c("div", { staticClass: "publisher-card-item" }, [
+                _c("span", { staticClass: "publisher-card-item-title" }, [
+                  _vm._v("\n              Neighborhood\n            ")
+                ]),
+                _vm._v(" "),
+                publisher.neighborhood
+                  ? _c("span", { staticClass: "publisher-card-item-info" }, [
+                      _vm._v(_vm._s(publisher.neighborhood))
+                    ])
+                  : _c(
+                      "span",
+                      { staticClass: "publisher-card-item-info red-text" },
+                      [_vm._v("Unknown")]
                     )
-                  ])
-                : _vm._e(),
+              ]),
               _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _vm._m(1, true),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              publisher.macro_region
-                ? _c("span", [
-                    _c("b", [_vm._v("Macro Region")]),
-                    _vm._v(
-                      "\n            " +
-                        _vm._s(publisher.macro_region.name) +
-                        "\n          "
+              _c("div", { staticClass: "publisher-card-item" }, [
+                _c("span", { staticClass: "publisher-card-item-title" }, [
+                  _vm._v("\n              Macro Region\n            ")
+                ]),
+                _vm._v(" "),
+                publisher.macro_region
+                  ? _c("span", { staticClass: "publisher-card-item-info" }, [
+                      _vm._v(_vm._s(publisher.macro_region.name))
+                    ])
+                  : _c(
+                      "span",
+                      { staticClass: "publisher-card-item-info red-text" },
+                      [_vm._v("Unknown")]
                     )
-                  ])
-                : _c("span", [
-                    _c("b", [_vm._v("Macro Region")]),
-                    _vm._v(" "),
-                    _c("i", { staticClass: "red-text" }, [_vm._v("Unknown")])
-                  ]),
-              _vm._v(" "),
-              _c("br")
+              ])
             ])
           ])
         ])
@@ -31978,11 +31980,11 @@ var render = function() {
       0
     ),
     _vm._v(" "),
-    _vm._m(2),
+    _vm._m(1),
     _vm._v(" "),
     _c("div", { staticClass: "modal", attrs: { id: "create-publisher" } }, [
       _c("form", { attrs: { action: "#", method: "post" } }, [
-        _vm._v("\n          @csrf\n          "),
+        _vm._v("\n      @csrf\n      "),
         _c("div", { staticClass: "modal-content" }, [
           _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
           _vm._v(" "),
@@ -32031,7 +32033,7 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _vm._m(3)
+        _vm._m(2)
       ])
     ])
   ])
@@ -32043,16 +32045,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col s12 m10 offset-m1" }, [
       _c("h4", [_c("b", [_vm._v("Publishers")])])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", [
-      _c("b", [_vm._v("Neighborhood")]),
-      _vm._v(" "),
-      _c("i", { staticClass: "red-text" }, [_vm._v("Unknown")])
     ])
   },
   function() {
@@ -32143,15 +32135,9 @@ var render = function() {
                     },
                     [
                       _c("li", { staticClass: "collection-header" }, [
-                        _c("div", { staticClass: "row mb-0 valign-wrapper" }, [
-                          _c("div", { staticClass: "col s9" }, [
-                            _c("h4", [
-                              _vm._v(
-                                "\n                          " +
-                                  _vm._s(card.name) +
-                                  "\n                      "
-                              )
-                            ])
+                        _c("div", { staticClass: "card-header-flex" }, [
+                          _c("div", { staticClass: "card-header-name" }, [
+                            _vm._v(_vm._s(card.name))
                           ]),
                           _vm._v(" "),
                           _vm._m(0, true)
@@ -32195,7 +32181,7 @@ var render = function() {
                             },
                             [
                               _c("span", { attrs: { id: card.id } }, [
-                                _vm._v(" + Add publisher")
+                                _vm._v("+ Add publisher")
                               ])
                             ]
                           )
@@ -32219,7 +32205,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col s3" }, [
+    return _c("div", { staticClass: "card-header-btn" }, [
       _c("a", { attrs: { href: "#" } }, [_vm._v("Received")])
     ])
   },
@@ -32652,7 +32638,7 @@ var render = function() {
     _vm.unassigned
       ? _c(
           "div",
-          { staticClass: "container" },
+          { attrs: { id: "macro-region" } },
           _vm._l(_vm.unassigned, function(macro_region) {
             return _c(
               "div",
@@ -32667,44 +32653,46 @@ var render = function() {
                     "ul",
                     {
                       key: card.id,
-                      staticClass: "collection with-header z-depth-3"
+                      staticClass: "collection with-header z-depth-3 card"
                     },
                     [
-                      _c("li", { staticClass: "collection-header" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass: "row valign-wrapper",
-                            staticStyle: { "margin-bottom": "0" }
-                          },
-                          [
-                            _c("div", { staticClass: "col s8" }, [
-                              _c("h4", [_vm._v(_vm._s(card.name))])
+                      _c(
+                        "li",
+                        { staticClass: "collection-header card-header" },
+                        [
+                          _c("div", { staticClass: "card-header-flex" }, [
+                            _c("div", { staticClass: "card-header-name" }, [
+                              _vm._v(
+                                "\n              " +
+                                  _vm._s(card.name) +
+                                  "\n            "
+                              )
                             ]),
                             _vm._v(" "),
-                            _c("div", { staticClass: "col s4" }, [
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "waves-effect waves-teal btn-flat modal-trigger add-publisher-button",
-                                  attrs: {
-                                    id: card.id,
-                                    href: "#modal-assign-territory"
-                                  }
-                                },
-                                [_vm._v("Assign")]
-                              )
-                            ])
-                          ]
-                        )
-                      ]),
+                            _vm._m(0, true)
+                          ])
+                        ]
+                      ),
                       _vm._v(" "),
                       _vm._l(card.addresses, function(address) {
                         return _c(
                           "li",
-                          { key: address.id, staticClass: "collection-item" },
-                          [_vm._v(_vm._s(address.street))]
+                          {
+                            key: address.id,
+                            staticClass: "collection-item",
+                            class:
+                              address.is_visitable == 1
+                                ? ""
+                                : "address-not-visitable"
+                          },
+                          [
+                            _vm._v(
+                              "(" +
+                                _vm._s(address.neighborhood) +
+                                ") " +
+                                _vm._s(address.street)
+                            )
+                          ]
                         )
                       })
                     ],
@@ -32717,10 +32705,18 @@ var render = function() {
           }),
           0
         )
-      : _c("div", [_vm._m(0)])
+      : _c("div", { attrs: { id: "macro-region" } }, [_vm._m(1)])
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header-btn" }, [
+      _c("a", { attrs: { href: "#" } }, [_vm._v("Editar")])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

@@ -9191,6 +9191,10 @@ input[type=range]::-ms-thumb {
   color: red;
 }
 
+.card-header-name {
+  font-size: 1.5rem;
+}
+
 .macro-region-card-content {
   padding: 0;
 }
@@ -9212,6 +9216,38 @@ input[type=range]::-ms-thumb {
   display: flex;
   align-items: center;
   margin-left: 2vw;
+}
+
+.card-header-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-header-flex .card-header-name {
+  display: flex;
+  align-items: center;
+}
+
+.card-header-btn {
+  display: flex;
+  align-items: center;
+  margin-left: 2vw;
+}
+
+.publisher-card .publisher-card-item-title {
+  font-weight: lighter;
+}
+
+.publisher-card .publisher-card-item-info {
+  font-weight: bold;
+}
+
+.publisher-card .publisher-name {
+  font-size: 2em;
+}
+
+.publisher-card .card-content {
+  padding: 10px 24px;
 }
 
 .navbar-laravel {

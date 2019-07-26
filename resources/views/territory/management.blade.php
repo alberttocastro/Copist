@@ -26,10 +26,8 @@
 
 <!-- Aba para escolher o mapa dos endereços -->
 <div id="manage">
-    <div class="container">
-        <div id="vue4">
-            <choose-address-card></choose-address-card>
-        </div>
+    <div id="vue4">
+        <choose-address-card></choose-address-card>
     </div>
 </div>
 @endsection
