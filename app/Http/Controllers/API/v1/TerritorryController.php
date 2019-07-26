@@ -61,6 +61,17 @@ class TerritorryController extends Controller
     }
 
     /**
+     * Retorna todos os cartões que estão sem Macro-região
+     */
+    public function cards_without_macro_region()
+    {
+        $card = new \App\Card;
+        return [
+            'data' => $card->without_macro_region()
+        ];
+    }
+
+    /**
      * Retorna todos os endereços sugeridos pelos publicadores
      */
     public function suggested_addresses()

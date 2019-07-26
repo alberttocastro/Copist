@@ -57,4 +57,17 @@ class Card extends Model
 
         return $assignments;
     }
+
+    /**
+     * Retorna todos os cartões que não estão com mapas
+     */
+    public function without_macro_region()
+    {
+        $cards = array();
+        foreach(Card::where('macro_region_id', 0)->get() as $card){
+            $card->addresses = $card->addresses;
+            $cards[] = $card;
+        }
+        return $cards;
+    }
 }
