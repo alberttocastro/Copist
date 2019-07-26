@@ -15,7 +15,7 @@
           </div>
           <div class="collapsible-body macro-region-card-content">
             <ul class="collection">
-              <li class="collection-item" v-bind:key="address.id" v-for="address in card.addresses">
+              <li class="collection-item" v-bind:class="address.is_visitable == 1 ? '' : 'address-not-visitable'" v-bind:key="address.id" v-for="address in card.addresses">
                 <div class="macro-region-card-content-info">
                   <div class="macro-region-card-content-info-text">
                     <div class="neighborhood">{{address.neighborhood}}</div>
@@ -58,28 +58,4 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.macro-region-card-content {
-  padding: 0;
-}
-
-.macro-region-card-content-info {
-  display: flex;
-  justify-content: space-between;
-}
-
-.macro-region-card-content-info-text .neighborhood {
-  font-size: 0.7rem;
-}
-
-.macro-region-card-content-info .street {
-  font-size: 1.3rem;
-}
-
-.macro-region-card-content-info-btn{
-  display: flex;
-  align-items: center;
-}
-</style>
 

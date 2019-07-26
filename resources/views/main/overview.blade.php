@@ -22,6 +22,7 @@
 <div id="all" class="col s12">
     <div id="vue">
         <all-addresses></all-addresses>
+        <cards-without-macro-region></cards-without-macro-region>
         <all-addresses-without-map></all-addresses-without-map>
     </div>
 </div>

@@ -9187,6 +9187,32 @@ input[type=range]::-ms-thumb {
   font-weight: bolder;
 }
 
+.address-not-visitable {
+  color: red;
+}
+
+.macro-region-card-content {
+  padding: 0;
+}
+
+.macro-region-card-content-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.macro-region-card-content-info-text .neighborhood {
+  font-size: 0.7rem;
+}
+
+.macro-region-card-content-info-text .street {
+  font-size: 1.3rem;
+}
+
+.macro-region-card-content-info-btn {
+  display: flex;
+  align-items: center;
+}
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);

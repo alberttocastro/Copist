@@ -1,6 +1,8 @@
 <template>
-  <div class="container">
-    <h4>Others</h4>
+  <div>
+    <blockquote class="macro-region-title">
+      <h5>Addresses without map</h5>
+    </blockquote>
 
     <ul class="collapsible popout">
       <li>
@@ -8,26 +10,18 @@
           <i class="material-icons">place</i>
           Without map
         </div>
-        <div class="collapsible-body">
-          <div class="card blue-grey darken-1" v-bind:key="address.id" v-for="address in addresses_without_map">
-            <div class="card-content white-text">
-              <span class="card-title">{{address.neighborhood}}</span>
-              <div class="row">
-                <div class="col s8">
-                  <p>
-                    <b>{{address.name}}</b>
-                  </p>
-                  <p>{{address.street}}</p>
-                </div>
-                <div class="s4">
-                  <a
-                    :href="links.address.edit + '/'+ address.id"
-                    class="waves-effect waves-light btn right"
-                  >Edit</a>
+        <div class="collapsible-body macro-region-card-content">
+          <ul class="collection">
+            <li class="collection-item" v-bind:class="address.is_visitable == 1 ? '' : 'address-not-visitable'" v-bind:key="address.id" v-for="address in addresses_without_map">
+              <div class="macro-region-card-content-info">
+                <div class="macro-region-card-content-info-text">
+                  <div class="neighborhood">{{address.neighborhood}}</div>
+                  <div class="street">{{address.street}}</div>
+                  <div class="name">{{address.name}}</div>
                 </div>
               </div>
-            </div>
-          </div>
+            </li>
+          </ul>
         </div>
       </li>
     </ul>

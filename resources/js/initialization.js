@@ -64,6 +64,7 @@ import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios);
 
 Vue.component('AllAddresses', require('./components/AllAddresses.vue').default);
+Vue.component('CardsWithoutMacroRegion', require('./components/CardsWithoutMacroRegion.vue').default);
 Vue.component('AllAddressesWithoutMap', require('./components/AllAddressesWithoutMap.vue').default);
 Vue.component('UnassignedCards', require('./components/UnassignedCards').default);
 Vue.component('TerritorySuggestion', require('./components/TerritorySuggestion.vue').default);
