@@ -1,30 +1,36 @@
 <template>
   <div>
     <h4 class="session-title">Macro Region and Addresses</h4>
-    <div v-bind:key="macro_region.id" v-for="macro_region in macro_regions">
-      <blockquote>
+    <div class="macro-region" v-bind:key="macro_region.id" v-for="macro_region in macro_regions">
+      <blockquote class="macro-region-title">
         <h5>{{macro_region.name}}</h5>
         <span>{{macro_region.amount}}</span>
       </blockquote>
 
-      <ul class="collapsible popout">
+      <ul class="collapsible popout macro-region-card">
         <li v-bind:key="card.id" v-for="card in macro_region.cards">
-          <div class="collapsible-header">
+          <div class="collapsible-header macro-region-card-title">
             <i class="material-icons">place</i>
-            {{card.name}}
+            <span class="macro-region-card-title-name">{{card.name}}</span>
           </div>
-          <div class="collapsible-body">
-            <div v-bind:key="address.id" v-for="address in card.addresses">
-              {{address.neighborhood}}
-              {{address.name}}
-              {{address.street}}
-              <div>
-                <a
-                  :href="links.address.edit + '/'+ address.id"
-                  class="waves-effect waves-light btn right"
-                >Edit</a>
-              </div>
-            </div>
+          <div class="collapsible-body macro-region-card-content">
+            <ul class="collection">
+              <li class="collection-item" v-bind:key="address.id" v-for="address in card.addresses">
+                <div class="macro-region-card-content-info">
+                  <div class="macro-region-card-content-info-text">
+                    <div class="neighborhood">{{address.neighborhood}}</div>
+                    <div class="street">{{address.street}}</div>
+                    <div class="name" v-if="address.name">{{address.name}}</div>
+                  </div>
+                  <div class="macro-region-card-content-info-btn">
+                    <a
+                      :href="links.address.edit + '/'+ address.id"
+                      class="waves-effect waves-light btn"
+                    >Edit</a>
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
         </li>
       </ul>
@@ -52,3 +58,28 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.macro-region-card-content {
+  padding: 0;
+}
+
+.macro-region-card-content-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.macro-region-card-content-info-text .neighborhood {
+  font-size: 0.7rem;
+}
+
+.macro-region-card-content-info .street {
+  font-size: 1.3rem;
+}
+
+.macro-region-card-content-info-btn{
+  display: flex;
+  align-items: center;
+}
+</style>
+
