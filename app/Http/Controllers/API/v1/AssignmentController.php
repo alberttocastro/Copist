@@ -22,7 +22,7 @@ class AssignmentController extends Controller
             $macro_region_assigned_territories = $macro_region->cards_report(true);
 
             if (\count($macro_region_assigned_territories) > 0) {
-                $mr = clone $macro_region; 
+                $mr = clone $macro_region;
                 $mr->assignment_cards = $macro_region_assigned_territories;
                 $assigned_cards[] = clone $mr;
             }
@@ -30,14 +30,14 @@ class AssignmentController extends Controller
             $macro_region_unassigned_territories = array();
             $macro_region_unassigned_territories = $macro_region->cards_report(false);
 
-            if(\count($macro_region_unassigned_territories) > 0){
+            if (\count($macro_region_unassigned_territories) > 0) {
                 $mr = clone $macro_region;
                 $mr->assignment_cards = $macro_region_unassigned_territories;
                 $unassigned_cards[] = clone $mr;
             }
         }
 
-        
+
 
 
         return [
@@ -46,5 +46,50 @@ class AssignmentController extends Controller
                 'unassigned' => $unassigned_cards
             ]
         ];
+    }
+
+    /**
+     * Retorna todos os usuários cadastrados e aprovados
+     */
+    public function users()
+    {
+        $user_obj = new \App\User;
+        $data = array();
+        foreach ($user_obj->approved_users() as $user) {
+            $user->publisher = $user->publisher;
+            $data[] = $user;
+        }
+        return [
+            'data' => $data
+        ];
+    }
+
+    /**
+     * Retorna todos os usuários que ainda não foram designados para um cartão
+     */
+    public function users_for_card(Request $request)
+    {
+        $user_obj = new \App\User;
+        $data = array();
+        foreach ($user_obj->approved_users() as $user) {
+            if (\App\Assignment::where('card_id', $request->card_id)->where('user_id', $user->id)->whereNull('completion_date')->get()->count() == 0) {
+                $user->publisher = $user->publisher;
+                $data[] = $user;
+            }
+        }
+
+        return [
+            'data' => $data
+        ];
+    }
+
+    public function assign_user_to_card(Request $request)
+    {
+        foreach ($request->publishers as $publisher_id) {
+            $assignment = new \App\Assignment;
+            $assignment->card_id = $request->card_id;
+            $assignment->user_id = $publisher_id;
+            $assignment->save();
+        }
     }
 }

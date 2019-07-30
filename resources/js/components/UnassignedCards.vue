@@ -12,16 +12,15 @@
         >
           <li class="collection-header card-header">
             <div class="card-header-flex">
-              <div class="card-header-name">
-                {{card.name}}
-              </div>
+              <div class="card-header-name">{{card.name}}</div>
               <div class="card-header-btn">
-                <a href="#">Editar</a>
+                <a class="modal-trigger" href="#assign-card-modal" @click="card_id = card.id">Assign</a>
               </div>
             </div>
           </li>
           <li
-            class="collection-item" v-bind:class="address.is_visitable == 1 ? '' : 'address-not-visitable'"
+            class="collection-item"
+            v-bind:class="address.is_visitable == 1 ? '' : 'address-not-visitable'"
             v-bind:key="address.id"
             v-for="address in card.addresses"
           >({{address.neighborhood}}) {{address.street}}</li>
@@ -37,13 +36,32 @@
         </div>
       </div>
     </div>
+
+    <div id="assign-card-modal" class="modal bottom-sheet">
+      <form action="/api/v1/assignment" method="post">
+        <div class="modal-content">
+          <input type="hidden" name="card_id" v-bind:value="card_id" />
+          <div class="input-field">
+            <select multiple name="publishers[]" id="publishers" size="3">
+              <option v-for="user in users" v-bind:key="user.id" :value="user.id">{{user.name}}</option>
+            </select>
+            <label for="publisher">Select the publishers</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn-flat waves-effect waves-green modal-close">Send</button>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      unassigned: []
+      unassigned: [],
+      users: [],
+      card_id: 0
     };
   },
   created() {
@@ -51,6 +69,24 @@ export default {
     this.axios.get(uri).then(response => {
       this.unassigned = response.data.data.unassigned;
     });
+
+    let users_uri = "/api/v1/users";
+    this.axios.get(users_uri).then(response => {
+      this.users = response.data.data;
+    });
+  },
+  updated() {
+    var select = $("select").formSelect();
+    select.isMultiple = true;
+  },
+  watch: {
+    card_id: function(new_card_id, old_card_id) {
+      console.log("updated");
+      let users = "/api/v1/users/available/" + card_id;
+      this.axios.get(users).then(response => {
+        this.users = response.data.data;
+      });
+    }
   }
 };
 </script>

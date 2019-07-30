@@ -34,6 +34,10 @@ Route::prefix('v1')->group(function(){
     Route::get('cards', 'API\v1\InformationController@cards');
     Route::get('addresstypes', 'API\v1\InformationController@address_types');
 
+    Route::get('users', 'API\v1\AssignmentController@users');
+    Route::get('users/available/{card_id}', 'API\v1\AssignmentController@users_for_card');
+    Route::post('assignment', 'API\v1\AssignmentController@assign_user_to_card');
+
     Route::get('idioms', 'API\v1\InformationController@idioms');
     Route::get('nationalities', 'API\v1\InformationController@nationalities');
 });

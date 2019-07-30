@@ -2702,10 +2702,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      unassigned: []
+      unassigned: [],
+      users: [],
+      card_id: 0
     };
   },
   created: function created() {
@@ -2715,6 +2733,35 @@ __webpack_require__.r(__webpack_exports__);
     this.axios.get(uri).then(function (response) {
       _this.unassigned = response.data.data.unassigned;
     });
+    var users_uri = "/api/v1/users";
+    this.axios.get(users_uri).then(function (response) {
+      _this.users = response.data.data;
+    });
+  },
+  updated: function updated() {
+    var select = $("select").formSelect();
+    select.isMultiple = true;
+  },
+  watch: {
+    card_id: function (_card_id) {
+      function card_id(_x, _x2) {
+        return _card_id.apply(this, arguments);
+      }
+
+      card_id.toString = function () {
+        return _card_id.toString();
+      };
+
+      return card_id;
+    }(function (new_card_id, old_card_id) {
+      var _this2 = this;
+
+      console.log("updated");
+      var users = "/api/v1/users/available/" + card_id;
+      this.axios.get(users).then(function (response) {
+        _this2.users = response.data.data;
+      });
+    })
   }
 });
 
@@ -32662,14 +32709,24 @@ var render = function() {
                         [
                           _c("div", { staticClass: "card-header-flex" }, [
                             _c("div", { staticClass: "card-header-name" }, [
-                              _vm._v(
-                                "\n              " +
-                                  _vm._s(card.name) +
-                                  "\n            "
-                              )
+                              _vm._v(_vm._s(card.name))
                             ]),
                             _vm._v(" "),
-                            _vm._m(0, true)
+                            _c("div", { staticClass: "card-header-btn" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "modal-trigger",
+                                  attrs: { href: "#assign-card-modal" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.card_id = card.id
+                                    }
+                                  }
+                                },
+                                [_vm._v("Assign")]
+                              )
+                            ])
                           ])
                         ]
                       ),
@@ -32705,18 +32762,57 @@ var render = function() {
           }),
           0
         )
-      : _c("div", { attrs: { id: "macro-region" } }, [_vm._m(1)])
+      : _c("div", { attrs: { id: "macro-region" } }, [_vm._m(0)]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "modal bottom-sheet", attrs: { id: "assign-card-modal" } },
+      [
+        _c(
+          "form",
+          { attrs: { action: "/api/v1/assignment", method: "post" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("input", {
+                attrs: { type: "hidden", name: "card_id" },
+                domProps: { value: _vm.card_id }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-field" }, [
+                _c(
+                  "select",
+                  {
+                    attrs: {
+                      multiple: "",
+                      name: "publishers[]",
+                      id: "publishers",
+                      size: "3"
+                    }
+                  },
+                  _vm._l(_vm.users, function(user) {
+                    return _c(
+                      "option",
+                      { key: user.id, domProps: { value: user.id } },
+                      [_vm._v(_vm._s(user.name))]
+                    )
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "publisher" } }, [
+                  _vm._v("Select the publishers")
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(1)
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header-btn" }, [
-      _c("a", { attrs: { href: "#" } }, [_vm._v("Editar")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -32731,6 +32827,21 @@ var staticRenderFns = [
           _vm._v("Please, go to the database to create one.")
         ])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn-flat waves-effect waves-green modal-close",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("Send")]
+      )
     ])
   }
 ]
