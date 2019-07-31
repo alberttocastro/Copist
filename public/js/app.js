@@ -2425,8 +2425,6 @@ __webpack_require__.r(__webpack_exports__);
           card_id: card_id
         },
         success: function success(data) {
-          console.log('Data successfully sent');
-          console.log(data);
           vm.update_assigned_cards();
         }
       });

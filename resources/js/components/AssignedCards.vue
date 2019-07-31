@@ -78,9 +78,6 @@ export default {
           card_id: card_id
         },
         success: function(data){
-          console.log('Data successfully sent');
-          console.log(data);
-
           vm.update_assigned_cards();
         }
       });
