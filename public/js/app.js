@@ -2406,6 +2406,12 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.update_assigned_cards();
   },
+  mounted: function mounted() {
+    var vm = this;
+    this.$root.$on('assignmentUpdate', function () {
+      vm.update_assigned_cards();
+    });
+  },
   methods: {
     update_assigned_cards: function update_assigned_cards() {
       var _this = this;
@@ -2425,7 +2431,7 @@ __webpack_require__.r(__webpack_exports__);
           card_id: card_id
         },
         success: function success(data) {
-          vm.update_assigned_cards();
+          vm.$root.$emit('assignmentUpdate');
         }
       });
     }
@@ -2757,6 +2763,12 @@ __webpack_require__.r(__webpack_exports__);
     var select = $("select").formSelect();
     select.isMultiple = true;
   },
+  mounted: function mounted() {
+    var vm = this;
+    this.$root.$on('assignmentUpdate', function () {
+      vm.update_unassigned_cards();
+    });
+  },
   watch: {
     card_id: function (_card_id) {
       function card_id(_x, _x2) {
@@ -2790,7 +2802,7 @@ __webpack_require__.r(__webpack_exports__);
             vm.update_unassigned_cards();
 
             try {
-              vm.$broad('assignment-change');
+              vm.$root.$emit('assignmentUpdate');
             } catch (error) {
               console.log(error);
             }

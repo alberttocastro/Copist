@@ -61,6 +61,12 @@ export default {
   created() {
     this.update_assigned_cards();
   },
+  mounted(){
+    var vm = this;
+    this.$root.$on('assignmentUpdate', () => {
+      vm.update_assigned_cards();
+    });
+  },
   methods: {
     update_assigned_cards: function() {
       let uri = "/api/v1/assignments";
@@ -78,7 +84,7 @@ export default {
           card_id: card_id
         },
         success: function(data){
-          vm.update_assigned_cards();
+          vm.$root.$emit('assignmentUpdate');
         }
       });
     }

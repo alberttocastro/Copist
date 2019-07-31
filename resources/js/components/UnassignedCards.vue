@@ -75,6 +75,12 @@ export default {
     var select = $("select").formSelect();
     select.isMultiple = true;
   },
+  mounted(){
+    var vm = this;
+    this.$root.$on('assignmentUpdate', () => {
+      vm.update_unassigned_cards();
+    });
+  },
   watch: {
     card_id: function(new_card_id, old_card_id) {
       let users = "/api/v1/users/available/" + card_id;
@@ -96,7 +102,7 @@ export default {
           success: function(data) {
             vm.update_unassigned_cards();
             try {
-              vm.$broad('assignment-change');
+              vm.$root.$emit('assignmentUpdate');
             } catch (error) {
               console.log(error);
             }
