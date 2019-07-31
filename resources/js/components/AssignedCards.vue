@@ -31,8 +31,9 @@
           </li>
           <li class="collection-item center" style="padding: 0">
             <a
-              href="#modal-assign-territory"
+              :href="'#assign-card-modal-'+uid"
               class="btn-flat waves-effect waves-light modal-trigger add-publisher-button"
+              @click="card_id = card.id"
             >
               <span :id="card.id">+ Add publisher</span>
             </a>
@@ -48,14 +49,18 @@
         </div>
       </div>
     </div>
+    <modal-assign-card v-bind:card_id="card_id" v-bind:modal_id="uid"></modal-assign-card>
   </div>
 </template>
 <script>
+import ModalAssignCard from "./ModalAssignCard.vue";
 export default {
   data() {
+    var vm = this;
     return {
       assigned: [],
-      card_id: 0
+      card_id: 0,
+      uid: vm._uid
     };
   },
   created() {
@@ -88,6 +93,9 @@ export default {
         }
       });
     }
+  },
+  components:{
+    ModalAssignCard
   }
 };
 </script>

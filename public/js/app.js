@@ -2344,6 +2344,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ModalAssignCard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModalAssignCard.vue */ "./resources/js/components/ModalAssignCard.vue");
 //
 //
 //
@@ -2396,11 +2397,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
+    var vm = this;
     return {
       assigned: [],
-      card_id: 0
+      card_id: 0,
+      uid: vm._uid
     };
   },
   created: function created() {
@@ -2435,6 +2441,9 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     }
+  },
+  components: {
+    ModalAssignCard: _ModalAssignCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -2608,6 +2617,88 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalAssignCard.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ModalAssignCard.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    var vm = this;
+    return {
+      users: [],
+      modal_id_string: vm.modal_id.toString(),
+      card_id_watch: vm.card_id
+    };
+  },
+  props: {
+    card_id: Number,
+    modal_id: Number
+  },
+  methods: {
+    submit: function submit() {
+      var vm = this;
+      $("#assign-card-modal form").submit(function (target) {
+        target.preventDefault();
+        $.ajax({
+          url: $(this).prop("action"),
+          method: "POST",
+          data: $(this).serialize(),
+          success: function success(data) {
+            try {
+              vm.$root.$emit("assignmentUpdate");
+            } catch (error) {
+              console.log(error);
+            }
+          }
+        });
+      });
+    }
+  },
+  watch: {
+    card_id: function card_id(new_card_id, old_card_id) {
+      var _this = this;
+
+      var users = "/api/v1/users/available/" + new_card_id;
+      this.axios.get(users).then(function (response) {
+        console.log(response);
+        _this.users = response.data.data;
+      });
+    }
+  },
+  updated: function updated() {
+    $("select").formSelect();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TerritorySuggestion.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TerritorySuggestion.vue?vue&type=script&lang=js& ***!
@@ -2760,8 +2851,7 @@ __webpack_require__.r(__webpack_exports__);
     this.update_unassigned_cards();
   },
   updated: function updated() {
-    var select = $("select").formSelect();
-    select.isMultiple = true;
+    $("select").formSelect();
   },
   mounted: function mounted() {
     var vm = this;
@@ -32220,103 +32310,118 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.assigned
-      ? _c(
-          "div",
-          _vm._l(_vm.assigned, function(macro_region) {
-            return _c(
-              "div",
-              { key: macro_region.id },
-              [
-                _c("blockquote", [
-                  _c("h4", [_vm._v(_vm._s(macro_region.name))])
-                ]),
-                _vm._v(" "),
-                _vm._l(macro_region.assignment_cards, function(card) {
-                  return _c(
-                    "ul",
-                    {
-                      key: card.id,
-                      staticClass: "collection with-header z-depth-3"
-                    },
-                    [
-                      _c("li", { staticClass: "collection-header" }, [
-                        _c("div", { staticClass: "card-header-flex" }, [
-                          _c("div", { staticClass: "card-header-name" }, [
-                            _vm._v(_vm._s(card.name))
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "card-header-btn" }, [
-                            _c(
-                              "a",
-                              {
-                                attrs: { href: "#" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.submit_and_update(card.id)
-                                  }
-                                }
-                              },
-                              [_vm._v("Received")]
-                            )
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _vm._l(card.assignments, function(assignment) {
-                        return _c(
-                          "li",
-                          {
-                            key: assignment.id,
-                            staticClass: "collection-item"
-                          },
-                          [
-                            false
-                              ? undefined
-                              : _c("span", [_vm._v("Unknown")]),
+  return _c(
+    "div",
+    [
+      _vm.assigned
+        ? _c(
+            "div",
+            _vm._l(_vm.assigned, function(macro_region) {
+              return _c(
+                "div",
+                { key: macro_region.id },
+                [
+                  _c("blockquote", [
+                    _c("h4", [_vm._v(_vm._s(macro_region.name))])
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(macro_region.assignment_cards, function(card) {
+                    return _c(
+                      "ul",
+                      {
+                        key: card.id,
+                        staticClass: "collection with-header z-depth-3"
+                      },
+                      [
+                        _c("li", { staticClass: "collection-header" }, [
+                          _c("div", { staticClass: "card-header-flex" }, [
+                            _c("div", { staticClass: "card-header-name" }, [
+                              _vm._v(_vm._s(card.name))
+                            ]),
                             _vm._v(" "),
-                            _c("div", { staticClass: "right" }, [
-                              _c("b", [_vm._v(_vm._s(assignment.created_at))])
+                            _c("div", { staticClass: "card-header-btn" }, [
+                              _c(
+                                "a",
+                                {
+                                  attrs: { href: "#" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.submit_and_update(card.id)
+                                    }
+                                  }
+                                },
+                                [_vm._v("Received")]
+                              )
                             ])
-                          ]
-                        )
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        {
-                          staticClass: "collection-item center",
-                          staticStyle: { padding: "0" }
-                        },
-                        [
-                          _c(
-                            "a",
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(card.assignments, function(assignment) {
+                          return _c(
+                            "li",
                             {
-                              staticClass:
-                                "btn-flat waves-effect waves-light modal-trigger add-publisher-button",
-                              attrs: { href: "#modal-assign-territory" }
+                              key: assignment.id,
+                              staticClass: "collection-item"
                             },
                             [
-                              _c("span", { attrs: { id: card.id } }, [
-                                _vm._v("+ Add publisher")
+                              false
+                                ? undefined
+                                : _c("span", [_vm._v("Unknown")]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "right" }, [
+                                _c("b", [_vm._v(_vm._s(assignment.created_at))])
                               ])
                             ]
                           )
-                        ]
-                      )
-                    ],
-                    2
-                  )
-                })
-              ],
-              2
-            )
-          }),
-          0
-        )
-      : _c("div", [_vm._m(0)])
-  ])
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "li",
+                          {
+                            staticClass: "collection-item center",
+                            staticStyle: { padding: "0" }
+                          },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn-flat waves-effect waves-light modal-trigger add-publisher-button",
+                                attrs: {
+                                  href: "#assign-card-modal-" + _vm.uid
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.card_id = card.id
+                                  }
+                                }
+                              },
+                              [
+                                _c("span", { attrs: { id: card.id } }, [
+                                  _vm._v("+ Add publisher")
+                                ])
+                              ]
+                            )
+                          ]
+                        )
+                      ],
+                      2
+                    )
+                  })
+                ],
+                2
+              )
+            }),
+            0
+          )
+        : _c("div", [_vm._m(0)]),
+      _vm._v(" "),
+      _c("modal-assign-card", {
+        attrs: { card_id: _vm.card_id, modal_id: _vm.uid }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -32596,6 +32701,95 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalAssignCard.vue?vue&type=template&id=66891991&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ModalAssignCard.vue?vue&type=template&id=66891991& ***!
+  \******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal bottom-sheet",
+      attrs: { id: "assign-card-modal-" + _vm.modal_id_string }
+    },
+    [
+      _c(
+        "form",
+        {
+          attrs: { action: "/api/v1/assignment", method: "post" },
+          on: {
+            submit: function($event) {
+              return _vm.submit()
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("input", {
+              attrs: { type: "hidden", name: "card_id" },
+              domProps: { value: _vm.card_id }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-field" }, [
+              _c(
+                "select",
+                {
+                  attrs: {
+                    multiple: "",
+                    name: "publishers[]",
+                    id: "publishers",
+                    size: "3"
+                  }
+                },
+                _vm._l(_vm.users, function(user) {
+                  return _c(
+                    "option",
+                    { key: user.id, domProps: { value: user.id } },
+                    [_vm._v(_vm._s(user.name))]
+                  )
+                }),
+                0
+              ),
+              _vm._v(" "),
+              _c("label", { attrs: { for: "publisher" } }, [
+                _vm._v("Select the publishers")
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-footer" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn-flat waves-effect waves-green modal-close",
+                attrs: { type: "submit" },
+                on: { click: _vm.submit }
+              },
+              [_vm._v("Send")]
+            )
+          ])
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -45793,15 +45987,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!***************************************************!*\
   !*** ./resources/js/components/AssignedCards.vue ***!
   \***************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AssignedCards_vue_vue_type_template_id_9e1f594c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AssignedCards.vue?vue&type=template&id=9e1f594c& */ "./resources/js/components/AssignedCards.vue?vue&type=template&id=9e1f594c&");
 /* harmony import */ var _AssignedCards_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AssignedCards.vue?vue&type=script&lang=js& */ "./resources/js/components/AssignedCards.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _AssignedCards_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _AssignedCards_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -45831,7 +46024,7 @@ component.options.__file = "resources/js/components/AssignedCards.vue"
 /*!****************************************************************************!*\
   !*** ./resources/js/components/AssignedCards.vue?vue&type=script&lang=js& ***!
   \****************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45992,6 +46185,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChooseAddressCard_vue_vue_type_template_id_3c5d7d32___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChooseAddressCard_vue_vue_type_template_id_3c5d7d32___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ModalAssignCard.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/ModalAssignCard.vue ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ModalAssignCard_vue_vue_type_template_id_66891991___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModalAssignCard.vue?vue&type=template&id=66891991& */ "./resources/js/components/ModalAssignCard.vue?vue&type=template&id=66891991&");
+/* harmony import */ var _ModalAssignCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModalAssignCard.vue?vue&type=script&lang=js& */ "./resources/js/components/ModalAssignCard.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ModalAssignCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ModalAssignCard_vue_vue_type_template_id_66891991___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ModalAssignCard_vue_vue_type_template_id_66891991___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ModalAssignCard.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ModalAssignCard.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/ModalAssignCard.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalAssignCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ModalAssignCard.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalAssignCard.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalAssignCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ModalAssignCard.vue?vue&type=template&id=66891991&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/ModalAssignCard.vue?vue&type=template&id=66891991& ***!
+  \************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalAssignCard_vue_vue_type_template_id_66891991___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ModalAssignCard.vue?vue&type=template&id=66891991& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalAssignCard.vue?vue&type=template&id=66891991&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalAssignCard_vue_vue_type_template_id_66891991___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalAssignCard_vue_vue_type_template_id_66891991___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

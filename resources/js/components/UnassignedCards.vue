@@ -72,8 +72,7 @@ export default {
     this.update_unassigned_cards();
   },
   updated() {
-    var select = $("select").formSelect();
-    select.isMultiple = true;
+    $("select").formSelect();
   },
   mounted(){
     var vm = this;

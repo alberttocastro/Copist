@@ -32,5 +32,4 @@
 
 </div>
 
-@yield('modal',view('main.modal.choose_publisher'))
 @endsection
