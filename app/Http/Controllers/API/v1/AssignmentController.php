@@ -92,4 +92,16 @@ class AssignmentController extends Controller
             $assignment->save();
         }
     }
+
+    /**
+     * Remove todas as designações do cartão
+     */
+    public function finish_card_assignments(Request $request)
+    {
+        foreach(\App\Assignment::where('card_id', $request->card_id)->whereNull('completion_date')->get() as $assignment){
+            $date = new \DateTime;
+            $assignment->completion_date = $date->format('Y-m-d H:i:s');
+            $assignment->save();
+        }
+    }
 }

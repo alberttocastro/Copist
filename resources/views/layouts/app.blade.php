@@ -30,7 +30,9 @@
             @yield('sidenav', View::make('layouts.sidenav'))
         </header>
         <main>
-            @yield('main')
+            <div id="vue">
+                @yield('main')
+            </div>
         </main>
         <footer>
             @yield('bar', View::make('layouts.footer'))

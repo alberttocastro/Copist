@@ -37,6 +37,7 @@ Route::prefix('v1')->group(function(){
     Route::get('users', 'API\v1\AssignmentController@users');
     Route::get('users/available/{card_id}', 'API\v1\AssignmentController@users_for_card');
     Route::post('assignment', 'API\v1\AssignmentController@assign_user_to_card');
+    Route::post('assignment/receive/{card_id}', 'API\v1\AssignmentController@finish_card_assignments');
 
     Route::get('idioms', 'API\v1\InformationController@idioms');
     Route::get('nationalities', 'API\v1\InformationController@nationalities');

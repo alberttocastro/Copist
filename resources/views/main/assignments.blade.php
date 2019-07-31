@@ -19,9 +19,7 @@
 @endif
 {{-- ABA Dos territórios não designados --}}
 <div id="all" class="col s12">
-    <div id="vue2">
-        <unassigned-cards></unassigned-cards>
-    </div>
+    <unassigned-cards></unassigned-cards>
 </div>
 {{-- Fim da aba dos territórios designados --}}
 
@@ -30,9 +28,7 @@
 <!-- ABA 2 -->
 <div id="dashboard" class="col s12">
 
-    <div id="vue">
-        <assigned-cards></assigned-cards>
-    </div>
+    <assigned-cards v-on:assignment-change="update_assigned_cards()"></assigned-cards>
 
 </div>
 

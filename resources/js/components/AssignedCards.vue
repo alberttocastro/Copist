@@ -14,7 +14,7 @@
             <div class="card-header-flex">
               <div class="card-header-name">{{card.name}}</div>
               <div class="card-header-btn">
-                <a href="#">Received</a>
+                <a href="#" v-on:click="submit_and_update(card.id)">Received</a>
               </div>
             </div>
           </li>
@@ -23,7 +23,7 @@
             v-bind:key="assignment.id"
             v-for="assignment in card.assignments"
           >
-            <span v-if="publisher">{{assignment.user.name}}</span>
+            <span v-if="false">{{assignment.user.name}}</span>
             <span v-else>Unknown</span>
             <div class="right">
               <b>{{assignment.created_at}}</b>
@@ -54,14 +54,37 @@
 export default {
   data() {
     return {
-      assigned: []
+      assigned: [],
+      card_id: 0
     };
   },
   created() {
-    let uri = "/api/v1/assignments";
-    this.axios.get(uri).then(response => {
-      this.assigned = response.data.data.assigned;
-    });
+    this.update_assigned_cards();
+  },
+  methods: {
+    update_assigned_cards: function() {
+      let uri = "/api/v1/assignments";
+      this.axios.get(uri).then(response => {
+        this.assigned = response.data.data.assigned;
+      });
+    },
+    submit_and_update: function (card_id){
+      var vm = this;
+      let uri = "/api/v1/assignment/receive/" + card_id;
+      $.ajax({
+        url: uri,
+        method: "POST",
+        data: {
+          card_id: card_id
+        },
+        success: function(data){
+          console.log('Data successfully sent');
+          console.log(data);
+
+          vm.update_assigned_cards();
+        }
+      });
+    }
   }
 };
 </script>

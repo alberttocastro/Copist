@@ -82,14 +82,6 @@ window.vm = new Vue({
     el: "#vue"
 });
 
-window.vm2 = new Vue({
-    el: "#vue2"
-})
-
-window.vm3 = new Vue({
-    el: "#vue3"
-})
-
-window.vm4 = new Vue({
-    el: "#vue4"
-})
+window.update_unassigned = function (){
+    vm.update_assigned_cards();
+}

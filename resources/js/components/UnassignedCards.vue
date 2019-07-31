@@ -38,7 +38,7 @@
     </div>
 
     <div id="assign-card-modal" class="modal bottom-sheet">
-      <form action="/api/v1/assignment" method="post">
+      <form action="/api/v1/assignment" method="post" @submit="submit_and_update();">
         <div class="modal-content">
           <input type="hidden" name="card_id" v-bind:value="card_id" />
           <div class="input-field">
@@ -49,7 +49,11 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn-flat waves-effect waves-green modal-close">Send</button>
+          <button
+            type="submit"
+            class="btn-flat waves-effect waves-green modal-close"
+            v-on:click="submit_and_update"
+          >Send</button>
         </div>
       </form>
     </div>
@@ -65,15 +69,7 @@ export default {
     };
   },
   created() {
-    let uri = "/api/v1/assignments";
-    this.axios.get(uri).then(response => {
-      this.unassigned = response.data.data.unassigned;
-    });
-
-    let users_uri = "/api/v1/users";
-    this.axios.get(users_uri).then(response => {
-      this.users = response.data.data;
-    });
+    this.update_unassigned_cards();
   },
   updated() {
     var select = $("select").formSelect();
@@ -81,9 +77,41 @@ export default {
   },
   watch: {
     card_id: function(new_card_id, old_card_id) {
-      console.log("updated");
       let users = "/api/v1/users/available/" + card_id;
       this.axios.get(users).then(response => {
+        this.users = response.data.data;
+      });
+    }
+  },
+  methods: {
+    submit_and_update: function() {
+      var vm = this;
+      $("#assign-card-modal form").submit(function(target) {
+        target.preventDefault();
+
+        $.ajax({
+          url: $(this).prop("action"),
+          method: "POST",
+          data: $(this).serialize(),
+          success: function(data) {
+            vm.update_unassigned_cards();
+            try {
+              vm.$broad('assignment-change');
+            } catch (error) {
+              console.log(error);
+            }
+          }
+        });
+      });
+    },
+    update_unassigned_cards: function() {
+      let uri = "/api/v1/assignments";
+      this.axios.get(uri).then(response => {
+        this.unassigned = response.data.data.unassigned;
+      });
+
+      let users_uri = "/api/v1/users";
+      this.axios.get(users_uri).then(response => {
         this.users = response.data.data;
       });
     }

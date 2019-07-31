@@ -2399,16 +2399,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      assigned: []
+      assigned: [],
+      card_id: 0
     };
   },
   created: function created() {
-    var _this = this;
+    this.update_assigned_cards();
+  },
+  methods: {
+    update_assigned_cards: function update_assigned_cards() {
+      var _this = this;
 
-    var uri = "/api/v1/assignments";
-    this.axios.get(uri).then(function (response) {
-      _this.assigned = response.data.data.assigned;
-    });
+      var uri = "/api/v1/assignments";
+      this.axios.get(uri).then(function (response) {
+        _this.assigned = response.data.data.assigned;
+      });
+    },
+    submit_and_update: function submit_and_update(card_id) {
+      var vm = this;
+      var uri = "/api/v1/assignment/receive/" + card_id;
+      $.ajax({
+        url: uri,
+        method: "POST",
+        data: {
+          card_id: card_id
+        },
+        success: function success(data) {
+          console.log('Data successfully sent');
+          console.log(data);
+          vm.update_assigned_cards();
+        }
+      });
+    }
   }
 });
 
@@ -2718,6 +2740,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2727,16 +2753,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    var _this = this;
-
-    var uri = "/api/v1/assignments";
-    this.axios.get(uri).then(function (response) {
-      _this.unassigned = response.data.data.unassigned;
-    });
-    var users_uri = "/api/v1/users";
-    this.axios.get(users_uri).then(function (response) {
-      _this.users = response.data.data;
-    });
+    this.update_unassigned_cards();
   },
   updated: function updated() {
     var select = $("select").formSelect();
@@ -2754,14 +2771,47 @@ __webpack_require__.r(__webpack_exports__);
 
       return card_id;
     }(function (new_card_id, old_card_id) {
-      var _this2 = this;
+      var _this = this;
 
-      console.log("updated");
       var users = "/api/v1/users/available/" + card_id;
       this.axios.get(users).then(function (response) {
-        _this2.users = response.data.data;
+        _this.users = response.data.data;
       });
     })
+  },
+  methods: {
+    submit_and_update: function submit_and_update() {
+      var vm = this;
+      $("#assign-card-modal form").submit(function (target) {
+        target.preventDefault();
+        $.ajax({
+          url: $(this).prop("action"),
+          method: "POST",
+          data: $(this).serialize(),
+          success: function success(data) {
+            vm.update_unassigned_cards();
+
+            try {
+              vm.$broad('assignment-change');
+            } catch (error) {
+              console.log(error);
+            }
+          }
+        });
+      });
+    },
+    update_unassigned_cards: function update_unassigned_cards() {
+      var _this2 = this;
+
+      var uri = "/api/v1/assignments";
+      this.axios.get(uri).then(function (response) {
+        _this2.unassigned = response.data.data.unassigned;
+      });
+      var users_uri = "/api/v1/users";
+      this.axios.get(users_uri).then(function (response) {
+        _this2.users = response.data.data;
+      });
+    }
   }
 });
 
@@ -32187,7 +32237,20 @@ var render = function() {
                             _vm._v(_vm._s(card.name))
                           ]),
                           _vm._v(" "),
-                          _vm._m(0, true)
+                          _c("div", { staticClass: "card-header-btn" }, [
+                            _c(
+                              "a",
+                              {
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.submit_and_update(card.id)
+                                  }
+                                }
+                              },
+                              [_vm._v("Received")]
+                            )
+                          ])
                         ])
                       ]),
                       _vm._v(" "),
@@ -32199,10 +32262,8 @@ var render = function() {
                             staticClass: "collection-item"
                           },
                           [
-                            _vm.publisher
-                              ? _c("span", [
-                                  _vm._v(_vm._s(assignment.user.name))
-                                ])
+                            false
+                              ? undefined
                               : _c("span", [_vm._v("Unknown")]),
                             _vm._v(" "),
                             _c("div", { staticClass: "right" }, [
@@ -32244,18 +32305,10 @@ var render = function() {
           }),
           0
         )
-      : _c("div", [_vm._m(1)])
+      : _c("div", [_vm._m(0)])
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header-btn" }, [
-      _c("a", { attrs: { href: "#" } }, [_vm._v("Received")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -32770,7 +32823,14 @@ var render = function() {
       [
         _c(
           "form",
-          { attrs: { action: "/api/v1/assignment", method: "post" } },
+          {
+            attrs: { action: "/api/v1/assignment", method: "post" },
+            on: {
+              submit: function($event) {
+                return _vm.submit_and_update()
+              }
+            }
+          },
           [
             _c("div", { staticClass: "modal-content" }, [
               _c("input", {
@@ -32805,7 +32865,17 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(1)
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn-flat waves-effect waves-green modal-close",
+                  attrs: { type: "submit" },
+                  on: { click: _vm.submit_and_update }
+                },
+                [_vm._v("Send")]
+              )
+            ])
           ]
         )
       ]
@@ -32827,21 +32897,6 @@ var staticRenderFns = [
           _vm._v("Please, go to the database to create one.")
         ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn-flat waves-effect waves-green modal-close",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("Send")]
-      )
     ])
   }
 ]
@@ -45728,14 +45783,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!***************************************************!*\
   !*** ./resources/js/components/AssignedCards.vue ***!
   \***************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AssignedCards_vue_vue_type_template_id_9e1f594c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AssignedCards.vue?vue&type=template&id=9e1f594c& */ "./resources/js/components/AssignedCards.vue?vue&type=template&id=9e1f594c&");
 /* harmony import */ var _AssignedCards_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AssignedCards.vue?vue&type=script&lang=js& */ "./resources/js/components/AssignedCards.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _AssignedCards_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _AssignedCards_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -45765,7 +45821,7 @@ component.options.__file = "resources/js/components/AssignedCards.vue"
 /*!****************************************************************************!*\
   !*** ./resources/js/components/AssignedCards.vue?vue&type=script&lang=js& ***!
   \****************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46157,15 +46213,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('AllPublishers', __webpack_
 window.vm = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: "#vue"
 });
-window.vm2 = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
-  el: "#vue2"
-});
-window.vm3 = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
-  el: "#vue3"
-});
-window.vm4 = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
-  el: "#vue4"
-});
+
+window.update_unassigned = function () {
+  vm.update_assigned_cards();
+};
 
 /***/ }),
 
