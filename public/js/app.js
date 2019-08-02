@@ -32346,8 +32346,10 @@ var render = function() {
                               staticClass: "collection-item"
                             },
                             [
-                              false
-                                ? undefined
+                              assignment.user.name != ""
+                                ? _c("span", [
+                                    _vm._v(_vm._s(assignment.user.name))
+                                  ])
                                 : _c("span", [_vm._v("Unknown")]),
                               _vm._v(" "),
                               _c("div", { staticClass: "right" }, [

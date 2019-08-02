@@ -23,7 +23,7 @@
             v-bind:key="assignment.id"
             v-for="assignment in card.assignments"
           >
-            <span v-if="false">{{assignment.user.name}}</span>
+            <span v-if="assignment.user.name != '' ">{{assignment.user.name}}</span>
             <span v-else>Unknown</span>
             <div class="right">
               <b>{{assignment.created_at}}</b>
