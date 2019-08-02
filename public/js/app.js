@@ -32295,7 +32295,7 @@ var render = function() {
   return _c(
     "div",
     [
-      _vm.assigned
+      _vm.assigned.length != 0
         ? _c(
             "div",
             _vm._l(_vm.assigned, function(macro_region) {
