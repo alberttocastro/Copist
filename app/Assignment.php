@@ -17,4 +17,15 @@ class Assignment extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    /**
+     * Cria uma designação com base no id do usuário e do cartão
+     */
+    public static function assign($user_id, $card_id)
+    {
+        $assignment = new Assignment;
+        $assignment->card_id = $card_id;
+        $assignment->user_id = $user_id;
+        return $assignment;
+    }
 }

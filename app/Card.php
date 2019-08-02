@@ -70,4 +70,13 @@ class Card extends Model
         }
         return $cards;
     }
+
+    public function finish_assignments()
+    {
+        foreach(\App\Assignment::where('card_id', $this->id)->whereNull('completion_date')->get() as $assignment){
+            $date = new \DateTime;
+            $assignment->completion_date = $date->format('Y-m-d H:i:s');
+            $assignment->save();
+        }
+    }
 }

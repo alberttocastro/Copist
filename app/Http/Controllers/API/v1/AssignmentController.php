@@ -24,6 +24,7 @@ class AssignmentController extends Controller
             if (\count($macro_region_assigned_territories) > 0) {
                 $mr = clone $macro_region;
                 $mr->assignment_cards = $macro_region_assigned_territories;
+                
                 $assigned_cards[] = clone $mr;
             }
 
@@ -33,12 +34,10 @@ class AssignmentController extends Controller
             if (\count($macro_region_unassigned_territories) > 0) {
                 $mr = clone $macro_region;
                 $mr->assignment_cards = $macro_region_unassigned_territories;
+                
                 $unassigned_cards[] = clone $mr;
             }
         }
-
-
-
 
         return [
             'data' => [
@@ -53,9 +52,8 @@ class AssignmentController extends Controller
      */
     public function users()
     {
-        $user_obj = new \App\User;
         $data = array();
-        foreach ($user_obj->approved_users() as $user) {
+        foreach (\App\User::approved_users() as $user) {
             $user->publisher = $user->publisher;
             $data[] = $user;
         }
@@ -69,9 +67,8 @@ class AssignmentController extends Controller
      */
     public function users_for_card(Request $request)
     {
-        $user_obj = new \App\User;
         $data = array();
-        foreach ($user_obj->approved_users() as $user) {
+        foreach (\App\User::approved_users() as $user) {
             if (\App\Assignment::where('card_id', $request->card_id)->where('user_id', $user->id)->whereNull('completion_date')->get()->count() == 0) {
                 $user->publisher = $user->publisher;
                 $data[] = $user;
@@ -85,11 +82,8 @@ class AssignmentController extends Controller
 
     public function assign_user_to_card(Request $request)
     {
-        foreach ($request->publishers as $publisher_id) {
-            $assignment = new \App\Assignment;
-            $assignment->card_id = $request->card_id;
-            $assignment->user_id = $publisher_id;
-            $assignment->save();
+        foreach ($request->publishers as $user_id) {
+            \App\Assignment::assign($user_id, $request->card_id)->save();
         }
     }
 
@@ -98,10 +92,6 @@ class AssignmentController extends Controller
      */
     public function finish_card_assignments(Request $request)
     {
-        foreach(\App\Assignment::where('card_id', $request->card_id)->whereNull('completion_date')->get() as $assignment){
-            $date = new \DateTime;
-            $assignment->completion_date = $date->format('Y-m-d H:i:s');
-            $assignment->save();
-        }
+        \App\Card::find($request->card_id)->finish_assignments();
     }
 }
