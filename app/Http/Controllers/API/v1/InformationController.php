@@ -21,12 +21,7 @@ class InformationController extends Controller
 
     public function create_publisher(Request $request)
     {
-        $publisher = new \App\Publisher;
-        $publisher->name = $request->name;
-        $publisher->email = $request->email;
-        $publisher->neighborhood = $request->neighborhood;
-        $publisher->phone = $request->phone;
-        $publisher->macro_region_id = $request->macro_region_id;
+        $publisher = \App\Publisher::from_request($request);
         $publisher->save();
     }
 

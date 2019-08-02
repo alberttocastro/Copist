@@ -8,6 +8,20 @@ class Publisher extends Model
 {
     //
 
+    /**
+     * Retorna um objeto criado a partir de uma requisição
+     */
+    public static function from_request($request){
+        $publisher = new Publisher;
+        $publisher->name = $request->name;
+        $publisher->email = $request->email;
+        $publisher->neighborhood = $request->neighborhood;
+        $publisher->phone = $request->phone;
+        $publisher->macro_region_id = $request->macro_region_id;
+        
+        return $publisher;
+    }
+
     public function macro_region()
     {
         return $this->belongsTo('App\Macro_region');
