@@ -2648,6 +2648,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     var vm = this;
@@ -2662,22 +2663,26 @@ __webpack_require__.r(__webpack_exports__);
     modal_id: Number
   },
   methods: {
+    /**
+     * Evita que ao submeter o formulário, ele seja enviado para a página, e faz o envio via ajax.
+     */
     submit: function submit() {
       var vm = this;
-      $("#assign-card-modal form").submit(function (target) {
+      var jquery_form_object = $("#assign-card-modal-" + vm.modal_id_string + " form");
+      jquery_form_object.submit(function (target) {
         target.preventDefault();
-        $.ajax({
-          url: $(this).prop("action"),
-          method: "POST",
-          data: $(this).serialize(),
-          success: function success(data) {
-            try {
-              vm.$root.$emit("assignmentUpdate");
-            } catch (error) {
-              console.log(error);
-            }
+      });
+      $.ajax({
+        url: jquery_form_object.prop("action"),
+        method: "POST",
+        data: jquery_form_object.serialize(),
+        success: function success(data) {
+          try {
+            vm.$root.$emit("assignmentUpdate");
+          } catch (error) {
+            console.log(error);
           }
-        });
+        }
       });
     }
   },
@@ -2778,6 +2783,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ModalAssignCard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModalAssignCard.vue */ "./resources/js/components/ModalAssignCard.vue");
 //
 //
 //
@@ -2819,32 +2825,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
+    var vm = this;
     return {
       unassigned: [],
       users: [],
-      card_id: 0
+      card_id: 0,
+      uid: vm._uid
     };
   },
   created: function created() {
@@ -2860,24 +2849,14 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   watch: {
-    card_id: function (_card_id) {
-      function card_id(_x, _x2) {
-        return _card_id.apply(this, arguments);
-      }
-
-      card_id.toString = function () {
-        return _card_id.toString();
-      };
-
-      return card_id;
-    }(function (new_card_id, old_card_id) {
+    card_id: function card_id(new_card_id, old_card_id) {
       var _this = this;
 
-      var users = "/api/v1/users/available/" + card_id;
+      var users = "/api/v1/users/available/" + new_card_id;
       this.axios.get(users).then(function (response) {
         _this.users = response.data.data;
       });
-    })
+    }
   },
   methods: {
     submit_and_update: function submit_and_update() {
@@ -2912,6 +2891,9 @@ __webpack_require__.r(__webpack_exports__);
         _this2.users = response.data.data;
       });
     }
+  },
+  components: {
+    ModalAssignCard: _ModalAssignCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -32729,63 +32711,56 @@ var render = function() {
       attrs: { id: "assign-card-modal-" + _vm.modal_id_string }
     },
     [
-      _c(
-        "form",
-        {
-          attrs: { action: "/api/v1/assignment", method: "post" },
-          on: {
-            submit: function($event) {
-              return _vm.submit()
-            }
-          }
-        },
-        [
-          _c("div", { staticClass: "modal-content" }, [
-            _c("input", {
-              attrs: { type: "hidden", name: "card_id" },
-              domProps: { value: _vm.card_id }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-field" }, [
-              _c(
-                "select",
-                {
-                  attrs: {
-                    multiple: "",
-                    name: "publishers[]",
-                    id: "publishers",
-                    size: "3"
-                  }
-                },
-                _vm._l(_vm.users, function(user) {
-                  return _c(
-                    "option",
-                    { key: user.id, domProps: { value: user.id } },
-                    [_vm._v(_vm._s(user.name))]
-                  )
-                }),
-                0
-              ),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "publisher" } }, [
-                _vm._v("Select the publishers")
-              ])
-            ])
-          ]),
+      _c("form", { attrs: { action: "/api/v1/assignment", method: "post" } }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _c("input", {
+            attrs: { type: "hidden", name: "card_id" },
+            domProps: { value: _vm.card_id }
+          }),
           _vm._v(" "),
-          _c("div", { staticClass: "modal-footer" }, [
+          _c("div", { staticClass: "input-field" }, [
             _c(
-              "button",
+              "select",
               {
-                staticClass: "btn-flat waves-effect waves-green modal-close",
-                attrs: { type: "submit" },
-                on: { click: _vm.submit }
+                attrs: {
+                  multiple: "",
+                  name: "publishers[]",
+                  id: "publishers",
+                  size: "3"
+                }
               },
-              [_vm._v("Send")]
-            )
+              _vm._l(_vm.users, function(user) {
+                return _c(
+                  "option",
+                  { key: user.id, domProps: { value: user.id } },
+                  [_vm._v(_vm._s(user.name))]
+                )
+              }),
+              0
+            ),
+            _vm._v(" "),
+            _c("label", { attrs: { for: "publisher" } }, [
+              _vm._v("Select the publishers")
+            ])
           ])
-        ]
-      )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "modal-footer" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn-flat waves-effect waves-green modal-close",
+              attrs: { type: "submit" },
+              on: {
+                click: function($event) {
+                  return _vm.submit()
+                }
+              }
+            },
+            [_vm._v("Send")]
+          )
+        ])
+      ])
     ]
   )
 }
@@ -32938,153 +32913,99 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.unassigned
-      ? _c(
-          "div",
-          { attrs: { id: "macro-region" } },
-          _vm._l(_vm.unassigned, function(macro_region) {
-            return _c(
-              "div",
-              { key: macro_region.id },
-              [
-                _c("blockquote", [
-                  _c("h4", [_vm._v(_vm._s(macro_region.name))])
-                ]),
-                _vm._v(" "),
-                _vm._l(macro_region.assignment_cards, function(card) {
-                  return _c(
-                    "ul",
-                    {
-                      key: card.id,
-                      staticClass: "collection with-header z-depth-3 card"
-                    },
-                    [
-                      _c(
-                        "li",
-                        { staticClass: "collection-header card-header" },
-                        [
-                          _c("div", { staticClass: "card-header-flex" }, [
-                            _c("div", { staticClass: "card-header-name" }, [
-                              _vm._v(_vm._s(card.name))
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "card-header-btn" }, [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "modal-trigger",
-                                  attrs: { href: "#assign-card-modal" },
-                                  on: {
-                                    click: function($event) {
-                                      _vm.card_id = card.id
-                                    }
-                                  }
-                                },
-                                [_vm._v("Assign")]
-                              )
-                            ])
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _vm._l(card.addresses, function(address) {
-                        return _c(
-                          "li",
-                          {
-                            key: address.id,
-                            staticClass: "collection-item",
-                            class:
-                              address.is_visitable == 1
-                                ? ""
-                                : "address-not-visitable"
-                          },
-                          [
-                            _vm._v(
-                              "(" +
-                                _vm._s(address.neighborhood) +
-                                ") " +
-                                _vm._s(address.street)
-                            )
-                          ]
-                        )
-                      })
-                    ],
-                    2
-                  )
-                })
-              ],
-              2
-            )
-          }),
-          0
-        )
-      : _c("div", { attrs: { id: "macro-region" } }, [_vm._m(0)]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "modal bottom-sheet", attrs: { id: "assign-card-modal" } },
-      [
-        _c(
-          "form",
-          {
-            attrs: { action: "/api/v1/assignment", method: "post" },
-            on: {
-              submit: function($event) {
-                return _vm.submit_and_update()
-              }
-            }
-          },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("input", {
-                attrs: { type: "hidden", name: "card_id" },
-                domProps: { value: _vm.card_id }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-field" }, [
-                _c(
-                  "select",
-                  {
-                    attrs: {
-                      multiple: "",
-                      name: "publishers[]",
-                      id: "publishers",
-                      size: "3"
-                    }
-                  },
-                  _vm._l(_vm.users, function(user) {
+  return _c(
+    "div",
+    [
+      _vm.unassigned
+        ? _c(
+            "div",
+            { attrs: { id: "macro-region" } },
+            _vm._l(_vm.unassigned, function(macro_region) {
+              return _c(
+                "div",
+                { key: macro_region.id },
+                [
+                  _c("blockquote", [
+                    _c("h4", [_vm._v(_vm._s(macro_region.name))])
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(macro_region.assignment_cards, function(card) {
                     return _c(
-                      "option",
-                      { key: user.id, domProps: { value: user.id } },
-                      [_vm._v(_vm._s(user.name))]
+                      "ul",
+                      {
+                        key: card.id,
+                        staticClass: "collection with-header z-depth-3 card"
+                      },
+                      [
+                        _c(
+                          "li",
+                          { staticClass: "collection-header card-header" },
+                          [
+                            _c("div", { staticClass: "card-header-flex" }, [
+                              _c("div", { staticClass: "card-header-name" }, [
+                                _vm._v(_vm._s(card.name))
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "card-header-btn" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "modal-trigger",
+                                    attrs: {
+                                      href: "#assign-card-modal-" + _vm.uid
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.card_id = card.id
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Assign")]
+                                )
+                              ])
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(card.addresses, function(address) {
+                          return _c(
+                            "li",
+                            {
+                              key: address.id,
+                              staticClass: "collection-item",
+                              class:
+                                address.is_visitable == 1
+                                  ? ""
+                                  : "address-not-visitable"
+                            },
+                            [
+                              _vm._v(
+                                "(" +
+                                  _vm._s(address.neighborhood) +
+                                  ") " +
+                                  _vm._s(address.street)
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
                     )
-                  }),
-                  0
-                ),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "publisher" } }, [
-                  _vm._v("Select the publishers")
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "modal-footer" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn-flat waves-effect waves-green modal-close",
-                  attrs: { type: "submit" },
-                  on: { click: _vm.submit_and_update }
-                },
-                [_vm._v("Send")]
+                  })
+                ],
+                2
               )
-            ])
-          ]
-        )
-      ]
-    )
-  ])
+            }),
+            0
+          )
+        : _c("div", { attrs: { id: "macro-region" } }, [_vm._m(0)]),
+      _vm._v(" "),
+      _c("modal-assign-card", {
+        attrs: { card_id: _vm.card_id, modal_id: _vm.uid }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {

@@ -1,6 +1,7 @@
 <template>
+<!-- TODO: Fazer apenas uma implementação do modal -->
   <div v-bind:id="'assign-card-modal-' + modal_id_string" class="modal bottom-sheet">
-    <form action="/api/v1/assignment" method="post" @submit="submit();">
+    <form action="/api/v1/assignment" method="post">
       <div class="modal-content">
         <input type="hidden" name="card_id" v-bind:value="card_id" />
         <div class="input-field">
@@ -14,7 +15,7 @@
         <button
           type="submit"
           class="btn-flat waves-effect waves-green modal-close"
-          v-on:click="submit"
+          v-on:click="submit()"
         >Send</button>
       </div>
     </form>
@@ -27,31 +28,34 @@ export default {
     return {
       users: [],
       modal_id_string: vm.modal_id.toString(),
-      card_id_watch: vm.card_id 
+      card_id_watch: vm.card_id
     };
   },
   props: {
-      card_id: Number,
-      modal_id: Number
+    card_id: Number,
+    modal_id: Number
   },
   methods: {
+    /**
+     * Evita que ao submeter o formulário, ele seja enviado para a página, e faz o envio via ajax.
+     */
     submit: function() {
       var vm = this;
-      $("#assign-card-modal form").submit(function(target) {
-        target.preventDefault();
+      var jquery_form_object = $("#assign-card-modal-" + vm.modal_id_string + " form");
 
-        $.ajax({
-          url: $(this).prop("action"),
-          method: "POST",
-          data: $(this).serialize(),
-          success: function(data) {
-            try {
-              vm.$root.$emit("assignmentUpdate");
-            } catch (error) {
-              console.log(error);
-            }
+      jquery_form_object.submit(function(target) {target.preventDefault();});
+
+      $.ajax({
+        url: jquery_form_object.prop("action"),
+        method: "POST",
+        data: jquery_form_object.serialize(),
+        success: function(data) {
+          try {
+            vm.$root.$emit("assignmentUpdate");
+          } catch (error) {
+            console.log(error);
           }
-        });
+        }
       });
     }
   },
