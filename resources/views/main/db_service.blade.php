@@ -24,7 +24,7 @@
 
 <div id="publishers" class="col s12">
     <div id="vue">
-        <all-publishers></all-publishers>
+        <publishers></publishers>
     </div>
 </div>{{-- END div#publishers --}}
 <div id="macroregions" class="col s12">

@@ -76,7 +76,7 @@ Vue.component('AllCards',require('./components/AllCards').default);
 Vue.component('AllIdioms',require('./components/AllIdioms').default);
 Vue.component('AllMacroRegions',require('./components/AllMacroRegions.vue').default);
 Vue.component('AllNationalities',require('./components/AllNationalities').default);
-Vue.component('AllPublishers',require('./components/AllPublishers').default);
+Vue.component('Publishers',require('./components/Publishers').default);
 
 window.vm = new Vue({
     el: "#vue"
