@@ -14,12 +14,12 @@
 @section('main')
 <div id="idioms" class="col s12">
     <div id="vue">
-        <all-idioms></all-idioms>
+        <idioms></idioms>
     </div>
 </div> {{-- End div#idioms --}}
 <div id="nationalities" class="col s12">
     <div id="vue2">
-        <all-nationalities></all-nationalities>
+        <nationalities></nationalities>
     </div>
 </div> {{-- End - div#nationalities --}}
 @endsection

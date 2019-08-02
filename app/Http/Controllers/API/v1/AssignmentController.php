@@ -12,7 +12,7 @@ class AssignmentController extends Controller
     /**
      * Retorna os cartões de território informando em array se estão designados ou não-designados.
      */
-    public function cards_assignment()
+    public function cards_assignments()
     {
         $assigned_cards = array();
         $unassigned_cards = array();

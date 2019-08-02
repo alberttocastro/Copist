@@ -29,17 +29,17 @@
 </div>{{-- END div#publishers --}}
 <div id="macroregions" class="col s12">
     <div id="vue2">
-        <all-macro-regions></all-macro-regions>
+        <macro-regions></macro-regions>
     </div>
 </div> {{-- END div#macro-region--}}
 <div id="cards" class="col s12">
     <div id="vue3">
-        <all-cards></all-cards>
+        <cards></cards>
     </div>
 </div> {{-- END  div#cards--}}
 <div id="addresstype" class="col s12">
     <div id="vue4">
-        <all-address-types></all-address-types>
+        <address-types></address-types>
     </div>
 </div> {{-- END div#address-types--}}
 @endsection

@@ -42,7 +42,7 @@ class TerritorryController extends Controller
     /**
      * Retorna todos os endereços que não pertencem a nenhum cartão
      */
-    public function addresses_without_map()
+    public function addresses_without_card()
     { 
         $data = [];
         foreach(Address::where('card_id', 0)->get() as $address){

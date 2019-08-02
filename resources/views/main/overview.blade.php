@@ -21,9 +21,9 @@
 <!-- ABA 1 -->
 <div id="all" class="col s12">
     <div id="vue">
-        <all-addresses></all-addresses>
+        <addresses></addresses>
         <cards-without-macro-region></cards-without-macro-region>
-        <all-addresses-without-map></all-addresses-without-map>
+        <addresses-without-card></addresses-without-card>
     </div>
 </div>
 
