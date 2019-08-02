@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="assigned">
+    <div v-if="assigned.length != 0">
       <div v-bind:key="macro_region.id" v-for="macro_region in assigned">
         <blockquote>
           <h4>{{macro_region.name}}</h4>
