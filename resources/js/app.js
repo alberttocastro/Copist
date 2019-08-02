@@ -39,8 +39,6 @@ $(function () {
 
     $('.modal').modal();
 
-    $('select').formSelect();
-
     $('.collapsible').collapsible();
 
     $('.tabs').tabs();

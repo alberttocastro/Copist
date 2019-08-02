@@ -30,6 +30,8 @@ Route::prefix('v1')->group(function(){
     Route::get('suggestedaddresses', 'API\v1\TerritorryController@suggested_addresses');
 
     Route::get('publishers', 'API\v1\InformationController@publishers');
+    Route::post('publishers', 'API\v1\InformationController@create_publisher');
+
     Route::get('macroregions', 'API\v1\InformationController@macro_regions');
     Route::get('cards', 'API\v1\InformationController@cards');
     Route::get('addresstypes', 'API\v1\InformationController@address_types');
