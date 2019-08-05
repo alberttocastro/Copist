@@ -74,4 +74,6 @@ Route::prefix('v1')->group(function(){
 
     Route::get('nationalities', 'API\v1\InformationController@nationalities');
     Route::post('nationalities', 'API\v1\InformationController@create_nationality');
+    Route::put('nationalities/{id}', 'API\v1\InformationController@update_nationality');
+    Route::delete('nationalities/{id}', 'API\v1\InformationController@destroy_nationality');
 });

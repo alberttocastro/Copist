@@ -99,6 +99,16 @@ class InformationController extends Controller
         \App\Nationality::from_request($request)->save();
     }
 
+    public function update_nationality(Request $request, $id)
+    {
+        \App\Nationality::find($id)->update($request);
+    }
+
+    public function destroy_nationality()
+    {
+        \App\Nationality::find($id)->delete();
+    }
+
     public function idioms()
     {
         return [
