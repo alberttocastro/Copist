@@ -64,6 +64,17 @@ class InformationController extends Controller
         \App\Address_type::from_request($request)->save();
     }
 
+    public function update_address_type(Request $request, $id)
+    {
+        \App\Address_type::find($id)->update($request);
+    }
+
+    public function destroy_address_type($id)
+    {
+        if(\App\Address::where('address_type_id', $id)->count() == 0)
+            \App\Address_type::find($id)->delete();
+    }
+
     /**
      * Retorna todos as nacionalidades
      */
