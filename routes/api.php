@@ -44,7 +44,8 @@ Route::prefix('v1')->group(function(){
         return $territorry_controller->cards();
     });
     Route::post('cards', 'API\v1\InformationController@create_card');
-    Route::get('cards/{card_id}/users', 'API\v1\AssignmentController@users_for_card');
+    Route::get('cards/{id}/users', 'API\v1\AssignmentController@users_for_card');
+    Route::delete('cards/{id}/assignments', 'API\v1\AssignmentController@finish_card_assignments');
     
     Route::get('macroregions', 'API\v1\InformationController@macro_regions');
     Route::post('macroregions', 'API\v1\InformationController@create_macro_region');
@@ -53,10 +54,11 @@ Route::prefix('v1')->group(function(){
     
     Route::get('assignments', 'API\v1\AssignmentController@cards_assignments');
     Route::post('assignments', 'API\v1\AssignmentController@assign_user_to_card');
-    Route::delete('assignments/{card_id}', 'API\v1\AssignmentController@finish_card_assignments');
     
     Route::get('publishers', 'API\v1\InformationController@publishers');
     Route::post('publishers', 'API\v1\InformationController@create_publisher');
+    Route::put('publishers/{id}', 'API\v1\InformationController@update_publisher');
+    Route::delete('publishers/{id}', 'API\v1\InformationController@destroy_publisher');
     
     Route::get('addresstypes', 'API\v1\InformationController@address_types');
     Route::post('addresstypes', 'API\v1\InformationController@create_address_type');

@@ -19,8 +19,17 @@ class InformationController extends Controller
 
     public function create_publisher(Request $request)
     {
-        $publisher = \App\Publisher::from_request($request);
-        $publisher->save();
+        \App\Publisher::create($request);
+    }
+
+    public function update_publisher(Request $request, $id)
+    {
+        \App\Publisher::find($id)->update($request);
+    }
+
+    public function destroy_publisher($id)
+    {
+        \App\Publisher::find($id)->delete();
     }
 
     /**
