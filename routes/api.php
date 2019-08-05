@@ -33,7 +33,7 @@ Route::prefix('v1')->group(function(){
         
         return $territorry_controller->addresses();
     });
-
+    Route::get('addresses/{id}', 'API\v1\TerritorryController@address');
     Route::post('addresses', 'API\v1\TerritorryController@create_address');
     Route::put('addresses/{id}', 'API\v1\TerritorryController@update_address');
     Route::delete('addresses/{id}', 'API\v1\TerritorryController@destroy_address');

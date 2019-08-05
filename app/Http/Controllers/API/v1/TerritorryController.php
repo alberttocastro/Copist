@@ -56,6 +56,13 @@ class TerritorryController extends Controller
         ];
     }
 
+    public function address($id)
+    {
+        return [
+            'data' => \App\Address::find($id)
+        ];
+    }
+
     public function create_address(Request $request)
     {
         if(\App\Address::create($request->address) && $request->suggested_address != null)
