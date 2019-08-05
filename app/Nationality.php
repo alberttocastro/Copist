@@ -12,4 +12,11 @@ class Nationality extends Model
     {
         return $this->hasMany('App\Address');
     }
+
+    public static function from_request($request)
+    {
+        $nationality = new Nationality;
+        $nationality->name = $request->name;
+        return $nationality;
+    } 
 }

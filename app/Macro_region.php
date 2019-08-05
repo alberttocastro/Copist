@@ -57,4 +57,11 @@ class Macro_region extends Model
         return $return;
     }
 
+    public static function from_request($request)
+    {
+        $macro_region = new Macro_region;
+        $macro_region->name = $request->name;
+        return $macro_region;
+    }
+
 }

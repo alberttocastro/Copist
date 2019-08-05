@@ -9,6 +9,11 @@ class InformationController extends Controller
 {
     //
 
+    public function hello()
+    {
+        return 'hello world';
+    }
+
     /**
      * Retorna todos os publicadores
      */
@@ -35,19 +40,9 @@ class InformationController extends Controller
         ];
     }
 
-    /**
-     * Retorna todos os cartões
-     */
-    public function cards()
+    public function create_macro_region(Request $request)
     {
-        $cards = array();
-        foreach(\App\Card::all() as $card){
-            $card->addresses = $card->addresses;
-            $cards[] = $card;
-        }
-        return [
-            'data' => $cards
-        ];
+        \App\Macro_region::from_request($request)->save();
     }
 
     /**
@@ -60,6 +55,11 @@ class InformationController extends Controller
         ];
     }
 
+    public function create_address_type(Request $request)
+    {
+        \App\Address_type::from_request($request)->save();
+    }
+
     /**
      * Retorna todos as nacionalidades
      */
@@ -70,10 +70,20 @@ class InformationController extends Controller
         ];
     }
 
+    public function create_nationality(Request $request)
+    {
+        \App\Nationality::from_request($request)->save();
+    }
+
     public function idioms()
     {
         return [
             'data' => \App\Idiom::all()
         ];
+    }
+
+    public function create_idiom(Request $request)
+    {
+        \App\Idiom::from_request($request)->save();
     }
 }

@@ -12,11 +12,11 @@ class TerritorryController extends Controller
 {
     public $BLANK_ID = '';
     /**
-     * Retorna todos os territórios que estão relacionados a um mapa
-     *
-     * @return \Illuminate\Http\Response
+     * Retorna todos os endereços que estão relacionados a um mapa.
+     * Envie o parâmetro 'card = false' para ter todos os endereços sem cartão
+     * Envie o parâmetro 'suggested = true' para ter todos os endereços sugeridos
      */
-    public function territories()
+    public function addresses()
     {
         $data = [];
         foreach (Macro_region::all() as $macro_region) {
@@ -39,13 +39,10 @@ class TerritorryController extends Controller
         ];
     }
 
-    /**
-     * Retorna todos os endereços que não pertencem a nenhum cartão
-     */
-    public function addresses_without_card()
-    { 
+    public function addresses_no_card()
+    {
         $data = [];
-        foreach(Address::where('card_id', 0)->get() as $address){
+        foreach (Address::where('card_id', 0)->get() as $address) {
             $data[] = $address;
         }
         return [
@@ -61,17 +58,6 @@ class TerritorryController extends Controller
     }
 
     /**
-     * Retorna todos os cartões que estão sem Macro-região
-     */
-    public function cards_without_macro_region()
-    {
-        $card = new \App\Card;
-        return [
-            'data' => $card->without_macro_region()
-        ];
-    }
-
-    /**
      * Retorna todos os endereços sugeridos pelos publicadores
      */
     public function suggested_addresses()
@@ -79,5 +65,42 @@ class TerritorryController extends Controller
         return [
             'data' => \App\Suggested_address::All()->toArray()
         ];
+    }
+
+    /**
+     * Retorna todos os cartões.
+     * Envie 'macro_region = false' nos parâmetros para retornar cartões sem macro região
+     */
+    public function cards()
+    {
+        $cards = array();
+        foreach (\App\Card::all() as $card) {
+            $card->addresses = $card->addresses;
+            $cards[] = $card;
+        }
+        return [
+            'data' => $cards
+        ];
+    }
+
+    public function cards_no_macro_region()
+    {
+        return [
+            'data' => \App\Card::without_macro_region()
+        ];
+    }
+
+    public function create_card(Request $request)
+    {
+        \App\Card::from_request($request)->save();
+    }
+
+
+    /**
+     * Retorna todos os cartões que estão sem Macro-região
+     */
+    public function cards_without_macro_region()
+    {
+        $card = new \App\Card;
     }
 }

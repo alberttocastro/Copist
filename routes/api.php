@@ -19,28 +19,52 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 Route::prefix('v1')->group(function(){
-    Route::get('territorries', 'API\v1\TerritorryController@territories');
-    Route::get('withoutcard', 'API\v1\TerritorryController@addresses_without_card');
-    Route::get('withoutmacroregion', 'API\v1\TerritorryController@cards_without_macro_region');
+    Route::get('addresses', function(Request $request){
+        $no_card = !$request->card;
+        $suggested = $request->suggested;
+        $territorry_controller = new \App\Http\Controllers\API\v1\TerritorryController;
 
+        if($suggested)
+            return $territorry_controller->suggested_addresses();
+        
+        if($no_card)
+            return $territorry_controller->addresses_no_card();
+        
+        return $territorry_controller->addresses();
+    });
+    
+    Route::get('cards', function(Request $request){
+        $no_macro_region = !$request->macro_region;
+        $territorry_controller = new \App\Http\Controllers\API\v1\TerritorryController;
+
+        if($no_macro_region)
+            return $territorry_controller->cards_no_macro_region();
+        
+        return $territorry_controller->cards();
+    });
+    Route::post('cards', 'API\v1\InformationController@create_card');
+    Route::get('cards/{card_id}/users', 'API\v1\AssignmentController@users_for_card');
+    
+    Route::get('macroregions', 'API\v1\InformationController@macro_regions');
+    Route::post('macroregions', 'API\v1\InformationController@create_macro_region');
+    
     Route::get('assignments', 'API\v1\AssignmentController@cards_assignments');
-
-    Route::get('suggestedaddresses', 'API\v1\TerritorryController@suggested_addresses');
-
+    Route::post('assignments', 'API\v1\AssignmentController@assign_user_to_card');
+    Route::delete('assignments/{card_id}', 'API\v1\AssignmentController@finish_card_assignments');
+    
     Route::get('publishers', 'API\v1\InformationController@publishers');
     Route::post('publishers', 'API\v1\InformationController@create_publisher');
-
-    Route::get('macroregions', 'API\v1\InformationController@macro_regions');
-    Route::get('cards', 'API\v1\InformationController@cards');
+    
     Route::get('addresstypes', 'API\v1\InformationController@address_types');
+    Route::post('addresstypes', 'API\v1\InformationController@create_address_type');
 
     Route::get('users', 'API\v1\AssignmentController@users');
-    Route::get('users/available/{card_id}', 'API\v1\AssignmentController@users_for_card');
-    Route::post('assignment', 'API\v1\AssignmentController@assign_user_to_card');
-    Route::post('assignment/receive/{card_id}', 'API\v1\AssignmentController@finish_card_assignments');
-
+    
+    
     Route::get('idioms', 'API\v1\InformationController@idioms');
+    Route::post('idioms', 'API\v1\InformationController@create_idiom');
+
     Route::get('nationalities', 'API\v1\InformationController@nationalities');
+    Route::post('nationalities', 'API\v1\InformationController@create_nationality');
 });

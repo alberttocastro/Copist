@@ -61,7 +61,7 @@ class Card extends Model
     /**
      * Retorna todos os cartões que não estão com mapas
      */
-    public function without_macro_region()
+    public static function without_macro_region()
     {
         $cards = array();
         foreach(Card::where('macro_region_id', 0)->get() as $card){
@@ -78,5 +78,14 @@ class Card extends Model
             $assignment->completion_date = $date->format('Y-m-d H:i:s');
             $assignment->save();
         }
+    }
+
+    public static function from_request($request)
+    {
+        $card = new Card;
+        $card->name = $request->name;
+        $card->number = $request->number;
+        $card->macro_region_id = $request->macro_region_id;
+        return $card;
     }
 }
