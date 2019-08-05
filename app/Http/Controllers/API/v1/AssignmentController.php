@@ -12,7 +12,7 @@ class AssignmentController extends Controller
     /**
      * Retorna os cartões de território informando em array se estão designados ou não-designados.
      */
-    public function cards_assignments()
+    public function assignments()
     {
         $assigned_cards = array();
         $unassigned_cards = array();
@@ -80,7 +80,7 @@ class AssignmentController extends Controller
         ];
     }
 
-    public function assign_user_to_card(Request $request)
+    public function create_assignment(Request $request)
     {
         foreach ($request->publishers as $user_id) {
             \App\Assignment::assign($user_id, $request->card_id)->save();
@@ -90,7 +90,7 @@ class AssignmentController extends Controller
     /**
      * Remove todas as designações do cartão
      */
-    public function finish_card_assignments(Request $request)
+    public function finish_assignments(Request $request)
     {
         \App\Card::find($request->card_id)->finish_assignments();
     }

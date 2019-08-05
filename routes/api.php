@@ -33,6 +33,10 @@ Route::prefix('v1')->group(function(){
         
         return $territorry_controller->addresses();
     });
+
+    Route::post('addresses', 'API\v1\TerritorryController@create_address');
+    Route::put('addresses/{id}', 'API\v1\TerritorryController@update_address');
+    Route::delete('addresses/{id}', 'API\v1\TerritorryController@destroy_address');
     
     Route::get('cards', function(Request $request){
         $no_macro_region = !$request->macro_region;
@@ -44,16 +48,17 @@ Route::prefix('v1')->group(function(){
         return $territorry_controller->cards();
     });
     Route::post('cards', 'API\v1\InformationController@create_card');
+    
     Route::get('cards/{id}/users', 'API\v1\AssignmentController@users_for_card');
-    Route::delete('cards/{id}/assignments', 'API\v1\AssignmentController@finish_card_assignments');
+    Route::delete('cards/{id}/assignments', 'API\v1\AssignmentController@finish_assignments');
     
     Route::get('macroregions', 'API\v1\InformationController@macro_regions');
     Route::post('macroregions', 'API\v1\InformationController@create_macro_region');
     Route::put('macroregions/{id}', 'API\v1\InformationController@update_macro_region');
     Route::delete('macroregions/{id}', 'API\v1\InformationController@destroy_macro_region');
     
-    Route::get('assignments', 'API\v1\AssignmentController@cards_assignments');
-    Route::post('assignments', 'API\v1\AssignmentController@assign_user_to_card');
+    Route::get('assignments', 'API\v1\AssignmentController@assignments');
+    Route::post('assignments', 'API\v1\AssignmentController@create_assignment');
     
     Route::get('publishers', 'API\v1\InformationController@publishers');
     Route::post('publishers', 'API\v1\InformationController@create_publisher');

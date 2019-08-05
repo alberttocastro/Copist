@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Address extends Model
 {
-    //
+
+    protected $fillable = ['neighborhood', 'street', 'nationality_id', 'idiom_id', 'name', 'is_valid', 'is_visitable', 'comments', 'references' , 'publisher_id', 'second_language_id', 'card_id', 'frequence'];
 
     public function is_visited(){
         return $this->publisher_id != "0";
