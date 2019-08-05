@@ -7,13 +7,6 @@ use App\Http\Controllers\Controller;
 
 class InformationController extends Controller
 {
-    //
-
-    public function hello()
-    {
-        return 'hello world';
-    }
-
     /**
      * Retorna todos os publicadores
      */
@@ -42,7 +35,18 @@ class InformationController extends Controller
 
     public function create_macro_region(Request $request)
     {
-        \App\Macro_region::from_request($request)->save();
+        \App\Macro_region::create($request);
+    }
+
+    public function update_macro_region(Request $request, $id)
+    {
+        \App\Macro_region::find($id)->update($request);
+    }
+
+    public function destroy_macro_region($id)
+    {
+        if(\App\Card::where('macro_region_id', $id)->count() == 0)
+            \App\Macro_region::find($id)->delete();
     }
 
     /**

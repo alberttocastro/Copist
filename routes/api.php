@@ -48,6 +48,7 @@ Route::prefix('v1')->group(function(){
     
     Route::get('macroregions', 'API\v1\InformationController@macro_regions');
     Route::post('macroregions', 'API\v1\InformationController@create_macro_region');
+    Route::put('macroregions/{id}', 'API\v1\InformationController@update_macro_region');
     
     Route::get('assignments', 'API\v1\AssignmentController@cards_assignments');
     Route::post('assignments', 'API\v1\AssignmentController@assign_user_to_card');
@@ -60,8 +61,7 @@ Route::prefix('v1')->group(function(){
     Route::post('addresstypes', 'API\v1\InformationController@create_address_type');
 
     Route::get('users', 'API\v1\AssignmentController@users');
-    
-    
+
     Route::get('idioms', 'API\v1\InformationController@idioms');
     Route::post('idioms', 'API\v1\InformationController@create_idiom');
 
