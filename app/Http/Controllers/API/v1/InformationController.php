@@ -108,6 +108,16 @@ class InformationController extends Controller
 
     public function create_idiom(Request $request)
     {
-        \App\Idiom::from_request($request)->save();
+        \App\Idiom::create($request);
+    }
+
+    public function update_idiom(Request $request, $id)
+    {
+        \App\Idiom::find($id)->update($request);
+    }
+
+    public function destroy_idiom($id)
+    {
+        \App\Idiom::find($id)->delete();
     }
 }

@@ -69,6 +69,8 @@ Route::prefix('v1')->group(function(){
 
     Route::get('idioms', 'API\v1\InformationController@idioms');
     Route::post('idioms', 'API\v1\InformationController@create_idiom');
+    Route::put('idioms/{id}', 'API\v1\InformationController@update_idiom');
+    Route::delete('idioms/{id}', 'API\v1\InformationController@destroy_idiom');
 
     Route::get('nationalities', 'API\v1\InformationController@nationalities');
     Route::post('nationalities', 'API\v1\InformationController@create_nationality');
