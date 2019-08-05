@@ -110,6 +110,16 @@ class TerritorryController extends Controller
         \App\Card::from_request($request)->save();
     }
 
+    public function update_card(Request $request, $id)
+    {
+        \App\Card::find($id)->update($request);
+    }
+
+    public function destroy_card($id)
+    {
+        \App\Card::find($id)->delete();
+    }
+
 
     /**
      * Retorna todos os cartões que estão sem Macro-região

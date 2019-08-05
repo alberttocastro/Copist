@@ -47,7 +47,9 @@ Route::prefix('v1')->group(function(){
         
         return $territorry_controller->cards();
     });
-    Route::post('cards', 'API\v1\InformationController@create_card');
+    Route::post('cards', 'API\v1\TerritorryController@create_card');
+    Route::put('cards/{id}', 'API\v1\TerritorryController@update_card');
+    Route::delete('cards/{id}', 'API\v1\TerritorryController@update_card');
     
     Route::get('cards/{id}/users', 'API\v1\AssignmentController@users_for_card');
     Route::delete('cards/{id}/assignments', 'API\v1\AssignmentController@finish_assignments');

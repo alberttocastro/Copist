@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Card extends Model
 {
-    //
+    protected $fillable = ['number', 'name', 'macro_region_id'];
+
     public function macro_region()
     {
         return $this->belongsTo('App\Macro_region');
