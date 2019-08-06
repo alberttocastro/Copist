@@ -65,11 +65,11 @@ class AssignmentController extends Controller
     /**
      * Retorna todos os usuários que ainda não foram designados para um cartão
      */
-    public function users_for_card(Request $request)
+    public function users_for_card(Request $request, $id)
     {
         $data = array();
         foreach (\App\User::approved_users() as $user) {
-            if (\App\Assignment::where('card_id', $request->card_id)->where('user_id', $user->id)->whereNull('completion_date')->get()->count() == 0) {
+            if (\App\Assignment::where('card_id', $id)->where('user_id', $user->id)->whereNull('completion_date')->get()->count() == 0) {
                 $user->publisher = $user->publisher;
                 $data[] = $user;
             }
