@@ -24,22 +24,22 @@
 
 <div id="publishers" class="col s12">
     <div id="vue">
-        <publishers></publishers>
+        <publishers-view></publishers-view>
     </div>
 </div>{{-- END div#publishers --}}
 <div id="macroregions" class="col s12">
     <div id="vue2">
-        <macro-regions></macro-regions>
+        <macro-regions-view></macro-regions-view>
     </div>
 </div> {{-- END div#macro-region--}}
 <div id="cards" class="col s12">
     <div id="vue3">
-        <cards></cards>
+        <cards-view></cards-vi>
     </div>
 </div> {{-- END  div#cards--}}
 <div id="addresstype" class="col s12">
     <div id="vue4">
-        <address-types></address-types>
+        <address-types-view></address-types-vi>
     </div>
 </div> {{-- END div#address-types--}}
 @endsection

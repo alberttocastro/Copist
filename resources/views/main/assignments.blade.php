@@ -17,19 +17,11 @@
     {{\Session::get('message')}}
 </p>
 @endif
-{{-- ABA Dos territórios não designados --}}
 <div id="all" class="col s12">
-    <unassigned-cards></unassigned-cards>
+    <cards-unassigned-view></cards-unassigned-view>
 </div>
-{{-- Fim da aba dos territórios designados --}}
-
-
-
-<!-- ABA 2 -->
 <div id="dashboard" class="col s12">
-
-    <assigned-cards v-on:assignment-change="update_assigned_cards()"></assigned-cards>
-
+    <cards-assigned-view v-on:assignment-change="update_assigned_cards()"></cards-assigned-view>
 </div>
 
 @endsection

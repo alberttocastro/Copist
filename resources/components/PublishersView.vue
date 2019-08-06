@@ -51,14 +51,14 @@
         </a>
       </div>
     </div>
-    <new-publisher></new-publisher>
+    <publisher-new-modal></publisher-new-modal>
   </div>
 </template>
 <script>
-import NewPublisher from "./NewPublisher.vue";
+import PublisherNewModal from "./PublisherNewModal.vue";
 export default {
   components: {
-    NewPublisher
+    PublisherNewModal
   },
   data() {
     return {

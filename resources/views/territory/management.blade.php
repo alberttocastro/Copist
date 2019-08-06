@@ -17,17 +17,12 @@
 @endif
 <!-- Aba de aceitar endereços novos -->
 <div id="new">
-    <div id="vue3">
-        <territory-suggestion></territory-suggestion>
-    </div>
-
+    <suggested-territory-view></territory-suggestion>
     @yield('accept_addres', view('territory.modal.accept_address'))
 </div> <!-- <div id="new"> -->
 
 <!-- Aba para escolher o mapa dos endereços -->
 <div id="manage">
-    <div id="vue4">
-        <choose-address-card></choose-address-card>
-    </div>
+    <address-select-card-view></address-select-card-view>
 </div>
 @endsection

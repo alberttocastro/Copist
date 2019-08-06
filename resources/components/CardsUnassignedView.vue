@@ -36,12 +36,15 @@
         </div>
       </div>
     </div>
-    <modal-assign-card v-bind:card_id="card_id" v-bind:modal_id="uid"></modal-assign-card>    
+    <assignment-new-modal v-bind:card_id="card_id" v-bind:modal_id="uid"></assignment-new-modal>    
   </div>
 </template>
 <script>
-import ModalAssignCard from "./ModalAssignCard.vue";
+import AssignmentNewModal from "./AssignmentNewModal.vue";
 export default {
+  components:{
+    AssignmentNewModal
+  },
   data() {
     var vm = this;
     return {
@@ -103,9 +106,6 @@ export default {
         this.users = response.data.data;
       });
     }
-  },
-  components:{
-    ModalAssignCard
   }
 };
 </script>

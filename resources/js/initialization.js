@@ -63,20 +63,24 @@ import VueAxios from 'vue-axios'
 
 Vue.use(VueAxios, axios);
 
-Vue.component('Addresses', require('./components/Addresses.vue').default);
-Vue.component('CardsWithoutMacroRegion', require('./components/CardsWithoutMacroRegion.vue').default);
-Vue.component('AddresseswithoutCard', require('./components/AddressesWithoutCard.vue').default);
-Vue.component('UnassignedCards', require('./components/UnassignedCards').default);
-Vue.component('TerritorySuggestion', require('./components/TerritorySuggestion.vue').default);
-Vue.component('ChooseAddressCard', require('./components/ChooseAddressCard.vue').default);
-Vue.component('AssignedCards', require('./components/AssignedCards.vue').default);
+//Territory
+Vue.component('AddressesView', require('../components/AddressesView.vue').default);
+Vue.component('AddressesWithoutCardView', require('../components/AddressesWithoutCardView.vue').default);
+Vue.component('AddressSelectCardView', require('../components/AddressSelectCardView.vue').default);
 
-Vue.component('AddressTypes',require('./components/AddressTypes').default);
-Vue.component('Cards',require('./components/Cards').default);
-Vue.component('Idioms',require('./components/Idioms').default);
-Vue.component('MacroRegions',require('./components/MacroRegions.vue').default);
-Vue.component('Nationalities',require('./components/Nationalities').default);
-Vue.component('Publishers',require('./components/Publishers').default);
+Vue.component('SuggestedAddressesView', require('../components/SuggestedAddressesView.vue').default);
+
+Vue.component('CardsView',require('../components/CardsView.vue').default);
+Vue.component('CardsWithoutMacroRegionView', require('../components/CardsWithoutMacroRegionView.vue').default);
+
+Vue.component('CardsUnassignedView', require('../components/CardsUnassignedView.vue').default);
+Vue.component('CardsAssignedView', require('../components/CardsAssignedView.vue').default);
+
+Vue.component('MacroRegionsView',require('../components/MacroRegionsView.vue').default);
+Vue.component('AddressTypesView',require('../components/AddressTypesView.vue').default);
+Vue.component('IdiomsView',require('../components/IdiomsView.vue').default);
+Vue.component('NationalitiesView',require('../components/NationalitiesView.vue').default);
+Vue.component('PublishersView',require('../components/PublishersView.vue').default);
 
 window.vm = new Vue({
     el: "#vue"
