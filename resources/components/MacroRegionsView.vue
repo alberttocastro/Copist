@@ -56,8 +56,7 @@ export default {
         }
     },
     created(){
-        let uri = "/api/v1/macroregions";
-        this.axios.get(uri).then(response=>{
+        this.axios.get(routes.macro_regions()).then(response=>{
             this.macro_regions = response.data.data;
         })
     }

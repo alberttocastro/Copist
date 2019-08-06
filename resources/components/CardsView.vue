@@ -78,8 +78,7 @@ export default {
       this.cards = response.data.data;
     });
 
-    let macro_regions_uri = "/api/v1/macroregions";
-    this.axios.get(uri).then(response => {
+    this.axios.get(routes.cards()).then(response => {
       this.macro_regions = response.data.data;
     });
   }

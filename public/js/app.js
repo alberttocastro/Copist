@@ -1853,8 +1853,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    var uri = "/api/v1/addresstypes";
-    this.axios.get(uri).then(function (response) {
+    this.axios.get(routes.address_types()).then(function (response) {
       _this.address_types = response.data.data;
     });
   }
@@ -2404,8 +2403,7 @@ __webpack_require__.r(__webpack_exports__);
     this.axios.get(uri).then(function (response) {
       _this.cards = response.data.data;
     });
-    var macro_regions_uri = "/api/v1/macroregions";
-    this.axios.get(uri).then(function (response) {
+    this.axios.get(routes.cards()).then(function (response) {
       _this.macro_regions = response.data.data;
     });
   }
@@ -2620,8 +2618,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    var uri = "/api/v1/macroregions";
-    this.axios.get(uri).then(function (response) {
+    this.axios.get(routes.macro_regions()).then(function (response) {
       _this.macro_regions = response.data.data;
     });
   }
@@ -2890,8 +2887,7 @@ __webpack_require__.r(__webpack_exports__);
     update_publishers: function update_publishers() {
       var _this = this;
 
-      var uri = "/api/v1/publishers";
-      this.axios.get(uri).then(function (response) {
+      this.axios.get(routes.publishers()).then(function (response) {
         _this.publishers = response.data.data;
       });
     }
@@ -59581,6 +59577,18 @@ window.routes = {
   },
   users: function users() {
     return "".concat(this.PREFIX_V1, "/users");
+  },
+  publishers: function publishers() {
+    return "".concat(this.PREFIX_V1, "/publishers");
+  },
+  macro_regions: function macro_regions() {
+    return "".concat(this.PREFIX_V1, "/macroregions");
+  },
+  cards: function cards() {
+    return "".concat(this.PREFIX_V1, "/cards");
+  },
+  address_types: function address_types() {
+    return "".concat(this.PREFIX_V1, "/addresstypes");
   }
 };
 

@@ -48,8 +48,7 @@ export default {
         }
     },
     created(){
-        let uri = "/api/v1/addresstypes";
-        this.axios.get(uri).then(response => {
+        this.axios.get(routes.address_types()).then(response => {
             this.address_types = response.data.data;
         })
     }

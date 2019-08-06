@@ -76,8 +76,7 @@ export default {
   },
   methods: {
     update_publishers: function() {
-      let uri = "/api/v1/publishers";
-      this.axios.get(uri).then(response => {
+      this.axios.get(routes.publishers()).then(response => {
         this.publishers = response.data.data;
       });
     }
