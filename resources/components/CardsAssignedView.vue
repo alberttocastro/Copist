@@ -74,17 +74,15 @@ export default {
   },
   methods: {
     update_assigned_cards: function() {
-      let uri = "/api/v1/assignments";
-      this.axios.get(uri).then(response => {
+      this.axios.get(routes.assignments()).then(response => {
         this.assigned = response.data.data.assigned;
       });
     },
     submit_and_update: function (card_id){
       var vm = this;
-      let uri = "/api/v1/assignment/receive/" + card_id;
       $.ajax({
-        url: uri,
-        method: "POST",
+        url: routes.assignments_card_finish(card_id),
+        method: "DELETE",
         data: {
           card_id: card_id
         },

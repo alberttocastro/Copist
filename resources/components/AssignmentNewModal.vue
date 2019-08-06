@@ -1,7 +1,7 @@
 <template>
 <!-- TODO: Fazer apenas uma implementação do modal -->
   <div v-bind:id="'assign-card-modal-' + modal_id_string" class="modal bottom-sheet">
-    <form action="/api/v1/assignment" method="post">
+    <form v-bind:action="this.$parent.$parent.routes.assignments()" method="post">
       <div class="modal-content">
         <input type="hidden" name="card_id" v-bind:value="card_id" />
         <div class="input-field">
@@ -61,8 +61,7 @@ export default {
   },
   watch: {
     card_id: function(new_card_id, old_card_id) {
-      let users = "/api/v1/users/available/" + new_card_id;
-      this.axios.get(users).then(response => {
+      this.axios.get(routes.card_users_available(new_card_id)).then(response => {
         console.log(response);
         this.users = response.data.data;
       });

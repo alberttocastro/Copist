@@ -1,3 +1,4 @@
+require('./routes.js');
 require('./initialization');
 
 // Document Ready Início

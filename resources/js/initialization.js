@@ -82,10 +82,15 @@ Vue.component('IdiomsView',require('../components/IdiomsView.vue').default);
 Vue.component('NationalitiesView',require('../components/NationalitiesView.vue').default);
 Vue.component('PublishersView',require('../components/PublishersView.vue').default);
 
-window.vm = new Vue({
-    el: "#vue"
-});
-
-window.update_unassigned = function (){
-    vm.update_assigned_cards();
+var routes = {
+    data: function(){
+        return {
+            routes: window.routes
+        }
+    }
 }
+
+window.vm = new Vue({
+    el: "#vue",
+    mixins: [routes]
+});

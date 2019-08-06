@@ -2068,8 +2068,7 @@ __webpack_require__.r(__webpack_exports__);
     card_id: function card_id(new_card_id, old_card_id) {
       var _this = this;
 
-      var users = "/api/v1/users/available/" + new_card_id;
-      this.axios.get(users).then(function (response) {
+      this.axios.get(routes.card_users_available(new_card_id)).then(function (response) {
         console.log(response);
         _this.users = response.data.data;
       });
@@ -2169,17 +2168,15 @@ __webpack_require__.r(__webpack_exports__);
     update_assigned_cards: function update_assigned_cards() {
       var _this = this;
 
-      var uri = "/api/v1/assignments";
-      this.axios.get(uri).then(function (response) {
+      this.axios.get(routes.assignments()).then(function (response) {
         _this.assigned = response.data.data.assigned;
       });
     },
     submit_and_update: function submit_and_update(card_id) {
       var vm = this;
-      var uri = "/api/v1/assignment/receive/" + card_id;
       $.ajax({
-        url: uri,
-        method: "POST",
+        url: routes.assignments_card_finish(card_id),
+        method: "DELETE",
         data: {
           card_id: card_id
         },
@@ -2277,8 +2274,7 @@ __webpack_require__.r(__webpack_exports__);
     card_id: function card_id(new_card_id, old_card_id) {
       var _this = this;
 
-      var users = "/api/v1/users/available/" + new_card_id;
-      this.axios.get(users).then(function (response) {
+      this.axios.get(routes.card_users_available(new_card_id)).then(function (response) {
         _this.users = response.data.data;
       });
     }
@@ -2307,12 +2303,10 @@ __webpack_require__.r(__webpack_exports__);
     update_unassigned_cards: function update_unassigned_cards() {
       var _this2 = this;
 
-      var uri = "/api/v1/assignments";
-      this.axios.get(uri).then(function (response) {
+      this.axios.get(routes.assignments()).then(function (response) {
         _this2.unassigned = response.data.data.unassigned;
       });
-      var users_uri = "/api/v1/users";
-      this.axios.get(users_uri).then(function (response) {
+      this.axios.get(routes.users()).then(function (response) {
         _this2.users = response.data.data;
       });
     }
@@ -31750,56 +31744,65 @@ var render = function() {
       attrs: { id: "assign-card-modal-" + _vm.modal_id_string }
     },
     [
-      _c("form", { attrs: { action: "/api/v1/assignment", method: "post" } }, [
-        _c("div", { staticClass: "modal-content" }, [
-          _c("input", {
-            attrs: { type: "hidden", name: "card_id" },
-            domProps: { value: _vm.card_id }
-          }),
+      _c(
+        "form",
+        {
+          attrs: {
+            action: this.$parent.$parent.routes.assignments(),
+            method: "post"
+          }
+        },
+        [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("input", {
+              attrs: { type: "hidden", name: "card_id" },
+              domProps: { value: _vm.card_id }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-field" }, [
+              _c(
+                "select",
+                {
+                  attrs: {
+                    multiple: "",
+                    name: "publishers[]",
+                    id: "publishers",
+                    size: "3"
+                  }
+                },
+                _vm._l(_vm.users, function(user) {
+                  return _c(
+                    "option",
+                    { key: user.id, domProps: { value: user.id } },
+                    [_vm._v(_vm._s(user.name))]
+                  )
+                }),
+                0
+              ),
+              _vm._v(" "),
+              _c("label", { attrs: { for: "publisher" } }, [
+                _vm._v("Select the publishers")
+              ])
+            ])
+          ]),
           _vm._v(" "),
-          _c("div", { staticClass: "input-field" }, [
+          _c("div", { staticClass: "modal-footer" }, [
             _c(
-              "select",
+              "button",
               {
-                attrs: {
-                  multiple: "",
-                  name: "publishers[]",
-                  id: "publishers",
-                  size: "3"
+                staticClass: "btn-flat waves-effect waves-green modal-close",
+                attrs: { type: "submit" },
+                on: {
+                  click: function($event) {
+                    return _vm.submit()
+                  }
                 }
               },
-              _vm._l(_vm.users, function(user) {
-                return _c(
-                  "option",
-                  { key: user.id, domProps: { value: user.id } },
-                  [_vm._v(_vm._s(user.name))]
-                )
-              }),
-              0
-            ),
-            _vm._v(" "),
-            _c("label", { attrs: { for: "publisher" } }, [
-              _vm._v("Select the publishers")
-            ])
+              [_vm._v("Send")]
+            )
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "modal-footer" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn-flat waves-effect waves-green modal-close",
-              attrs: { type: "submit" },
-              on: {
-                click: function($event) {
-                  return _vm.submit()
-                }
-              }
-            },
-            [_vm._v("Send")]
-          )
-        ])
-      ])
+        ]
+      )
     ]
   )
 }
@@ -46351,6 +46354,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+__webpack_require__(/*! ./routes.js */ "./resources/js/routes.js");
+
 __webpack_require__(/*! ./initialization */ "./resources/js/initialization.js"); // Document Ready Início
 
 
@@ -46614,13 +46619,17 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('AddressTypesView', __webpa
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('IdiomsView', __webpack_require__(/*! ../components/IdiomsView.vue */ "./resources/components/IdiomsView.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('NationalitiesView', __webpack_require__(/*! ../components/NationalitiesView.vue */ "./resources/components/NationalitiesView.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('PublishersView', __webpack_require__(/*! ../components/PublishersView.vue */ "./resources/components/PublishersView.vue")["default"]);
-window.vm = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
-  el: "#vue"
-});
-
-window.update_unassigned = function () {
-  vm.update_assigned_cards();
+var routes = {
+  data: function data() {
+    return {
+      routes: window.routes
+    };
+  }
 };
+window.vm = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
+  el: "#vue",
+  mixins: [routes]
+});
 
 /***/ }),
 
@@ -59549,6 +59558,31 @@ var $jscomp$this = this;
   Range.init($('input[type=range]'));
 })(cash, M.anime);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node_modules/webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./resources/js/routes.js":
+/*!********************************!*\
+  !*** ./resources/js/routes.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+window.routes = {
+  PREFIX_V1: "/api/v1",
+  card_users_available: function card_users_available(card_id) {
+    return "".concat(this.PREFIX_V1, "/cards/").concat(card_id, "/users");
+  },
+  assignments: function assignments() {
+    return "".concat(this.PREFIX_V1, "/assignments");
+  },
+  assignments_card_finish: function assignments_card_finish(card_id) {
+    return "".concat(this.PREFIX_V1, "/cards/").concat(card_id, "/assignments");
+  },
+  users: function users() {
+    return "".concat(this.PREFIX_V1, "/users");
+  }
+};
 
 /***/ }),
 

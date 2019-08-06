@@ -68,8 +68,7 @@ export default {
   },
   watch: {
     card_id: function(new_card_id, old_card_id) {
-      let users = "/api/v1/users/available/" + new_card_id;
-      this.axios.get(users).then(response => {
+      this.axios.get(routes.card_users_available(new_card_id)).then(response => {
         this.users = response.data.data;
       });
     }
@@ -96,13 +95,11 @@ export default {
       });
     },
     update_unassigned_cards: function() {
-      let uri = "/api/v1/assignments";
-      this.axios.get(uri).then(response => {
+      this.axios.get(routes.assignments()).then(response => {
         this.unassigned = response.data.data.unassigned;
       });
 
-      let users_uri = "/api/v1/users";
-      this.axios.get(users_uri).then(response => {
+      this.axios.get(routes.users()).then(response => {
         this.users = response.data.data;
       });
     }
