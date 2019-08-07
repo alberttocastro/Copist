@@ -2,7 +2,7 @@
   <div>
     <div v-if="addresses">
       <blockquote>
-        <h4>Address without a map</h4>
+        <h4>Address without a card</h4>
       </blockquote>
 
       <div class="row" v-bind:key="address.id" v-for="address in addresses">
@@ -29,8 +29,9 @@
             <div class="card-action">
               <a
                 :id="address.id"
-                href="#choose-map"
+                href="#choose-card"
                 class="modal-trigger add-card-to-address-button"
+                @click="address_id = address.id"
               >Choose card</a>
             </div>
           </div>
@@ -47,46 +48,38 @@
       </div>
     </div>
 
-    <!-- Colocar rota de setar cartão -->
-    <form action="#" method="post">
-      <!-- Modal - Escolher mapa -->
-      <div id="choose-map" class="modal">
-        <!-- Conteúdo -->
-        <div class="modal-content">
-          <input type="hidden" id="address_id" name="address_id" />
-          <h4>Choose map</h4>
-          <br />
-          <div class="input-field col s12">
-            <select name="card_id" id="card_id">
-              <!-- TODO: Iterar sobre cartões -->
-              <!-- <option :value="card.id">{{card.name}} - {{card.number}}</option> -->
-              <option value="0">Cartão 1 - 1</option>
-            </select>
-          </div>
-        </div>
-        <!-- Footer -->
-        <div class="modal-footer">
-          <input
-            type="submit"
-            value="Confirm"
-            class="modal-close waves-effect waves-green btn-flat"
-          />
-        </div>
-      </div>
-    </form>
+    <address-select-card-edit-modal v-bind:address_id="address_id"></address-select-card-edit-modal>
   </div>
 </template>
 <script>
+import AddressSelectCardEditModal from "./AddressSelectCardEditModal.vue";
 export default {
+  components: {
+    AddressSelectCardEditModal
+  },
   data() {
     return {
-      addresses: []
+      addresses: [],
+      address_id: 0
     };
   },
   created() {
-      this.axios.get(routes.addresses(),{params: {card: false}}).then(response => {
+    this.update_data();
+  },
+  mounted(){
+    var vm = this;
+    this.$root.$on("addressCardUpdated", () => {
+      vm.update_data();
+    });
+  },
+  methods: {
+    update_data: function() {
+      this.axios
+        .get(routes.addresses(), { params: { card: false } })
+        .then(response => {
           this.addresses = response.data.data;
-      })
+        });
+    }
   }
 };
 </script>

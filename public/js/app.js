@@ -1688,10 +1688,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/components/AddressSelectCardView.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/components/AddressSelectCardView.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/components/AddressSelectCardEditModal.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/components/AddressSelectCardEditModal.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1731,66 +1731,143 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    address_id: Number
+  },
   data: function data() {
     return {
-      addresses: []
+      cards: []
+    };
+  },
+  watch: {
+    address_id: function address_id(new_address_id, old_address_id) {
+      var _this = this;
+
+      this.axios.get(routes.cards()).then(function (response) {
+        _this.cards = response.data.data;
+      });
+    }
+  },
+  updated: function updated() {
+    $("select").formSelect();
+  },
+  methods: {
+    submit: function submit() {
+      var vm = this;
+      var form_object = $("#choose-card form");
+      form_object.submit(function (target) {
+        target.preventDefault();
+      });
+      $.ajax({
+        url: form_object.prop("action"),
+        method: "PUT",
+        data: form_object.serialize(),
+        success: function success(data) {
+          vm.$root.$emit("addressCardUpdated");
+        }
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/components/AddressSelectCardView.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/components/AddressSelectCardView.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AddressSelectCardEditModal_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddressSelectCardEditModal.vue */ "./resources/components/AddressSelectCardEditModal.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    AddressSelectCardEditModal: _AddressSelectCardEditModal_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      addresses: [],
+      address_id: 0
     };
   },
   created: function created() {
-    var _this = this;
-
-    this.axios.get(routes.addresses(), {
-      params: {
-        card: false
-      }
-    }).then(function (response) {
-      _this.addresses = response.data.data;
+    this.update_data();
+  },
+  mounted: function mounted() {
+    var vm = this;
+    this.$root.$on("addressCardUpdated", function () {
+      vm.update_data();
     });
+  },
+  methods: {
+    update_data: function update_data() {
+      var _this = this;
+
+      this.axios.get(routes.addresses(), {
+        params: {
+          card: false
+        }
+      }).then(function (response) {
+        _this.addresses = response.data.data;
+      });
+    }
   }
 });
 
@@ -31203,6 +31280,93 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof="fun
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/components/AddressSelectCardEditModal.vue?vue&type=template&id=23e0c4d8&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/components/AddressSelectCardEditModal.vue?vue&type=template&id=23e0c4d8& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "modal bottom-sheet", attrs: { id: "choose-card" } },
+    [
+      _c(
+        "form",
+        {
+          attrs: {
+            action: this.$parent.$parent.routes.addresses(_vm.address_id),
+            method: "post"
+          }
+        },
+        [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("input", {
+              attrs: { type: "hidden", name: "_method", value: "PUT" }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", id: "address_id", name: "address_id" },
+              domProps: { value: _vm.address_id }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-field col s12" }, [
+              _c("div", { staticClass: "input-field" }, [
+                _c(
+                  "select",
+                  { attrs: { name: "card_id", id: "card_id" } },
+                  _vm._l(_vm.cards, function(card) {
+                    return _c(
+                      "option",
+                      { key: card.id, domProps: { value: card.id } },
+                      [_vm._v(_vm._s(card.name) + " - " + _vm._s(card.number))]
+                    )
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "card_id" } }, [
+                  _vm._v("Select card")
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-footer" }, [
+            _c(
+              "button",
+              {
+                staticClass: "modal-close waves-effect waves-green btn-flat",
+                attrs: { type: "submit" },
+                on: {
+                  click: function($event) {
+                    return _vm.submit()
+                  }
+                }
+              },
+              [_vm._v("Confirm")]
+            )
+          ])
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/components/AddressSelectCardView.vue?vue&type=template&id=d14a1d38&":
 /*!*********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/components/AddressSelectCardView.vue?vue&type=template&id=d14a1d38& ***!
@@ -31218,80 +31382,100 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.addresses
-      ? _c(
-          "div",
-          [
-            _vm._m(0),
-            _vm._v(" "),
-            _vm._l(_vm.addresses, function(address) {
-              return _c("div", { key: address.id, staticClass: "row" }, [
-                _c("div", { staticClass: "col s12 m6" }, [
-                  _c("div", { staticClass: "card grey lighten-5 z-depth-2" }, [
+  return _c(
+    "div",
+    [
+      _vm.addresses
+        ? _c(
+            "div",
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._l(_vm.addresses, function(address) {
+                return _c("div", { key: address.id, staticClass: "row" }, [
+                  _c("div", { staticClass: "col s12 m6" }, [
                     _c(
                       "div",
-                      { staticClass: "card-content indigo-text text-darken-4" },
+                      { staticClass: "card grey lighten-5 z-depth-2" },
                       [
-                        _c("p", [
-                          _c("b", [_vm._v("Street:")]),
-                          _vm._v(" "),
-                          _c("span", [_vm._v(_vm._s(address.street))])
-                        ]),
-                        _vm._v(" "),
-                        _c("p", [
-                          _c("b", [_vm._v("Neighborhood:")]),
-                          _vm._v(" "),
-                          _c("span", [_vm._v(_vm._s(address.neighborhood))])
-                        ]),
-                        _vm._v(" "),
-                        address.reference != ""
-                          ? _c("p", [
-                              _c("b", [_vm._v("Reference:")]),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "card-content indigo-text text-darken-4"
+                          },
+                          [
+                            _c("p", [
+                              _c("b", [_vm._v("Street:")]),
                               _vm._v(" "),
-                              _c("span", [_vm._v(_vm._s(address.reference))])
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        address.comments != ""
-                          ? _c("p", [
-                              _c("b", [_vm._v("Comments:")]),
+                              _c("span", [_vm._v(_vm._s(address.street))])
+                            ]),
+                            _vm._v(" "),
+                            _c("p", [
+                              _c("b", [_vm._v("Neighborhood:")]),
                               _vm._v(" "),
-                              _c("span", [_vm._v(_vm._s(address.comments))])
-                            ])
-                          : _vm._e()
+                              _c("span", [_vm._v(_vm._s(address.neighborhood))])
+                            ]),
+                            _vm._v(" "),
+                            address.reference != ""
+                              ? _c("p", [
+                                  _c("b", [_vm._v("Reference:")]),
+                                  _vm._v(" "),
+                                  _c("span", [
+                                    _vm._v(_vm._s(address.reference))
+                                  ])
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            address.comments != ""
+                              ? _c("p", [
+                                  _c("b", [_vm._v("Comments:")]),
+                                  _vm._v(" "),
+                                  _c("span", [_vm._v(_vm._s(address.comments))])
+                                ])
+                              : _vm._e()
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "card-action" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass:
+                                "modal-trigger add-card-to-address-button",
+                              attrs: { id: address.id, href: "#choose-card" },
+                              on: {
+                                click: function($event) {
+                                  _vm.address_id = address.id
+                                }
+                              }
+                            },
+                            [_vm._v("Choose card")]
+                          )
+                        ])
                       ]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "card-action" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass:
-                            "modal-trigger add-card-to-address-button",
-                          attrs: { id: address.id, href: "#choose-map" }
-                        },
-                        [_vm._v("Choose card")]
-                      )
-                    ])
+                    )
                   ])
                 ])
-              ])
-            })
-          ],
-          2
-        )
-      : _c("div", [_vm._m(1)]),
-    _vm._v(" "),
-    _vm._m(2)
-  ])
+              })
+            ],
+            2
+          )
+        : _c("div", [_vm._m(1)]),
+      _vm._v(" "),
+      _c("address-select-card-edit-modal", {
+        attrs: { address_id: _vm.address_id }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("blockquote", [_c("h4", [_vm._v("Address without a map")])])
+    return _c("blockquote", [_c("h4", [_vm._v("Address without a card")])])
   },
   function() {
     var _vm = this
@@ -31306,37 +31490,6 @@ var staticRenderFns = [
         ]),
         _vm._v(" "),
         _c("p", { staticClass: "center-align" }, [_vm._v("That's beautiful!")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("form", { attrs: { action: "#", method: "post" } }, [
-      _c("div", { staticClass: "modal", attrs: { id: "choose-map" } }, [
-        _c("div", { staticClass: "modal-content" }, [
-          _c("input", {
-            attrs: { type: "hidden", id: "address_id", name: "address_id" }
-          }),
-          _vm._v(" "),
-          _c("h4", [_vm._v("Choose map")]),
-          _vm._v(" "),
-          _c("br"),
-          _vm._v(" "),
-          _c("div", { staticClass: "input-field col s12" }, [
-            _c("select", { attrs: { name: "card_id", id: "card_id" } }, [
-              _c("option", { attrs: { value: "0" } }, [_vm._v("Cartão 1 - 1")])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "modal-footer" }, [
-          _c("input", {
-            staticClass: "modal-close waves-effect waves-green btn-flat",
-            attrs: { type: "submit", value: "Confirm" }
-          })
-        ])
       ])
     ])
   }
@@ -45321,6 +45474,75 @@ module.exports = function(module) {
 	}
 	return module;
 };
+
+
+/***/ }),
+
+/***/ "./resources/components/AddressSelectCardEditModal.vue":
+/*!*************************************************************!*\
+  !*** ./resources/components/AddressSelectCardEditModal.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AddressSelectCardEditModal_vue_vue_type_template_id_23e0c4d8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddressSelectCardEditModal.vue?vue&type=template&id=23e0c4d8& */ "./resources/components/AddressSelectCardEditModal.vue?vue&type=template&id=23e0c4d8&");
+/* harmony import */ var _AddressSelectCardEditModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddressSelectCardEditModal.vue?vue&type=script&lang=js& */ "./resources/components/AddressSelectCardEditModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AddressSelectCardEditModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AddressSelectCardEditModal_vue_vue_type_template_id_23e0c4d8___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AddressSelectCardEditModal_vue_vue_type_template_id_23e0c4d8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/components/AddressSelectCardEditModal.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/components/AddressSelectCardEditModal.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/components/AddressSelectCardEditModal.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddressSelectCardEditModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/babel-loader/lib??ref--4-0!../../node_modules/vue-loader/lib??vue-loader-options!./AddressSelectCardEditModal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/components/AddressSelectCardEditModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddressSelectCardEditModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/components/AddressSelectCardEditModal.vue?vue&type=template&id=23e0c4d8&":
+/*!********************************************************************************************!*\
+  !*** ./resources/components/AddressSelectCardEditModal.vue?vue&type=template&id=23e0c4d8& ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddressSelectCardEditModal_vue_vue_type_template_id_23e0c4d8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib??vue-loader-options!./AddressSelectCardEditModal.vue?vue&type=template&id=23e0c4d8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/components/AddressSelectCardEditModal.vue?vue&type=template&id=23e0c4d8&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddressSelectCardEditModal_vue_vue_type_template_id_23e0c4d8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddressSelectCardEditModal_vue_vue_type_template_id_23e0c4d8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
 
 
 /***/ }),
@@ -59584,7 +59806,8 @@ var $jscomp$this = this;
 window.routes = {
   PREFIX_V1: "/api/v1",
   addresses: function addresses() {
-    return "".concat(this.PREFIX_V1, "/addresses");
+    var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    return id == null ? "".concat(this.PREFIX_V1, "/addresses") : "".concat(this.PREFIX_V1, "/addresses/").concat(id);
   },
   card_users_available: function card_users_available(card_id) {
     return "".concat(this.PREFIX_V1, "/cards/").concat(card_id, "/users");
