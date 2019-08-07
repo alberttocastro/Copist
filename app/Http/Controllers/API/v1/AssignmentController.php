@@ -94,4 +94,11 @@ class AssignmentController extends Controller
     {
         \App\Card::find($id)->finish_assignments();
     }
+
+    public function user_assignments($id)
+    {
+        return [
+            'data' => \App\Assignment::where('user_id', $id)->whereNull('completion_date')
+        ];
+    }
 }

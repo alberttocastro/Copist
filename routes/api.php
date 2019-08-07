@@ -20,6 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->group(function(){
+    Route::post('addresses/suggested', 'API\v1\TerritorryController@create_suggested_address');
+    Route::delete('address/suggested/{id}', 'API\v1\TerritorryController@reject_suggested_address');
+
     Route::get('addresses', function(Request $request){
         $territorry_controller = new \App\Http\Controllers\API\v1\TerritorryController;
         
@@ -37,7 +40,7 @@ Route::prefix('v1')->group(function(){
     Route::post('addresses', 'API\v1\TerritorryController@create_address');
     Route::put('addresses/{id}', 'API\v1\TerritorryController@update_address');
     Route::delete('addresses/{id}', 'API\v1\TerritorryController@destroy_address');
-    
+
     Route::get('cards', function(Request $request){
         $territorry_controller = new \App\Http\Controllers\API\v1\TerritorryController;
 
@@ -59,6 +62,7 @@ Route::prefix('v1')->group(function(){
     Route::delete('macroregions/{id}', 'API\v1\InformationController@destroy_macro_region');
     
     Route::get('assignments', 'API\v1\AssignmentController@assignments');
+    Route::get('assignments/user/{id}','API\v1\AssignmentController@user_assignments');
     Route::post('assignments', 'API\v1\AssignmentController@create_assignment');
     
     Route::get('publishers', 'API\v1\InformationController@publishers');

@@ -89,6 +89,17 @@ class TerritorryController extends Controller
         ];
     }
 
+    public function create_suggested_address(Request $request)
+    {
+        \App\Suggested_address::create($request->toArray());
+    }
+
+    // Para aceitar um suggested_addres, use a ação de criar um endereço
+    public function reject_suggested_address($id)
+    {
+        \App\Suggested_address::find($id)->delete();
+    }
+
     /**
      * Retorna todos os cartões.
      * Envie 'macro_region = false' nos parâmetros para retornar cartões sem macro região
