@@ -17,7 +17,7 @@
 @endif
 <!-- Aba de aceitar endereços novos -->
 <div id="new">
-    <suggested-territory-view></territory-suggestion>
+    <suggested-addresses-view></suggested-addresses-view>
     @yield('accept_addres', view('territory.modal.accept_address'))
 </div> <!-- <div id="new"> -->
 
