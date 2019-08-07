@@ -21,15 +21,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function(){
     Route::get('addresses', function(Request $request){
-        $no_card = !$request->card;
-        $suggested = $request->suggested;
         $territorry_controller = new \App\Http\Controllers\API\v1\TerritorryController;
-
-        if($suggested)
-            return $territorry_controller->suggested_addresses();
         
-        if($no_card)
+        if($request->has('suggested') && $request->suggested === 'true'){
+            return $territorry_controller->suggested_addresses();
+        }
+        
+        if($request->has('card') && $request->card === 'false'){
             return $territorry_controller->addresses_no_card();
+        }
         
         return $territorry_controller->addresses();
     });
