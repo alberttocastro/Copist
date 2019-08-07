@@ -71,7 +71,7 @@ class TerritorryController extends Controller
 
     public function update_address(Request $request, $id)
     {
-        \App\Address::find($id)->update($request);
+        \App\Address::find($id)->update($request->toArray());
     }
 
     public function destroy_address($id)
@@ -114,12 +114,12 @@ class TerritorryController extends Controller
 
     public function create_card(Request $request)
     {
-        \App\Card::from_request($request)->save();
+        \App\Card::create($request->toArray());
     }
 
     public function update_card(Request $request, $id)
     {
-        \App\Card::find($id)->update($request);
+        \App\Card::find($id)->update($request->toArray());
     }
 
     public function destroy_card($id)

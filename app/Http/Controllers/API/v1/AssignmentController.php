@@ -90,8 +90,8 @@ class AssignmentController extends Controller
     /**
      * Remove todas as designações do cartão
      */
-    public function finish_assignments(Request $request)
+    public function finish_assignments(Request $request, $id)
     {
-        \App\Card::find($request->card_id)->finish_assignments();
+        \App\Card::find($id)->finish_assignments();
     }
 }

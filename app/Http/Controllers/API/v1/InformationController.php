@@ -44,12 +44,12 @@ class InformationController extends Controller
 
     public function create_macro_region(Request $request)
     {
-        \App\Macro_region::create($request);
+        \App\Macro_region::create($request->toArray());
     }
 
     public function update_macro_region(Request $request, $id)
     {
-        \App\Macro_region::find($id)->update($request);
+        \App\Macro_region::find($id)->update($request->toArray());
     }
 
     public function destroy_macro_region($id)
@@ -70,12 +70,12 @@ class InformationController extends Controller
 
     public function create_address_type(Request $request)
     {
-        \App\Address_type::from_request($request)->save();
+        \App\Address_type::create($request->toArray());
     }
 
     public function update_address_type(Request $request, $id)
     {
-        \App\Address_type::find($id)->update($request);
+        \App\Address_type::find($id)->update($request->toArray());
     }
 
     public function destroy_address_type($id)
@@ -96,15 +96,15 @@ class InformationController extends Controller
 
     public function create_nationality(Request $request)
     {
-        \App\Nationality::from_request($request)->save();
+        \App\Nationality::create($request->toArray());
     }
 
     public function update_nationality(Request $request, $id)
     {
-        \App\Nationality::find($id)->update($request);
+        \App\Nationality::find($id)->update($request->toArray());
     }
 
-    public function destroy_nationality()
+    public function destroy_nationality($id)
     {
         \App\Nationality::find($id)->delete();
     }
@@ -118,12 +118,12 @@ class InformationController extends Controller
 
     public function create_idiom(Request $request)
     {
-        \App\Idiom::create($request);
+        \App\Idiom::create($request->toArray());
     }
 
     public function update_idiom(Request $request, $id)
     {
-        \App\Idiom::find($id)->update($request);
+        \App\Idiom::find($id)->update($request->toArray());
     }
 
     public function destroy_idiom($id)
