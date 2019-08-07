@@ -39,10 +39,9 @@ Route::prefix('v1')->group(function(){
     Route::delete('addresses/{id}', 'API\v1\TerritorryController@destroy_address');
     
     Route::get('cards', function(Request $request){
-        $no_macro_region = !$request->macro_region;
         $territorry_controller = new \App\Http\Controllers\API\v1\TerritorryController;
 
-        if($no_macro_region)
+        if($request->has('macro_region') && $request->macro_region)
             return $territorry_controller->cards_no_macro_region();
         
         return $territorry_controller->cards();
