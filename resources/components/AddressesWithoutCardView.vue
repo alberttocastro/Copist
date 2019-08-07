@@ -36,8 +36,7 @@ export default {
     };
   },
   created() {
-    let uri = "/api/v1/withoutcard";
-    this.axios.get(uri).then(response => {
+    this.axios.get(routes.addresses(), {params: {card: false}}).then(response => {
       this.addresses_without_map = response.data.data;
       this.links = response.data.meta.links;
     });

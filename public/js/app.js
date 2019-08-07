@@ -1784,8 +1784,11 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    var uri = "/api/v1/withoutcard";
-    this.axios.get(uri).then(function (response) {
+    this.axios.get(routes.addresses(), {
+      params: {
+        card: false
+      }
+    }).then(function (response) {
       _this.addresses = response.data.data;
     });
   }
@@ -1921,7 +1924,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     var uri = "/api/v1/territorries";
-    this.axios.get(uri).then(function (response) {
+    this.axios.get(routes.addresses()).then(function (response) {
       _this.macro_regions = response.data.data;
       _this.links = response.data.meta.links;
     });
@@ -1981,8 +1984,11 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    var uri = "/api/v1/withoutcard";
-    this.axios.get(uri).then(function (response) {
+    this.axios.get(routes.addresses(), {
+      params: {
+        card: false
+      }
+    }).then(function (response) {
       _this.addresses_without_map = response.data.data;
       _this.links = response.data.meta.links;
     });
@@ -2399,11 +2405,10 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    var uri = "/api/v1/cards";
-    this.axios.get(uri).then(function (response) {
+    this.axios.get(routes.cards()).then(function (response) {
       _this.cards = response.data.data;
     });
-    this.axios.get(routes.cards()).then(function (response) {
+    this.axios.get(routes.macro_regions()).then(function (response) {
       _this.macro_regions = response.data.data;
     });
   }
@@ -2465,8 +2470,11 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    var uri = "/api/v1/withoutmacroregion";
-    this.axios.get(uri).then(function (response) {
+    this.axios.get(routes.cards(), {
+      params: {
+        macro_region: false
+      }
+    }).then(function (response) {
       _this.cards = response.data.data;
     });
   }
@@ -2541,8 +2549,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    var uri = "/api/v1/idioms";
-    this.axios.get(uri).then(function (response) {
+    this.axios.get(routes.idioms()).then(function (response) {
       _this.idioms = response.data.data;
     });
   }
@@ -2693,8 +2700,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    var uri = "/api/v1/nationalities";
-    this.axios.get(uri).then(function (response) {
+    this.axios.get(routes.nationalities()).then(function (response) {
       _this.nationalities = response.data.data;
     });
   }
@@ -2764,8 +2770,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    var uri = "/api/v1/macroregions";
-    this.axios.get(uri).then(function (response) {
+    this.axios.get(routes.macro_regions()).then(function (response) {
       _this.macro_regions = response.data.data;
     });
   },
@@ -2957,8 +2962,11 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    var uri = "/api/v1/suggestedaddresses";
-    this.axios.get(uri).then(function (response) {
+    this.axios.get(routes.addresses(), {
+      params: {
+        suggested: true
+      }
+    }).then(function (response) {
       _this.suggestions = response.data.data;
     });
   }
@@ -32796,58 +32804,67 @@ var render = function() {
     "div",
     { staticClass: "modal modal-fixed-footer", attrs: { id: "new-publisher" } },
     [
-      _c("form", { attrs: { action: "/api/v1/publishers", method: "POST" } }, [
-        _c("div", { staticClass: "modal-content" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _vm._m(1),
-          _vm._v(" "),
-          _vm._m(2),
-          _vm._v(" "),
-          _vm._m(3),
-          _vm._v(" "),
-          _c("div", { staticClass: "input-field" }, [
-            _c(
-              "select",
-              { attrs: { name: "macro_region_id", id: "macro_region_id" } },
-              [
-                _c(
-                  "option",
-                  { attrs: { value: "", disabled: "", selected: "" } },
-                  [_vm._v("Select a Macro-Region")]
-                ),
-                _vm._v(" "),
-                _vm._l(_vm.macro_regions, function(macro_region) {
-                  return _c(
-                    "option",
-                    {
-                      key: macro_region.id,
-                      domProps: { value: macro_region.id }
-                    },
-                    [_vm._v(_vm._s(macro_region.name))]
-                  )
-                })
-              ],
-              2
-            ),
+      _c(
+        "form",
+        {
+          attrs: {
+            action: this.$parent.$parent.routes.publishers(),
+            method: "POST"
+          }
+        },
+        [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(0),
             _vm._v(" "),
-            _c("label", [_vm._v("Macro Region")])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "modal-footer" }, [
-          _c("input", {
-            staticClass: "btn-flat green-text",
-            attrs: { type: "submit" },
-            domProps: { value: "Create Publisher" },
-            on: {
-              click: function($event) {
-                return _vm.submit()
+            _vm._m(1),
+            _vm._v(" "),
+            _vm._m(2),
+            _vm._v(" "),
+            _vm._m(3),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-field" }, [
+              _c(
+                "select",
+                { attrs: { name: "macro_region_id", id: "macro_region_id" } },
+                [
+                  _c(
+                    "option",
+                    { attrs: { value: "", disabled: "", selected: "" } },
+                    [_vm._v("Select a Macro-Region")]
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.macro_regions, function(macro_region) {
+                    return _c(
+                      "option",
+                      {
+                        key: macro_region.id,
+                        domProps: { value: macro_region.id }
+                      },
+                      [_vm._v(_vm._s(macro_region.name))]
+                    )
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c("label", [_vm._v("Macro Region")])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-footer" }, [
+            _c("input", {
+              staticClass: "btn-flat green-text",
+              attrs: { type: "submit" },
+              domProps: { value: "Create Publisher" },
+              on: {
+                click: function($event) {
+                  return _vm.submit()
+                }
               }
-            }
-          })
-        ])
-      ])
+            })
+          ])
+        ]
+      )
     ]
   )
 }
@@ -59566,6 +59583,9 @@ var $jscomp$this = this;
 
 window.routes = {
   PREFIX_V1: "/api/v1",
+  addresses: function addresses() {
+    return "".concat(this.PREFIX_V1, "/addresses");
+  },
   card_users_available: function card_users_available(card_id) {
     return "".concat(this.PREFIX_V1, "/cards/").concat(card_id, "/users");
   },
@@ -59589,6 +59609,12 @@ window.routes = {
   },
   address_types: function address_types() {
     return "".concat(this.PREFIX_V1, "/addresstypes");
+  },
+  idioms: function idioms() {
+    return "".concat(this.PREFIX_V1, "/idioms");
+  },
+  nationalities: function nationalities() {
+    return "".concat(this.PREFIX_V1, "/nationalities");
   }
 };
 

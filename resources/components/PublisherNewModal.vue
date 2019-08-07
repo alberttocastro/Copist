@@ -1,7 +1,7 @@
 <template>
   <div id="new-publisher" class="modal modal-fixed-footer">
     <!-- Colocar ação do formulário -->
-    <form action="/api/v1/publishers" method="POST">
+    <form v-bind:action="this.$parent.$parent.routes.publishers()" method="POST">
       <div class="modal-content">
         <div class="input-field">
           <label for="name">Name</label>
@@ -50,8 +50,7 @@ export default {
     };
   },
   created() {
-    let uri = "/api/v1/macroregions";
-    this.axios.get(uri).then(response => {
+    this.axios.get(routes.macro_regions()).then(response => {
       this.macro_regions = response.data.data;
     });
   },

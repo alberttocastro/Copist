@@ -55,8 +55,7 @@ export default {
         }
     },
     created(){
-        let uri = "/api/v1/nationalities";
-        this.axios.get(uri).then(response => {
+        this.axios.get(routes.nationalities()).then(response => {
             this.nationalities = response.data.data;
         })
     }

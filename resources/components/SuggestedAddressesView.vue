@@ -49,8 +49,7 @@ export default {
     };
   },
   created() {
-    let uri = "/api/v1/suggestedaddresses";
-    this.axios.get(uri).then(response => {
+    this.axios.get(routes.addresses(), {params: {suggested: true}}).then(response => {
       this.suggestions = response.data.data;
     });
   }

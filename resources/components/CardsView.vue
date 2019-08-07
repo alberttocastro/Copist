@@ -73,12 +73,11 @@ export default {
     };
   },
   created() {
-    let uri = "/api/v1/cards";
-    this.axios.get(uri).then(response => {
+    this.axios.get(routes.cards()).then(response => {
       this.cards = response.data.data;
     });
 
-    this.axios.get(routes.cards()).then(response => {
+    this.axios.get(routes.macro_regions()).then(response => {
       this.macro_regions = response.data.data;
     });
   }

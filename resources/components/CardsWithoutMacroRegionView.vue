@@ -42,8 +42,7 @@ export default {
     };
   },
   created() {
-    let uri = "/api/v1/withoutmacroregion";
-    this.axios.get(uri).then(response => {
+    this.axios.get(routes.cards(),{params:{macro_region: false}}).then(response => {
       this.cards = response.data.data;
     });
   }
