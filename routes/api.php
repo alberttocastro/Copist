@@ -64,6 +64,7 @@ Route::prefix('v1')->group(function(){
     Route::get('assignments', 'API\v1\AssignmentController@assignments');
     Route::get('assignments/user/{id}','API\v1\AssignmentController@user_assignments');
     Route::post('assignments', 'API\v1\AssignmentController@create_assignment');
+    Route::delete('assignments/{id}', 'API\v1\AssignmentController@finish_assignment');
     
     Route::get('publishers', 'API\v1\InformationController@publishers');
     Route::post('publishers', 'API\v1\InformationController@create_publisher');

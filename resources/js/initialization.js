@@ -76,6 +76,8 @@ Vue.component('CardsWithoutMacroRegionView', require('../components/CardsWithout
 Vue.component('CardsUnassignedView', require('../components/CardsUnassignedView.vue').default);
 Vue.component('CardsAssignedView', require('../components/CardsAssignedView.vue').default);
 
+Vue.component('AssignmentUserView', require('../components/AssignmentsUserView.vue').default);
+
 Vue.component('MacroRegionsView',require('../components/MacroRegionsView.vue').default);
 Vue.component('AddressTypesView',require('../components/AddressTypesView.vue').default);
 Vue.component('IdiomsView',require('../components/IdiomsView.vue').default);

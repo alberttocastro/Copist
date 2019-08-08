@@ -28,4 +28,11 @@ class Assignment extends Model
         $assignment->user_id = $user_id;
         return $assignment;
     }
+
+    public function finish()
+    {
+        $this->completion_date = (new \DateTime)->format('Y-m-d H:i:s');
+        $this->save();
+        return $this;
+    }
 }
