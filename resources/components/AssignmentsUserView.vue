@@ -43,7 +43,8 @@
                   <a
                     :id=" address.id"
                     class="waves-effect waves-light btn modal-trigger blue darken-3 report-visit"
-                    href="#report-visit"
+                    href="#report-new"
+                    @click="address_id = address.id"
                   >Report</a>
                 </div>
               </div>
@@ -63,13 +64,19 @@
         </form>
       </div>
     </div>
+    <report-new-modal v-bind:address_id="address_id"></report-new-modal>
   </div>
 </template>
 <script>
+import ReportNewModal from './ReportNewModal.vue';
 export default {
+  components:{
+    ReportNewModal
+  },
   data() {
     return {
-      assignments: []
+      assignments: [],
+      address_id: 0
     };
   },
   created() {
