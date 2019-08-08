@@ -65,7 +65,7 @@ class TerritorryController extends Controller
 
     public function create_address(Request $request)
     {
-        if(\App\Address::create($request->address) && $request->suggested_address != null)
+        if (\App\Address::create($request->address) && $request->suggested_address != null)
             \App\Suggested_address::find($request->suggested_address)->delete();
     }
 

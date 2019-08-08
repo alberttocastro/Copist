@@ -68,9 +68,11 @@ Vue.component('AddressesView', require('../components/AddressesView.vue').defaul
 Vue.component('AddressesWithoutCardView', require('../components/AddressesWithoutCardView.vue').default);
 Vue.component('AddressSelectCardView', require('../components/AddressSelectCardView.vue').default);
 
+Vue.component('SuggestedAddressNewAction', require('../components/SuggestedAddressNewAction.vue').default);
+
 Vue.component('SuggestedAddressesView', require('../components/SuggestedAddressesView.vue').default);
 
-Vue.component('CardsView',require('../components/CardsView.vue').default);
+Vue.component('CardsView', require('../components/CardsView.vue').default);
 Vue.component('CardsWithoutMacroRegionView', require('../components/CardsWithoutMacroRegionView.vue').default);
 
 Vue.component('CardsUnassignedView', require('../components/CardsUnassignedView.vue').default);
@@ -78,14 +80,14 @@ Vue.component('CardsAssignedView', require('../components/CardsAssignedView.vue'
 
 Vue.component('AssignmentUserView', require('../components/AssignmentsUserView.vue').default);
 
-Vue.component('MacroRegionsView',require('../components/MacroRegionsView.vue').default);
-Vue.component('AddressTypesView',require('../components/AddressTypesView.vue').default);
-Vue.component('IdiomsView',require('../components/IdiomsView.vue').default);
-Vue.component('NationalitiesView',require('../components/NationalitiesView.vue').default);
-Vue.component('PublishersView',require('../components/PublishersView.vue').default);
+Vue.component('MacroRegionsView', require('../components/MacroRegionsView.vue').default);
+Vue.component('AddressTypesView', require('../components/AddressTypesView.vue').default);
+Vue.component('IdiomsView', require('../components/IdiomsView.vue').default);
+Vue.component('NationalitiesView', require('../components/NationalitiesView.vue').default);
+Vue.component('PublishersView', require('../components/PublishersView.vue').default);
 
 var routes = {
-    data: function(){
+    data: function () {
         return {
             routes: window.routes
         }
