@@ -19,21 +19,24 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('v1')->group(function(){
+Route::prefix('v1')->group(function () {
+
+    Route::put('permissions', 'API\V1\PermissionController@update_permission');
+
     Route::post('addresses/suggested', 'API\v1\TerritorryController@create_suggested_address');
     Route::delete('address/suggested/{id}', 'API\v1\TerritorryController@reject_suggested_address');
 
-    Route::get('addresses', function(Request $request){
+    Route::get('addresses', function (Request $request) {
         $territorry_controller = new \App\Http\Controllers\API\v1\TerritorryController;
-        
-        if($request->has('suggested') && $request->suggested === 'true'){
+
+        if ($request->has('suggested') && $request->suggested === 'true') {
             return $territorry_controller->suggested_addresses();
         }
-        
-        if($request->has('card') && $request->card === 'false'){
+
+        if ($request->has('card') && $request->card === 'false') {
             return $territorry_controller->addresses_no_card();
         }
-        
+
         return $territorry_controller->addresses();
     });
     Route::get('addresses/{id}', 'API\v1\TerritorryController@address');
@@ -41,40 +44,40 @@ Route::prefix('v1')->group(function(){
     Route::put('addresses/{id}', 'API\v1\TerritorryController@update_address');
     Route::delete('addresses/{id}', 'API\v1\TerritorryController@destroy_address');
 
-    Route::get('cards', function(Request $request){
+    Route::get('cards', function (Request $request) {
         $territorry_controller = new \App\Http\Controllers\API\v1\TerritorryController;
 
-        if($request->has('macro_region') && $request->macro_region)
+        if ($request->has('macro_region') && $request->macro_region)
             return $territorry_controller->cards_no_macro_region();
-        
+
         return $territorry_controller->cards();
     });
     Route::post('cards', 'API\v1\TerritorryController@create_card');
     Route::put('cards/{id}', 'API\v1\TerritorryController@update_card');
     Route::delete('cards/{id}', 'API\v1\TerritorryController@destroy_card');
-    
+
     Route::get('cards/{id}/users', 'API\v1\AssignmentController@users_for_card');
     Route::delete('cards/{id}/assignments', 'API\v1\AssignmentController@finish_assignments');
-    
+
     Route::get('macroregions', 'API\v1\InformationController@macro_regions');
     Route::post('macroregions', 'API\v1\InformationController@create_macro_region');
     Route::put('macroregions/{id}', 'API\v1\InformationController@update_macro_region');
     Route::delete('macroregions/{id}', 'API\v1\InformationController@destroy_macro_region');
-    
+
     Route::get('assignments', 'API\v1\AssignmentController@assignments');
-    Route::get('assignments/user/{id}','API\v1\AssignmentController@user_assignments');
+    Route::get('assignments/user/{id}', 'API\v1\AssignmentController@user_assignments');
     Route::post('assignments', 'API\v1\AssignmentController@create_assignment');
     Route::delete('assignments/{id}', 'API\v1\AssignmentController@finish_assignment');
-    
+
     Route::get('publishers', 'API\v1\InformationController@publishers');
     Route::post('publishers', 'API\v1\InformationController@create_publisher');
     Route::put('publishers/{id}', 'API\v1\InformationController@update_publisher');
     Route::delete('publishers/{id}', 'API\v1\InformationController@destroy_publisher');
-    
+
     Route::get('addresstypes', 'API\v1\InformationController@address_types');
     Route::post('addresstypes', 'API\v1\InformationController@create_address_type');
-    Route::put('addresstypes/{id}','API\v1\InformationController@update_address_type');
-    Route::delete('addresstypes/{id}','API\v1\InformationController@destroy_address_type');
+    Route::put('addresstypes/{id}', 'API\v1\InformationController@update_address_type');
+    Route::delete('addresstypes/{id}', 'API\v1\InformationController@destroy_address_type');
 
     Route::get('users', 'API\v1\AssignmentController@users');
 

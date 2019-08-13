@@ -41,5 +41,8 @@ window.routes = {
     },
     nationalities: function () {
         return `${this.PREFIX_V1}/nationalities`
+    },
+    permissions: function () {
+        return `${this.PREFIX_V1}/permissions`
     }
 };

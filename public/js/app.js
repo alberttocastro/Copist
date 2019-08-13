@@ -2916,6 +2916,106 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/components/PermissionsView.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/components/PermissionsView.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      users: [],
+      publishers: []
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    this.axios.get(routes.users()).then(function (response) {
+      _this.users = response.data.data;
+    });
+    this.axios.get(routes.publishers()).then(function (response) {
+      _this.publishers = response.data.data;
+    });
+  },
+  updated: function updated() {
+    this.make_materialize_select();
+  },
+  methods: {
+    ensure_unique_selection: function ensure_unique_selection(publisher_id) {// TODO: Make sure that no more than one user gets the same publisher
+    },
+    make_materialize_select: function make_materialize_select() {
+      $("select").formSelect();
+    },
+    submit: function submit() {
+      var form_object = $("#update-permissions-form");
+      form_object.submit(function (target) {
+        target.preventDefault();
+      });
+      $.ajax({
+        url: form_object.prop("action"),
+        method: "PUT",
+        data: form_object.serialize(),
+        success: function success() {
+          console.info("Permissions updated");
+        }
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/components/PublisherNewModal.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/components/PublisherNewModal.vue?vue&type=script&lang=js& ***!
@@ -33416,6 +33516,144 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/components/PermissionsView.vue?vue&type=template&id=1c117430&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/components/PermissionsView.vue?vue&type=template&id=1c117430& ***!
+  \***************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c(
+      "form",
+      {
+        attrs: {
+          id: "update-permissions-form",
+          action: this.$parent.routes.permissions(),
+          method: "post"
+        }
+      },
+      [
+        _c("input", {
+          attrs: { type: "hidden", name: "_method", value: "put" }
+        }),
+        _vm._v(" "),
+        _vm.users
+          ? _c(
+              "div",
+              { staticClass: "row" },
+              _vm._l(_vm.users, function(user) {
+                return _c("div", { key: user.id, staticClass: "col s12 m12" }, [
+                  _c("div", { staticClass: "card white z-depth-3" }, [
+                    _c("div", { staticClass: "card-content black-text" }, [
+                      _c("span", { staticClass: "card-title" }, [
+                        _vm._v(_vm._s(user.email))
+                      ]),
+                      _vm._v(" "),
+                      _c("div", [
+                        _c(
+                          "select",
+                          {
+                            attrs: {
+                              name: "permissions[" + user.id + "]",
+                              id: user.id
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              {
+                                attrs: { value: "0" },
+                                domProps: { selected: user.publisher_id == 0 }
+                              },
+                              [_vm._v("Access denied")]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.publishers, function(publisher) {
+                              return _c(
+                                "option",
+                                {
+                                  key: publisher.id,
+                                  domProps: {
+                                    value: publisher.id,
+                                    selected: user.publisher_id == publisher.id
+                                  },
+                                  on: {
+                                    select: function($event) {
+                                      return _vm.ensure_unique_selection(
+                                        publisher.id
+                                      )
+                                    }
+                                  }
+                                },
+                                [_vm._v(_vm._s(publisher.name))]
+                              )
+                            })
+                          ],
+                          2
+                        )
+                      ])
+                    ])
+                  ])
+                ])
+              }),
+              0
+            )
+          : _c("div", { staticClass: "row" }, [_vm._m(0)]),
+        _vm._v(" "),
+        _c("div", { staticClass: "fixed-action-btn" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn-floating btn-large purple darken-2",
+              attrs: { type: "submit" },
+              on: {
+                click: function($event) {
+                  return _vm.submit()
+                }
+              }
+            },
+            [_c("i", { staticClass: "material-icons Large" }, [_vm._v("send")])]
+          )
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "valign-wrapper" }, [
+      _c("div", { staticStyle: { width: "100%" } }, [
+        _c("h2", { staticClass: "center-align" }, [_vm._v("Ooops")]),
+        _vm._v(" "),
+        _c("h5", { staticClass: "center-align" }, [
+          _vm._v("No users to manage permission")
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "center-align" }, [
+          _vm._v("Encourage the brothers from your congregation to use it!")
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/components/PublisherNewModal.vue?vue&type=template&id=371bcde8&":
 /*!*****************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/components/PublisherNewModal.vue?vue&type=template&id=371bcde8& ***!
@@ -47151,6 +47389,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/components/PermissionsView.vue":
+/*!**************************************************!*\
+  !*** ./resources/components/PermissionsView.vue ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PermissionsView_vue_vue_type_template_id_1c117430___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PermissionsView.vue?vue&type=template&id=1c117430& */ "./resources/components/PermissionsView.vue?vue&type=template&id=1c117430&");
+/* harmony import */ var _PermissionsView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PermissionsView.vue?vue&type=script&lang=js& */ "./resources/components/PermissionsView.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PermissionsView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PermissionsView_vue_vue_type_template_id_1c117430___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PermissionsView_vue_vue_type_template_id_1c117430___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/components/PermissionsView.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/components/PermissionsView.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/components/PermissionsView.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PermissionsView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/babel-loader/lib??ref--4-0!../../node_modules/vue-loader/lib??vue-loader-options!./PermissionsView.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/components/PermissionsView.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PermissionsView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/components/PermissionsView.vue?vue&type=template&id=1c117430&":
+/*!*********************************************************************************!*\
+  !*** ./resources/components/PermissionsView.vue?vue&type=template&id=1c117430& ***!
+  \*********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PermissionsView_vue_vue_type_template_id_1c117430___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib??vue-loader-options!./PermissionsView.vue?vue&type=template&id=1c117430& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/components/PermissionsView.vue?vue&type=template&id=1c117430&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PermissionsView_vue_vue_type_template_id_1c117430___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PermissionsView_vue_vue_type_template_id_1c117430___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/components/PublisherNewModal.vue":
 /*!****************************************************!*\
   !*** ./resources/components/PublisherNewModal.vue ***!
@@ -47822,8 +48129,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_axios__WEBPACK_IMPORTED_MODULE_2___default.a, axios__WEBPACK_IMPORTED_MODULE_1___default.a); //Territory
-
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_axios__WEBPACK_IMPORTED_MODULE_2___default.a, axios__WEBPACK_IMPORTED_MODULE_1___default.a);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('AddressesView', __webpack_require__(/*! ../components/AddressesView.vue */ "./resources/components/AddressesView.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('AddressesWithoutCardView', __webpack_require__(/*! ../components/AddressesWithoutCardView.vue */ "./resources/components/AddressesWithoutCardView.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('AddressSelectCardView', __webpack_require__(/*! ../components/AddressSelectCardView.vue */ "./resources/components/AddressSelectCardView.vue")["default"]);
@@ -47839,6 +48145,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('AddressTypesView', __webpa
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('IdiomsView', __webpack_require__(/*! ../components/IdiomsView.vue */ "./resources/components/IdiomsView.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('NationalitiesView', __webpack_require__(/*! ../components/NationalitiesView.vue */ "./resources/components/NationalitiesView.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('PublishersView', __webpack_require__(/*! ../components/PublishersView.vue */ "./resources/components/PublishersView.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('PermissionsView', __webpack_require__(/*! ../components/PermissionsView.vue */ "./resources/components/PermissionsView.vue")["default"]);
 var routes = {
   data: function data() {
     return {
@@ -60832,6 +61139,9 @@ window.routes = {
   },
   nationalities: function nationalities() {
     return "".concat(this.PREFIX_V1, "/nationalities");
+  },
+  permissions: function permissions() {
+    return "".concat(this.PREFIX_V1, "/permissions");
   }
 };
 

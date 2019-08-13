@@ -63,7 +63,6 @@ import VueAxios from 'vue-axios'
 
 Vue.use(VueAxios, axios);
 
-//Territory
 Vue.component('AddressesView', require('../components/AddressesView.vue').default);
 Vue.component('AddressesWithoutCardView', require('../components/AddressesWithoutCardView.vue').default);
 Vue.component('AddressSelectCardView', require('../components/AddressSelectCardView.vue').default);
@@ -85,6 +84,7 @@ Vue.component('AddressTypesView', require('../components/AddressTypesView.vue').
 Vue.component('IdiomsView', require('../components/IdiomsView.vue').default);
 Vue.component('NationalitiesView', require('../components/NationalitiesView.vue').default);
 Vue.component('PublishersView', require('../components/PublishersView.vue').default);
+Vue.component('PermissionsView', require('../components/PermissionsView.vue').default);
 
 var routes = {
     data: function () {
