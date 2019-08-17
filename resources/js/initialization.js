@@ -66,6 +66,7 @@ Vue.use(VueAxios, axios);
 Vue.component('AddressesView', require('../components/AddressesView.vue').default);
 Vue.component('AddressesWithoutCardView', require('../components/AddressesWithoutCardView.vue').default);
 Vue.component('AddressSelectCardView', require('../components/AddressSelectCardView.vue').default);
+Vue.component('AddressView', require('../components/AddressView.vue').default);
 
 Vue.component('SuggestedAddressNewAction', require('../components/SuggestedAddressNewAction.vue').default);
 

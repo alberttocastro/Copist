@@ -58,9 +58,7 @@ class TerritorryController extends Controller
 
     public function address($id)
     {
-        return [
-            'data' => \App\Address::find($id)
-        ];
+        return new \App\Http\Resources\Address(\App\Address::with('visits')->find($id));
     }
 
     public function create_address(Request $request)
