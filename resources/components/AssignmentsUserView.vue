@@ -36,7 +36,7 @@
                     <br />
                   </div>
                   <div class="col s3">
-                    <a v-bind:href="addresses_route(address.id)">View</a>
+                    <a v-bind:href="`/territory/${address.id}`">View</a>
                   </div>
                 </div>
                 <div>
@@ -52,7 +52,11 @@
           </ul>
           <h5 v-else class="green-text text-darken-1">This card has no address!</h5>
         </div>
-        <form id="assignment-finish" v-bind:action="assignment_finish_route(assignment.id)" method="POST">
+        <form
+          id="assignment-finish"
+          v-bind:action="assignment_finish_route(assignment.id)"
+          method="POST"
+        >
           <div class="card-action">
             <button
               class="btn black-text waves-effect waves-teal btn-flat"
@@ -68,9 +72,9 @@
   </div>
 </template>
 <script>
-import ReportNewModal from './ReportNewModal.vue';
+import ReportNewModal from "./ReportNewModal.vue";
 export default {
-  components:{
+  components: {
     ReportNewModal
   },
   data() {

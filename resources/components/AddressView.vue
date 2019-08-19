@@ -93,7 +93,7 @@
       </div>
       <div class="row">
         <div class="col s6 offset-s3">
-          <a v-bind:href="this.$parent.routes.addresses(address_id)" class="btn">Edit</a>
+          <a v-bind:href="`/territory/edit/${address_id}`" class="btn">Edit</a>
         </div>
       </div>
     </div>

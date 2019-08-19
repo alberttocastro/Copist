@@ -1,24 +1,26 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url("https://fonts.googleapis.com/css?family=Nunito");
 
 // Variables
-@import 'variables';
+@import "variables";
 
 //Materialize
-@import 'materialize.scss';
+@import "materialize.scss";
 
 //Components
-@import 'app_components/forms';
-@import 'app_components/text';
-@import 'app_components/collections';
-@import 'app_components/cards';
+@import "app_components/forms";
+@import "app_components/text";
+@import "app_components/collections";
+@import "app_components/cards";
 
+//toastr
+@import "~toastr/toastr";
 
 .navbar-laravel {
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
-.display-none{
-    display: none;
+.display-none {
+  display: none;
 }

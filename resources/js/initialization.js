@@ -1,6 +1,29 @@
 window._ = require('lodash');
 
 /**
+ * 
+ */
+
+window.toastr = require('toastr');
+window.toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": true,
+    "progressBar": true,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+};
+
+/**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
  * code may be modified to fit the specific needs of your application.
@@ -67,6 +90,7 @@ Vue.component('AddressesView', require('../components/AddressesView.vue').defaul
 Vue.component('AddressesWithoutCardView', require('../components/AddressesWithoutCardView.vue').default);
 Vue.component('AddressSelectCardView', require('../components/AddressSelectCardView.vue').default);
 Vue.component('AddressView', require('../components/AddressView.vue').default);
+Vue.component('AddressEdit', require('../components/AddressEdit.vue').default);
 
 Vue.component('SuggestedAddressNewAction', require('../components/SuggestedAddressNewAction.vue').default);
 
@@ -97,5 +121,7 @@ var routes = {
 
 window.vm = new Vue({
     el: "#vue",
-    mixins: [routes]
+    mixins: [
+        routes
+    ]
 });
