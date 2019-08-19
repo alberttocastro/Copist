@@ -14,10 +14,6 @@
                 <div class="card-content">
                   <h5 style="margin-top: 0;">{{idiom.name}}</h5>
                 </div>
-                <div class="card-action">
-                  <a class="blue-text text-darken-4" href="#">Edit</a>
-                  <a class="red-text text-darken-4" href="#">Delete</a>
-                </div>
               </div>
             </div>
           </div>
@@ -32,16 +28,18 @@
         </div>
       </div>
     </div>
-    <div id="create-idiom" class="modal">
-        <!-- TODO: Adicionar rota de criar idioma -->
-      <form action="#" method="post">
-        @csrf
+    <div id="create-idiom" class="modal bottom-sheet">
+      <form id="idiom-new" :action="this.$parent.routes.idioms()" method="post">
         <div class="modal-content">
           <label for="idiom">Idiom name</label>
           <input type="text" name="name" id="name" />
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn-flat modal-close green-text">Create idiom</button>
+          <button
+            type="submit"
+            class="btn-flat modal-close green-text"
+            @click="submit()"
+          >Create idiom</button>
         </div>
       </form>
     </div>
@@ -49,15 +47,39 @@
 </template>
 <script>
 export default {
-  data(){
+  data() {
     return {
       idioms: []
-    }
+    };
   },
-  created(){
-    this.axios.get(routes.idioms()).then(response => {
-      this.idioms = response.data.data;
-    })
+  created() {
+    this.update();
+  },
+  methods: {
+    submit() {
+      let vm = this;
+      let form_object = $("form#idiom-new");
+
+      form_object.submit(function(target) {
+        target.preventDefault();
+      });
+
+      $.ajax({
+        url: form_object.prop("action"),
+        method: "POST",
+        data: form_object.serialize(),
+        success: function() {
+          form_object.parent().modal("close");
+          vm.update();
+          $("input[name='name']").val("");
+        }
+      });
+    },
+    update() {
+      this.axios.get(routes.idioms()).then(response => {
+        this.idioms = response.data.data;
+      });
+    }
   }
 };
 </script>

@@ -9,14 +9,14 @@
       <div class="row">
         <div class="col s12 m10 offset-m1">
           <div class="row">
-            <div v-for="nationality in nationalities" v-bind:key="nationality.id" class="col s12 m6">
+            <div
+              v-for="nationality in nationalities"
+              v-bind:key="nationality.id"
+              class="col s12 m6"
+            >
               <div class="card">
                 <div class="card-content">
-                  <h5 style="margin-top: 0;">{{nationlity.name}}</h5>
-                </div>
-                <div class="card-action">
-                  <a class="blue-text text-darken-4" href="#">Edit</a>
-                  <a class="red-text text-darken-4" href="#">Delete</a>
+                  <h5 style="margin-top: 0;">{{nationality.name}}</h5>
                 </div>
               </div>
             </div>
@@ -33,15 +33,13 @@
       </div>
     </div>
     <div id="create-nationality" class="modal bottom-sheet">
-        <!-- TODO: Colocar rota no formulário -->
-      <form action="#" method="post">
-        @csrf
+      <form id="nationality-new" :action="this.$parent.routes.nationalities()" method="post">
         <div class="modal-content">
           <label for="nationality">Nationality name</label>
           <input type="text" name="name" id="name" />
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn-flat green-text">Create Nationality</button>
+          <button type="submit" class="btn-flat green-text" @click="submit()">Create Nationality</button>
         </div>
       </form>
     </div>
@@ -49,16 +47,40 @@
 </template>
 <script>
 export default {
-    data(){
-        return {
-            nationalities: []
+  data() {
+    return {
+      nationalities: []
+    };
+  },
+  created() {
+    this.update();
+  },
+  methods: {
+    submit() {
+      let vm = this;
+      let form_object = $("form#nationality-new");
+
+      form_object.submit(function(target) {
+        target.preventDefault();
+      });
+
+      $.ajax({
+        url: form_object.prop("action"),
+        method: "POST",
+        data: form_object.serialize(),
+        success: function() {
+          form_object.parent().modal("close");
+          vm.update();
+          $("input[name='name']").val("");
         }
+      });
     },
-    created(){
-        this.axios.get(routes.nationalities()).then(response => {
-            this.nationalities = response.data.data;
-        })
+    update() {
+      this.axios.get(routes.nationalities()).then(response => {
+        this.nationalities = response.data.data;
+      });
     }
-}
+  }
+};
 </script>
 
