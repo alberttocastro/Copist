@@ -1848,19 +1848,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     var href = window.location.href.split("/");
@@ -1878,11 +1865,9 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.axios.get(routes.idioms()).then(function (response) {
-      console.log(response);
       _this.idioms = response.data.data;
     });
     this.axios.get(routes.nationalities()).then(function (response) {
-      console.log(response);
       _this.nationalities = response.data.data;
     });
     this.axios.get(routes.address_types()).then(function (response) {
@@ -1903,19 +1888,20 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submit: function submit() {
+      var vm = this;
       var form_object = $("form#address-edit-form");
       form_object.submit(function (target) {
         target.preventDefault();
       });
-      console.log(form_object.serialize());
+      window.setCheckboxInputValue($("input:checkbox"));
       $.ajax({
         url: form_object.prop("action"),
         method: "PUT",
-        data: form_object.serialize(),
+        data: form_object.serializeArray(),
         success: function success() {
           window.toastr["success"]("Address successfully updated");
         },
-        error: function error() {
+        error: function error(jqXHR, textStatus, errorThrown) {
           window.toastr["error"]("Address could not be saved");
         }
       });
@@ -32780,47 +32766,29 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "input-field s12" }, [
-              _vm._v("\n          Allow us to visit?\n          "),
-              _c("div", { staticClass: "switch" }, [
-                _c("label", [
-                  _vm._v("\n              No\n              "),
-                  _c("input", {
-                    attrs: {
-                      id: "is_visitable",
-                      name: "is_visitable",
-                      type: "checkbox"
-                    },
-                    domProps: { checked: _vm.address.is_visitable }
-                  }),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "lever" }),
-                  _vm._v("\n              Yes\n            ")
-                ])
-              ])
+          _c("p", [
+            _c("label", [
+              _c("input", {
+                attrs: {
+                  id: "is_visitable",
+                  name: "is_visitable",
+                  type: "checkbox"
+                },
+                domProps: { checked: _vm.address.is_visitable }
+              }),
+              _vm._v(" "),
+              _c("span", [_vm._v("Allow us to visit?")])
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "input-field s12" }, [
-              _vm._v("\n          Is a valid address?\n          "),
-              _c("div", { staticClass: "switch" }, [
-                _c("label", [
-                  _vm._v("\n              No\n              "),
-                  _c("input", {
-                    attrs: {
-                      id: "is_valid",
-                      name: "is_valid",
-                      type: "checkbox"
-                    },
-                    domProps: { checked: _vm.address.is_valid }
-                  }),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "lever" }),
-                  _vm._v("\n              Yes\n            ")
-                ])
-              ])
+          _c("p", [
+            _c("label", [
+              _c("input", {
+                attrs: { id: "is_valid", name: "is_valid", type: "checkbox" },
+                domProps: { checked: _vm.address.is_valid }
+              }),
+              _vm._v(" "),
+              _c("span", [_vm._v("Teste")])
             ])
           ]),
           _vm._v(" "),
@@ -49702,7 +49670,15 @@ $(function () {
     $("input#address_id").val(id);
   });
   suggestTerritoryValidation();
+  var checkbox_object = $("input:checkbox");
+  checkbox_object.change(function () {
+    window.setCheckboxInputValue(checkbox_object);
+  });
 }); // Document Ready Fim
+
+window.setCheckboxInputValue = function (checkbox_object) {
+  checkbox_object.val(checkbox_object.prop('checked'));
+};
 
 function notHidden() {
   if ($("nav").parent().prop("tagName") == "DIV") {

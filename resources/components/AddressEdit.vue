@@ -83,42 +83,29 @@
             </select>
           </div>
         </div>
-        <div class="row">
-          <div class="input-field s12">
-            Allow us to visit?
-            <div class="switch">
-              <label>
-                No
-                <input
-                  id="is_visitable"
-                  name="is_visitable"
-                  type="checkbox"
-                  :checked="address.is_visitable"
-                />
-                <span class="lever"></span>
-                Yes
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field s12">
-            Is a valid address?
-            <div class="switch">
-              <label>
-                No
-                <input id="is_valid" name="is_valid" type="checkbox" :checked="address.is_valid" />
-                <span class="lever"></span>
-                Yes
-              </label>
-            </div>
-          </div>
-        </div>
+        <p>
+          <label>
+            <input
+              id="is_visitable"
+              name="is_visitable"
+              type="checkbox"
+              :checked="address.is_visitable"
+            />
+            <span>Allow us to visit?</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input id="is_valid" name="is_valid" type="checkbox" :checked="address.is_valid" />
+            <span>Teste</span>
+          </label>
+        </p>
         <div class="row">
           <div class="input-field s12">
             Return Visit
             <select name="publisher_id" id="publisher_id">
               <option value="0">Is not being visited</option>
+
               <option
                 v-for="publisher in publishers"
                 v-bind:key="publisher.id"
@@ -178,11 +165,9 @@ export default {
   },
   created() {
     this.axios.get(routes.idioms()).then(response => {
-      console.log(response);
       this.idioms = response.data.data;
     });
     this.axios.get(routes.nationalities()).then(response => {
-      console.log(response);
       this.nationalities = response.data.data;
     });
     this.axios.get(routes.address_types()).then(response => {
@@ -203,21 +188,22 @@ export default {
   },
   methods: {
     submit() {
+      let vm = this;
       let form_object = $("form#address-edit-form");
 
       form_object.submit(function(target) {
         target.preventDefault();
       });
 
-      console.log(form_object.serialize());
+      window.setCheckboxInputValue($("input:checkbox"));
       $.ajax({
         url: form_object.prop("action"),
         method: "PUT",
-        data: form_object.serialize(),
+        data: form_object.serializeArray(),
         success: function() {
           window.toastr["success"]("Address successfully updated");
         },
-        error: function() {
+        error: function(jqXHR, textStatus, errorThrown) {
           window.toastr["error"]("Address could not be saved");
         }
       });

@@ -127,7 +127,17 @@ $(function () {
 
     suggestTerritoryValidation();
 
+    let checkbox_object = $("input:checkbox");
+
+    checkbox_object.change(function () {
+        window.setCheckboxInputValue(checkbox_object);
+    });
+
 }); // Document Ready Fim
+
+window.setCheckboxInputValue = function (checkbox_object) {
+    checkbox_object.val(checkbox_object.prop('checked'));
+}
 
 function notHidden() {
     if ($("nav").parent().prop("tagName") == "DIV") {
