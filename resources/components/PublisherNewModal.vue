@@ -1,5 +1,5 @@
 <template>
-  <div id="new-publisher" class="modal modal-fixed-footer">
+  <div id="new-publisher" class="modal bottom-sheet modal-fixed-footer">
     <!-- Colocar ação do formulário -->
     <form v-bind:action="this.$parent.$parent.routes.publishers()" method="POST">
       <div class="modal-content">
@@ -32,12 +32,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <input
-          type="submit"
-          class="btn-flat green-text"
-          :value="'Create Publisher'"
-          @click="submit()"
-        />
+        <button class="btn-flat green-text" @click="submit()">Create publisher</button>
       </div>
     </form>
   </div>
@@ -50,34 +45,37 @@ export default {
     };
   },
   created() {
-    this.axios.get(routes.macro_regions()).then(response => {
-      this.macro_regions = response.data.data;
-    });
+    this.update();
   },
   updated() {
-    $("select").formSelect();
+    $("#new-publisher select").formSelect();
   },
   methods: {
-    submit: function() {
+    submit() {
       var vm = this;
       var jquery_form_object = $("#new-publisher form");
-      
-      jquery_form_object.submit(function(target) {target.preventDefault();});
+      jquery_form_object.submit(function(target) {
+        target.preventDefault();
+      });
 
       $.ajax({
-        url: jquery_form_object.prop('action'),
+        url: jquery_form_object.prop("action"),
         method: "POST",
         data: jquery_form_object.serialize(),
-        success: function (data){
-          vm.$root.$emit('createPublisher');
-          
-          $("#new-publisher").modal('close');
-          $("#new-publisher input").val('');
-        },
-        error: function(data){
-          console.log(data);
+        success: function(data) {
+          vm.$root.$emit("createPublisher");
+
+          window.toastr["success"]("Publisher successfully created");
+
+          $("#new-publisher").modal("close");
+          $("#new-publisher input").val("");
         }
-      })
+      });
+    },
+    update() {
+      this.axios.get(routes.macro_regions()).then(response => {
+        this.macro_regions = response.data.data;
+      });
     }
   }
 };

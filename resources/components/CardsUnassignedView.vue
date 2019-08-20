@@ -14,7 +14,11 @@
             <div class="card-header-flex">
               <div class="card-header-name">{{card.name}}</div>
               <div class="card-header-btn">
-                <a class="modal-trigger" :href="'#assign-card-modal-' + uid" @click="card_id = card.id">Assign</a>
+                <a
+                  class="modal-trigger"
+                  :href="'#assign-card-modal-' + uid"
+                  @click="card_id = card.id"
+                >Assign</a>
               </div>
             </div>
           </li>
@@ -36,13 +40,13 @@
         </div>
       </div>
     </div>
-    <assignment-new-modal v-bind:card_id="card_id" v-bind:modal_id="uid"></assignment-new-modal>    
+    <assignment-new-modal v-bind:card_id="card_id" v-bind:modal_id="uid"></assignment-new-modal>
   </div>
 </template>
 <script>
 import AssignmentNewModal from "./AssignmentNewModal.vue";
 export default {
-  components:{
+  components: {
     AssignmentNewModal
   },
   data() {
@@ -57,20 +61,19 @@ export default {
   created() {
     this.update_unassigned_cards();
   },
-  updated() {
-    $("select").formSelect();
-  },
-  mounted(){
+  mounted() {
     var vm = this;
-    this.$root.$on('assignmentUpdate', () => {
+    this.$root.$on("assignmentUpdate", () => {
       vm.update_unassigned_cards();
     });
   },
   watch: {
     card_id: function(new_card_id, old_card_id) {
-      this.axios.get(routes.card_users_available(new_card_id)).then(response => {
-        this.users = response.data.data;
-      });
+      this.axios
+        .get(routes.card_users_available(new_card_id))
+        .then(response => {
+          this.users = response.data.data;
+        });
     }
   },
   methods: {
@@ -86,7 +89,7 @@ export default {
           success: function(data) {
             vm.update_unassigned_cards();
             try {
-              vm.$root.$emit('assignmentUpdate');
+              vm.$root.$emit("assignmentUpdate");
             } catch (error) {
               console.log(error);
             }

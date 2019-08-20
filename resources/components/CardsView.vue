@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     <div class="row">
       <div class="col s12 m10 offset-m1">
         <h4>
@@ -28,7 +28,7 @@
             </div>
           </div>
           <a
-            href="#create-card"
+            href="#card-new"
             class="btn blue accent-4 waves-effect waves-light col s12 center-align modal-trigger"
           >
             <span class="valign-wrapper" style="max-width:fit-content; margin: auto;">
@@ -38,15 +38,13 @@
         </div>
       </div>
     </div>
-    <div id="create-card" class="modal">
-      <!-- TODO: Colocar ação do formulário -->
-      <form action="#" method="post">
-        @csrf
+    <div id="card-new" class="modal bottom-sheet">
+      <form id="card-create" :action="this.$parent.routes.cards()" method="post">
         <div class="modal-content">
-          <label for="name">name</label>
+          <label for="name">Card name</label>
           <input type="text" name="name" id="name" />
-          <label for="macro_region">Macro Region</label>
-          <select name="macro_region" id="macro_region">
+          <label for="macro_region_id">Macro Region</label>
+          <select name="macro_region_id" id="macro_region_id">
             <option value="0">Select Macro Region</option>
             <option
               v-for="macro_region in macro_regions"
@@ -54,11 +52,11 @@
               :value="macro_region.id"
             >{{macro_region.name}}</option>
           </select>
-          <label for="number"></label>
+          <label for="number">Choose a number</label>
           <input type="number" name="number" id="number" />
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn-flat green-text">Create card</button>
+          <button type="submit" class="btn-flat green-text" @click="submit()">Create card</button>
         </div>
       </form>
     </div>
@@ -73,13 +71,42 @@ export default {
     };
   },
   created() {
-    this.axios.get(routes.cards()).then(response => {
-      this.cards = response.data.data;
-    });
+    this.update();
+  },
+  updated() {
+    $("#card-create select").formSelect();
+  },
+  methods: {
+    submit() {
+      let vm = this;
+      let form_object = $("form#card-create");
+      form_object.submit(function(target) {
+        target.preventDefault();
+      });
 
-    this.axios.get(routes.macro_regions()).then(response => {
-      this.macro_regions = response.data.data;
-    });
+      $.ajax({
+        url: form_object.prop("action"),
+        method: "POST",
+        data: form_object.serialize(),
+        success: function() {
+          form_object.parent(".modal").modal("close");
+          $("input").val("");
+
+          window.toastr["success"]("Card successfully created");
+
+          vm.update();
+        }
+      });
+    },
+    update() {
+      this.axios.get(routes.cards()).then(response => {
+        this.cards = response.data.data;
+      });
+
+      this.axios.get(routes.macro_regions()).then(response => {
+        this.macro_regions = response.data.data;
+      });
+    }
   }
 };
 </script>

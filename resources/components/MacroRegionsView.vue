@@ -23,7 +23,7 @@
             </div>
           </div>
           <a
-            href="#create-macro-region"
+            href="#macro-region-new"
             class="btn blue accent-4 waves-effect waves-light col s12 center-align modal-trigger"
           >
             <span class="valign-wrapper" style="max-width:fit-content; margin: auto;">
@@ -33,16 +33,14 @@
         </div>
       </div>
     </div>
-    <div id="create-macro-region" class="modal">
-        <!-- TODO: Colocar rota de formulário -->
-      <form action="#" method="post">
-        @csrf
+    <div id="macro-region-new" class="modal bottom-sheet">
+      <form id="macro-region-create" :action="this.$parent.routes.macro_regions()" method="post">
         <div class="modal-content">
           <label for="name">Macro Region name</label>
           <input type="text" name="name" id="name" />
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn-flat green-text">Create Macro-Region</button>
+          <button type="submit" class="btn-flat green-text" @click="submit()">Create Macro-Region</button>
         </div>
       </form>
     </div>
@@ -50,15 +48,41 @@
 </template>
 <script>
 export default {
-    data(){
-        return {
-            macro_regions: []
+  data() {
+    return {
+      macro_regions: []
+    };
+  },
+  created() {
+    this.update();
+  },
+  methods: {
+    submit() {
+      let vm = this;
+      let form_object = $("form#macro-region-create");
+      form_object.submit(function(target) {
+        target.preventDefault();
+      });
+
+      $.ajax({
+        url: form_object.prop("action"),
+        method: "POST",
+        data: form_object.serialize(),
+        success: function() {
+          form_object.parent(".modal").modal("close");
+          $("input").val("");
+
+          window.toastr["success"]("Macro Region successfully created");
+
+          vm.update();
         }
+      });
     },
-    created(){
-        this.axios.get(routes.macro_regions()).then(response=>{
-            this.macro_regions = response.data.data;
-        })
+    update() {
+      this.axios.get(routes.macro_regions()).then(response => {
+        this.macro_regions = response.data.data;
+      });
     }
+  }
 };
 </script>

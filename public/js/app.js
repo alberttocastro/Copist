@@ -2147,6 +2147,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2154,11 +2160,34 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    var _this = this;
+    this.update();
+  },
+  methods: {
+    submit: function submit() {
+      var vm = this;
+      var form_object = $("form#address-type-create");
+      form_object.submit(function (target) {
+        target.preventDefault();
+      });
+      $.ajax({
+        url: form_object.prop("action"),
+        method: "POST",
+        data: form_object.serialize(),
+        success: function success() {
+          form_object.parent(".modal").modal("close");
+          $("input[name='name']").val("");
+          window.toastr["success"]("Address type successfully created");
+          vm.update();
+        }
+      });
+    },
+    update: function update() {
+      var _this = this;
 
-    this.axios.get(routes.address_types()).then(function (response) {
-      _this.address_types = response.data.data;
-    });
+      this.axios.get(routes.address_types()).then(function (response) {
+        _this.address_types = response.data.data;
+      });
+    }
   }
 });
 
@@ -2861,6 +2890,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2878,12 +2911,9 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.update_unassigned_cards();
   },
-  updated: function updated() {
-    $("select").formSelect();
-  },
   mounted: function mounted() {
     var vm = this;
-    this.$root.$on('assignmentUpdate', function () {
+    this.$root.$on("assignmentUpdate", function () {
       vm.update_unassigned_cards();
     });
   },
@@ -2909,7 +2939,7 @@ __webpack_require__.r(__webpack_exports__);
             vm.update_unassigned_cards();
 
             try {
-              vm.$root.$emit('assignmentUpdate');
+              vm.$root.$emit("assignmentUpdate");
             } catch (error) {
               console.log(error);
             }
@@ -3005,8 +3035,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3015,14 +3043,40 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    var _this = this;
+    this.update();
+  },
+  updated: function updated() {
+    $("#card-create select").formSelect();
+  },
+  methods: {
+    submit: function submit() {
+      var vm = this;
+      var form_object = $("form#card-create");
+      form_object.submit(function (target) {
+        target.preventDefault();
+      });
+      $.ajax({
+        url: form_object.prop("action"),
+        method: "POST",
+        data: form_object.serialize(),
+        success: function success() {
+          form_object.parent(".modal").modal("close");
+          $("input").val("");
+          window.toastr["success"]("Card successfully created");
+          vm.update();
+        }
+      });
+    },
+    update: function update() {
+      var _this = this;
 
-    this.axios.get(routes.cards()).then(function (response) {
-      _this.cards = response.data.data;
-    });
-    this.axios.get(routes.macro_regions()).then(function (response) {
-      _this.macro_regions = response.data.data;
-    });
+      this.axios.get(routes.cards()).then(function (response) {
+        _this.cards = response.data.data;
+      });
+      this.axios.get(routes.macro_regions()).then(function (response) {
+        _this.macro_regions = response.data.data;
+      });
+    }
   }
 });
 
@@ -3246,8 +3300,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3255,11 +3307,34 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    var _this = this;
+    this.update();
+  },
+  methods: {
+    submit: function submit() {
+      var vm = this;
+      var form_object = $("form#macro-region-create");
+      form_object.submit(function (target) {
+        target.preventDefault();
+      });
+      $.ajax({
+        url: form_object.prop("action"),
+        method: "POST",
+        data: form_object.serialize(),
+        success: function success() {
+          form_object.parent(".modal").modal("close");
+          $("input").val("");
+          window.toastr["success"]("Macro Region successfully created");
+          vm.update();
+        }
+      });
+    },
+    update: function update() {
+      var _this = this;
 
-    this.axios.get(routes.macro_regions()).then(function (response) {
-      _this.macro_regions = response.data.data;
-    });
+      this.axios.get(routes.macro_regions()).then(function (response) {
+        _this.macro_regions = response.data.data;
+      });
+    }
   }
 });
 
@@ -3508,11 +3583,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3520,14 +3590,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    var _this = this;
-
-    this.axios.get(routes.macro_regions()).then(function (response) {
-      _this.macro_regions = response.data.data;
-    });
+    this.update();
   },
   updated: function updated() {
-    $("select").formSelect();
+    $("#new-publisher select").formSelect();
   },
   methods: {
     submit: function submit() {
@@ -3537,17 +3603,22 @@ __webpack_require__.r(__webpack_exports__);
         target.preventDefault();
       });
       $.ajax({
-        url: jquery_form_object.prop('action'),
+        url: jquery_form_object.prop("action"),
         method: "POST",
         data: jquery_form_object.serialize(),
         success: function success(data) {
-          vm.$root.$emit('createPublisher');
-          $("#new-publisher").modal('close');
-          $("#new-publisher input").val('');
-        },
-        error: function error(data) {
-          console.log(data);
+          vm.$root.$emit("createPublisher");
+          window.toastr["success"]("Publisher successfully created");
+          $("#new-publisher").modal("close");
+          $("#new-publisher input").val("");
         }
+      });
+    },
+    update: function update() {
+      var _this = this;
+
+      this.axios.get(routes.macro_regions()).then(function (response) {
+        _this.macro_regions = response.data.data;
       });
     }
   }
@@ -33173,7 +33244,41 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(2)
+    _c(
+      "div",
+      { staticClass: "modal bottom-sheet", attrs: { id: "address-type-new" } },
+      [
+        _c(
+          "form",
+          {
+            attrs: {
+              id: "address-type-create",
+              action: this.$parent.routes.address_types(),
+              method: "post"
+            }
+          },
+          [
+            _vm._m(2),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn-flat green-text",
+                  attrs: { type: "submit" },
+                  on: {
+                    click: function($event) {
+                      return _vm.submit()
+                    }
+                  }
+                },
+                [_vm._v("Create Address Type")]
+              )
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -33194,20 +33299,20 @@ var staticRenderFns = [
       {
         staticClass:
           "btn blue accent-4 waves-effect waves-light col s12 center-align modal-trigger",
-        attrs: { href: "#create-address-type" }
+        attrs: { href: "#address-type-new" }
       },
       [
         _c(
           "span",
           {
-            staticClass: "valign-wrapper ",
+            staticClass: "valign-wrapper",
             staticStyle: { "max-width": "fit-content", margin: "auto" }
           },
           [
             _c("i", { staticClass: "material-icons" }, [
               _vm._v("add_circle_outline")
             ]),
-            _vm._v(" Add Address Type\n                    ")
+            _vm._v(" Add Address Type\n          ")
           ]
         )
       ]
@@ -33217,28 +33322,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "modal", attrs: { id: "create-address-type" } },
-      [
-        _c("form", { attrs: { action: "#", method: "post" } }, [
-          _vm._v("\n        @csrf\n        "),
-          _c("div", { staticClass: "modal-content" }, [
-            _c("label", { attrs: { for: "name" } }, [_vm._v("Type")]),
-            _vm._v(" "),
-            _c("input", { attrs: { type: "text", name: "name", id: "name" } })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "modal-footer" }, [
-            _c(
-              "button",
-              { staticClass: "btn-flat green-text", attrs: { type: "submit" } },
-              [_vm._v("Create Address Type")]
-            )
-          ])
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "modal-content" }, [
+      _c("label", { attrs: { for: "name" } }, [_vm._v("New address type:")]),
+      _vm._v(" "),
+      _c("input", { attrs: { type: "text", name: "name", id: "name" } })
+    ])
   }
 ]
 render._withStripped = true
@@ -34414,50 +34502,81 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "modal", attrs: { id: "create-card" } }, [
-      _c("form", { attrs: { action: "#", method: "post" } }, [
-        _vm._v("\n      @csrf\n      "),
-        _c("div", { staticClass: "modal-content" }, [
-          _c("label", { attrs: { for: "name" } }, [_vm._v("name")]),
-          _vm._v(" "),
-          _c("input", { attrs: { type: "text", name: "name", id: "name" } }),
-          _vm._v(" "),
-          _c("label", { attrs: { for: "macro_region" } }, [
-            _vm._v("Macro Region")
-          ]),
-          _vm._v(" "),
-          _c(
-            "select",
-            { attrs: { name: "macro_region", id: "macro_region" } },
-            [
-              _c("option", { attrs: { value: "0" } }, [
-                _vm._v("Select Macro Region")
+    _c(
+      "div",
+      { staticClass: "modal bottom-sheet", attrs: { id: "card-new" } },
+      [
+        _c(
+          "form",
+          {
+            attrs: {
+              id: "card-create",
+              action: this.$parent.routes.cards(),
+              method: "post"
+            }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("label", { attrs: { for: "name" } }, [_vm._v("Card name")]),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "text", name: "name", id: "name" }
+              }),
+              _vm._v(" "),
+              _c("label", { attrs: { for: "macro_region_id" } }, [
+                _vm._v("Macro Region")
               ]),
               _vm._v(" "),
-              _vm._l(_vm.macro_regions, function(macro_region) {
-                return _c(
-                  "option",
-                  {
-                    key: macro_region.id,
-                    domProps: { value: macro_region.id }
-                  },
-                  [_vm._v(_vm._s(macro_region.name))]
-                )
+              _c(
+                "select",
+                { attrs: { name: "macro_region_id", id: "macro_region_id" } },
+                [
+                  _c("option", { attrs: { value: "0" } }, [
+                    _vm._v("Select Macro Region")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.macro_regions, function(macro_region) {
+                    return _c(
+                      "option",
+                      {
+                        key: macro_region.id,
+                        domProps: { value: macro_region.id }
+                      },
+                      [_vm._v(_vm._s(macro_region.name))]
+                    )
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c("label", { attrs: { for: "number" } }, [
+                _vm._v("Choose a number")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "number", name: "number", id: "number" }
               })
-            ],
-            2
-          ),
-          _vm._v(" "),
-          _c("label", { attrs: { for: "number" } }),
-          _vm._v(" "),
-          _c("input", {
-            attrs: { type: "number", name: "number", id: "number" }
-          })
-        ]),
-        _vm._v(" "),
-        _vm._m(2)
-      ])
-    ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn-flat green-text",
+                  attrs: { type: "submit" },
+                  on: {
+                    click: function($event) {
+                      return _vm.submit()
+                    }
+                  }
+                },
+                [_vm._v("Create card")]
+              )
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -34478,7 +34597,7 @@ var staticRenderFns = [
       {
         staticClass:
           "btn blue accent-4 waves-effect waves-light col s12 center-align modal-trigger",
-        attrs: { href: "#create-card" }
+        attrs: { href: "#card-new" }
       },
       [
         _c(
@@ -34496,18 +34615,6 @@ var staticRenderFns = [
         )
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        { staticClass: "btn-flat green-text", attrs: { type: "submit" } },
-        [_vm._v("Create card")]
-      )
-    ])
   }
 ]
 render._withStripped = true
@@ -34817,7 +34924,41 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(2)
+    _c(
+      "div",
+      { staticClass: "modal bottom-sheet", attrs: { id: "macro-region-new" } },
+      [
+        _c(
+          "form",
+          {
+            attrs: {
+              id: "macro-region-create",
+              action: this.$parent.routes.macro_regions(),
+              method: "post"
+            }
+          },
+          [
+            _vm._m(2),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn-flat green-text",
+                  attrs: { type: "submit" },
+                  on: {
+                    click: function($event) {
+                      return _vm.submit()
+                    }
+                  }
+                },
+                [_vm._v("Create Macro-Region")]
+              )
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -34838,7 +34979,7 @@ var staticRenderFns = [
       {
         staticClass:
           "btn blue accent-4 waves-effect waves-light col s12 center-align modal-trigger",
-        attrs: { href: "#create-macro-region" }
+        attrs: { href: "#macro-region-new" }
       },
       [
         _c(
@@ -34861,30 +35002,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "modal", attrs: { id: "create-macro-region" } },
-      [
-        _c("form", { attrs: { action: "#", method: "post" } }, [
-          _vm._v("\n      @csrf\n      "),
-          _c("div", { staticClass: "modal-content" }, [
-            _c("label", { attrs: { for: "name" } }, [
-              _vm._v("Macro Region name")
-            ]),
-            _vm._v(" "),
-            _c("input", { attrs: { type: "text", name: "name", id: "name" } })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "modal-footer" }, [
-            _c(
-              "button",
-              { staticClass: "btn-flat green-text", attrs: { type: "submit" } },
-              [_vm._v("Create Macro-Region")]
-            )
-          ])
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "modal-content" }, [
+      _c("label", { attrs: { for: "name" } }, [_vm._v("Macro Region name")]),
+      _vm._v(" "),
+      _c("input", { attrs: { type: "text", name: "name", id: "name" } })
+    ])
   }
 ]
 render._withStripped = true
@@ -35191,7 +35313,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "modal modal-fixed-footer", attrs: { id: "new-publisher" } },
+    {
+      staticClass: "modal bottom-sheet modal-fixed-footer",
+      attrs: { id: "new-publisher" }
+    },
     [
       _c(
         "form",
@@ -35241,16 +35366,18 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "modal-footer" }, [
-            _c("input", {
-              staticClass: "btn-flat green-text",
-              attrs: { type: "submit" },
-              domProps: { value: "Create Publisher" },
-              on: {
-                click: function($event) {
-                  return _vm.submit()
+            _c(
+              "button",
+              {
+                staticClass: "btn-flat green-text",
+                on: {
+                  click: function($event) {
+                    return _vm.submit()
+                  }
                 }
-              }
-            })
+              },
+              [_vm._v("Create publisher")]
+            )
           ])
         ]
       )
