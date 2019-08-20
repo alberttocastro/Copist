@@ -19,12 +19,12 @@ class InformationController extends Controller
 
     public function create_publisher(Request $request)
     {
-        \App\Publisher::create($request);
+        \App\Publisher::create($request->toArray());
     }
 
     public function update_publisher(Request $request, $id)
     {
-        \App\Publisher::find($id)->update($request);
+        \App\Publisher::find($id)->update($request->toArray());
     }
 
     public function destroy_publisher($id)
@@ -54,7 +54,7 @@ class InformationController extends Controller
 
     public function destroy_macro_region($id)
     {
-        if(\App\Card::where('macro_region_id', $id)->count() == 0)
+        if (\App\Card::where('macro_region_id', $id)->count() == 0)
             \App\Macro_region::find($id)->delete();
     }
 
@@ -80,7 +80,7 @@ class InformationController extends Controller
 
     public function destroy_address_type($id)
     {
-        if(\App\Address::where('address_type_id', $id)->count() == 0)
+        if (\App\Address::where('address_type_id', $id)->count() == 0)
             \App\Address_type::find($id)->delete();
     }
 
