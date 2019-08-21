@@ -1,5 +1,5 @@
-require('./routes.js');
 require('./initialization');
+require('./vue.js');
 
 // Document Ready Início
 $(function () {

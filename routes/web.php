@@ -11,21 +11,24 @@
 |
 */
 
+Route::get('/{any}', 'WebAppController@index')->where('any', '.*');
+
 // Rotas de autenticação
 Auth::routes();
+
 
 // Rotas não aprovadas
 Route::get('/', 'MainController@main')->name('home')->middleware('auth');
 
 // Rotas protegidas pelo sistema
-Route::middleware(['auth', 'approved'])->group(function(){
+Route::middleware(['auth', 'approved'])->group(function () {
 
     Route::get('overview', 'MainController@overview')->name('overview');
 
-    Route::prefix('territory')->group(function(){
+    Route::prefix('territory')->group(function () {
 
         Route::get('management', 'TerritoryController@management')->name('territory_management');
-        Route::post('management/accept','TerritoryController@accept_new_address')->name('accept_address');
+        Route::post('management/accept', 'TerritoryController@accept_new_address')->name('accept_address');
         Route::put('management/map', 'TerritoryController@set_map_to_address')->name('set_map_to_address');
 
         Route::post('suggest', 'TerritoryController@create_suggested_address')->name('create_suggested_address');
@@ -38,26 +41,25 @@ Route::middleware(['auth', 'approved'])->group(function(){
         Route::put('/edit/{id}', 'TerritoryController@update')->name('update_territory');
     });
 
-    Route::prefix('assignment')->group(function(){
+    Route::prefix('assignment')->group(function () {
 
-        Route::get('/','AssignmentController@index')->name('assignments');
+        Route::get('/', 'AssignmentController@index')->name('assignments');
 
         Route::post('set', 'AssignmentController@assign_to_territory')->name('assign_to_territory');
         Route::delete('remove', 'AssignmentController@remove_assignment')->name('remove_assignment_to_territory');
 
-        Route::post('done/{assignment_id}','AssignmentController@set_assignment_as_done')->name('set_assignment_done');
-
+        Route::post('done/{assignment_id}', 'AssignmentController@set_assignment_as_done')->name('set_assignment_done');
     });
 
-    Route::get('help','MainController@help')->name('help');
+    Route::get('help', 'MainController@help')->name('help');
 
-    Route::prefix('permissions')->group(function(){
-        Route::get('/','PermissionsController@index')->name('permissions');
+    Route::prefix('permissions')->group(function () {
+        Route::get('/', 'PermissionsController@index')->name('permissions');
         Route::put('update', 'PermissionsController@update')->name('update_permission');
     });
 
-    Route::prefix('/database')->group(function(){
-        Route::prefix('service')->group(function(){
+    Route::prefix('/database')->group(function () {
+        Route::prefix('service')->group(function () {
             Route::get('/', 'DatabaseController@db_service')->name('db_service');
 
             Route::post('publisher', 'DatabaseController@create_publisher')->name('create_publisher');
@@ -66,7 +68,7 @@ Route::middleware(['auth', 'approved'])->group(function(){
             Route::post('macro_region', 'DatabaseController@create_macro_region')->name('create_macro_region');
         });
 
-        Route::prefix('public')->group(function(){
+        Route::prefix('public')->group(function () {
             Route::get('/', 'DatabaseController@db_public')->name('db_public');
 
             Route::post('idiom', 'DatabaseController@create_idiom')->name('create_idiom');
@@ -74,4 +76,3 @@ Route::middleware(['auth', 'approved'])->group(function(){
         });
     });
 });
-

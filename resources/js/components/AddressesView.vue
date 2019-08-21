@@ -15,7 +15,12 @@
           </div>
           <div class="collapsible-body macro-region-card-content">
             <ul class="collection">
-              <li class="collection-item" v-bind:class="address.is_visitable == 1 ? '' : 'address-not-visitable'" v-bind:key="address.id" v-for="address in card.addresses">
+              <li
+                class="collection-item"
+                v-bind:class="address.is_visitable == 1 ? '' : 'address-not-visitable'"
+                v-bind:key="address.id"
+                v-for="address in card.addresses"
+              >
                 <div class="macro-region-card-content-info">
                   <div class="macro-region-card-content-info-text">
                     <div class="neighborhood">{{address.neighborhood}}</div>
