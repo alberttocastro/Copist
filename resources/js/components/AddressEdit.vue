@@ -3,7 +3,7 @@
     <div class="row">
       <form
         id="address-edit-form"
-        :action="this.$parent.routes.addresses(address.id)"
+        :action="this.$root.routes.addresses(address.id)"
         method="post"
         class="col s12"
       >
@@ -154,7 +154,6 @@ export default {
   data() {
     let href = window.location.href.split("/");
     return {
-      address_id: href[href.length - 1],
       address: [],
       idioms: [],
       nationalities: [],
@@ -162,6 +161,9 @@ export default {
       publishers: [],
       cards: []
     };
+  },
+  props: {
+    address_id: Number
   },
   created() {
     this.axios.get(routes.idioms()).then(response => {

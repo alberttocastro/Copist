@@ -39,7 +39,7 @@
       </div>
     </div>
     <div id="card-new" class="modal bottom-sheet">
-      <form id="card-create" :action="this.$parent.routes.cards()" method="post">
+      <form id="card-create" :action="this.$root.routes.cards()" method="post">
         <div class="modal-content">
           <label for="name">Card name</label>
           <input type="text" name="name" id="name" />

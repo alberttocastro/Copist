@@ -36,7 +36,7 @@
                     <br />
                   </div>
                   <div class="col s3">
-                    <a v-bind:href="`/territory/${address.id}`">View</a>
+                    <router-link :to="{name: 'address-view', params: {id: address.id}}">View</router-link>
                   </div>
                 </div>
                 <div>

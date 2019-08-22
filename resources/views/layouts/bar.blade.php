@@ -16,7 +16,7 @@
     @endcan
     <li class="valign-wrapper">
         <a href="#!" class="dropdown-trigger" data-target="user"><span class="material-icons">account_circle</span><span
-            class="material-icons">arrow_drop_down</span>
+                class="material-icons">arrow_drop_down</span>
         </a>
     </li>
 </ul>

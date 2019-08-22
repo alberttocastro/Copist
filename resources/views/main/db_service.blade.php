@@ -34,12 +34,14 @@
 </div> {{-- END div#macro-region--}}
 <div id="cards" class="col s12">
     <div id="vue3">
-        <cards-view></cards-vi>
+        <cards-view>
+            </cards-vi>
     </div>
 </div> {{-- END  div#cards--}}
 <div id="addresstype" class="col s12">
     <div id="vue4">
-        <address-types-view></address-types-vi>
+        <address-types-view>
+            </address-types-vi>
     </div>
 </div> {{-- END div#address-types--}}
 @endsection

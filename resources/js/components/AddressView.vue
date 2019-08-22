@@ -93,7 +93,7 @@
       </div>
       <div class="row">
         <div class="col s6 offset-s3">
-          <a v-bind:href="`/territory/edit/${address_id}`" class="btn">Edit</a>
+          <router-link :to="{name: 'address-edit', params: {id: Number(address_id)}}">Edit</router-link>
         </div>
       </div>
     </div>
@@ -150,11 +150,12 @@
 <script>
 export default {
   data() {
-    let href = window.location.href.split("/");
     return {
-      address: [],
-      address_id: href[href.length - 1]
+      address: []
     };
+  },
+  props: {
+    address_id: Number
   },
   created() {
     this.axios.get(routes.addresses(this.address_id)).then(response => {

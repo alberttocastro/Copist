@@ -2,7 +2,7 @@
   <div class="container">
     <form
       id="update-permissions-form"
-      v-bind:action="this.$parent.routes.permissions()"
+      v-bind:action="this.$root.routes.permissions()"
       method="post"
     >
       <input type="hidden" name="_method" value="put" />

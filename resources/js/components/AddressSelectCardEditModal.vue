@@ -2,7 +2,7 @@
   <!-- Colocar rota de setar cartão -->
   <!-- Modal - Escolher mapa -->
   <div id="choose-card" class="modal bottom-sheet">
-    <form v-bind:action="this.$parent.$parent.routes.addresses(address_id)" method="post">
+    <form v-bind:action="this.$root.routes.addresses(address_id)" method="post">
       <!-- Conteúdo -->
       <div class="modal-content">
         <input type="hidden" name="_method" value="PUT" />

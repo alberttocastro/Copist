@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="modal bottom-sheet" id="address-type-new">
-      <form id="address-type-create" :action="this.$parent.routes.address_types()" method="post">
+      <form id="address-type-create" :action="this.$root.routes.address_types()" method="post">
         <div class="modal-content">
           <label for="name">New address type:</label>
           <input type="text" name="name" id="name" />

@@ -57,8 +57,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueRouter from 'vue-router';
 
-import App from '@/js/views/App';
-import Home from '@/js/components/Home';
+import App from '@/js/views/App.vue';
 
 import {
     store
@@ -69,14 +68,7 @@ Vue.use(VueRouter)
 
 require('./components.js');
 
-const router = new VueRouter({
-    mode: 'history',
-    routes: [{
-        path: '/',
-        name: 'home',
-        component: Home
-    }]
-});
+import router from '@/js/router.js'
 
 var routes = {
     data: function () {
@@ -88,7 +80,7 @@ var routes = {
 
 window.vm = new Vue({
     el: "#vue",
-    router: router,
+    router,
     store,
     render: h => h(App),
     mixins: [

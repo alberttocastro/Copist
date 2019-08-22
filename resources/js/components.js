@@ -24,3 +24,5 @@ Vue.component('IdiomsView', require('@/js/components/IdiomsView.vue').default);
 Vue.component('NationalitiesView', require('@/js/components/NationalitiesView.vue').default);
 Vue.component('PublishersView', require('@/js/components/PublishersView.vue').default);
 Vue.component('PermissionsView', require('@/js/components/PermissionsView.vue').default);
+
+Vue.component('Index', require('@/js/pages/Index.vue').default);

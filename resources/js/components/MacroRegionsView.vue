@@ -34,7 +34,7 @@
       </div>
     </div>
     <div id="macro-region-new" class="modal bottom-sheet">
-      <form id="macro-region-create" :action="this.$parent.routes.macro_regions()" method="post">
+      <form id="macro-region-create" :action="this.$root.routes.macro_regions()" method="post">
         <div class="modal-content">
           <label for="name">Macro Region name</label>
           <input type="text" name="name" id="name" />

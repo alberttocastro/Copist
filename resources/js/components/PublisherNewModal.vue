@@ -1,7 +1,7 @@
 <template>
   <div id="new-publisher" class="modal bottom-sheet modal-fixed-footer">
     <!-- Colocar ação do formulário -->
-    <form v-bind:action="this.$parent.$parent.routes.publishers()" method="POST">
+    <form v-bind:action="this.$root.routes.publishers()" method="POST">
       <div class="modal-content">
         <div class="input-field">
           <label for="name">Name</label>

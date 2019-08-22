@@ -1,22 +1,6 @@
 <template>
-  <component v-bind:is="layout"></component>
+  <router-view></router-view>
 </template>
-
 <script>
-import StandardLayout from "@/js/layouts/StandardLayout.vue";
-import TextLayout from "@/js/layouts/TextLayout.vue";
-export default {
-  computed: {
-    layout() {
-      return this.$store.getters.layout;
-    }
-  },
-  components: {
-    StandardLayout,
-    TextLayout
-  }
-};
+export default {};
 </script>
-
-<style>
-</style>
