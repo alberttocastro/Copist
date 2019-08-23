@@ -51,7 +51,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  mounted() {
+    $(".dropdown-trigger").dropdown({
+      coverTrigger: false
+    });
+  }
+};
 </script>
 
 <style>

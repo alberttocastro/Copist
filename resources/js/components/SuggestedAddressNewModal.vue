@@ -59,6 +59,9 @@ export default {
         }
       });
     }
+  },
+  mounted() {
+    $(".modal").modal();
   }
 };
 </script>
