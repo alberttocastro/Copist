@@ -29,7 +29,7 @@
       </div>
     </div>
     <div id="create-idiom" class="modal bottom-sheet">
-      <form id="idiom-new" :action="this.$parent.routes.idioms()" method="post">
+      <form id="idiom-new" :action="this.$root.routes.idioms()" method="post">
         <div class="modal-content">
           <label for="idiom">Idiom name</label>
           <input type="text" name="name" id="name" />

@@ -1,6 +1,6 @@
 <template>
   <div id="address-suggestion-new" class="modal">
-    <form v-bind:action="this.$parent.$parent.routes.address_suggestions()" method="post">
+    <form v-bind:action="this.$root.routes.address_suggestions()" method="post">
       <div class="modal-content">
         <div class="input-field col s12">
           <input type="text" name="street" id="street" />

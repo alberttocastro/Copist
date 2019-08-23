@@ -33,7 +33,7 @@
       </div>
     </div>
     <div id="create-nationality" class="modal bottom-sheet">
-      <form id="nationality-new" :action="this.$parent.routes.nationalities()" method="post">
+      <form id="nationality-new" :action="this.$root.routes.nationalities()" method="post">
         <div class="modal-content">
           <label for="nationality">Nationality name</label>
           <input type="text" name="name" id="name" />

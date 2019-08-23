@@ -1,7 +1,7 @@
 <template>
 <!-- TODO: Fazer apenas uma implementação do modal -->
   <div v-bind:id="'assign-card-modal-' + modal_id_string" class="modal bottom-sheet">
-    <form v-bind:action="this.$parent.$parent.routes.assignments()" method="post">
+    <form v-bind:action="this.$root.routes.assignments()" method="post">
       <div class="modal-content">
         <input type="hidden" name="card_id" v-bind:value="card_id" />
         <div class="input-field">

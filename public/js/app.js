@@ -34448,12 +34448,7 @@ var render = function() {
     [
       _c(
         "form",
-        {
-          attrs: {
-            action: this.$parent.$parent.routes.assignments(),
-            method: "post"
-          }
-        },
+        { attrs: { action: this.$root.routes.assignments(), method: "post" } },
         [
           _c("div", { staticClass: "modal-content" }, [
             _c("input", {
@@ -35369,7 +35364,7 @@ var render = function() {
           {
             attrs: {
               id: "idiom-new",
-              action: this.$parent.routes.idioms(),
+              action: this.$root.routes.idioms(),
               method: "post"
             }
           },
@@ -35648,7 +35643,7 @@ var render = function() {
           {
             attrs: {
               id: "nationality-new",
-              action: this.$parent.routes.nationalities(),
+              action: this.$root.routes.nationalities(),
               method: "post"
             }
           },
@@ -36287,7 +36282,7 @@ var render = function() {
         "form",
         {
           attrs: {
-            action: this.$parent.$parent.routes.address_suggestions(),
+            action: this.$root.routes.address_suggestions(),
             method: "post"
           }
         },
