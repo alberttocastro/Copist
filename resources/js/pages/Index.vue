@@ -27,6 +27,9 @@ import StandardLayout from "@/js/layouts/StandardLayout.vue";
 export default {
   components: {
     StandardLayout
+  },
+  mounted() {
+    $(".tabs").tabs();
   }
 };
 </script>
