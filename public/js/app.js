@@ -3899,6 +3899,9 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     }
+  },
+  mounted: function mounted() {
+    $(".modal").modal();
   }
 });
 
@@ -4095,7 +4098,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    $(".dropdown-trigger").dropdown({
+      coverTrigger: false
+    });
+  }
+});
 
 /***/ }),
 
@@ -4488,6 +4497,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     StandardLayout: _js_layouts_StandardLayout_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  mounted: function mounted() {
+    $(".tabs").tabs();
   }
 });
 
