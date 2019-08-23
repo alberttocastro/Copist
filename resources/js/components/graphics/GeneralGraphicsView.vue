@@ -1,0 +1,50 @@
+<template>
+  <div class="container">
+    <h3>
+      <b>Charts</b>
+    </h3>
+    <div class="divider"></div>
+    <div class="col"></div>
+    <div class="row">
+      <div class="col l10 m6">
+        <h4>Addresses</h4>
+      </div>
+      <div class="col l2 m3 offset-m3">
+        <span class="right">
+          <h4>2000 Endereços</h4>
+        </span>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <h4 class="grey-text text-darken2">By Country</h4>
+
+    <canvas id="foreigners-by-country" width="20rem" height="10rem"></canvas>
+
+    <div class="divider"></div>
+  </div>
+</template>
+
+<script>
+import Chart from "chart.js";
+export default {
+  mounted() {
+    var ctx = document.getElementById("foreigners-by-country");
+    var myChart = new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: ["Label", "Label"],
+        datasets: [
+          {
+            label: "# foreigners",
+            data: [1, 2],
+            borderWidth: 1
+          }
+        ]
+      }
+    });
+  }
+};
+</script>
+
+<style>
+</style>

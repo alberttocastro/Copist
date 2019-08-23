@@ -8,14 +8,21 @@ import AddressEditPage from '@/js/pages/addresses/Edit.vue'
 import AssignmentsPage from '@/js/pages/Assignments.vue'
 import ManagementPage from '@/js/pages/Management.vue'
 import PermissionsPage from '@/js/pages/Permissions.vue'
-import DatabasePublic from '@/js/pages/DatabasePublic.vue'
-import DatabaseService from '@/js/pages/DatabaseService.vue'
+import DatabasePublicPage from '@/js/pages/DatabasePublic.vue'
+import DatabaseServicePage from '@/js/pages/DatabaseService.vue'
+import LoginPage from '@/js/pages/auth/Login.vue'
+import AccessNotGrantedPage from '@/js/pages/accesses/AccessNotGranted.vue'
 
 Vue.use(Router)
 
 export default new Router({
     mode: 'history',
     routes: [{
+            path: '/login',
+            name: 'login',
+            component: LoginPage
+        },
+        {
             path: '/',
             name: 'index',
             component: IndexPage
@@ -53,12 +60,17 @@ export default new Router({
         {
             path: '/database/public',
             name: 'database-public',
-            component: DatabasePublic
+            component: DatabasePublicPage
         },
         {
             path: '/database/service',
             name: 'database-service',
-            component: DatabaseService
+            component: DatabaseServicePage
+        },
+        {
+            path: '/100',
+            name: 'access-not-granted',
+            component: AccessNotGrantedPage
         }
     ]
 });

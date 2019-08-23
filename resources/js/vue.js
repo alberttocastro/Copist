@@ -55,7 +55,7 @@ window.Vue = require('vue');
 import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import VueRouter from 'vue-router';
+import VueRouter from 'vue-router'
 
 import App from '@/js/views/App.vue';
 

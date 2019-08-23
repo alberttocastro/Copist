@@ -5,6 +5,7 @@ Vue.component('AddressesWithoutCardView', require('@/js/components/AddressesWith
 Vue.component('AddressSelectCardView', require('@/js/components/AddressSelectCardView.vue').default);
 Vue.component('AddressView', require('@/js/components/AddressView.vue').default);
 Vue.component('AddressEdit', require('@/js/components/AddressEdit.vue').default);
+Vue.component('AddressNotCall', require('@/js/components/AddressNotCall.vue').default)
 
 Vue.component('SuggestedAddressNewAction', require('@/js/components/SuggestedAddressNewAction.vue').default);
 
@@ -26,3 +27,5 @@ Vue.component('PublishersView', require('@/js/components/PublishersView.vue').de
 Vue.component('PermissionsView', require('@/js/components/PermissionsView.vue').default);
 
 Vue.component('Index', require('@/js/pages/Index.vue').default);
+
+Vue.component('GeneralGraphicsView', require('@/js/components/graphics/GeneralGraphicsView.vue').default)
