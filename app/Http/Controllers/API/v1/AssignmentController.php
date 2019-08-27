@@ -24,7 +24,7 @@ class AssignmentController extends Controller
             if (\count($macro_region_assigned_territories) > 0) {
                 $mr = clone $macro_region;
                 $mr->assignment_cards = $macro_region_assigned_territories;
-                
+
                 $assigned_cards[] = clone $mr;
             }
 
@@ -34,7 +34,7 @@ class AssignmentController extends Controller
             if (\count($macro_region_unassigned_territories) > 0) {
                 $mr = clone $macro_region;
                 $mr->assignment_cards = $macro_region_unassigned_territories;
-                
+
                 $unassigned_cards[] = clone $mr;
             }
         }
@@ -44,39 +44,6 @@ class AssignmentController extends Controller
                 'assigned' => $assigned_cards,
                 'unassigned' => $unassigned_cards
             ]
-        ];
-    }
-
-    /**
-     * Retorna todos os usuários cadastrados e aprovados
-     */
-    public function users()
-    {
-        $data = array();
-        foreach (\App\User::approved_users() as $user) {
-            $user->publisher = $user->publisher;
-            $data[] = $user;
-        }
-        return [
-            'data' => $data
-        ];
-    }
-
-    /**
-     * Retorna todos os usuários que ainda não foram designados para um cartão
-     */
-    public function users_for_card(Request $request, $id)
-    {
-        $data = array();
-        foreach (\App\User::approved_users() as $user) {
-            if (\App\Assignment::where('card_id', $id)->where('user_id', $user->id)->whereNull('completion_date')->get()->count() == 0) {
-                $user->publisher = $user->publisher;
-                $data[] = $user;
-            }
-        }
-
-        return [
-            'data' => $data
         ];
     }
 
