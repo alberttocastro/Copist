@@ -4342,7 +4342,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     StandardLayout: _js_layouts_StandardLayout_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  updated: function updated() {
+  mounted: function mounted() {
     $(".tabs").tabs();
   }
 });
@@ -4389,7 +4389,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     StandardLayout: _js_layouts_StandardLayout_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  updated: function updated() {
+  mounted: function mounted() {
     $(".tabs").tabs();
   }
 });
@@ -4452,7 +4452,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     StandardLayout: _js_layouts_StandardLayout_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  updated: function updated() {
+  mounted: function mounted() {
     $(".tabs").tabs();
   }
 });
@@ -4498,7 +4498,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     StandardLayout: _js_layouts_StandardLayout_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  updated: function updated() {
+  mounted: function mounted() {
     $(".tabs").tabs();
   }
 });
@@ -4544,7 +4544,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     StandardLayout: _js_layouts_StandardLayout_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  updated: function updated() {
+  mounted: function mounted() {
     $(".tabs").tabs();
   }
 });
@@ -4589,7 +4589,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     StandardLayout: _js_layouts_StandardLayout_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  updated: function updated() {
+  mounted: function mounted() {
     $(".tabs").tabs();
   }
 });

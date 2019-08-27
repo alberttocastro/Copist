@@ -27,7 +27,7 @@ export default {
   components: {
     StandardLayout
   },
-  updated() {
+  mounted() {
     $(".tabs").tabs();
   }
 };
