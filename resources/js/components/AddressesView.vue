@@ -29,7 +29,7 @@
                   </div>
                   <div class="macro-region-card-content-info-btn">
                     <a
-                      :href="links.address.edit + '/'+ address.id"
+                      v-bind:href="$root.routes.addresses(address.id)"
                       class="waves-effect waves-light btn"
                     >Edit</a>
                   </div>
@@ -47,8 +47,7 @@
 export default {
   data() {
     return {
-      macro_regions: [],
-      links: []
+      macro_regions: []
     };
   },
   created() {
@@ -57,7 +56,6 @@ export default {
         .get(routes.addresses())
         .then(response => {
           this.macro_regions = response.data.data;
-          this.links = response.data.meta.links;
         })
         .catch(reason => {
           console.log(reason);

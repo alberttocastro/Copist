@@ -12,7 +12,12 @@
         </div>
         <div class="collapsible-body macro-region-card-content">
           <ul class="collection">
-            <li class="collection-item" v-bind:class="address.is_visitable == 1 ? '' : 'address-not-visitable'" v-bind:key="address.id" v-for="address in addresses_without_map">
+            <li
+              class="collection-item"
+              v-bind:class="address.is_visitable == 1 ? '' : 'address-not-visitable'"
+              v-bind:key="address.id"
+              v-for="address in addresses_without_map"
+            >
               <div class="macro-region-card-content-info">
                 <div class="macro-region-card-content-info-text">
                   <div class="neighborhood">{{address.neighborhood}}</div>
@@ -31,15 +36,15 @@
 export default {
   data() {
     return {
-      addresses_without_map: [],
-      links: []
+      addresses_without_map: []
     };
   },
   created() {
-    this.axios.get(routes.addresses(), {params: {card: false}}).then(response => {
-      this.addresses_without_map = response.data.data;
-      this.links = response.data.meta.links;
-    });
+    this.axios
+      .get(routes.addresses(), { params: { card: false } })
+      .then(response => {
+        this.addresses_without_map = response.data.data;
+      });
   },
   updated() {
     $(".collapsible").collapsible();
