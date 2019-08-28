@@ -78,24 +78,21 @@ export default {
   },
   methods: {
     submit_and_update: function() {
-      var vm = this;
-      $("#assign-card-modal form").submit(function(target) {
+      let vm = this;
+      let form_object = $("#assign-card-modal form");
+      form_object.submit(function(target) {
         target.preventDefault();
-
-        $.ajax({
-          url: $(this).prop("action"),
-          method: "POST",
-          data: $(this).serialize(),
-          success: function(data) {
-            vm.update_unassigned_cards();
-            try {
-              vm.$root.$emit("assignmentUpdate");
-            } catch (error) {
-              console.log(error);
-            }
+      });
+      this.axios
+        .post(form_object.prop("action"), form_object.serialize())
+        .then(response => {
+          vm.update_unassigned_cards();
+          try {
+            vm.$root.$emit("assignmentUpdate");
+          } catch (error) {
+            console.log(error);
           }
         });
-      });
     },
     update_unassigned_cards: function() {
       this.axios.get(routes.assignments()).then(response => {

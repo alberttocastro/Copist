@@ -64,17 +64,14 @@ export default {
         target.preventDefault();
       });
 
-      $.ajax({
-        url: form_object.prop("action"),
-        method: "POST",
-        data: form_object.serialize(),
-        success: function() {
+      this.axios
+        .post(form_object.prop("action"), form_object.serialize())
+        .then(response => {
           form_object.parent(".modal").modal("close");
           $("input[name='name']").val("");
           window.toastr["success"]("Address type successfully created");
           vm.update();
-        }
-      });
+        });
     },
     update() {
       this.axios.get(routes.address_types()).then(response => {

@@ -198,17 +198,15 @@ export default {
       });
 
       window.setCheckboxInputValue($("input:checkbox"));
-      $.ajax({
-        url: form_object.prop("action"),
-        method: "PUT",
-        data: form_object.serializeArray(),
-        success: function() {
+
+      this.axios
+        .put(form_object.prop("action"), form_object.serializeArray())
+        .then(response => {
           window.toastr["success"]("Address successfully updated");
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
+        })
+        .catch(reason => {
           window.toastr["error"]("Address could not be saved");
-        }
-      });
+        });
     }
   }
 };

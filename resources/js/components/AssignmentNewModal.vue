@@ -1,5 +1,5 @@
 <template>
-<!-- TODO: Fazer apenas uma implementação do modal -->
+  <!-- TODO: Fazer apenas uma implementação do modal -->
   <div v-bind:id="'assign-card-modal-' + modal_id_string" class="modal bottom-sheet">
     <form v-bind:action="this.$root.routes.assignments()" method="post">
       <div class="modal-content">
@@ -41,30 +41,31 @@ export default {
      */
     submit: function() {
       var vm = this;
-      var jquery_form_object = $("#assign-card-modal-" + vm.modal_id_string + " form");
+      var form_object = $("#assign-card-modal-" + vm.modal_id_string + " form");
 
-      jquery_form_object.submit(function(target) {target.preventDefault();});
+      form_object.submit(function(target) {
+        target.preventDefault();
+      });
 
-      $.ajax({
-        url: jquery_form_object.prop("action"),
-        method: "POST",
-        data: jquery_form_object.serialize(),
-        success: function(data) {
+      this.axios
+        .post(form_object.prop("action"), form_object.serialize())
+        .then(response => {
           try {
             vm.$root.$emit("assignmentUpdate");
           } catch (error) {
             console.log(error);
           }
-        }
-      });
+        });
     }
   },
   watch: {
     card_id: function(new_card_id, old_card_id) {
-      this.axios.get(routes.card_users_available(new_card_id)).then(response => {
-        console.log(response);
-        this.users = response.data.data;
-      });
+      this.axios
+        .get(routes.card_users_available(new_card_id))
+        .then(response => {
+          console.log(response);
+          this.users = response.data.data;
+        });
     }
   },
   updated() {

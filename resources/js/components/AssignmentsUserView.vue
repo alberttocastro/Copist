@@ -104,12 +104,8 @@ export default {
         target.preventDefault();
       });
 
-      $.ajax({
-        url: form_object.prop("action"),
-        method: "DELETE",
-        success: function() {
-          vm.update_data();
-        }
+      this.axios.delete(form_object.prop("action")).then(response => {
+        vm.update_data();
       });
     },
     update_data: function() {

@@ -58,19 +58,16 @@ export default {
         target.preventDefault();
       });
 
-      $.ajax({
-        url: jquery_form_object.prop("action"),
-        method: "POST",
-        data: jquery_form_object.serialize(),
-        success: function(data) {
+      this.axios
+        .post(jquery_form_object.prop("action"), jquery_form_object.serialize())
+        .then(response => {
           vm.$root.$emit("createPublisher");
 
           window.toastr["success"]("Publisher successfully created");
 
           $("#new-publisher").modal("close");
           $("#new-publisher input").val("");
-        }
-      });
+        });
     },
     update() {
       this.axios.get(routes.macro_regions()).then(response => {

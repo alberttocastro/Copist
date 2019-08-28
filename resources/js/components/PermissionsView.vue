@@ -77,14 +77,9 @@ export default {
         target.preventDefault();
       });
 
-      $.ajax({
-        url: form_object.prop("action"),
-        method: "PUT",
-        data: form_object.serialize(),
-        success: function() {
-          console.info("Permissions updated");
-        }
-      });
+      this.axios
+        .put(form_object.prop("action"), form_object.serialize())
+        .then(response => {console.log('updated')});
     }
   }
 };

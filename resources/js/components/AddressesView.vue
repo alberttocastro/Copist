@@ -52,11 +52,17 @@ export default {
     };
   },
   created() {
-    let uri = "/api/v1/territorries";
-    this.axios.get(routes.addresses()).then(response => {
-      this.macro_regions = response.data.data;
-      this.links = response.data.meta.links;
-    });
+    console.log(
+      this.axios
+        .get(routes.addresses())
+        .then(response => {
+          this.macro_regions = response.data.data;
+          this.links = response.data.meta.links;
+        })
+        .catch(reason => {
+          console.log(reason);
+        })
+    );
   },
   updated() {
     $(".collapsible").collapsible();

@@ -49,15 +49,12 @@ export default {
         target.preventDefault();
       });
 
-      $.ajax({
-        url: form_object.prop("action"),
-        method: "POST",
-        data: form_object.serialize(),
-        success: function() {
+      this.axios
+        .post(form_object.prop("action"), form_object.serialize())
+        .then(response => {
           $("#address-suggestion-new.modal").modal("close");
           $("#address-suggestion-new.modal input").val("");
-        }
-      });
+        });
     }
   },
   mounted() {

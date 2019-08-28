@@ -66,9 +66,9 @@ export default {
   created() {
     this.update_assigned_cards();
   },
-  mounted(){
+  mounted() {
     var vm = this;
-    this.$root.$on('assignmentUpdate', () => {
+    this.$root.$on("assignmentUpdate", () => {
       vm.update_assigned_cards();
     });
   },
@@ -78,21 +78,16 @@ export default {
         this.assigned = response.data.data.assigned;
       });
     },
-    submit_and_update: function (card_id){
+    submit_and_update: function(card_id) {
       var vm = this;
-      $.ajax({
-        url: routes.assignments_card_finish(card_id),
-        method: "DELETE",
-        data: {
-          card_id: card_id
-        },
-        success: function(data){
-          vm.$root.$emit('assignmentUpdate');
-        }
-      });
+      this.axios
+        .delete(routes.assignments_card_finish(card_id))
+        .then(response => {
+          vm.$root.$emit("assignmentUpdate");
+        });
     }
   },
-  components:{
+  components: {
     AssignmentNewModal
   }
 };
