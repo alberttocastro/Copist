@@ -72,7 +72,11 @@
 <script>
 export default {
   mounted() {
-    $(".sidenav").sidenav();
+    let sidenav = $(".sidenav");
+    sidenav.sidenav();
+    $("ul.sidenav a").click(function() {
+      sidenav.sidenav("close");
+    });
   }
 };
 </script>
