@@ -25,9 +25,9 @@
           </p>
         </div>
         <div class="card-action">
-            <!-- TODO: Ações de aceitar ou rejeitar -->
-            <a href="#">Accept</a>
-            <a href="#">Reject</a>
+          <!-- TODO: Ações de aceitar ou rejeitar -->
+          <a href="#">Accept</a>
+          <a href="#">Reject</a>
         </div>
       </div>
     </div>
@@ -49,9 +49,11 @@ export default {
     };
   },
   created() {
-    this.axios.get(routes.addresses(), {params: {suggested: true}}).then(response => {
-      this.suggestions = response.data.data;
-    });
+    this.axios
+      .get(routes.addresses(), { params: { suggested: true } })
+      .then(response => {
+        this.suggestions = response.data.data;
+      });
   }
 };
 </script>
