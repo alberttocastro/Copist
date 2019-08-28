@@ -4,13 +4,14 @@
       <div class="col s10 offset-s1 m8 offset-m2 l6 offset-l3">
         <div class="container">
           <h3>Log in</h3>
-          <form method="POST" action="/">
+          <form id="login-form" method="POST" action="/oauth/token" @submit.prevent="login">
             <div class="row">
               <div class="col s12">
                 <div class="field">
                   <label for="email">Email</label>
                   <br />
                   <input
+                    v-model="email"
                     id="email"
                     type="email"
                     class="form-control is-invalid"
@@ -29,6 +30,7 @@
                   <label for="password">Password</label>
                   <br />
                   <input
+                    v-model="password"
                     id="password"
                     type="password"
                     class="form-control is-invalid"
@@ -66,8 +68,34 @@
 <script>
 import LoginLayout from "@/js/layouts/LoginLayout.vue";
 export default {
+  data() {
+    return {
+      email: "",
+      password: ""
+    };
+  },
   components: {
     LoginLayout
+  },
+  methods: {
+    login() {
+      const { email, password } = this;
+
+      let vm = this;
+      console.log(
+        this.$store
+          .dispatch("api_authenticate", {
+            url: $("form#login-form").prop("action"),
+            email: email,
+            password: password
+          })
+          .finally(function() {
+            console.log(vm.$store.getters.isLoggedIn);
+            if (vm.$store.getters.isLoggedIn)
+              vm.$root.$router.push({ name: "index" });
+          })
+      );
+    }
   }
 };
 </script>
