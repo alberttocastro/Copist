@@ -24,7 +24,7 @@
       </li>
     </ul>
     <ul id="user" class="dropdown-content">
-      <li>
+      <li @click="logout()">
         <router-link :to="{name: 'index'}">Logout</router-link>
       </li>
     </ul>
@@ -56,6 +56,12 @@ export default {
     $(".dropdown-trigger").dropdown({
       coverTrigger: false
     });
+  },
+  methods: {
+    logout($event) {
+      this.$store.dispatch("logout");
+      this.$router.push({ name: "login" });
+    }
   }
 };
 </script>
