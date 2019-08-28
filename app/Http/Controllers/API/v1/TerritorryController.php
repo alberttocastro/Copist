@@ -28,13 +28,6 @@ class TerritorryController extends Controller
         };
         return [
             'data' => $data,
-            'meta' => [
-                'links' => [
-                    'address' => [
-                        'edit' => route('edit_territory', ['id' => $this->BLANK_ID])
-                    ]
-                ]
-            ]
         ];
     }
 
@@ -46,13 +39,6 @@ class TerritorryController extends Controller
         }
         return [
             'data' => $data,
-            'meta' => [
-                'links' => [
-                    'address' => [
-                        'edit' => route('edit_territory', ['id' => $this->BLANK_ID])
-                    ]
-                ]
-            ]
         ];
     }
 
