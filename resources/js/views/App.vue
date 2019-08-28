@@ -3,12 +3,14 @@
 </template>
 <script>
 export default {
-  mounted() {
+  beforeCreate() {
     if (this.$store.getters.isLoggedIn) {
       const qs = require("querystring");
-      this.axios.defaults.headers.common = qs.stringify({
-        Authorization: "Bearer " + this.$store.state.access_token
-      });
+      this.axios.defaults.headers.common = {
+        Authorization: "Bearer " + this.$store.state.access_token,
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      };
     }
   }
 };
