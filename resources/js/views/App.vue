@@ -12,6 +12,9 @@ export default {
         Accept: "application/json"
       };
     }
+  },
+  updated() {
+    $(".modal").modal();
   }
 };
 </script>
