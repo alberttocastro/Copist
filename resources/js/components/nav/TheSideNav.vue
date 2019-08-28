@@ -60,7 +60,7 @@
       </router-link>
     </li>
     <div class="divider"></div>
-    <li>
+    <li @click="logout()">
       <router-link :to="{name: 'index'}">
         <i class="material-icons left">exit_to_app</i>
         Logout
@@ -77,6 +77,12 @@ export default {
     $("ul.sidenav a").click(function() {
       sidenav.sidenav("close");
     });
+  },
+  methods: {
+    logout($event) {
+      this.$store.dispatch("logout");
+      this.$router.push({ name: "login" });
+    }
   }
 };
 </script>
