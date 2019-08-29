@@ -4,14 +4,21 @@
 <script>
 export default {
   beforeCreate() {
-    if (this.$store.getters.isLoggedIn) {
-      const qs = require("querystring");
-      this.axios.defaults.headers.common = {
-        Authorization: "Bearer " + this.$store.state.access_token,
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      };
-    }
+    let vm = this;
+    this.$store.dispatch("set_ajax_headers");
+
+    this.axios.interceptors.response.use(
+      function(response) {
+        return response;
+      },
+      function(error) {
+        if ((error.response.status = "401")) {
+          vm.$store.dispatch("logout");
+        }
+      }
+    );
+
+    this.$store.dispatch("get_data");
   },
   updated() {
     $(".modal").modal();
