@@ -89,7 +89,6 @@ export default {
           password: password
         })
         .finally(function() {
-          console.log(vm.$store.getters.isLoggedIn);
           if (vm.$store.getters.isLoggedIn)
             vm.$root.$router.push({ name: "index" });
         });
