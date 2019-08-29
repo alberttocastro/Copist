@@ -90,6 +90,9 @@ Route::prefix('v1')->group(function () {
         Route::put('nationalities/{id}', 'API\v1\InformationController@update_nationality');
         Route::delete('nationalities/{id}', 'API\v1\InformationController@destroy_nationality');
 
+        Route::get('users/current', function () {
+            return response()->json(request()->user());
+        });
         Route::get('users', 'API\v1\UserController@users');
         Route::put('users/{id}', 'API\v1\UserController@update_user');
         Route::delete('users/{id}', 'API\v1\UserController@destroy_user');
