@@ -7,9 +7,9 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
     state: {
         //TODO: Armazenar tokens num lugar mais seguro.
-        access_token: window.localStorage.getItem('access_token') || '',
-        refresh_token: window.localStorage.getItem('refresh_token') || '',
-        expire_at: window.localStorage.getItem('expire_at') || '',
+        access_token: window.localStorage.getItem('access_token') || null,
+        refresh_token: window.localStorage.getItem('refresh_token') || null,
+        expire_at: window.localStorage.getItem('expire_at') || null,
         user: {
             name: '',
             email: '',
@@ -35,9 +35,9 @@ export const store = new Vuex.Store({
             );
         },
         delete_credentials(state, payload) {
-            state.access_token = '';
-            state.refresh_token = '';
-            state.expire_at = '';
+            state.access_token = null;
+            state.refresh_token = null;
+            state.expire_at = null;
 
             window.localStorage.removeItem('access_token');
             window.localStorage.removeItem('refresh_token');
@@ -45,7 +45,7 @@ export const store = new Vuex.Store({
         }
     },
     actions: {
-        api_authenticate(state, payload) {
+        api_authenticate(context, payload) {
             const qs = require("querystring");
             const instance = axios.create();
 
@@ -57,25 +57,56 @@ export const store = new Vuex.Store({
                 password: payload.password
             };
 
-            return instance
-                .post(payload.url, qs.stringify(data), {
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded",
-                    }
-                })
+            instance.defaults.headers.common = {
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+
+            instance
+                .post(payload.url, qs.stringify(data))
                 .then(response => {
                     this.commit('save_credentials', response.data);
+                    context.state.user.email = payload.email;
+                }).catch(motive => {
+                    console.log(motive);
+                });
 
-                    return response;
-                })
+            this.dispatch('set_ajax_headers');
+            this.dispatch('get_user_data');
         },
-        logout(state) {
+        logout(context) {
             this.commit('delete_credentials');
-        }
+        },
+        get_data(context) {
+            if (this.getters.isLoggedIn) {
+                if (context.state.user.name == '') {
+                    axios.get("api/v1/users/current").then(response => {
+                        context.state.user.email = response.data.email;
+                        context.state.user.name = response.data.name;
+                    })
+                }
+            }
+
+            return context.state.user;
+        },
+        set_ajax_headers(context) {
+            let store = this;
+            if (this.getters.isLoggedIn) {
+                axios.defaults.headers.common = {
+                    Authorization: "Bearer " + store.state.access_token,
+                    "Content-Type": "application/json",
+                    Accept: "application/json"
+                };
+            } else {
+                axios.defaults.headers.common = {
+                    "Content-Type": "application/json",
+                    Accept: "application/json"
+                }
+            }
+        },
     },
     getters: {
         isLoggedIn(state) {
-            return state.access_token != '' || (state.expire_at != '' && Date.now() > state.expire_at)
+            return state.access_token != null || (state.expire_at != null && Date.now() > state.expire_at)
         }
     }
 })
