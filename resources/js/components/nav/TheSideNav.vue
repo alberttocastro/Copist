@@ -7,11 +7,11 @@
             <b>Usuário</b>
           </span>
           <br />
-          <span class="white-text">(João de José)</span>
+          <span class="white-text">({{$store.state.user.name}})</span>
         </div>
         <div style="line-height: 2rem; margin-top: 2vh">
           <span class="white-text">
-            <b>email@email.com</b>
+            <b>{{$store.state.user.email}}</b>
           </span>
         </div>
       </div>
