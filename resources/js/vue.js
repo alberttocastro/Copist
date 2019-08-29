@@ -85,5 +85,14 @@ window.vm = new Vue({
     render: h => h(App),
     mixins: [
         routes
-    ]
+    ],
+    beforeCreate() {
+        if (this.$store.getters.isLoggedIn) {
+            this.axios.defaults.headers.common = {
+                Authorization: "Bearer " + this.$store.state.access_token,
+                "Content-Type": "application/json",
+                Accept: "application/json"
+            };
+        }
+    }
 });
