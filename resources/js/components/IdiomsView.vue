@@ -9,13 +9,15 @@
       <div class="row">
         <div class="col s12 m10 offset-m1">
           <div class="row">
-            <div v-for="idiom in idioms" v-bind:key="idiom.id" class="col s12 m6">
-              <div class="card">
-                <div class="card-content">
-                  <h5 style="margin-top: 0;">{{idiom.name}}</h5>
+            <transition-group appear>
+              <div v-for="idiom in idioms" v-bind:key="idiom.id" class="col s12 m6">
+                <div class="card">
+                  <div class="card-content">
+                    <h5 style="margin-top: 0;">{{idiom.name}}</h5>
+                  </div>
                 </div>
               </div>
-            </div>
+            </transition-group>
           </div>
           <a
             href="#create-idiom"

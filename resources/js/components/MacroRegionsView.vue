@@ -9,18 +9,20 @@
       <div class="row">
         <div class="col s12 m10 offset-m1">
           <div class="row">
-            <div
-              v-bind:key="macro_region.id"
-              v-for="macro_region in macro_regions"
-              class="col s12 m6"
-            >
-              <div class="card">
-                <div class="card-content">
-                  <h5 style="margin-top: 0;">{{macro_region.name}}</h5>
+            <transition-group appear>
+              <div
+                v-bind:key="macro_region.id"
+                v-for="macro_region in macro_regions"
+                class="col s12 m6"
+              >
+                <div class="card">
+                  <div class="card-content">
+                    <h5 style="margin-top: 0;">{{macro_region.name}}</h5>
+                  </div>
+                  <!-- TODO: Botão de editar -->
                 </div>
-                <!-- TODO: Botão de editar -->
               </div>
-            </div>
+            </transition-group>
           </div>
           <a
             href="#macro-region-new"

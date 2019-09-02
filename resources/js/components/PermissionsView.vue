@@ -7,34 +7,38 @@
     >
       <input type="hidden" name="_method" value="put" />
       <div class="row" v-if="users">
-        <div class="col s12 m12" v-for="user in users" v-bind:key="user.id">
-          <div class="card white z-depth-3">
-            <div class="card-content black-text">
-              <span class="card-title">{{user.email}}</span>
-              <div>
-                <select :name="`permissions[${user.id}]`" :id="user.id">
-                  <option value="0" v-bind:selected="user.publisher_id == 0">Access denied</option>
-                  <option
-                    @select="ensure_unique_selection(publisher.id)"
-                    v-for="publisher in publishers"
-                    v-bind:key="publisher.id"
-                    v-bind:value="publisher.id"
-                    v-bind:selected="user.publisher_id == publisher.id"
-                  >{{publisher.name}}</option>
-                </select>
+        <transition-group appear>
+          <div class="col s12 m12" v-for="user in users" v-bind:key="user.id">
+            <div class="card white z-depth-3">
+              <div class="card-content black-text">
+                <span class="card-title">{{user.email}}</span>
+                <div>
+                  <select :name="`permissions[${user.id}]`" :id="user.id">
+                    <option value="0" v-bind:selected="user.publisher_id == 0">Access denied</option>
+                    <option
+                      @select="ensure_unique_selection(publisher.id)"
+                      v-for="publisher in publishers"
+                      v-bind:key="publisher.id"
+                      v-bind:value="publisher.id"
+                      v-bind:selected="user.publisher_id == publisher.id"
+                    >{{publisher.name}}</option>
+                  </select>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </transition-group>
       </div>
       <div class="row" v-else>
-        <div class="valign-wrapper">
-          <div style="width: 100%">
-            <h2 class="center-align">Ooops</h2>
-            <h5 class="center-align">No users to manage permission</h5>
-            <p class="center-align">Encourage the brothers from your congregation to use it!</p>
+        <transition-group appear>
+          <div class="valign-wrapper">
+            <div style="width: 100%">
+              <h2 class="center-align">Ooops</h2>
+              <h5 class="center-align">No users to manage permission</h5>
+              <p class="center-align">Encourage the brothers from your congregation to use it!</p>
+            </div>
           </div>
-        </div>
+        </transition-group>
       </div>
       <div class="fixed-action-btn">
         <button type="submit" class="btn-floating btn-large purple darken-2" @click="submit()">
@@ -79,7 +83,9 @@ export default {
 
       this.axios
         .put(form_object.prop("action"), form_object.serialize())
-        .then(response => {console.log('updated')});
+        .then(response => {
+          console.log("updated");
+        });
     }
   }
 };

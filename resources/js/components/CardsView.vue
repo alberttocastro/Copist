@@ -9,23 +9,25 @@
       <div class="row">
         <div class="col s12 m10 offset-m1">
           <div class="row">
-            <div v-for="card in cards" v-bind:key="card.id" class="col s12 m6">
-              <div class="card">
-                <div class="card-content">
-                  <h5 style="margin-top: 0;">{{card.name}}</h5>
-                  <div v-if="card.addresses">
-                    <p v-bind:key="address.id" v-for="address in card.addresses">
-                      {{address.street}} |
-                      <b>{{address.neighborhood}}</b>
-                    </p>
+            <transition-group appear>
+              <div v-for="card in cards" v-bind:key="card.id" class="col s12 m6">
+                <div class="card">
+                  <div class="card-content">
+                    <h5 style="margin-top: 0;">{{card.name}}</h5>
+                    <div v-if="card.addresses">
+                      <p v-bind:key="address.id" v-for="address in card.addresses">
+                        {{address.street}} |
+                        <b>{{address.neighborhood}}</b>
+                      </p>
+                    </div>
+                    <div v-else>
+                      <i>No addresses in this card yet.</i>
+                    </div>
                   </div>
-                  <div v-else>
-                    <i>No addresses in this card yet.</i>
-                  </div>
+                  <!-- TODO: Botões de deletar e editar -->
                 </div>
-                <!-- TODO: Botões de deletar e editar -->
               </div>
-            </div>
+            </transition-group>
           </div>
           <a
             href="#card-new"

@@ -6,39 +6,42 @@
       </h4>
     </div>
     <div class="row">
-      <div v-bind:key="publisher.id" v-for="publisher in publishers" class="col s12 m6">
-        <div class="card publisher-card">
-          <div class="card-content">
-            <span class="publisher-name">{{publisher.name}}</span>
-            <div class="publisher-card-item">
-              <span class="publisher-card-item-title">Email</span>
-              <span class="publisher-card-item-info">{{publisher.email}}</span>
+      <transition-group appear>
+        <div v-bind:key="publisher.id" v-for="publisher in publishers" class="col s12 m6">
+          <div class="card publisher-card">
+            <div class="card-content">
+              <span class="publisher-name">{{publisher.name}}</span>
+              <div class="publisher-card-item">
+                <span class="publisher-card-item-title">Email</span>
+                <span class="publisher-card-item-info">{{publisher.email}}</span>
+              </div>
+              <div class="publisher-card-item">
+                <span class="publisher-card-item-title">Phone</span>
+                <span class="publisher-card-item-info">{{publisher.phone}}</span>
+              </div>
+              <div class="publisher-card-item">
+                <span class="publisher-card-item-title">Neighborhood</span>
+                <span
+                  v-if="publisher.neighborhood"
+                  class="publisher-card-item-info"
+                >{{publisher.neighborhood}}</span>
+                <span v-else class="publisher-card-item-info red-text">Unknown</span>
+              </div>
+              <div class="publisher-card-item">
+                <span class="publisher-card-item-title">Macro Region</span>
+                <span
+                  v-if="publisher.macro_region"
+                  class="publisher-card-item-info"
+                >{{publisher.macro_region.name}}</span>
+                <span v-else class="publisher-card-item-info red-text">Unknown</span>
+              </div>
             </div>
-            <div class="publisher-card-item">
-              <span class="publisher-card-item-title">Phone</span>
-              <span class="publisher-card-item-info">{{publisher.phone}}</span>
-            </div>
-            <div class="publisher-card-item">
-              <span class="publisher-card-item-title">Neighborhood</span>
-              <span
-                v-if="publisher.neighborhood"
-                class="publisher-card-item-info"
-              >{{publisher.neighborhood}}</span>
-              <span v-else class="publisher-card-item-info red-text">Unknown</span>
-            </div>
-            <div class="publisher-card-item">
-              <span class="publisher-card-item-title">Macro Region</span>
-              <span
-                v-if="publisher.macro_region"
-                class="publisher-card-item-info"
-              >{{publisher.macro_region.name}}</span>
-              <span v-else class="publisher-card-item-info red-text">Unknown</span>
-            </div>
+            <!-- TODO: Botão de editar -->
           </div>
-          <!-- TODO: Botão de editar -->
         </div>
-      </div>
+      </transition-group>
     </div>
+
     <div class="row">
       <div class="col s12 m10 offset-m1">
         <a

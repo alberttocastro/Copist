@@ -5,40 +5,44 @@
         <blockquote>
           <h4>{{macro_region.name}}</h4>
         </blockquote>
-        <ul
-          class="collection with-header z-depth-3 card"
-          v-bind:key="card.id"
-          v-for="card in macro_region.assignment_cards"
-        >
-          <li class="collection-header card-header">
-            <div class="card-header-flex">
-              <div class="card-header-name">{{card.name}}</div>
-              <div class="card-header-btn">
-                <a
-                  class="modal-trigger"
-                  :href="'#assign-card-modal-' + uid"
-                  @click="card_id = card.id"
-                >Assign</a>
+        <transition-group appear>
+          <ul
+            class="collection with-header z-depth-3 card"
+            v-bind:key="card.id"
+            v-for="card in macro_region.assignment_cards"
+          >
+            <li class="collection-header card-header">
+              <div class="card-header-flex">
+                <div class="card-header-name">{{card.name}}</div>
+                <div class="card-header-btn">
+                  <a
+                    class="modal-trigger"
+                    :href="'#assign-card-modal-' + uid"
+                    @click="card_id = card.id"
+                  >Assign</a>
+                </div>
               </div>
-            </div>
-          </li>
-          <li
-            class="collection-item"
-            v-bind:class="address.is_visitable == 1 ? '' : 'address-not-visitable'"
-            v-bind:key="address.id"
-            v-for="address in card.addresses"
-          >({{address.neighborhood}}) {{address.street}}</li>
-        </ul>
+            </li>
+            <li
+              class="collection-item"
+              v-bind:class="address.is_visitable == 1 ? '' : 'address-not-visitable'"
+              v-bind:key="address.id"
+              v-for="address in card.addresses"
+            >({{address.neighborhood}}) {{address.street}}</li>
+          </ul>
+        </transition-group>
       </div>
     </div>
     <div id="macro-region" v-else>
       <!--  Caso não tenha uma macro-região cadastrada -->
-      <div class="valign-wrapper">
-        <div>
-          <h2 class="center-align">There aren't macro-regions yet.</h2>
-          <h5 class="center-align">Please, go to the database to create one.</h5>
+      <transition-group appear>
+        <div class="valign-wrapper">
+          <div>
+            <h2 class="center-align">There aren't macro-regions yet.</h2>
+            <h5 class="center-align">Please, go to the database to create one.</h5>
+          </div>
         </div>
-      </div>
+      </transition-group>
     </div>
     <assignment-new-modal v-bind:card_id="card_id" v-bind:modal_id="uid"></assignment-new-modal>
   </div>

@@ -14,12 +14,14 @@
               v-bind:key="address_type.id"
               class="col s12 m6"
             >
-              <div class="card">
-                <div class="card-content">
-                  <h5 style="margin-top: 0;">{{address_type.name}}</h5>
+              <transition appear>
+                <div class="card">
+                  <div class="card-content">
+                    <h5 style="margin-top: 0;">{{address_type.name}}</h5>
+                  </div>
+                  <!-- TODO: Botões de editar e deletar -->
                 </div>
-                <!-- TODO: Botões de editar e deletar -->
-              </div>
+              </transition>
             </div>
           </div>
           <a

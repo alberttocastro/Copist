@@ -18,37 +18,39 @@
             </div>
           </span>
           <ul class="collapsible z-depth-0" v-if="assignment.card.addresses">
-            <li v-for="address in assignment.card.addresses" v-bind:key="address.id">
-              <div class="collapsible-header" :class="address.done ? 'blue lighten-4' : null">
-                <i class="material-icons">contacts</i>
-                {{ address.street }}
-              </div>
-              <div class="collapsible-body">
-                <div class="row valign-wrapper">
-                  <div class="col s9">
-                    <p>Name: {{ address.name }}</p>
-                    <p v-if="address.nationality != null">
-                      Country:
-                      {{ address.nationality.name }}
-                    </p>
-                    <p>Ref: {{ address.references }}</p>
-                    <p>Obs: {{ address.comments }}</p>
-                    <br />
+            <transition-group appear>
+              <li v-for="address in assignment.card.addresses" v-bind:key="address.id">
+                <div class="collapsible-header" :class="address.done ? 'blue lighten-4' : null">
+                  <i class="material-icons">contacts</i>
+                  {{ address.street }}
+                </div>
+                <div class="collapsible-body">
+                  <div class="row valign-wrapper">
+                    <div class="col s9">
+                      <p>Name: {{ address.name }}</p>
+                      <p v-if="address.nationality != null">
+                        Country:
+                        {{ address.nationality.name }}
+                      </p>
+                      <p>Ref: {{ address.references }}</p>
+                      <p>Obs: {{ address.comments }}</p>
+                      <br />
+                    </div>
+                    <div class="col s3">
+                      <router-link :to="{name: 'address-view', params: {id: address.id}}">View</router-link>
+                    </div>
                   </div>
-                  <div class="col s3">
-                    <router-link :to="{name: 'address-view', params: {id: address.id}}">View</router-link>
+                  <div>
+                    <a
+                      :id=" address.id"
+                      class="waves-effect waves-light btn modal-trigger blue darken-3 report-visit"
+                      href="#report-new"
+                      @click="address_id = address.id"
+                    >Report</a>
                   </div>
                 </div>
-                <div>
-                  <a
-                    :id=" address.id"
-                    class="waves-effect waves-light btn modal-trigger blue darken-3 report-visit"
-                    href="#report-new"
-                    @click="address_id = address.id"
-                  >Report</a>
-                </div>
-              </div>
-            </li>
+              </li>
+            </transition-group>
           </ul>
           <h5 v-else class="green-text text-darken-1">This card has no address!</h5>
         </div>
