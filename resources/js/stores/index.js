@@ -11,8 +11,10 @@ export const store = new Vuex.Store({
         refresh_token: window.localStorage.getItem('refresh_token') || null,
         expire_at: window.localStorage.getItem('expire_at') || null,
         user: {
-            name: '',
-            email: '',
+            name: null,
+            email: null,
+            publisher_id: null,
+            is_admin: false
         }
     },
     mutations: {
@@ -58,7 +60,7 @@ export const store = new Vuex.Store({
             };
 
             instance.defaults.headers.common = {
-                "Content-Type": "application/x-www-form-urlencoded"
+                "Content-Type": "application/json"
             }
 
             instance
@@ -71,7 +73,7 @@ export const store = new Vuex.Store({
                 });
 
             this.dispatch('set_ajax_headers');
-            this.dispatch('get_user_data');
+            this.dispatch('get_data');
         },
         logout(context) {
             this.commit('delete_credentials');
@@ -82,9 +84,14 @@ export const store = new Vuex.Store({
                     axios.get("api/v1/users/current").then(response => {
                         context.state.user.email = response.data.email;
                         context.state.user.name = response.data.name;
+                        context.state.user.is_admin = response.data.is_admin;
+                        if (response.data.publisher_id != 0)
+                            context.state.user.publisher_id = response.data.publisher_id;
                     })
                 }
             }
+
+            this.dispatch('set_ajax_headers');
 
             return context.state.user;
         },
@@ -107,6 +114,12 @@ export const store = new Vuex.Store({
     getters: {
         isLoggedIn(state) {
             return state.access_token != null || (state.expire_at != null && Date.now() > state.expire_at)
+        },
+        isAuthorized(state) {
+            return state.user.publisher_id != 0
+        },
+        isAdmin(state) {
+            return state.user.is_admin
         }
     }
 })

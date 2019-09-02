@@ -4,7 +4,7 @@
 <script>
 export default {
   beforeCreate() {
-    let vm = this;
+    console.log("beforeCreate");
     this.$store.dispatch("set_ajax_headers");
 
     this.axios.interceptors.response.use(
@@ -17,11 +17,32 @@ export default {
         }
       }
     );
-
-    this.$store.dispatch("get_data");
   },
-  updated() {
-    $(".modal").modal();
+  beforeUpdate() {
+    this.$store.dispatch("get_data").then(response => {
+      if (this.$route.meta.requiresAuth) {
+        // Caso não seja  pagina de não autorizado, sendo o usuário autorizado, passa
+        if (
+          this.$route.name != "unauthorized" &&
+          !this.$store.getters.isAuthorized
+        ) {
+          this.$router.push({
+            name: "unauthorized"
+          });
+        }
+
+        // Se a pagina for de administrador, e o usuário não for administrador, não passa
+        if (
+          this.$route.name != "unauthorized" &&
+          this.$route.matched.some(record => record.meta.isAdmin) &&
+          this.$store.getters.isAdmin
+        ) {
+          this.$router.push({
+            name: "unauthorized"
+          });
+        }
+      }
+    });
   }
 };
 </script>

@@ -17,12 +17,21 @@
           style="width:100%"
         >You were not yet granted access. Please, contact one of the administrators.</h5>
       </div>
+      <a href="#" class="btn btn-block" @click.prevent="logout">Logout</a>
     </main>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    logout() {
+      this.$store.dispatch("logout").then(response => {
+        this.$router.push({ name: "login" });
+      });
+    }
+  }
+};
 </script>
 
 <style>

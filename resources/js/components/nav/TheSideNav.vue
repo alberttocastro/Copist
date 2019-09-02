@@ -80,8 +80,9 @@ export default {
   },
   methods: {
     logout($event) {
-      this.$store.dispatch("logout");
-      this.$router.push({ name: "login" });
+      this.$store.dispatch("logout").then(response => {
+        this.$router.push({ name: "login" });
+      });
     }
   }
 };
