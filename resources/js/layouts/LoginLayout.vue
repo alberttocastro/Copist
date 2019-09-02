@@ -10,10 +10,10 @@
             </a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
               <li>
-                <a class="nav-link" href="/">Login</a>
+                <router-link class="nav-link" :to="{name: 'login'}">Login</router-link>
               </li>
               <li>
-                <a class="nav-link" href="/">Register</a>
+                <router-link class="nav-link" :to="{name: 'login'}">Register</router-link>
               </li>
             </ul>
           </div>
@@ -28,10 +28,10 @@
           </div>
         </li>
         <li>
-          <a href="/">Login</a>
+          <router-link :to="{name: 'login'}">Login</router-link>
         </li>
         <li>
-          <a href="/">Registrar</a>
+          <router-link :to="{name: 'register'}">Register</router-link>
         </li>
       </ul>
     </header>
@@ -42,7 +42,15 @@
 </template>
 
 <script>
-export default {};
+export default {
+  mounted() {
+    let sidenav = $(".sidenav");
+    sidenav.sidenav();
+    $("ul.sidenav a").click(function() {
+      sidenav.sidenav("close");
+    });
+  }
+};
 </script>
 
 <style>

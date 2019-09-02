@@ -72,6 +72,7 @@
 <script>
 export default {
   mounted() {
+    this.$store.dispatch("get_data");
     let sidenav = $(".sidenav");
     sidenav.sidenav();
     $("ul.sidenav a").click(function() {

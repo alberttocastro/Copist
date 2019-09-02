@@ -80,7 +80,7 @@ export const store = new Vuex.Store({
         },
         get_data(context) {
             if (this.getters.isLoggedIn) {
-                if (context.state.user.name == '') {
+                if (context.state.user.name == null) {
                     axios.get("api/v1/users/current").then(response => {
                         context.state.user.email = response.data.email;
                         context.state.user.name = response.data.name;
