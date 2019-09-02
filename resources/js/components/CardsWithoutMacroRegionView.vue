@@ -4,8 +4,8 @@
       <h5>Cards without Macro-region</h5>
       <span>{{cards.length}}</span>
     </blockquote>
-    <ul class="collapsible popout macro-region-card">
-      <transition-group appear>
+    <transition appear>
+      <ul class="collapsible popout macro-region-card">
         <li v-bind:key="card.id" v-for="card in cards">
           <div class="collapsible-header macro-region-card-title">
             <i class="material-icons">place</i>
@@ -34,8 +34,8 @@
             </ul>
           </div>
         </li>
-      </transition-group>
-    </ul>
+      </ul>
+    </transition>
   </div>
 </template>
 <script>
