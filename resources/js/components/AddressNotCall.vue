@@ -6,12 +6,8 @@
           <transition appear>
             <div class="card-content">
               <span class="card-title red-text">
-                <b>DO NOT CALL</b>
+                <b>Coming Soon</b>
               </span>
-
-              <h5>Macro-região</h5>
-              <p>Rua dos não bata aqui</p>
-              <div class="divider"></div>
             </div>
           </transition>
         </div>
