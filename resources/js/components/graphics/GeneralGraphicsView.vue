@@ -11,7 +11,7 @@
       </div>
       <div class="col l2 m3 offset-m3">
         <span class="right">
-          <h4>2000 Endereços</h4>
+          <h4>{{arrSum(nationalities.amount)}} Addresses</h4>
         </span>
       </div>
     </div>
@@ -27,21 +27,56 @@
 <script>
 import Chart from "chart.js";
 export default {
+  data() {
+    return {
+      nationalities: {
+        names: [],
+        amount: []
+      },
+      addresses: {
+        amount: 0
+      }
+    };
+  },
   mounted() {
+    this.axios.get("api/v1/graphics/nationalities").then(response => {
+      this.nationalities.names = response.data.data.names;
+      this.nationalities.amount = response.data.data.amount;
+    });
+  },
+  updated() {
     var ctx = document.getElementById("foreigners-by-country");
     var myChart = new Chart(ctx, {
       type: "pie",
       data: {
-        labels: ["Label", "Label"],
+        labels: this.nationalities.names,
         datasets: [
           {
             label: "# foreigners",
-            data: [1, 2],
-            borderWidth: 1
+            data: this.nationalities.amount,
+            borderWidth: 1,
+            backgroundColor: this.backgroundColors(
+              this.nationalities.names.length
+            )
           }
         ]
       }
     });
+  },
+  methods: {
+    arrSum(array) {
+      return array.reduce(function(a, b) {
+        return a + b;
+      }, 0);
+    },
+    backgroundColors(quantity) {
+      let answer = [];
+      for (let i = 0; i < quantity; i++) {
+        answer.push("#" + Math.floor(Math.random() * 16777215).toString(16));
+      }
+
+      return answer;
+    }
   }
 };
 </script>

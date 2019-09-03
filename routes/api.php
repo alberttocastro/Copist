@@ -96,5 +96,9 @@ Route::prefix('v1')->group(function () {
         Route::get('users', 'API\v1\UserController@users');
         Route::put('users/{id}', 'API\v1\UserController@update_user');
         Route::delete('users/{id}', 'API\v1\UserController@destroy_user');
+
+        Route::prefix('graphics')->group(function () {
+            Route::get('nationalities', 'API\v1\GraphicController@nationalities');
+        });
     });
 });
