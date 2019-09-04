@@ -48,8 +48,8 @@
       </router-link>
     </li>
 
-    <div class="divider"></div>
-    <li>
+    <!-- <div class="divider"></div> -->
+    <!-- <li>
       <router-link :to="{name: 'database-service'}">
         <i class="material-icons left">dvr</i> Database - Service
       </router-link>
@@ -58,7 +58,7 @@
       <router-link :to="{name: 'database-public'}">
         <i class="material-icons left">dvr</i> Database - Public
       </router-link>
-    </li>
+    </li>-->
     <div class="divider"></div>
     <li @click="logout()">
       <router-link :to="{name: 'index'}">

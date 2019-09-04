@@ -39,13 +39,13 @@
       <li>
         <router-link :to="{name: 'permissions'}">Permissions</router-link>
       </li>
-      <li class="divider">DB</li>
+      <!-- <li class="divider">DB</li>
       <li>
         <router-link :to="{name: 'database-service'}">Database - Service</router-link>
       </li>
       <li>
         <router-link :to="{name: 'database-public'}">Database - Public</router-link>
-      </li>
+      </li>-->
     </ul>
   </div>
 </template>
