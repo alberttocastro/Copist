@@ -1,24 +1,24 @@
 <template>
   <div class="row">
     <div class="col s12 m10 l8 xl8 offset-xl2 offset-l2 offset-m1">
-      <div
-        v-for="assignment in assignments"
-        v-bind:key="assignment.id"
-        class="card grey lighten-5 z-depth-2"
-      >
-        <div class="card-content indigo-text text-darken-4">
-          <span class="card-title">
-            <div class="row">
-              <div class="col s2" style="padding-left: 0%">
-                <i class="material-icons medium">location_on</i>
+      <transition-group appear>
+        <div
+          v-for="assignment in assignments"
+          v-bind:key="assignment.id"
+          class="card grey lighten-5 z-depth-2"
+        >
+          <div class="card-content indigo-text text-darken-4">
+            <span class="card-title">
+              <div class="row">
+                <div class="col s2" style="padding-left: 0%">
+                  <i class="material-icons medium">location_on</i>
+                </div>
+                <div class="col s10" style="vertical-align:middle;">
+                  <h4 style="margin-top: 0px">{{ assignment.card.name }}</h4>
+                </div>
               </div>
-              <div class="col s10" style="vertical-align:middle;">
-                <h4 style="margin-top: 0px">{{ assignment.card.name }}</h4>
-              </div>
-            </div>
-          </span>
-          <ul class="collapsible z-depth-0" v-if="assignment.card.addresses">
-            <transition-group appear>
+            </span>
+            <ul class="collapsible z-depth-0" v-if="assignment.card.addresses">
               <li v-for="address in assignment.card.addresses" v-bind:key="address.id">
                 <div class="collapsible-header" :class="address.done ? 'blue lighten-4' : null">
                   <i class="material-icons">contacts</i>
@@ -50,25 +50,25 @@
                   </div>
                 </div>
               </li>
-            </transition-group>
-          </ul>
-          <h5 v-else class="green-text text-darken-1">This card has no address!</h5>
-        </div>
-        <form
-          id="assignment-finish"
-          v-bind:action="assignment_finish_route(assignment.id)"
-          method="POST"
-        >
-          <div class="card-action">
-            <button
-              class="btn black-text waves-effect waves-teal btn-flat"
-              @click="submit_assignment_finish()"
-            >
-              <b>Done</b>
-            </button>
+            </ul>
+            <h5 v-else class="green-text text-darken-1">This card has no address!</h5>
           </div>
-        </form>
-      </div>
+          <form
+            id="assignment-finish"
+            v-bind:action="assignment_finish_route(assignment.id)"
+            method="POST"
+          >
+            <div class="card-action">
+              <button
+                class="btn black-text waves-effect waves-teal btn-flat"
+                @click="submit_assignment_finish()"
+              >
+                <b>Done</b>
+              </button>
+            </div>
+          </form>
+        </div>
+      </transition-group>
     </div>
     <report-new-modal v-bind:address_id="address_id"></report-new-modal>
   </div>

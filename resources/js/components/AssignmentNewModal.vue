@@ -69,6 +69,7 @@ export default {
     }
   },
   updated() {
+    $(".modal").modal();
     $("select").formSelect();
   }
 };
