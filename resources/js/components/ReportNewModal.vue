@@ -1,5 +1,5 @@
 <template>
-  <div id="report-new" class="modal">
+  <div id="report-new" class="modal modal-fixed-footer">
     <form id="visit-new" method="POST" action="#" @submit.prevent="submit">
       <input type="hidden" name="_method" value="POST" />
       <div class="modal-content">
