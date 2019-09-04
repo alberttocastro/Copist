@@ -45,6 +45,8 @@ Route::prefix('v1')->group(function () {
         Route::put('addresses/{id}', 'API\v1\TerritorryController@update_address');
         Route::delete('addresses/{id}', 'API\v1\TerritorryController@destroy_address');
 
+        Route::post('addresses/{address_id}/visit', 'API\v1\TerritorryController@report_visit');
+
         Route::get('cards', function (Request $request) {
             $territorry_controller = new \App\Http\Controllers\API\v1\TerritorryController;
 

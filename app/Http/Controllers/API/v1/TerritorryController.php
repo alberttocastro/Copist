@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Macro_region;
 use App\Address;
+use IlluminateSupportFacadesLog;
 
 class TerritorryController extends Controller
 {
@@ -137,5 +138,18 @@ class TerritorryController extends Controller
     public function cards_without_macro_region()
     {
         $card = new \App\Card;
+    }
+
+    /**
+     * Adiciona novo relatório de visita ao endereço
+     */
+    public function report_visit(Request $request)
+    {
+        $request['publisher_id'] = request()->user()->publisher_id;
+        return [
+            'data' => [
+                'visit' => \App\Visit::create($request->toArray())
+            ]
+        ];
     }
 }
