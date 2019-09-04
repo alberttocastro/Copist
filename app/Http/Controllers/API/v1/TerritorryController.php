@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Macro_region;
 use App\Address;
-use IlluminateSupportFacadesLog;
 
 class TerritorryController extends Controller
 {
@@ -45,7 +44,7 @@ class TerritorryController extends Controller
 
     public function address($id)
     {
-        return new \App\Http\Resources\Address(\App\Address::with('visits')->find($id));
+        return new \App\Http\Resources\Address(\App\Address::with('visits.publisher')->find($id));
     }
 
     public function create_address(Request $request)

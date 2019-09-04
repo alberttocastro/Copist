@@ -98,7 +98,7 @@
       </div>
     </div>
     <!-- address.visits.count() > 0 -->
-    <div v-if="false">
+    <div v-if="address != []">
       <div class="carousel carousel-slider">
         <div class="row hide-on-small-only">
           <div class="col offset-s1">
@@ -129,7 +129,7 @@
                         <div class="row mb-0">{{visit.publisher.name}}</div>
                         <div class="row">
                           <h6 class="mt-0" style="font-weight: 300">
-                            <span v-if="visit.date != null">{{visit.date().format('m/d/Y')}}</span>
+                            <span v-if="visit.visit_date != null">{{visit.visit_date}}</span>
                             <span v-else>No date</span>
                           </h6>
                         </div>
@@ -159,7 +159,13 @@ export default {
   },
   created() {
     this.axios.get(routes.addresses(this.address_id)).then(response => {
+      console.log(response);
       this.address = response.data.data;
+    });
+  },
+  updated() {
+    $(".carousel").carousel({
+      indicators: true
     });
   }
 };
