@@ -170,3 +170,8 @@ export default {
   }
 };
 </script>
+<style scoped>
+.card {
+  width: 60vw !important;
+}
+</style>
