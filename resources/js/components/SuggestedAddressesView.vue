@@ -31,7 +31,7 @@
           <div class="card-action">
             <!-- TODO: Ações de aceitar ou rejeitar -->
             <a href="#">Accept</a>
-            <a href="#">Reject</a>
+            <a href="#" @click.prevent="reject(suggested_address.id)">Reject</a>
           </div>
         </div>
       </transition-group>
@@ -54,11 +54,25 @@ export default {
     };
   },
   created() {
-    this.axios
-      .get(routes.addresses(), { params: { suggested: true } })
-      .then(response => {
-        this.suggestions = response.data.data;
-      });
+    this.update_data();
+  },
+  methods: {
+    reject(suggested_address_id) {
+      let vm = this;
+      this.axios
+        .delete(this.$root.routes.address_suggestions(suggested_address_id))
+        .then(response => {
+          window.toastr["success"]("Suggested address succesfully excluded");
+          vm.update_data();
+        });
+    },
+    update_data() {
+      this.axios
+        .get(routes.addresses(), { params: { suggested: true } })
+        .then(response => {
+          this.suggestions = response.data.data;
+        });
+    }
   }
 };
 </script>

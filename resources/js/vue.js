@@ -3,8 +3,8 @@ window.routes = {
     addresses: function (id = null) {
         return id == null ? `${this.PREFIX_V1}/addresses` : `${this.PREFIX_V1}/addresses/${id}`
     },
-    address_suggestions: function () {
-        return `${this.PREFIX_V1}/addresses/suggested`
+    address_suggestions: function (id = null) {
+        return id == null ? `${this.PREFIX_V1}/addresses/suggested` : `${this.PREFIX_V1}/addresses/suggested/${id}`
     },
     card_users_available: function (card_id) {
         return `${this.PREFIX_V1}/cards/${card_id}/users`;

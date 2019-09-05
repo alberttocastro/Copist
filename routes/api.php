@@ -25,7 +25,7 @@ Route::prefix('v1')->group(function () {
         Route::put('permissions', 'API\V1\PermissionController@update_permission');
 
         Route::post('addresses/suggested', 'API\v1\TerritorryController@create_suggested_address');
-        Route::delete('address/suggested/{id}', 'API\v1\TerritorryController@reject_suggested_address');
+        Route::delete('addresses/suggested/{id}', 'API\v1\TerritorryController@reject_suggested_address');
 
         Route::get('addresses', function (Request $request) {
             $territorry_controller = new \App\Http\Controllers\API\v1\TerritorryController;

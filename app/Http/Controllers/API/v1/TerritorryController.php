@@ -47,6 +47,9 @@ class TerritorryController extends Controller
         return new \App\Http\Resources\Address(\App\Address::with('visits.publisher')->find($id));
     }
 
+    /**
+     * Cria um novo endereço. E se tiver um endereço sugerido, deleta
+     */
     public function create_address(Request $request)
     {
         if (\App\Address::create($request->address) && $request->suggested_address != null)
