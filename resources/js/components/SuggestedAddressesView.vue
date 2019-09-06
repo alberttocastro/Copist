@@ -30,12 +30,13 @@
           </div>
           <div class="card-action">
             <!-- TODO: Ações de aceitar ou rejeitar -->
-            <a href="#">Accept</a>
+            <a href="#" @click.prevent="accept(suggested_address)">Accept</a>
             <a href="#" @click.prevent="reject(suggested_address.id)">Reject</a>
           </div>
         </div>
       </transition-group>
     </div>
+    <suggested-address-accept v-bind:address="address"></suggested-address-accept>
   </div>
   <div v-else>
     <div class="valign-wrapper">
@@ -47,10 +48,15 @@
   </div>
 </template>
 <script>
+import SuggestedAddressAccept from "@/js/components/SuggestedAddressAccept.vue";
 export default {
+  components: {
+    SuggestedAddressAccept
+  },
   data() {
     return {
-      suggestions: []
+      suggestions: [],
+      address: {}
     };
   },
   created() {
@@ -72,6 +78,9 @@ export default {
         .then(response => {
           this.suggestions = response.data.data;
         });
+    },
+    accept(suggested_address) {
+      this.address = suggested_address;
     }
   }
 };
