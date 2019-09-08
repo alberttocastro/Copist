@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Macro_region;
 use App\Address;
+use Illuminate\Support\Facades\Log;
 
 class TerritorryController extends Controller
 {
@@ -52,7 +53,16 @@ class TerritorryController extends Controller
      */
     public function create_address(Request $request)
     {
-        if (\App\Address::create($request->toArray()) && $request->suggested_address_id != null)
+        $array = $request->toArray();
+        Log::info($array);
+        $array['is_visitable'] = (bool) $request->is_visitable;
+        $array['is_valid'] = true;
+        $array['publisher_id'] = 0;
+        $array['frequence'] = 0;
+        $array['second_language_id'] = 0;
+        Log::info($array);
+
+        if (\App\Address::create($array) && $request->suggested_address_id != null)
             \App\Suggested_address::find($request->suggested_address_id)->delete();
     }
 

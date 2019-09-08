@@ -1,7 +1,7 @@
 <template>
   <div id="accept-address" class="modal">
     <form id="address-new" :action="'#'" method="post" @submit.prevent="submit">
-      <input type="hidden" name="suggeste_address_id" class="hidden-id" :value="address.id" />
+      <input type="hidden" name="suggested_address_id" class="hidden-id" :value="address.id" />
       <div class="modal-content">
         <h4>Add a new territory</h4>
         <br />
@@ -53,6 +53,7 @@
           Type of Address
           <br />
           <select name="address_type_id" id="address_type_id">
+            <option value="0" selected>Unknown</option>
             <option
               v-for="address_type in address_types"
               v-bind:key="address_type.id"
@@ -64,6 +65,7 @@
           Macro-Region
           <br />
           <select name="macroregion_id" id="macroregion_id">
+            <option value="0" selected>Unknown</option>
             <option
               v-for="macro_region in macro_regions"
               v-bind:key="macro_region.id"
@@ -83,6 +85,34 @@
             >{{card.name}} - {{card.number}}</option>
           </select>
         </div>
+        <div class="input-field col s12">
+          Nationality
+          <br />
+          <select name="nationality_id" id="nationality_id">
+            <option value="0" selected>Unknown</option>
+            <option
+              v-for="nationality in nationalities"
+              v-bind:key="nationality.id"
+              :value="nationality.id"
+            >{{nationality.name}}</option>
+          </select>
+        </div>
+        <div class="input-field col s12">
+          Idiom
+          <br />
+          <select name="idiom_id" id="idiom_id">
+            <option value="0" selected>Unknown</option>
+            <option v-for="idiom in idioms" v-bind:key="idiom.id" :value="idiom.id">{{idiom.name}}</option>
+          </select>
+        </div>
+        <div class="col s12">
+          <p>
+            <label>
+              <input type="checkbox" name="is_visitable" />
+              <span>Allow us to visit?</span>
+            </label>
+          </p>
+        </div>
       </div>
       <div class="modal-footer">
         <input type="submit" value="Agree" class="modal-close waves-effect waves-green btn-flat" />
@@ -97,7 +127,10 @@ export default {
     return {
       address_types: [],
       macro_regions: [],
-      cards: []
+      cards: [],
+      nationalities: [],
+      idioms: [],
+      open: false
     };
   },
   props: {
@@ -113,10 +146,21 @@ export default {
     this.axios.get(this.$root.routes.cards()).then(response => {
       this.cards = response.data.data;
     });
+    this.axios.get(this.$root.routes.idioms()).then(response => {
+      this.idioms = response.data.data;
+    });
+    this.axios.get(this.$root.routes.nationalities()).then(response => {
+      this.nationalities = response.data.data;
+    });
+  },
+  mounted() {
+    this.open = true;
   },
   watch: {
     address: function(newAddress, oldAddress) {
-      $("#accept-address.modal").modal("open");
+      let modal = $("#accept-address.modal");
+      modal.modal();
+      modal.modal("open");
     },
     address_types: function(newAddressTypes, oldAddressTypes) {
       $("select").formSelect();
@@ -126,14 +170,23 @@ export default {
     },
     cards: function(newCards, oldCards) {
       $("select").formSelect();
+    },
+    nationalities: function(newNationalities, oldNationalities) {
+      $("select").formSelect();
+    },
+    idioms: function(newIdioms, oldIdioms) {
+      $("select").formSelect();
     }
   },
   methods: {
     submit() {
+      let vm = this;
+      console.log($("form#address-new").serialize());
       this.axios
         .post(this.$root.routes.addresses(), $("form#address-new").serialize())
         .then(response => {
           window.toastr["success"]("Address successfully created!");
+          vm.$parent.update_data();
         })
         .catch(reason => {
           window.toastr["error"]("Address could not be created.");
