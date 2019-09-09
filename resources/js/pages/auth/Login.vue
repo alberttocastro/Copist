@@ -82,16 +82,11 @@ export default {
       const { email, password } = this;
 
       let vm = this;
-      this.$store
-        .dispatch("api_authenticate", {
-          url: $("form#login-form").prop("action"),
-          email: email,
-          password: password
-        })
-        .finally(function() {
-          if (vm.$store.getters.isLoggedIn)
-            vm.$root.$router.push({ name: "index" });
-        });
+      this.$store.dispatch("api_authenticate", {
+        url: $("form#login-form").prop("action"),
+        email: email,
+        password: password
+      });
     }
   }
 };

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import router from '@/js/router.js'
 
 Vue.use(Vuex);
 
@@ -68,6 +69,10 @@ export const store = new Vuex.Store({
                 .then(response => {
                     this.commit('save_credentials', response.data);
                     context.state.user.email = payload.email;
+
+                    router.push({
+                        name: "index"
+                    });
                 }).catch(motive => {
                     console.log(motive);
                 });
