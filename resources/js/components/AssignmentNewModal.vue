@@ -68,8 +68,10 @@ export default {
         });
     }
   },
-  updated() {
+  mounted(){
     $(".modal").modal();
+  },
+  updated() {
     $("select").formSelect();
   }
 };
