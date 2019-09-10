@@ -29,8 +29,7 @@
             <div class="card-action">
               <a
                 :id="address.id"
-                href="#choose-card"
-                class="modal-trigger add-card-to-address-button"
+                class="add-card-to-address-button"
                 @click="address_id = address.id"
               >Choose card</a>
             </div>
@@ -65,12 +64,6 @@ export default {
   },
   created() {
     this.update_data();
-  },
-  mounted(){
-    var vm = this;
-    this.$root.$on("addressCardUpdated", () => {
-      vm.update_data();
-    });
   },
   methods: {
     update_data: function() {

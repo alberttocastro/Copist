@@ -46,6 +46,7 @@ export default {
     address_id: function(new_address_id, old_address_id) {
       this.axios.get(routes.cards()).then(response => {
         this.cards = response.data.data;
+        $("div#choose-card").modal("open");
       });
     }
   },
@@ -54,16 +55,18 @@ export default {
   },
   methods: {
     submit: function() {
-      var vm = this;
-      var form_object = $("#choose-card form");
+      let vm = this;
+      let form_object = $("#choose-card form");
       form_object.submit(function(target) {
         target.preventDefault();
       });
 
+      console.log(form_object.serialize());
       this.axios
         .put(form_object.prop("action"), form_object.serialize())
         .then(response => {
-          vm.$root.$emit("addressCardUpdated");
+          vm.$parent.update_data();
+          window.toastr["success"]("Updated successfuly");
         });
     }
   }
