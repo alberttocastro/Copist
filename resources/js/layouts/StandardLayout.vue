@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div class="modal-over-modal-container"></div>
     <header>
       <div class="navbar-fixed">
         <nav class="nav-extended navbar-dark indigo darken-2 z-depth-2">
@@ -42,4 +43,10 @@ export default {
 </script>
 
 <style>
+main {
+  padding-top: 52px;
+}
+div.modal-over-modal-container {
+  z-index: 9999999;
+}
 </style>

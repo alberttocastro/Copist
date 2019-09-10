@@ -1,5 +1,5 @@
 <template>
-  <div id="report-new" class="modal modal-fixed-footer">
+  <div id="report-new" class="modal modal-fixed-footer bottom-sheet">
     <form id="visit-new" method="POST" action="#" @submit.prevent="submit">
       <input type="hidden" name="_method" value="POST" />
       <div class="modal-content">
@@ -26,7 +26,8 @@ export default {
   },
   updated() {
     $(".datepicker").datepicker({
-      format: "yyyy/mm/dd"
+      format: "yyyy/mm/dd",
+      container: $(".modal-over-modal-container")[0]
     });
   },
   methods: {
