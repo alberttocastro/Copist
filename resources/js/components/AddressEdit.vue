@@ -97,7 +97,7 @@
         <p>
           <label>
             <input id="is_valid" name="is_valid" type="checkbox" :checked="address.is_valid" />
-            <span>Teste</span>
+            <span>Is valid?</span>
           </label>
         </p>
         <div class="row">
@@ -180,6 +180,7 @@ export default {
     });
     this.axios.get(routes.addresses(this.address_id)).then(response => {
       this.address = response.data.data;
+      console.log(this.address);
     });
     this.axios.get(routes.cards()).then(response => {
       this.cards = response.data.data;
@@ -200,7 +201,7 @@ export default {
       window.setCheckboxInputValue($("input:checkbox"));
 
       this.axios
-        .put(form_object.prop("action"), form_object.serializeArray())
+        .put(form_object.prop("action"), form_object.serialize())
         .then(response => {
           window.toastr["success"]("Address successfully updated");
         })
