@@ -140,11 +140,11 @@ window.setCheckboxInputValue = function (checkbox_object) {
 }
 
 function notHidden() {
-    if ($("nav").parent().prop("tagName") == "DIV") {
-        $("main").css({
-            "padding-top": $('nav').height() - 40
-        })
-    }
+    // if ($("nav").parent().prop("tagName") == "DIV") {
+    //     $("main").css({
+    //         "padding-top": $('nav').height() - 40
+    //     })
+    // }
 }
 
 function searchHelp() {

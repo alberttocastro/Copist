@@ -20,9 +20,9 @@
                     autocomplete="email"
                     autofocus
                   />
-                  <span class="invalid-feedback" role="alert">
+                  <!-- <span class="invalid-feedback" role="alert">
                     <strong>Mensagem</strong>
-                  </span>
+                  </span> -->
                 </div>
               </div>
               <div class="col s12">
@@ -38,9 +38,9 @@
                     required
                     autocomplete="current-password"
                   />
-                  <span class="invalid-feedback" role="alert">
+                  <!-- <span class="invalid-feedback" role="alert">
                     <strong>Error</strong>
-                  </span>
+                  </span> -->
                 </div>
               </div>
               <div class="col s12">
@@ -80,6 +80,8 @@ export default {
   methods: {
     login() {
       const { email, password } = this;
+
+      $('button[type="submit"]').prop("disabled", true);
 
       let vm = this;
       this.$store.dispatch("api_authenticate", {

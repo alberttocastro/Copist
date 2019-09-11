@@ -1,12 +1,21 @@
 .session-title {
-    text-transform: uppercase;
-    font-weight: bolder;
+  text-transform: uppercase;
+  font-weight: bolder;
 }
 
 .address-not-visitable {
-    color: red;
+  color: red;
 }
 
 .card-header-name {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.address-details p {
+  font-size: 1.2rem;
+}
+
+.address-details p span {
+  text-transform: capitalize;
+  font-weight: bold;
 }

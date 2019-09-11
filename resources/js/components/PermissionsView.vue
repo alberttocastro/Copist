@@ -11,7 +11,7 @@
           <div class="col s12 m12" v-for="user in users" v-bind:key="user.id">
             <div class="card white z-depth-3">
               <div class="card-content black-text">
-                <span class="card-title">{{user.email}}</span>
+                <span class="card-title">{{user.email}} - {{user.name}}</span>
                 <div>
                   <select :name="`permissions[${user.id}]`" :id="user.id">
                     <option value="0" v-bind:selected="user.publisher_id == 0">Access denied</option>
@@ -84,7 +84,7 @@ export default {
       this.axios
         .put(form_object.prop("action"), form_object.serialize())
         .then(response => {
-          console.log("updated");
+          window.toastr["success"]("Successfully updated");
         });
     }
   }

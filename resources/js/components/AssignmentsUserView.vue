@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col s12 m10 l8 xl8 offset-xl2 offset-l2 offset-m1">
+    <div class="col s12">
       <transition-group appear>
         <div
           v-for="assignment in assignments"
@@ -26,14 +26,23 @@
                 </div>
                 <div class="collapsible-body">
                   <div class="row valign-wrapper">
-                    <div class="col s9">
-                      <p>Name: {{ address.name }}</p>
-                      <p v-if="address.nationality != null">
-                        Country:
+                    <div class="col s9 address-details">
+                      <p>
+                        <span>Name:</span>
+                        {{ address.name }}
+                      </p>
+                      <p v-if="address.nationality">
+                        <span>Country:</span>
                         {{ address.nationality.name }}
                       </p>
-                      <p>Ref: {{ address.references }}</p>
-                      <p>Obs: {{ address.comments }}</p>
+                      <p>
+                        <span>Ref:</span>
+                        {{ address.references }}
+                      </p>
+                      <p>
+                        <span>Obs:</span>
+                        {{ address.comments }}
+                      </p>
                       <br />
                     </div>
                     <div class="col s3">
