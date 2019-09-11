@@ -12,10 +12,10 @@ export const store = new Vuex.Store({
         refresh_token: window.localStorage.getItem('refresh_token') || null,
         expire_at: window.localStorage.getItem('expire_at') || null,
         user: {
-            name: null,
-            email: null,
-            publisher_id: null,
-            is_admin: false
+            name: window.localStorage.getItem('name') || null,
+            email: window.localStorage.getItem('email') || null,
+            publisher_id: window.localStorage.getItem('publisher_id') || null,
+            is_admin: window.localStorage.getItem('is_admin') == "true" || null
         }
     },
     mutations: {
@@ -33,7 +33,7 @@ export const store = new Vuex.Store({
                 payload.access_token
             );
             window.localStorage.setItem(
-                "token_expire_time",
+                "expire_at",
                 new Date(Date.now() + payload.expires_in)
             );
         },
@@ -41,10 +41,21 @@ export const store = new Vuex.Store({
             state.access_token = null;
             state.refresh_token = null;
             state.expire_at = null;
+            state.user = {
+                name: null,
+                email: null,
+                publisher_id: null,
+                is_admin: null
+            };
 
             window.localStorage.removeItem('access_token');
             window.localStorage.removeItem('refresh_token');
             window.localStorage.removeItem('expire_at');
+            window.localStorage.removeItem('name');
+            window.localStorage.removeItem('email');
+            window.localStorage.removeItem('publisher_id');
+            window.localStorage.removeItem('is_admin');
+
         }
     },
     actions: {
@@ -73,12 +84,14 @@ export const store = new Vuex.Store({
                     router.push({
                         name: "index"
                     });
+                    this.dispatch('set_ajax_headers').then(response => {
+                        this.dispatch('get_data');
+                    });
                 }).catch(motive => {
+                    $('button[type="submit"]').prop("disabled", false);
                     console.log(motive);
                 });
 
-            this.dispatch('set_ajax_headers');
-            this.dispatch('get_data');
         },
         logout(context) {
             this.commit('delete_credentials');
@@ -88,10 +101,15 @@ export const store = new Vuex.Store({
                 if (context.state.user.name == null) {
                     axios.get("api/v1/users/current").then(response => {
                         context.state.user.email = response.data.email;
+                        window.localStorage.setItem('email', response.data.email);
                         context.state.user.name = response.data.name;
-                        context.state.user.is_admin = response.data.is_admin;
-                        if (response.data.publisher_id != 0)
+                        window.localStorage.setItem('name', response.data.name);
+                        context.state.user.is_admin = (response.data.is_admin == "1");
+                        window.localStorage.setItem('is_admin', response.data.is_admin == "1");
+                        if (response.data.publisher_id != 0) {
                             context.state.user.publisher_id = response.data.publisher_id;
+                            window.localStorage.setItem('publisher_id', response.data.publisher_id);
+                        }
                     })
                 }
             }

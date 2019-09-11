@@ -12,6 +12,7 @@ export default {
         return response;
       },
       function(error) {
+        console.log({ erro: error });
         if ((error.response.status = "401")) {
           vm.$store.dispatch("logout");
         }
@@ -32,10 +33,16 @@ export default {
         }
 
         // Se a pagina for de administrador, e o usuário não for administrador, não passa
+        console.log({
+          validations:
+            this.$route.name != "unauthorized" &&
+            (this.$route.matched.some(record => record.meta.isAdmin) &&
+              !this.$store.getters.isAdmin)
+        });
         if (
           this.$route.name != "unauthorized" &&
-          this.$route.matched.some(record => record.meta.isAdmin) &&
-          this.$store.getters.isAdmin
+          (this.$route.matched.some(record => record.meta.isAdmin) &&
+            !this.$store.getters.isAdmin)
         ) {
           this.$router.push({
             name: "unauthorized"
