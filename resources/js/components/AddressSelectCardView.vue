@@ -63,7 +63,11 @@ export default {
     };
   },
   created() {
-    this.update_data();
+    let vm = this;
+    vm.update_data();
+    vm.$root.$on("address_created", function() {
+      vm.update_data();
+    });
   },
   methods: {
     update_data: function() {
