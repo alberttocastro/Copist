@@ -17,6 +17,8 @@ export default {
         if ((error.response.status = "401")) {
           window.toastr["error"]("Not authorized. Please, log in again.");
           vm.$store.dispatch("logout");
+        } else {
+          window.toastr["warning"]("Error :( ");
         }
       }
     );
