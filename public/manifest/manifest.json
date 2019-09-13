@@ -1,0 +1,6 @@
+{
+    "short_name": "Copist",
+    "name": "Copist Database",
+    "start_url": "/",
+    "display": "standalone"
+}

@@ -11,6 +11,7 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
+    <link rel="manifest" href="{{asset('manifest/manifest.json')}}" />
 </head>
 
 <body>
