@@ -82,10 +82,7 @@ export default {
       });
 
       this.axios
-        .put(form_object.prop("action"), form_object.serialize())
-        .then(response => {
-          window.toastr["success"]("Successfully updated");
-        });
+        .put(form_object.prop("action"), form_object.serialize());
     }
   }
 };

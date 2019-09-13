@@ -63,8 +63,6 @@ export default {
         .then(response => {
           vm.$root.$emit("createPublisher");
 
-          window.toastr["success"]("Publisher successfully created");
-
           $("#new-publisher").modal("close");
           $("#new-publisher input").val("");
         });

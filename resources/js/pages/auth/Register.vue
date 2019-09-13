@@ -77,11 +77,7 @@ export default {
       this.axios
         .post(form_object.prop("action"), form_object.serialize())
         .then(response => {
-          window.toastr["success"]("User was created successfully");
           this.$router.push({ name: "login" });
-        })
-        .catch(motive => {
-          window.toastr["error"]("User could not be created");
         });
     }
   }

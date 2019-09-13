@@ -66,7 +66,6 @@ export default {
         .put(form_object.prop("action"), form_object.serialize())
         .then(response => {
           vm.$parent.update_data();
-          window.toastr["success"]("Updated successfuly");
         });
     }
   }

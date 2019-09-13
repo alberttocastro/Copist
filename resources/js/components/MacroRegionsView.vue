@@ -72,8 +72,6 @@ export default {
           form_object.parent(".modal").modal("close");
           $("input").val("");
 
-          window.toastr["success"]("Macro Region successfully created");
-
           vm.update();
         });
     },

@@ -68,7 +68,6 @@ export default {
       this.axios
         .delete(this.$root.routes.address_suggestions(suggested_address_id))
         .then(response => {
-          window.toastr["success"]("Suggested address succesfully excluded");
           vm.update_data();
         });
     },

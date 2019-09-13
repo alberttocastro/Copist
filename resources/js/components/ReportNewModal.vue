@@ -33,15 +33,7 @@ export default {
   methods: {
     submit() {
       let url = `api/v1/addresses/${this.address_id}/visit`;
-      this.axios
-        .post(url, $("form#visit-new").serialize())
-        .then(response => {
-          console.log(response);
-          window.toastr["success"]("Visit successfully reported");
-        })
-        .catch(motive => {
-          console.log(motive);
-        });
+      this.axios.post(url, $("form#visit-new").serialize());
     }
   }
 };

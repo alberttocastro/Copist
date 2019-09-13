@@ -185,12 +185,8 @@ export default {
       this.axios
         .post(this.$root.routes.addresses(), $("form#address-new").serialize())
         .then(response => {
-          window.toastr["success"]("Address successfully created!");
           vm.$parent.update_data();
           vm.$root.$emit("address_created");
-        })
-        .catch(reason => {
-          window.toastr["error"]("Address could not be created.");
         });
     }
   }

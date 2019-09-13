@@ -9,11 +9,13 @@ export default {
 
     this.axios.interceptors.response.use(
       function(response) {
+        window.toastr["success"]("Success!");
         return response;
       },
       function(error) {
         console.log({ erro: error });
         if ((error.response.status = "401")) {
+          window.toastr["error"]("Not authorized. Please, log in again.");
           vm.$store.dispatch("logout");
         }
       }

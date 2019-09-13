@@ -201,13 +201,7 @@ export default {
       window.setCheckboxInputValue($("input:checkbox"));
 
       this.axios
-        .put(form_object.prop("action"), form_object.serialize())
-        .then(response => {
-          window.toastr["success"]("Address successfully updated");
-        })
-        .catch(reason => {
-          window.toastr["error"]("Address could not be saved");
-        });
+        .put(form_object.prop("action"), form_object.serialize());
     }
   }
 };

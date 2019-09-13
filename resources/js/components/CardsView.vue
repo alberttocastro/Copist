@@ -91,7 +91,6 @@ export default {
         .then(response => {
           form_object.parent(".modal").modal("close");
           $("input").val("");
-          window.toastr["success"]("Card successfully created");
           vm.update();
         });
     },

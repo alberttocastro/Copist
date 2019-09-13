@@ -71,7 +71,6 @@ export default {
         .then(response => {
           form_object.parent(".modal").modal("close");
           $("input[name='name']").val("");
-          window.toastr["success"]("Address type successfully created");
           vm.update();
         });
     },
