@@ -9,7 +9,13 @@ export default {
 
     this.axios.interceptors.response.use(
       function(response) {
-        window.toastr["success"]("Success!");
+        if (
+          response.config.method == "post" ||
+          response.config.method == "put" ||
+          response.config.method == "patch"
+        )
+          window.toastr["success"]("Success!");
+
         return response;
       },
       function(error) {
