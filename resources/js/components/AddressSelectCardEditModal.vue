@@ -42,16 +42,21 @@ export default {
       cards: []
     };
   },
-  watch: {
-    address_id: function(new_address_id, old_address_id) {
-      this.axios.get(routes.cards()).then(response => {
-        this.cards = response.data.data;
-        $("div#choose-card").modal("open");
-      });
-    }
+  mounted() {
+    $("div#choose-card").modal();
+    let vm = this;
+    this.$root.$on("address_select_card_edit_modal_open", function() {
+      vm.open_modal();
+    });
   },
+  watch: {},
   updated() {
-    $("select").formSelect();
+    $("select").formSelect({
+      dropdownOptions: {
+        container: $(".modal-over-modal-container")[0],
+        constrainWidth: false
+      }
+    });
   },
   methods: {
     submit: function() {
@@ -67,6 +72,17 @@ export default {
         .then(response => {
           vm.$parent.update_data();
         });
+    },
+    open_modal() {
+      if (this.cards.length == 0) {
+        this.axios.get(routes.cards()).then(response => {
+          console.log("Carregados cartões");
+          this.cards = response.data.data;
+          $("div#choose-card").modal("open");
+        });
+      } else {
+        $("div#choose-card").modal("open");
+      }
     }
   }
 };

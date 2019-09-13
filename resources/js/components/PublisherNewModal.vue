@@ -48,7 +48,12 @@ export default {
     this.update();
   },
   updated() {
-    $("#new-publisher select").formSelect();
+    $("#new-publisher select").formSelect({
+      dropdownOptions: {
+        container: $(".modal-over-modal-container")[0],
+        constrainWidth: false
+      }
+    });
   },
   methods: {
     submit() {

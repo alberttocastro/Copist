@@ -163,19 +163,44 @@ export default {
       modal.modal("open");
     },
     address_types: function(newAddressTypes, oldAddressTypes) {
-      $("select").formSelect();
+      $("select").formSelect({
+      dropdownOptions: {
+        container: $(".modal-over-modal-container")[0],
+        constrainWidth: false
+      }
+    });
     },
     macro_regions: function(newMacroRegions, oldMacroRegions) {
-      $("select").formSelect();
+      $("select").formSelect({
+      dropdownOptions: {
+        container: $(".modal-over-modal-container")[0],
+        constrainWidth: false
+      }
+    });
     },
     cards: function(newCards, oldCards) {
-      $("select").formSelect();
+      $("select").formSelect({
+      dropdownOptions: {
+        container: $(".modal-over-modal-container")[0],
+        constrainWidth: false
+      }
+    });
     },
     nationalities: function(newNationalities, oldNationalities) {
-      $("select").formSelect();
+      $("select").formSelect({
+      dropdownOptions: {
+        container: $(".modal-over-modal-container")[0],
+        constrainWidth: false
+      }
+    });
     },
     idioms: function(newIdioms, oldIdioms) {
-      $("select").formSelect();
+      $("select").formSelect({
+      dropdownOptions: {
+        container: $(".modal-over-modal-container")[0],
+        constrainWidth: false
+      }
+    });
     }
   },
   methods: {

@@ -30,7 +30,7 @@
               <a
                 :id="address.id"
                 class="add-card-to-address-button"
-                @click="address_id = address.id"
+                @click="open_modal(address)"
               >Choose card</a>
             </div>
           </div>
@@ -76,6 +76,10 @@ export default {
         .then(response => {
           this.addresses = response.data.data;
         });
+    },
+    open_modal(address) {
+      this.address_id = address.id;
+      this.$root.$emit("address_select_card_edit_modal_open");
     }
   }
 };

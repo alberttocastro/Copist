@@ -187,7 +187,12 @@ export default {
     });
   },
   updated() {
-    $("select").formSelect();
+    $("select").formSelect({
+      dropdownOptions: {
+        container: $(".modal-over-modal-container")[0],
+        constrainWidth: false
+      }
+    });
   },
   methods: {
     submit() {

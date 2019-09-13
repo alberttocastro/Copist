@@ -73,7 +73,12 @@ export default {
       // TODO: Make sure that no more than one user gets the same publisher
     },
     make_materialize_select: function() {
-      $("select").formSelect();
+      $("select").formSelect({
+      dropdownOptions: {
+        container: $(".modal-over-modal-container")[0],
+        constrainWidth: false
+      }
+    });
     },
     submit: function() {
       let form_object = $("#update-permissions-form");

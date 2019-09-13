@@ -72,7 +72,12 @@ export default {
     $(".modal").modal();
   },
   updated() {
-    $("select").formSelect();
+    $("select").formSelect({
+      dropdownOptions: {
+        container: $(".modal-over-modal-container")[0],
+        constrainWidth: false
+      }
+    });
   }
 };
 </script>
