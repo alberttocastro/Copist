@@ -50,7 +50,9 @@ class AssignmentController extends Controller
     public function create_assignment(Request $request)
     {
         foreach ($request->publishers as $user_id) {
-            \App\Assignment::assign($user_id, $request->card_id)->save();
+            if (\count(\App\Assignment::where('user_id', $user_id)->where('card_id', $request->card_id)->whereNull('completion_date')->get()) == 0) {
+                \App\Assignment::assign($user_id, $request->card_id)->save();
+            }
         }
     }
 
