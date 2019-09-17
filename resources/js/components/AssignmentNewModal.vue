@@ -44,7 +44,7 @@ export default {
         .post(form_object.prop("action"), form_object.serialize())
         .then(response => {
           try {
-            vm.$root.$emit("assignmentUpdate");
+            vm.$root.$emit("assignment-update");
           } catch (error) {
             console.log(error);
           }

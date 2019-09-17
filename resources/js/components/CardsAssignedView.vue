@@ -33,8 +33,8 @@
             <li class="collection-item center" style="padding: 0">
               <a
                 :href="'#assign-card-modal-'+uid"
-                class="btn-flat waves-effect waves-light modal-trigger add-publisher-button"
-                @click="card_id = card.id"
+                class="btn-flat waves-effect waves-light add-publisher-button"
+                @click.prevent="open_modal(card.id)"
               >
                 <span :id="card.id">+ Add publisher</span>
               </a>
@@ -53,7 +53,7 @@
         </div>
       </transition-group>
     </div>
-    <assignment-new-modal v-bind:card_id="card_id" v-bind:modal_id="uid"></assignment-new-modal>
+    <assignment-new-modal v-bind:card_id="card_id"></assignment-new-modal>
   </div>
 </template>
 <script>
@@ -72,7 +72,7 @@ export default {
   },
   mounted() {
     var vm = this;
-    this.$root.$on("assignmentUpdate", () => {
+    this.$root.$on("assignment-update", () => {
       vm.update_assigned_cards();
     });
   },
@@ -87,8 +87,13 @@ export default {
       this.axios
         .delete(routes.assignments_card_finish(card_id))
         .then(response => {
-          vm.$root.$emit("assignmentUpdate");
+          vm.$root.$emit("assignment-update");
         });
+    },
+    open_modal(card_id) {
+      console.log(card_id);
+      this.card_id = card_id;
+      this.$root.$emit("open-assignment-new-modal");
     }
   },
   components: {

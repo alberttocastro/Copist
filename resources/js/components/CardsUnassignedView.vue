@@ -61,7 +61,7 @@ export default {
   },
   mounted() {
     var vm = this;
-    this.$root.$on("assignmentUpdate", () => {
+    this.$root.$on("assignment-update", () => {
       vm.update_unassigned_cards();
     });
   },
@@ -86,7 +86,7 @@ export default {
         .then(response => {
           vm.update_unassigned_cards();
           try {
-            vm.$root.$emit("assignmentUpdate");
+            vm.$root.$emit("assignment-update");
           } catch (error) {
             console.log(error);
           }
