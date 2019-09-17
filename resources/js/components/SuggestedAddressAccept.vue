@@ -164,9 +164,11 @@ export default {
   methods: {
     submit() {
       let vm = this;
-      console.log($("form#address-new").serialize());
       this.axios
-        .post(this.$root.routes.addresses(), $("form#address-new").serialize())
+        .post(
+          this.$root.routes.addresses(),
+          this.$root.forms.serialize($("form#address-new"))
+        )
         .then(response => {
           vm.$parent.update_data();
           vm.$root.$emit("address_created");
