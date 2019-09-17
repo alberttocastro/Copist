@@ -136,7 +136,8 @@ export default {
   props: {
     address: Object
   },
-  created() {
+  mounted() {
+    this.open = true;
     this.axios.get(this.$root.routes.address_types()).then(response => {
       this.address_types = response.data.data;
     });
@@ -153,54 +154,11 @@ export default {
       this.nationalities = response.data.data;
     });
   },
-  mounted() {
-    this.open = true;
-  },
   watch: {
     address: function(newAddress, oldAddress) {
       let modal = $("#accept-address.modal");
       modal.modal();
       modal.modal("open");
-    },
-    address_types: function(newAddressTypes, oldAddressTypes) {
-      $("select").formSelect({
-      dropdownOptions: {
-        container: $(".modal-over-modal-container")[0],
-        constrainWidth: false
-      }
-    });
-    },
-    macro_regions: function(newMacroRegions, oldMacroRegions) {
-      $("select").formSelect({
-      dropdownOptions: {
-        container: $(".modal-over-modal-container")[0],
-        constrainWidth: false
-      }
-    });
-    },
-    cards: function(newCards, oldCards) {
-      $("select").formSelect({
-      dropdownOptions: {
-        container: $(".modal-over-modal-container")[0],
-        constrainWidth: false
-      }
-    });
-    },
-    nationalities: function(newNationalities, oldNationalities) {
-      $("select").formSelect({
-      dropdownOptions: {
-        container: $(".modal-over-modal-container")[0],
-        constrainWidth: false
-      }
-    });
-    },
-    idioms: function(newIdioms, oldIdioms) {
-      $("select").formSelect({
-      dropdownOptions: {
-        container: $(".modal-over-modal-container")[0],
-        constrainWidth: false
-      }
-    });
     }
   },
   methods: {
@@ -214,6 +172,14 @@ export default {
           vm.$root.$emit("address_created");
         });
     }
+  },
+  updated() {
+    $("select").formSelect({
+      dropdownOptions: {
+        container: $(".modal-over-modal-container")[0],
+        constrainWidth: false
+      }
+    });
   }
 };
 </script>
