@@ -72,7 +72,7 @@ class AssignmentController extends Controller
     public function user_assignments($id)
     {
         return [
-            'data' => \App\User::find($id)->assignments()
+            'data' => \App\Assignment::with("card.addresses")->where('user_id', $id)->whereNull('completion_date')->where('card_id', "!=", 0)->get()
         ];
     }
 }

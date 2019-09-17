@@ -60,17 +60,4 @@ class User extends Authenticatable
     {
         return User::where('publisher_id', '>', 0)->get();
     }
-
-    public function assignments()
-    {
-        $assignments = array();
-        foreach (\App\Assignment::where('user_id', $this->id)->whereNull('completion_date')->get() as $assignment) {
-            $card = $assignment->card;
-            $card->addresses = $card->addresses;
-            $assignment->card = $card;
-            $assignments[] = $assignment;
-        }
-
-        return $assignments;
-    }
 }
