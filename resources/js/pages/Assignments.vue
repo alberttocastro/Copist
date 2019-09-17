@@ -16,14 +16,22 @@
     <div id="dashboard" class="col s12">
       <cards-assigned-view v-on:assignment-change="update_assigned_cards()"></cards-assigned-view>
     </div>
+    <assignment-new-modal v-bind:card_id="card_id"></assignment-new-modal>
   </standard-layout>
 </template>
 
 <script>
 import StandardLayout from "@/js/layouts/StandardLayout.vue";
+import AssignmentNewModal from "@/js/components/AssignmentNewModal.vue";
 export default {
   components: {
+    AssignmentNewModal,
     StandardLayout
+  },
+  data() {
+    return {
+      card_id: 0
+    };
   },
   mounted() {
     $(".tabs").tabs();

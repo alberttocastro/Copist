@@ -40,7 +40,6 @@
         </div>
       </transition-group>
     </div>
-    <assignment-new-modal v-bind:card_id="card_id"></assignment-new-modal>
   </div>
 </template>
 <script>
@@ -103,6 +102,7 @@ export default {
     },
     open_modal(card_id) {
       console.log(card_id);
+      this.$parent.$parent.card_id = card_id;
       this.card_id = card_id;
       this.$root.$emit("open-assignment-new-modal");
     }

@@ -32,7 +32,6 @@
             </li>
             <li class="collection-item center" style="padding: 0">
               <a
-                :href="'#assign-card-modal-'+uid"
                 class="btn-flat waves-effect waves-light add-publisher-button"
                 @click.prevent="open_modal(card.id)"
               >
@@ -53,7 +52,6 @@
         </div>
       </transition-group>
     </div>
-    <assignment-new-modal v-bind:card_id="card_id"></assignment-new-modal>
   </div>
 </template>
 <script>
@@ -92,6 +90,7 @@ export default {
     },
     open_modal(card_id) {
       console.log(card_id);
+      this.$parent.$parent.card_id = card_id;
       this.card_id = card_id;
       this.$root.$emit("open-assignment-new-modal");
     }
