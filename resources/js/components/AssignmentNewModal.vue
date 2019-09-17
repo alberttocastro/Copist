@@ -1,7 +1,12 @@
 <template>
   <!-- TODO: Fazer apenas uma implementação do modal -->
-  <div v-bind:id="'assign-card-modal-' + modal_id_string" class="modal bottom-sheet">
-    <form v-bind:action="this.$root.routes.assignments()" method="post">
+  <div id="assign-card-modal" class="modal bottom-sheet">
+    <form
+      id="assign-card-form"
+      v-bind:action="this.$root.routes.assignments()"
+      method="post"
+      @submit.prevent="submit"
+    >
       <div class="modal-content">
         <input type="hidden" name="card_id" v-bind:value="card_id" />
         <div class="input-field">
@@ -12,11 +17,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button
-          type="submit"
-          class="btn-flat waves-effect waves-green modal-close"
-          v-on:click="submit()"
-        >Send</button>
+        <button type="submit" class="btn-flat waves-effect waves-green modal-close">Send</button>
       </div>
     </form>
   </div>
@@ -26,14 +27,11 @@ export default {
   data() {
     var vm = this;
     return {
-      users: [],
-      modal_id_string: vm.modal_id.toString(),
-      card_id_watch: vm.card_id
+      users: []
     };
   },
   props: {
-    card_id: Number,
-    modal_id: Number
+    card_id: Number
   },
   methods: {
     /**
@@ -41,12 +39,7 @@ export default {
      */
     submit: function() {
       var vm = this;
-      var form_object = $("#assign-card-modal-" + vm.modal_id_string + " form");
-
-      form_object.submit(function(target) {
-        target.preventDefault();
-      });
-
+      var form_object = $("#assign-card-form");
       this.axios
         .post(form_object.prop("action"), form_object.serialize())
         .then(response => {
@@ -60,16 +53,20 @@ export default {
   },
   watch: {
     card_id: function(new_card_id, old_card_id) {
+      $("select#publishers").prop("disabled", true);
       this.axios
         .get(routes.card_users_available(new_card_id))
         .then(response => {
-          console.log(response);
           this.users = response.data.data;
+          $("select#publishers").prop("disabled", false);
         });
     }
   },
-  mounted(){
+  mounted() {
     $(".modal").modal();
+    this.$root.$on("open-assignment-new-modal", function() {
+      $("#assign-card-modal").modal("open");
+    });
   },
   updated() {
     $("select").formSelect({

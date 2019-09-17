@@ -15,11 +15,7 @@
               <div class="card-header-flex">
                 <div class="card-header-name">{{card.name}}</div>
                 <div class="card-header-btn">
-                  <a
-                    class="modal-trigger"
-                    :href="'#assign-card-modal-' + uid"
-                    @click="card_id = card.id"
-                  >Assign</a>
+                  <a href="#" @click.prevent="open_modal(card.id)">Assign</a>
                 </div>
               </div>
             </li>
@@ -44,7 +40,7 @@
         </div>
       </transition-group>
     </div>
-    <assignment-new-modal v-bind:card_id="card_id" v-bind:modal_id="uid"></assignment-new-modal>
+    <assignment-new-modal v-bind:card_id="card_id"></assignment-new-modal>
   </div>
 </template>
 <script>
@@ -54,12 +50,10 @@ export default {
     AssignmentNewModal
   },
   data() {
-    var vm = this;
     return {
       unassigned: [],
       users: [],
-      card_id: 0,
-      uid: vm._uid
+      card_id: 0
     };
   },
   created() {
@@ -106,6 +100,11 @@ export default {
       this.axios.get(routes.users()).then(response => {
         this.users = response.data.data;
       });
+    },
+    open_modal(card_id) {
+      console.log(card_id);
+      this.card_id = card_id;
+      this.$root.$emit("open-assignment-new-modal");
     }
   }
 };
