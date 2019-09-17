@@ -47,6 +47,33 @@ window.routes = {
     }
 };
 
+window.forms = {
+    /**
+     * 
+     * Este método tem por função criar um objecto JSON da maneira correta para ser enviado junto com uma requisição 
+     */
+    serialize: function (object) {
+        let final_object = {};
+        $.each($(object).find("input"), function (idx, el) {
+            let obj = $(el);
+            if (obj.prop('type') == "checkbox") {
+                final_object[$(el).prop('name')] = $(el).prop('checked')
+            } else if (obj.prop('type') == "text") {
+                if (obj.parent().find('select').length > 0) {
+                    if (obj.parent().find('select').val() != null && obj.parent().find('select').val() != "0") {
+                        final_object[obj.parent().find('select').prop('name')] = obj.parent().find('select').val();
+                    }
+                } else {
+                    final_object[obj.prop('name')] = obj.val()
+                }
+            } else {
+                final_object[obj.prop('name')] = obj.val()
+            }
+        });
+        return final_object;
+    }
+}
+
 /**
  * Vue será usado para fazer componentes reativos consumindo banco de dados
  */
@@ -78,13 +105,21 @@ var routes = {
     }
 }
 
+var forms = {
+    data: function () {
+        return {
+            forms: window.forms
+        }
+    }
+}
+
 window.vm = new Vue({
     el: "#vue",
     router,
     store,
     render: h => h(App),
     mixins: [
-        routes
+        routes, forms
     ],
     beforeCreate() {
         if (this.$store.getters.isLoggedIn) {
