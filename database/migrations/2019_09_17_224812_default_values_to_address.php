@@ -21,6 +21,7 @@ class DefaultValuesToAddress extends Migration
             $table->integer('address_type_id')->nullable(true)->default(null)->change();
             $table->integer('publisher_id')->nullable(true)->default(null)->change();
             $table->integer('second_language_id')->nullable(true)->default(null)->change();
+            $table->integer('card_id')->nullable(true)->default(null)->change();
         });
     }
 
@@ -31,7 +32,7 @@ class DefaultValuesToAddress extends Migration
      */
     public function down()
     {
-        Schema::table('address', function (Blueprint $table) {
+        Schema::table('addresses', function (Blueprint $table) {
             //
         });
     }
