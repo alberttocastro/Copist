@@ -68,7 +68,8 @@ let router = new Router({
             name: 'address-edit',
             component: AddressEditPage,
             meta: {
-                requiresAuth: true
+                requiresAuth: true,
+                idAdmin: true
             }
         },
         {
