@@ -61,15 +61,8 @@ class TerritorryController extends Controller
 
     public function update_address(Request $request, $id)
     {
-        $request_array = $request->toArray();
-        array_key_exists("is_visitable", $request_array)
-            ? $request_array['is_visitable'] = (bool) $request_array['is_visitable']
-            : $request_array['is_visitable'] = false;
-        array_key_exists("is_valid", $request_array)
-            ? $request_array['is_valid'] = (bool) $request_array['is_valid']
-            : $request_array['is_valid'] = false;
-
-        \App\Address::find($id)->update($request_array);
+        Log::info(["id" => $id, "request" => $request->toArray()]);
+        \App\Address::find($id)->update($request->toArray());
     }
 
     public function destroy_address($id)

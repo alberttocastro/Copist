@@ -206,7 +206,7 @@ export default {
       window.setCheckboxInputValue($("input:checkbox"));
 
       this.axios
-        .put(form_object.prop("action"), form_object.serialize());
+        .put(form_object.prop("action"), this.$root.forms.serialize(form_object));
     }
   }
 };
