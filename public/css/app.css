@@ -9195,6 +9195,15 @@ input[type=range]::-ms-thumb {
   font-size: 1.5rem;
 }
 
+.address-details p {
+  font-size: 1.2rem;
+}
+
+.address-details p span {
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
 .macro-region-card-content {
   padding: 0;
 }
@@ -9248,6 +9257,12 @@ input[type=range]::-ms-thumb {
 
 .publisher-card .card-content {
   padding: 10px 24px;
+}
+
+.btn:not(.btn-floating),
+.btn-large:not(.btn-floating),
+.btn-small:not(.btn-floating) {
+  border-radius: 4px;
 }
 
 .toast-title {
@@ -9476,6 +9491,16 @@ button.toast-close-button {
     padding: 15px 15px 15px 50px;
     width: 25em;
   }
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s;
+}
+
+.v-enter,
+.v-leave-to {
+  opacity: 0;
 }
 
 .navbar-laravel {
