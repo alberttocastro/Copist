@@ -56,4 +56,54 @@ class ManageAddressesTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function testUpdateAddress()
+    {
+        $address = \App\Address::first();
+        $id = $address->id;
+        // Testa alterando todos os dados dentro do que é correto
+        $response = $this->json(
+            'PUT',
+            '/api/v1/addresses/' . $id,
+            [
+                'name' => $this->faker->name(),
+            ]
+        );
+
+        $response->assertStatus(200);
+
+        //Testa deixando nulos dados que não podem ser nulos
+        $response = $this->json(
+            'PUT',
+            '/api/v1/addresses/' . $id,
+            [
+                'name' => $this->faker->name(),
+                'is_valid' => null
+            ]
+        );
+
+        $response->assertStatus(500);
+    }
+
+    public function testDestroyAddress()
+    {
+        $address = \App\Address::create(['name' => $this->faker->name()]);
+        $id = $address->id;
+        $response = $this->json(
+            'DELETE',
+            '/api/v1/addresses/' . $id
+        );
+
+        $response->assertStatus(200);
+    }
+
+    public function testGetAddress()
+    {
+        $response = $this->json(
+            'GET',
+            '/api/v1/addresses/' . \App\Address::first()->id
+        );
+
+        $response->assertJson(['data' => \App\Address::first()->toArray()]);
+    }
 }
