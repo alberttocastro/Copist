@@ -55,14 +55,25 @@ class TerritorryController extends Controller
     {
         Log::info($request);
 
-        if (\App\Address::create($request->toArray()) && $request->suggested_address_id != null)
+        $address = new \App\Address;
+        $address->fill($request->toArray());
+
+        if ($address->save() && $request->suggested_address_id != null)
             \App\Suggested_address::find($request->suggested_address_id)->delete();
+
+        return [
+            'data' => \App\Address::find($address->id)
+        ];
     }
 
     public function update_address(Request $request, $id)
     {
         Log::info(["id" => $id, "request" => $request->toArray()]);
-        \App\Address::find($id)->update($request->toArray());
+        $address = \App\Address::find($id);
+        $address->update($request->toArray());
+        return [
+            'data' => $address
+        ];
     }
 
     public function destroy_address($id)
@@ -82,7 +93,10 @@ class TerritorryController extends Controller
 
     public function create_suggested_address(Request $request)
     {
-        \App\Suggested_address::create($request->toArray());
+        $suggested_address = \App\Suggested_address::create($request->toArray());
+        return [
+            'data' => \App\Suggested_address::find($suggested_address->id)
+        ];
     }
 
     // Para aceitar um suggested_addres, use a ação de criar um endereço
@@ -144,10 +158,11 @@ class TerritorryController extends Controller
     public function report_visit(Request $request)
     {
         $request['publisher_id'] = request()->user()->publisher_id;
+        $visit = new \App\Visit;
+        $visit->fill($request->toArray());
+        $visit->save();
         return [
-            'data' => [
-                'visit' => \App\Visit::create($request->toArray())
-            ]
+            'data' => \App\Visit::find($visit->id)
         ];
     }
 }
