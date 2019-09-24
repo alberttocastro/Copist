@@ -157,6 +157,7 @@ class TerritorryController extends Controller
      */
     public function report_visit(Request $request)
     {
+        $request['address_id'] = $request->address_id;
         $request['publisher_id'] = request()->user()->publisher_id;
         $visit = new \App\Visit;
         $visit->fill($request->toArray());
