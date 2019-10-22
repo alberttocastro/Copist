@@ -29,7 +29,6 @@
             </p>
           </div>
           <div class="card-action">
-            <!-- TODO: Ações de aceitar ou rejeitar -->
             <a href="#" @click.prevent="accept(suggested_address)">Accept</a>
             <a href="#" @click.prevent="reject(suggested_address.id)">Reject</a>
           </div>
