@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Publisher extends Model
 {
-    //
+    protected $fillable = ['name', 'email', 'neighborhood', 'phone', 'macro_region_id'];
 
     public function macro_region()
     {

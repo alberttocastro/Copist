@@ -2,13 +2,14 @@
 
 namespace App;
 
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -42,11 +43,12 @@ class User extends Authenticatable
      *
      * @return model
      */
-    public function do_not_call_info(){
+    public function do_not_call_info()
+    {
         // TODO: Pegar de maneira dinâmica
         return Address::where('is_valid', 1)
-                            ->where('is_visitable', 0)
-                            ->get();
+            ->where('is_visitable', 0)
+            ->get();
     }
 
     public function publisher()

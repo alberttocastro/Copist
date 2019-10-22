@@ -1,0 +1,13 @@
+.form-input-error,  .form-input-error:not([value]) {
+    border-bottom-color: red !important;
+    box-shadow: 0 1px 0 0 red !important;
+}
+
+.form-label-error {
+    color: red !important;
+}
+
+.error-message{
+    color: red;
+    font-weight: bold;
+}

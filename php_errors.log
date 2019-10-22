@@ -1,0 +1,3 @@
+[18-Sep-2019 21:39:30 UTC] PHP Fatal error:  Declaration of Tests\Feature\ManageAddressesTest::setUp() must be compatible with Illuminate\Foundation\Testing\TestCase::setUp(): void in C:\Users\alber\Documents\Desenvolvimento\Projetos\copist\tests\Feature\ManageAddressesTest.php on line 10
+[18-Sep-2019 21:40:27 UTC] PHP Fatal error:  Declaration of Tests\Feature\ManageAddressesTest::setUp() must be compatible with Illuminate\Foundation\Testing\TestCase::setUp(): void in C:\Users\alber\Documents\Desenvolvimento\Projetos\copist\tests\Feature\ManageAddressesTest.php on line 10
+[19-Sep-2019 10:47:04 UTC] PHP Parse error:  syntax error, unexpected '}' in C:\Users\alber\Documents\Desenvolvimento\Projetos\copist\tests\Feature\ManageAddressesTest.php on line 70

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Macro_region extends Model
 {
-    //
+    protected $fillable = ['name'];
 
     public function cards(){
         return $this->hasMany('App\Card');
@@ -38,6 +38,23 @@ class Macro_region extends Model
         }
 
         return $amount;
+    }
+
+    /**
+     * Retorna lista de cartões designados ou não designados de acordo com o parâmetro $assigned
+     */
+    public function cards_report($assigned){
+        $return = array();
+
+        foreach($this->cards as $card){
+            $card->addresses = $card->addresses;
+            $card->assignments = $card->get_assignments_to_card();
+            if($card->is_at_work() == $assigned){
+                $return[] = $card;
+            }
+        }
+
+        return $return;
     }
 
 }

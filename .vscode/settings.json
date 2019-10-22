@@ -1,0 +1,6 @@
+{
+    "logViewer.watch": [{
+        "title": "copist",
+        "pattern": "C:/Users/alber/Documents/Desenvolvimento/Projetos/copist/storage/logs/*.log"
+    }]
+}
